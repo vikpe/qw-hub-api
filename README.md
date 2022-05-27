@@ -74,3 +74,10 @@ $ go build
 * eb
 * Tuna
 * XantoM
+
+## See also
+
+* [masterstat](https://github.com/vikpe/masterstat)
+* [masterstat-cli](https://github.com/vikpe/masterstat-cli)
+* [serverstat](https://github.com/vikpe/serverstat)
+* [serverstat-cli](https://github.com/vikpe/serverstat-cli)
