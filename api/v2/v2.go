@@ -17,6 +17,18 @@ import (
 	"qws/ginutil"
 )
 
+func ToExport(server qserver.GenericServer) any {
+	if server.Version.IsMvdsv() {
+		return convert.ToMvdsvExport(server)
+	} else if server.Version.IsQwfwd() {
+		return convert.ToQwfwdExport(server)
+	} else if server.Version.IsQtv() {
+		return convert.ToQtvExport(server)
+	} else {
+		return server
+	}
+}
+
 func toIpHostPort(hostPort string) (string, error) {
 	host, port, err := net.SplitHostPort(hostPort)
 	if err != nil {
@@ -52,19 +64,7 @@ func ServerDetailsHandler(serverSource func() []qserver.GenericServer) func(c *g
 		server, err := serverByAddress(address)
 
 		if err == nil {
-			var data any
-
-			if server.Version.IsMvdsv() {
-				data = convert.ToMvdsvExport(server)
-			} else if server.Version.IsQwfwd() {
-				data = convert.ToQwfwdExport(server)
-			} else if server.Version.IsQtv() {
-				data = convert.ToQtvExport(server)
-			} else {
-				data = server
-			}
-
-			c.PureJSON(http.StatusOK, data)
+			c.PureJSON(http.StatusOK, ToExport(server))
 		} else {
 			c.PureJSON(http.StatusNotFound, "server not found")
 		}
@@ -162,7 +162,7 @@ func FindPlayerHandler(serverSource func() []mvdsv.MvdsvExport) func(c *gin.Cont
 
 func Init(baseUrl string, engine *gin.Engine, provider *dataprovider.DataProvider) {
 	e := engine.Group(baseUrl)
-	e.GET("servers/:address", ServerDetailsHandler(provider.Generic))
+	e.GET("server/:address", ServerDetailsHandler(provider.Generic))
 	e.GET("mvdsv", MvdsvHandler(provider.Mvdsv))
 	e.GET("qtv", QtvHandler(provider.Qtv))
 	e.GET("qwfwd", QwfwdHandler(provider.Qwfwd))
