@@ -26,32 +26,32 @@ func QwfwdHandler(serverSource func() []qwfwd.QwfwdExport) http.HandlerFunc {
 	return mhttp.CreateHandler(func() any { return serverSource() })
 }
 
-func ServerToQtvHandler(serverSource func() []qserver.GenericServer) http.HandlerFunc {
-	getServerToQtvMap := func() any {
-		serverToQtv := make(map[string]string, 0)
+func MvdsvToQtvHandler(serverSource func() []qserver.GenericServer) http.HandlerFunc {
+	resultFunc := func() any {
+		addressToQtv := make(map[string]string, 0)
 		for _, server := range serverSource() {
 			if "" != server.ExtraInfo.QtvStream.Address {
-				serverToQtv[server.Address] = server.ExtraInfo.QtvStream.Url()
+				addressToQtv[server.Address] = server.ExtraInfo.QtvStream.Url()
 			}
 		}
-		return serverToQtv
+		return addressToQtv
 	}
 
-	return mhttp.CreateHandler(func() any { return getServerToQtvMap() })
+	return mhttp.CreateHandler(func() any { return resultFunc() })
 }
 
-func QtvToServerHandler(serverSource func() []qserver.GenericServer) http.HandlerFunc {
-	getServerToQtvMap := func() any {
-		serverToQtv := make(map[string]string, 0)
+func QtvToMvdsvHandler(serverSource func() []qserver.GenericServer) http.HandlerFunc {
+	resultFunc := func() any {
+		qtvToAddress := make(map[string]string, 0)
 		for _, server := range serverSource() {
 			if "" != server.ExtraInfo.QtvStream.Address {
-				serverToQtv[server.ExtraInfo.QtvStream.Url()] = server.Address
+				qtvToAddress[server.ExtraInfo.QtvStream.Url()] = server.Address
 			}
 		}
-		return serverToQtv
+		return qtvToAddress
 	}
 
-	return mhttp.CreateHandler(func() any { return getServerToQtvMap() })
+	return mhttp.CreateHandler(func() any { return resultFunc() })
 }
 
 func FindPlayerHandler(serverSource func() []mvdsv.MvdsvExport) http.HandlerFunc {
@@ -93,12 +93,12 @@ func New(baseUrl string, provider *dataprovider.DataProvider) mhttp.Api {
 		Provider: provider,
 		BaseUrl:  baseUrl,
 		Endpoints: mhttp.Endpoints{
-			"servers":       MvdsvHandler(provider.Mvdsv),
-			"qtv":           QtvHandler(provider.Qtv),
-			"qwfwd":         QwfwdHandler(provider.Qwfwd),
-			"server_to_qtv": ServerToQtvHandler(provider.Generic),
-			"qtv_to_server": QtvToServerHandler(provider.Generic),
-			"find_player":   FindPlayerHandler(provider.Mvdsv),
+			"mvdsv":        MvdsvHandler(provider.Mvdsv),
+			"qtv":          QtvHandler(provider.Qtv),
+			"qwfwd":        QwfwdHandler(provider.Qwfwd),
+			"mvdsv_to_qtv": MvdsvToQtvHandler(provider.Generic),
+			"qtv_to_mvdsv": QtvToMvdsvHandler(provider.Generic),
+			"find_player":  FindPlayerHandler(provider.Mvdsv),
 		},
 	}
 }
