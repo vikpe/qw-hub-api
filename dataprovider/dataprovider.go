@@ -30,13 +30,10 @@ func (dp DataProvider) Mvdsv() []mvdsv.MvdsvExport {
 	result := make([]mvdsv.MvdsvExport, 0)
 
 	for _, server := range dp.scraper.Servers() {
-		if server.Version.IsMvdsv() && len(server.Clients) > 0 {
+		if server.Version.IsMvdsv() {
 			mvdsvExport := convert.ToMvdsvExport(server)
-
-			if mvdsvExport.PlayerSlots.Used > 0 {
-				mvdsvExport.Geo = dp.geoDb.GetByAddress(server.Address)
-				result = append(result, mvdsvExport)
-			}
+			mvdsvExport.Geo = dp.geoDb.GetByAddress(server.Address)
+			result = append(result, mvdsvExport)
 		}
 	}
 

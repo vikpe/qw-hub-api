@@ -16,7 +16,19 @@ import (
 )
 
 func MvdsvHandler(serverSource func() []mvdsv.MvdsvExport) func(c *gin.Context) {
-	return ginutil.JsonOk(func() any { return serverSource() })
+	activeServers := func() any {
+		result := make([]mvdsv.MvdsvExport, 0)
+
+		for _, server := range serverSource() {
+			if server.PlayerSlots.Used > 0 {
+				result = append(result, server)
+			}
+		}
+
+		return result
+	}
+
+	return ginutil.JsonOk(func() any { return activeServers() })
 }
 
 func QtvHandler(serverSource func() []qtv.QtvExport) func(c *gin.Context) {
@@ -73,7 +85,7 @@ func FindPlayerHandler(serverSource func() []mvdsv.MvdsvExport) func(c *gin.Cont
 	}
 
 	return func(c *gin.Context) {
-		playerName := c.Query("q")
+		playerName := strings.ToLower(c.Query("q"))
 		server, err := serverByPlayerName(playerName)
 
 		var result any
@@ -84,7 +96,7 @@ func FindPlayerHandler(serverSource func() []mvdsv.MvdsvExport) func(c *gin.Cont
 			result = err.Error()
 		}
 
-		c.IndentedJSON(http.StatusOK, result)
+		c.PureJSON(http.StatusOK, result)
 	}
 }
 
