@@ -57,7 +57,7 @@ func ServerDetailsHandler(serverSource func() []qserver.GenericServer) func(c *g
 		address, err := toIpHostPort(c.Param("address"))
 
 		if err != nil {
-			c.JSON(http.StatusBadRequest, err)
+			c.JSON(http.StatusBadRequest, err.Error())
 			return
 		}
 
