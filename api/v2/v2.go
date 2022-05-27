@@ -43,25 +43,24 @@ func toIpHostPort(hostPort string) (string, error) {
 	return net.JoinHostPort(ips[0].String(), port), nil
 }
 
-func ServerDetailsHandler(serverSource func() []qserver.GenericServer) func(c *gin.Context) {
-	serverByAddress := func(address string) (qserver.GenericServer, error) {
-		for _, server := range serverSource() {
-			if server.Address == address {
-				return server, nil
-			}
-		}
-		return qserver.GenericServer{}, errors.New("server not found")
+func serverByAddress(servers []qserver.GenericServer, address string) (qserver.GenericServer, error) {
+	address, err := toIpHostPort(address)
+
+	if err != nil {
+		return qserver.GenericServer{}, err
 	}
 
-	return func(c *gin.Context) {
-		address, err := toIpHostPort(c.Param("address"))
-
-		if err != nil {
-			c.JSON(http.StatusBadRequest, err.Error())
-			return
+	for _, server := range servers {
+		if server.Address == address {
+			return server, nil
 		}
+	}
+	return qserver.GenericServer{}, errors.New("server not found")
+}
 
-		server, err := serverByAddress(address)
+func ServerDetailsHandler(serverSource func() []qserver.GenericServer) func(c *gin.Context) {
+	return func(c *gin.Context) {
+		server, err := serverByAddress(serverSource(), c.Param("address"))
 
 		if err == nil {
 			c.PureJSON(http.StatusOK, ToExport(server))
