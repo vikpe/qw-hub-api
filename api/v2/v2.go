@@ -2,11 +2,13 @@ package v2
 
 import (
 	"errors"
+	"net"
 	"net/http"
 	"strings"
 
 	"github.com/gin-gonic/gin"
 	"github.com/vikpe/serverstat/qserver"
+	"github.com/vikpe/serverstat/qserver/convert"
 	"github.com/vikpe/serverstat/qserver/mvdsv"
 	"github.com/vikpe/serverstat/qserver/qtv"
 	"github.com/vikpe/serverstat/qserver/qwfwd"
@@ -14,6 +16,60 @@ import (
 	"qws/dataprovider"
 	"qws/ginutil"
 )
+
+func toIpHostPort(hostPort string) (string, error) {
+	host, port, err := net.SplitHostPort(hostPort)
+	if err != nil {
+		return "", err
+	}
+
+	ips, err := net.LookupIP(host)
+	if err != nil {
+		return "", err
+	}
+
+	return net.JoinHostPort(ips[0].String(), port), nil
+}
+
+func ServerDetailsHandler(serverSource func() []qserver.GenericServer) func(c *gin.Context) {
+	serverByAddress := func(address string) (qserver.GenericServer, error) {
+		for _, server := range serverSource() {
+			if server.Address == address {
+				return server, nil
+			}
+		}
+		return qserver.GenericServer{}, errors.New("server not found")
+	}
+
+	return func(c *gin.Context) {
+		address, err := toIpHostPort(c.Param("address"))
+
+		if err != nil {
+			c.JSON(http.StatusBadRequest, err)
+			return
+		}
+
+		server, err := serverByAddress(address)
+
+		if err == nil {
+			var data any
+
+			if server.Version.IsMvdsv() {
+				data = convert.ToMvdsvExport(server)
+			} else if server.Version.IsQwfwd() {
+				data = convert.ToQwfwdExport(server)
+			} else if server.Version.IsQtv() {
+				data = convert.ToQtvExport(server)
+			} else {
+				data = server
+			}
+
+			c.PureJSON(http.StatusOK, data)
+		} else {
+			c.PureJSON(http.StatusNotFound, "server not found")
+		}
+	}
+}
 
 func MvdsvHandler(serverSource func() []mvdsv.MvdsvExport) func(c *gin.Context) {
 	activeServers := func() any {
@@ -106,6 +162,7 @@ func FindPlayerHandler(serverSource func() []mvdsv.MvdsvExport) func(c *gin.Cont
 
 func Init(baseUrl string, engine *gin.Engine, provider *dataprovider.DataProvider) {
 	e := engine.Group(baseUrl)
+	e.GET("servers/:address", ServerDetailsHandler(provider.Generic))
 	e.GET("mvdsv", MvdsvHandler(provider.Mvdsv))
 	e.GET("qtv", QtvHandler(provider.Qtv))
 	e.GET("qwfwd", QwfwdHandler(provider.Qwfwd))
