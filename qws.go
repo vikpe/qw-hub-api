@@ -11,6 +11,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cache"
 	"github.com/gofiber/fiber/v2/middleware/compress"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	apiV1 "qws/api/v1"
 	apiV2 "qws/api/v2"
 	"qws/dataprovider"
@@ -32,6 +33,7 @@ func main() {
 
 	// serve
 	app := fiber.New()
+	app.Use(cors.New())
 	app.Use(compress.New())
 	app.Use(cache.New(cache.Config{
 		Expiration: time.Duration(conf.scrapeConfig.ActiveServerInterval) * time.Second,
