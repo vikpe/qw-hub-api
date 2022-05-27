@@ -70,6 +70,10 @@ func QtvToMvdsvHandler(serverSource func() []qserver.GenericServer) func(c *gin.
 func FindPlayerHandler(serverSource func() []mvdsv.MvdsvExport) func(c *gin.Context) {
 	serverByPlayerName := func(playerName string) (mvdsv.MvdsvExport, error) {
 		for _, server := range serverSource() {
+			if 0 == server.PlayerSlots.Used {
+				continue
+			}
+
 			readableNames := make([]string, 0)
 
 			for _, player := range server.Players {
