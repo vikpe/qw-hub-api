@@ -66,7 +66,7 @@ func ServerDetailsHandler(serverSource func() []qserver.GenericServer) func(c *g
 		if err == nil {
 			c.PureJSON(http.StatusOK, ToExport(server))
 		} else {
-			c.PureJSON(http.StatusNotFound, "server not found")
+			c.PureJSON(http.StatusNotFound, err.Error())
 		}
 	}
 }
