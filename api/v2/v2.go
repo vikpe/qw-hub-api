@@ -12,19 +12,19 @@ import (
 	"github.com/vikpe/serverstat/qserver/qwfwd"
 	"golang.org/x/exp/slices"
 	"qws/dataprovider"
-	"qws/mhttp"
+	"qws/ginutil"
 )
 
 func MvdsvHandler(serverSource func() []mvdsv.MvdsvExport) func(c *gin.Context) {
-	return mhttp.JsonOk(func() any { return serverSource() })
+	return ginutil.JsonOk(func() any { return serverSource() })
 }
 
 func QtvHandler(serverSource func() []qtv.QtvExport) func(c *gin.Context) {
-	return mhttp.JsonOk(func() any { return serverSource() })
+	return ginutil.JsonOk(func() any { return serverSource() })
 }
 
 func QwfwdHandler(serverSource func() []qwfwd.QwfwdExport) func(c *gin.Context) {
-	return mhttp.JsonOk(func() any { return serverSource() })
+	return ginutil.JsonOk(func() any { return serverSource() })
 }
 
 func MvdsvToQtvHandler(serverSource func() []qserver.GenericServer) func(c *gin.Context) {
@@ -38,7 +38,7 @@ func MvdsvToQtvHandler(serverSource func() []qserver.GenericServer) func(c *gin.
 		return addressToQtv
 	}
 
-	return mhttp.JsonOk(func() any { return resultFunc() })
+	return ginutil.JsonOk(func() any { return resultFunc() })
 }
 
 func QtvToMvdsvHandler(serverSource func() []qserver.GenericServer) func(c *gin.Context) {
@@ -52,7 +52,7 @@ func QtvToMvdsvHandler(serverSource func() []qserver.GenericServer) func(c *gin.
 		return qtvToAddress
 	}
 
-	return mhttp.JsonOk(func() any { return resultFunc() })
+	return ginutil.JsonOk(func() any { return resultFunc() })
 }
 
 func FindPlayerHandler(serverSource func() []mvdsv.MvdsvExport) func(c *gin.Context) {
@@ -88,17 +88,12 @@ func FindPlayerHandler(serverSource func() []mvdsv.MvdsvExport) func(c *gin.Cont
 	}
 }
 
-func New(baseUrl string, provider *dataprovider.DataProvider) mhttp.Api {
-	return mhttp.Api{
-		Provider: provider,
-		BaseUrl:  baseUrl,
-		Endpoints: mhttp.Endpoints{
-			"mvdsv":        MvdsvHandler(provider.Mvdsv),
-			"qtv":          QtvHandler(provider.Qtv),
-			"qwfwd":        QwfwdHandler(provider.Qwfwd),
-			"mvdsv_to_qtv": MvdsvToQtvHandler(provider.Generic),
-			"qtv_to_mvdsv": QtvToMvdsvHandler(provider.Generic),
-			"find_player":  FindPlayerHandler(provider.Mvdsv),
-		},
-	}
+func Init(baseUrl string, engine *gin.Engine, provider *dataprovider.DataProvider) {
+	e := engine.Group(baseUrl)
+	e.GET("mvdsv", MvdsvHandler(provider.Mvdsv))
+	e.GET("qtv", QtvHandler(provider.Qtv))
+	e.GET("qwfwd", QwfwdHandler(provider.Qwfwd))
+	e.GET("mvdsv_to_qtv", MvdsvToQtvHandler(provider.Generic))
+	e.GET("qtv_to_mvdsv", QtvToMvdsvHandler(provider.Generic))
+	e.GET("find_player", FindPlayerHandler(provider.Mvdsv))
 }

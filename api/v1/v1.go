@@ -9,7 +9,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/vikpe/serverstat/qserver/mvdsv"
 	"qws/dataprovider"
-	"qws/mhttp"
 )
 
 type Player struct {
@@ -106,12 +105,7 @@ func toStats(servers []mvdsv.MvdsvExport) ServerStats {
 	return stats
 }
 
-func New(baseUrl string, provider *dataprovider.DataProvider) mhttp.Api {
-	return mhttp.Api{
-		Provider: provider,
-		BaseUrl:  baseUrl,
-		Endpoints: mhttp.Endpoints{
-			"servers": ServersHandler(provider.Mvdsv),
-		},
-	}
+func Init(baseUrl string, engine *gin.Engine, provider *dataprovider.DataProvider) {
+	e := engine.Group(baseUrl)
+	e.GET("servers", ServersHandler(provider.Mvdsv))
 }
