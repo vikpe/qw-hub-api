@@ -30,6 +30,7 @@ func main() {
 
 	// serve
 	engine := gin.Default()
+	engine.SetTrustedProxies(nil)
 	engine.Use(gzip.Gzip(gzip.DefaultCompression))
 	apiV1.Init("v1", engine, &dataProvider)
 	apiV2.Init("v2", engine, &dataProvider)
