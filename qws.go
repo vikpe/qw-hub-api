@@ -40,7 +40,13 @@ func main() {
 	apiV1.Init(app.Group("/v1"), &dataProvider)
 	apiV2.Init(app.Group("/v2"), &dataProvider)
 
-	log.Fatal(app.Listen(fmt.Sprintf(":%d", conf.httpPort)))
+	listenAddress := fmt.Sprintf(":%d", conf.httpPort)
+
+	if 443 == conf.httpPort {
+		log.Fatal(app.ListenTLS(listenAddress, "server.crt", "server.key"))
+	} else {
+		log.Fatal(app.Listen(listenAddress))
+	}
 }
 
 type AppConfig struct {
