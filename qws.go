@@ -1,14 +1,16 @@
 package main
 
 import (
-	"encoding/json"
 	"flag"
 	"fmt"
 	"log"
 	"os"
+	"time"
 
-	"github.com/gin-contrib/gzip"
-	"github.com/gin-gonic/gin"
+	"github.com/goccy/go-json"
+	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cache"
+	"github.com/gofiber/fiber/v2/middleware/compress"
 	apiV1 "qws/api/v1"
 	apiV2 "qws/api/v2"
 	"qws/dataprovider"
@@ -29,18 +31,16 @@ func main() {
 	dataProvider := dataprovider.New(&scraper, geoDatabase)
 
 	// serve
-	engine := gin.Default()
-	engine.SetTrustedProxies(nil)
-	engine.Use(gzip.Gzip(gzip.DefaultCompression))
-	apiV1.Init("v1", engine, &dataProvider)
-	apiV2.Init("v2", engine, &dataProvider)
+	app := fiber.New()
+	app.Use(compress.New())
+	app.Use(cache.New(cache.Config{
+		Expiration: time.Duration(conf.scrapeConfig.ActiveServerInterval) * time.Second,
+	}))
 
-	err := engine.Run(fmt.Sprintf(":%d", conf.httpPort))
+	apiV1.Init(app.Group("/v1"), &dataProvider)
+	apiV2.Init(app.Group("/v2"), &dataProvider)
 
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
+	log.Fatal(app.Listen(fmt.Sprintf(":%d", conf.httpPort)))
 }
 
 type AppConfig struct {

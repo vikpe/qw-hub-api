@@ -5,10 +5,10 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/gin-gonic/gin"
+	"github.com/gofiber/fiber/v2"
 	"github.com/vikpe/serverstat/qserver/mvdsv"
 	"qws/dataprovider"
-	"qws/ginutil"
+	"qws/fiberutil"
 )
 
 type Player struct {
@@ -95,7 +95,7 @@ func FilterServersWithQtv(servers []mvdsv.MvdsvExport) []mvdsv.MvdsvExport {
 	return result
 }
 
-func ServersHandler(serverSource func() []mvdsv.MvdsvExport) func(c *gin.Context) {
+func ServersHandler(serverSource func() []mvdsv.MvdsvExport) func(c *fiber.Ctx) error {
 	outputFunc := func() any {
 		type server struct{ GameStates []GameState }
 		type result struct {
@@ -113,10 +113,9 @@ func ServersHandler(serverSource func() []mvdsv.MvdsvExport) func(c *gin.Context
 		}
 	}
 
-	return ginutil.JsonOk(outputFunc)
+	return fiberutil.JsonOk(outputFunc)
 }
 
-func Init(baseUrl string, engine *gin.Engine, provider *dataprovider.DataProvider) {
-	e := engine.Group(baseUrl)
-	e.GET("servers", ServersHandler(provider.Mvdsv))
+func Init(router fiber.Router, provider *dataprovider.DataProvider) {
+	router.Get("servers", ServersHandler(provider.Mvdsv))
 }

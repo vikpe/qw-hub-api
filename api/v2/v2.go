@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/gin-gonic/gin"
+	"github.com/gofiber/fiber/v2"
 	"github.com/vikpe/serverstat/qserver"
 	"github.com/vikpe/serverstat/qserver/convert"
 	"github.com/vikpe/serverstat/qserver/mvdsv"
@@ -14,7 +14,7 @@ import (
 	"github.com/vikpe/serverstat/qserver/qwfwd"
 	"golang.org/x/exp/slices"
 	"qws/dataprovider"
-	"qws/ginutil"
+	"qws/fiberutil"
 )
 
 func ToExport(server qserver.GenericServer) any {
@@ -58,19 +58,20 @@ func serverByAddress(servers []qserver.GenericServer, address string) (qserver.G
 	return qserver.GenericServer{}, errors.New("server not found")
 }
 
-func ServerDetailsHandler(serverSource func() []qserver.GenericServer) func(c *gin.Context) {
-	return func(c *gin.Context) {
-		server, err := serverByAddress(serverSource(), c.Param("address"))
+func ServerDetailsHandler(serverSource func() []qserver.GenericServer) func(c *fiber.Ctx) error {
+	return func(c *fiber.Ctx) error {
+		server, err := serverByAddress(serverSource(), c.Params("address"))
 
 		if err == nil {
-			c.PureJSON(http.StatusOK, ToExport(server))
+			return c.JSON(ToExport(server))
 		} else {
-			c.PureJSON(http.StatusNotFound, err.Error())
+			c.Status(http.StatusNotFound)
+			return c.JSON(err.Error())
 		}
 	}
 }
 
-func MvdsvHandler(serverSource func() []mvdsv.MvdsvExport) func(c *gin.Context) {
+func MvdsvHandler(serverSource func() []mvdsv.MvdsvExport) func(c *fiber.Ctx) error {
 	activeServers := func() any {
 		result := make([]mvdsv.MvdsvExport, 0)
 
@@ -83,18 +84,18 @@ func MvdsvHandler(serverSource func() []mvdsv.MvdsvExport) func(c *gin.Context) 
 		return result
 	}
 
-	return ginutil.JsonOk(func() any { return activeServers() })
+	return fiberutil.JsonOk(func() any { return activeServers() })
 }
 
-func QtvHandler(serverSource func() []qtv.QtvExport) func(c *gin.Context) {
-	return ginutil.JsonOk(func() any { return serverSource() })
+func QtvHandler(serverSource func() []qtv.QtvExport) func(c *fiber.Ctx) error {
+	return fiberutil.JsonOk(func() any { return serverSource() })
 }
 
-func QwfwdHandler(serverSource func() []qwfwd.QwfwdExport) func(c *gin.Context) {
-	return ginutil.JsonOk(func() any { return serverSource() })
+func QwfwdHandler(serverSource func() []qwfwd.QwfwdExport) func(c *fiber.Ctx) error {
+	return fiberutil.JsonOk(func() any { return serverSource() })
 }
 
-func MvdsvToQtvHandler(serverSource func() []qserver.GenericServer) func(c *gin.Context) {
+func MvdsvToQtvHandler(serverSource func() []qserver.GenericServer) func(c *fiber.Ctx) error {
 	resultFunc := func() any {
 		addressToQtv := make(map[string]string, 0)
 		for _, server := range serverSource() {
@@ -105,10 +106,10 @@ func MvdsvToQtvHandler(serverSource func() []qserver.GenericServer) func(c *gin.
 		return addressToQtv
 	}
 
-	return ginutil.JsonOk(func() any { return resultFunc() })
+	return fiberutil.JsonOk(func() any { return resultFunc() })
 }
 
-func QtvToMvdsvHandler(serverSource func() []qserver.GenericServer) func(c *gin.Context) {
+func QtvToMvdsvHandler(serverSource func() []qserver.GenericServer) func(c *fiber.Ctx) error {
 	resultFunc := func() any {
 		qtvToAddress := make(map[string]string, 0)
 		for _, server := range serverSource() {
@@ -119,10 +120,10 @@ func QtvToMvdsvHandler(serverSource func() []qserver.GenericServer) func(c *gin.
 		return qtvToAddress
 	}
 
-	return ginutil.JsonOk(func() any { return resultFunc() })
+	return fiberutil.JsonOk(func() any { return resultFunc() })
 }
 
-func FindPlayerHandler(serverSource func() []mvdsv.MvdsvExport) func(c *gin.Context) {
+func FindPlayerHandler(serverSource func() []mvdsv.MvdsvExport) func(c *fiber.Ctx) error {
 	serverByPlayerName := func(playerName string) (mvdsv.MvdsvExport, error) {
 		for _, server := range serverSource() {
 			if 0 == server.PlayerSlots.Used {
@@ -143,7 +144,7 @@ func FindPlayerHandler(serverSource func() []mvdsv.MvdsvExport) func(c *gin.Cont
 		return mvdsv.MvdsvExport{}, errors.New("player not found")
 	}
 
-	return func(c *gin.Context) {
+	return func(c *fiber.Ctx) error {
 		playerName := strings.ToLower(c.Query("q"))
 		server, err := serverByPlayerName(playerName)
 
@@ -155,17 +156,16 @@ func FindPlayerHandler(serverSource func() []mvdsv.MvdsvExport) func(c *gin.Cont
 			result = err.Error()
 		}
 
-		c.PureJSON(http.StatusOK, result)
+		return c.JSON(result)
 	}
 }
 
-func Init(baseUrl string, engine *gin.Engine, provider *dataprovider.DataProvider) {
-	e := engine.Group(baseUrl)
-	e.GET("server/:address", ServerDetailsHandler(provider.Generic))
-	e.GET("mvdsv", MvdsvHandler(provider.Mvdsv))
-	e.GET("qtv", QtvHandler(provider.Qtv))
-	e.GET("qwfwd", QwfwdHandler(provider.Qwfwd))
-	e.GET("mvdsv_to_qtv", MvdsvToQtvHandler(provider.Generic))
-	e.GET("qtv_to_mvdsv", QtvToMvdsvHandler(provider.Generic))
-	e.GET("find_player", FindPlayerHandler(provider.Mvdsv))
+func Init(router fiber.Router, provider *dataprovider.DataProvider) {
+	router.Get("server/:address", ServerDetailsHandler(provider.Generic))
+	router.Get("mvdsv", MvdsvHandler(provider.Mvdsv))
+	router.Get("qtv", QtvHandler(provider.Qtv))
+	router.Get("qwfwd", QwfwdHandler(provider.Qwfwd))
+	router.Get("mvdsv_to_qtv", MvdsvToQtvHandler(provider.Generic))
+	router.Get("qtv_to_mvdsv", QtvToMvdsvHandler(provider.Generic))
+	router.Get("find_player", FindPlayerHandler(provider.Mvdsv))
 }
