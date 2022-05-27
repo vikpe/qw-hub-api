@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"strings"
 
+	"github.com/gin-gonic/gin"
 	"github.com/vikpe/serverstat/qserver"
 	"github.com/vikpe/serverstat/qserver/mvdsv"
 	"github.com/vikpe/serverstat/qserver/qtv"
@@ -14,19 +15,19 @@ import (
 	"qws/mhttp"
 )
 
-func MvdsvHandler(serverSource func() []mvdsv.MvdsvExport) http.HandlerFunc {
-	return mhttp.CreateHandler(func() any { return serverSource() })
+func MvdsvHandler(serverSource func() []mvdsv.MvdsvExport) func(c *gin.Context) {
+	return mhttp.JsonOk(func() any { return serverSource() })
 }
 
-func QtvHandler(serverSource func() []qtv.QtvExport) http.HandlerFunc {
-	return mhttp.CreateHandler(func() any { return serverSource() })
+func QtvHandler(serverSource func() []qtv.QtvExport) func(c *gin.Context) {
+	return mhttp.JsonOk(func() any { return serverSource() })
 }
 
-func QwfwdHandler(serverSource func() []qwfwd.QwfwdExport) http.HandlerFunc {
-	return mhttp.CreateHandler(func() any { return serverSource() })
+func QwfwdHandler(serverSource func() []qwfwd.QwfwdExport) func(c *gin.Context) {
+	return mhttp.JsonOk(func() any { return serverSource() })
 }
 
-func MvdsvToQtvHandler(serverSource func() []qserver.GenericServer) http.HandlerFunc {
+func MvdsvToQtvHandler(serverSource func() []qserver.GenericServer) func(c *gin.Context) {
 	resultFunc := func() any {
 		addressToQtv := make(map[string]string, 0)
 		for _, server := range serverSource() {
@@ -37,10 +38,10 @@ func MvdsvToQtvHandler(serverSource func() []qserver.GenericServer) http.Handler
 		return addressToQtv
 	}
 
-	return mhttp.CreateHandler(func() any { return resultFunc() })
+	return mhttp.JsonOk(func() any { return resultFunc() })
 }
 
-func QtvToMvdsvHandler(serverSource func() []qserver.GenericServer) http.HandlerFunc {
+func QtvToMvdsvHandler(serverSource func() []qserver.GenericServer) func(c *gin.Context) {
 	resultFunc := func() any {
 		qtvToAddress := make(map[string]string, 0)
 		for _, server := range serverSource() {
@@ -51,10 +52,10 @@ func QtvToMvdsvHandler(serverSource func() []qserver.GenericServer) http.Handler
 		return qtvToAddress
 	}
 
-	return mhttp.CreateHandler(func() any { return resultFunc() })
+	return mhttp.JsonOk(func() any { return resultFunc() })
 }
 
-func FindPlayerHandler(serverSource func() []mvdsv.MvdsvExport) http.HandlerFunc {
+func FindPlayerHandler(serverSource func() []mvdsv.MvdsvExport) func(c *gin.Context) {
 	serverByPlayerName := func(playerName string) (mvdsv.MvdsvExport, error) {
 		for _, server := range serverSource() {
 			readableNames := make([]string, 0)
@@ -71,8 +72,8 @@ func FindPlayerHandler(serverSource func() []mvdsv.MvdsvExport) http.HandlerFunc
 		return mvdsv.MvdsvExport{}, errors.New("player not found")
 	}
 
-	return func(w http.ResponseWriter, r *http.Request) {
-		playerName := r.URL.Query().Get("q")
+	return func(c *gin.Context) {
+		playerName := c.Query("q")
 		server, err := serverByPlayerName(playerName)
 
 		var result any
@@ -83,8 +84,7 @@ func FindPlayerHandler(serverSource func() []mvdsv.MvdsvExport) http.HandlerFunc
 			result = err.Error()
 		}
 
-		responseBody, _ := mhttp.JsonMarshalNoEscapeHtml(result)
-		mhttp.JsonResponse(responseBody, w, r)
+		c.IndentedJSON(http.StatusOK, result)
 	}
 }
 

@@ -6,6 +6,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/gin-gonic/gin"
 	"github.com/vikpe/serverstat/qserver/mvdsv"
 	"qws/dataprovider"
 	"qws/mhttp"
@@ -62,7 +63,7 @@ func ToGameStates(servers []mvdsv.MvdsvExport) []GameState {
 	return states
 }
 
-func ServersHandler(serverSource func() []mvdsv.MvdsvExport) http.HandlerFunc {
+func ServersHandler(serverSource func() []mvdsv.MvdsvExport) func(c *gin.Context) {
 	getOutput := func() any {
 		servers := serverSource()
 		stats := toStats(servers)
@@ -81,7 +82,10 @@ func ServersHandler(serverSource func() []mvdsv.MvdsvExport) http.HandlerFunc {
 			ServerStats: stats,
 		}
 	}
-	return mhttp.CreateHandler(getOutput)
+
+	return func(c *gin.Context) {
+		c.IndentedJSON(http.StatusOK, getOutput())
+	}
 }
 
 func toStats(servers []mvdsv.MvdsvExport) ServerStats {
