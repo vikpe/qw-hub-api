@@ -17,34 +17,33 @@ qws [-master INTERVAL] [-server INTERVAL] [-active INTERVAL] [-port PORT]
 
 ## API endpoints
 
-| URL                    | description                            |  
-|------------------------|----------------------------------------|
-| `/v2/server/<address>` | Server details                         |  
-| `/v2/mvdsv`            | Mvdsv servers                          |  
-| `/v2/qwfwd`            | Qwfwd servers (proxies)                |  
-| `/v2/qtv`              | QTV servers                            |  
-| `/v2/qtv_to_server`    | Map of QTV streams to server addresses |  
-| `/v2/server_to_qtv`    | Map of server addresses to QTV streams |
+| URL                    | description                                  |  
+|------------------------|----------------------------------------------|
+| `/v2/server/<address>` | Server details                               |  
+| `/v2/mvdsv`            | Mvdsv servers                                |  
+| `/v2/qwfwd`            | Qwfwd servers (proxies)                      |  
+| `/v2/qtv`              | QTV servers                                  |  
+| `/v2/qtv_to_mvdsv`     | Map of QTV streams to mvdsv server addresses |  
+| `/v2/mvdsv_to_qtv`     | Map of mvdsv server addresses to QTV streams |
+| `/v2/clients`          | Clients                                      |
 
 ### Query params
 
-| URL                        | description                                                |
-|----------------------------|------------------------------------------------------------|
-| `has_client=xantom`        | Servers where `xantom` is connected as player or spectator |
-| `has_player=xantom`        | Servers where `xantom` is connected as player              |
-| `has_spectator=xantom`     | Servers where `xantom` is connected as spectator           |
-| `player_count=gte:3`       | Servers with at least 3 players                            |
-| `human_player_count=gte:1` | Servers with at least 1 human player                       |
-|                            |                                                            |
-| `cc=dk`                    | Servers where `Country Code` is `DK` (Denmark)             |
-| `region=asia`              | Servers where `Region` is `Asia`                           |
-| `mode=ffa`                 | Servers where `Mode` is `ffa`                              |
-| `mode=2on2,4on4`           | Servers where `Mode` is `2on2` or `4on4`                   |
-| `status=started`           | Servers where `Status` is `Started`                        |
-| `map=dm3`                  | Servers where `Map` is `dm3`                               |
-|                            |                                                            |
-| `sort_by=address`          | Sort by `server address`                                   |
-| `sort_order=desc`          | Sort in `descending` order                                 |
+| URL                 | description                                    |
+|---------------------|------------------------------------------------|
+| `status=started`    | Servers where `Status` is `Started`            |
+| `mode=ffa`          | Servers where `Mode` is `ffa`                  |
+| `mode=2on2,4on4`    | Servers where `Mode` is `2on2` or `4on4`       |
+|                     |                                                |
+| `has_player=xantom` | Servers where xantom is connected as player    |
+| `has_human_players` | Servers with at least 1 human player           |
+| `has_human_players` | Servers with at least 1 human player           |
+|                     |                                                |
+| `geo.cc=dk`         | Servers where `Country Code` is `DK` (Denmark) |
+| `geo.region=asia`   | Servers where `Region` is `Asia`               |
+|                     |                                                |
+| `sort_by=address`   | Sort by `server address`                       |
+| `sort_order=desc`   | Sort in `descending` order                     |
 
 ## Config
 
