@@ -116,6 +116,6 @@ func ServersHandler(serverSource func() []mvdsv.MvdsvExport) func(c *fiber.Ctx) 
 	return fiberutil.JsonOk(outputFunc)
 }
 
-func Init(router fiber.Router, provider *dataprovider.DataProvider) {
+func Routes(router fiber.Router, provider *dataprovider.DataProvider) {
 	router.Get("servers", ServersHandler(provider.Mvdsv))
 }
