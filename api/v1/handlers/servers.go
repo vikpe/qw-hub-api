@@ -1,4 +1,4 @@
-package v1
+package handlers
 
 import (
 	"fmt"
@@ -28,6 +28,27 @@ type ServerStats struct {
 	ActiveServerCount int
 	PlayerCount       int
 	ObserverCount     int
+}
+
+func Servers(provider *dataprovider.DataProvider) func(c *fiber.Ctx) error {
+	outputFunc := func() any {
+		type server struct{ GameStates []GameState }
+		type result struct {
+			Servers []server
+			ServerStats
+		}
+
+		serversWithQtv := FilterServersWithQtv(provider.Mvdsv())
+
+		return result{
+			Servers: []server{
+				{GameStates: ToGameStates(serversWithQtv)},
+			},
+			ServerStats: ToStats(serversWithQtv),
+		}
+	}
+
+	return fiberutil.JsonOk(outputFunc)
 }
 
 func GameStateFromServer(server mvdsv.MvdsvExport) GameState {
@@ -93,29 +114,4 @@ func FilterServersWithQtv(servers []mvdsv.MvdsvExport) []mvdsv.MvdsvExport {
 	}
 
 	return result
-}
-
-func ServersHandler(serverSource func() []mvdsv.MvdsvExport) func(c *fiber.Ctx) error {
-	outputFunc := func() any {
-		type server struct{ GameStates []GameState }
-		type result struct {
-			Servers []server
-			ServerStats
-		}
-
-		serversWithQtv := FilterServersWithQtv(serverSource())
-
-		return result{
-			Servers: []server{
-				{GameStates: ToGameStates(serversWithQtv)},
-			},
-			ServerStats: ToStats(serversWithQtv),
-		}
-	}
-
-	return fiberutil.JsonOk(outputFunc)
-}
-
-func Routes(router fiber.Router, provider *dataprovider.DataProvider) {
-	router.Get("servers", ServersHandler(provider.Mvdsv))
 }
