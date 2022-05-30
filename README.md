@@ -44,6 +44,7 @@ qws [-master INTERVAL] [-server INTERVAL] [-active INTERVAL] [-port PORT]
 |                     |                                                |
 | `sort_by=address`   | Sort by `server address`                       |
 | `sort_order=desc`   | Sort in `descending` order                     |
+| `limit=5`           | Limit result to `5` servers                    |
 
 ## Config
 
