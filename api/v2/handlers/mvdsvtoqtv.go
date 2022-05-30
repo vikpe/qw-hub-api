@@ -3,19 +3,20 @@ package handlers
 import (
 	"github.com/gofiber/fiber/v2"
 	"qws/dataprovider"
-	"qws/fiberutil"
 )
 
 func MvdsvToQtv(provider *dataprovider.DataProvider) func(c *fiber.Ctx) error {
-	resultFunc := func() any {
-		addressToQtv := make(map[string]string, 0)
+	addressToQtv := func() any {
+		result := make(map[string]string, 0)
 		for _, server := range provider.Generic() {
 			if "" != server.ExtraInfo.QtvStream.Address {
-				addressToQtv[server.Address] = server.ExtraInfo.QtvStream.Url()
+				result[server.Address] = server.ExtraInfo.QtvStream.Url()
 			}
 		}
-		return addressToQtv
+		return result
 	}
 
-	return fiberutil.JsonOk(func() any { return resultFunc() })
+	return func(c *fiber.Ctx) error {
+		return c.JSON(addressToQtv())
+	}
 }

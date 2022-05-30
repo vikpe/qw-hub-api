@@ -8,7 +8,6 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/vikpe/serverstat/qserver/mvdsv"
 	"qws/dataprovider"
-	"qws/fiberutil"
 )
 
 type Player struct {
@@ -48,7 +47,9 @@ func Servers(provider *dataprovider.DataProvider) func(c *fiber.Ctx) error {
 		}
 	}
 
-	return fiberutil.JsonOk(outputFunc)
+	return func(c *fiber.Ctx) error {
+		return c.JSON(outputFunc())
+	}
 }
 
 func GameStateFromServer(server mvdsv.MvdsvExport) GameState {
