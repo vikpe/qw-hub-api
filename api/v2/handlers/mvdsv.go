@@ -11,9 +11,12 @@ import (
 	"github.com/vikpe/serverstat/qserver/qclient/slots"
 	"github.com/vikpe/serverstat/qserver/qtime"
 	"golang.org/x/exp/slices"
-	"qws/cmp"
 	"qws/dataprovider"
 )
+
+func EqualStrings(expect string, actual string) bool {
+	return "" == expect || strings.EqualFold(expect, actual)
+}
 
 func Mvdsv(provider *dataprovider.DataProvider) func(c *fiber.Ctx) error {
 	serversByParams := func(p MvdsvParams) any {
@@ -73,9 +76,9 @@ func serverMatchesParams(p MvdsvParams, server mvdsv.MvdsvExport) bool {
 		return false
 	}
 
-	if !cmp.EqualStrings(p.Geo.CC, server.Geo.CC) ||
-		!cmp.EqualStrings(p.Geo.Country, server.Geo.Country) ||
-		!cmp.EqualStrings(p.Geo.Region, server.Geo.Region) {
+	if !EqualStrings(p.Geo.CC, server.Geo.CC) ||
+		!EqualStrings(p.Geo.Country, server.Geo.Country) ||
+		!EqualStrings(p.Geo.Region, server.Geo.Region) {
 		return false
 	}
 
