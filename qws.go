@@ -41,8 +41,8 @@ func main() {
 		Expiration: time.Duration(conf.scrapeConfig.ActiveServerInterval) * time.Second,
 	}))
 
-	apiV1.Init(app.Group("/v1"), &dataProvider)
-	apiV2.Init(app.Group("/v2"), &dataProvider)
+	apiV1.Routes(app.Group("/v1"), &dataProvider)
+	apiV2.Routes(app.Group("/v2"), &dataProvider)
 
 	listenAddress := fmt.Sprintf(":%d", conf.httpPort)
 
