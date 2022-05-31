@@ -2,6 +2,7 @@ package scrape
 
 import (
 	"log"
+	"sort"
 	"time"
 
 	"github.com/vikpe/masterstat"
@@ -40,6 +41,7 @@ func (index ServerIndex) ActiveAddresses() []string {
 		}
 	}
 
+	sort.Strings(activeAddresses)
 	return activeAddresses
 }
 
