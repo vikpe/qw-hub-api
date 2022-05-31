@@ -20,7 +20,7 @@ func EqualStrings(expect string, actual string) bool {
 
 func Mvdsv(provider *dataprovider.DataProvider) func(c *fiber.Ctx) error {
 	serversByParams := func(p MvdsvParams) any {
-		result := make([]mvdsv.MvdsvExport, 0)
+		result := make([]mvdsv.Mvdsv, 0)
 
 		for _, server := range provider.Mvdsv() {
 			if !serverMatchesParams(p, server) {
@@ -71,7 +71,7 @@ type MvdsvParams struct {
 	Limit          uint8  `validate:"min=0,max=20"`
 }
 
-func serverMatchesParams(p MvdsvParams, server mvdsv.MvdsvExport) bool {
+func serverMatchesParams(p MvdsvParams, server mvdsv.Mvdsv) bool {
 	if len(p.Mode) > 0 && !slices.Contains(p.Mode, string(server.Mode)) {
 		return false
 	}
@@ -89,7 +89,7 @@ func serverMatchesParams(p MvdsvParams, server mvdsv.MvdsvExport) bool {
 	return true
 }
 
-func serverHasPlayerByName(server mvdsv.MvdsvExport, playerName string) bool {
+func serverHasPlayerByName(server mvdsv.Mvdsv, playerName string) bool {
 	for _, c := range server.Players {
 		if strings.EqualFold(c.Name.ToPlainString(), playerName) {
 			return true

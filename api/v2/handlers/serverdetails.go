@@ -16,7 +16,7 @@ func ServerDetails(provider *dataprovider.DataProvider) func(c *fiber.Ctx) error
 		server, err := serverByAddress(provider.Generic(), c.Params("address"))
 
 		if err == nil {
-			return c.JSON(ToExport(server))
+			return c.Type("json").SendString(convert.ToJson(server))
 		} else {
 			c.Status(http.StatusNotFound)
 			return c.JSON(err.Error())
@@ -51,16 +51,4 @@ func serverByAddress(servers []qserver.GenericServer, address string) (qserver.G
 		}
 	}
 	return qserver.GenericServer{}, errors.New("server not found")
-}
-
-func ToExport(server qserver.GenericServer) any {
-	if server.Version.IsMvdsv() {
-		return convert.ToMvdsvExport(server)
-	} else if server.Version.IsQwfwd() {
-		return convert.ToQwfwdExport(server)
-	} else if server.Version.IsQtv() {
-		return convert.ToQtvExport(server)
-	} else {
-		return server
-	}
 }

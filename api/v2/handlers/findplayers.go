@@ -11,7 +11,7 @@ import (
 )
 
 func FindPlayer(provider *dataprovider.DataProvider) func(c *fiber.Ctx) error {
-	serverByPlayerName := func(playerName string) (mvdsv.MvdsvExport, error) {
+	serverByPlayerName := func(playerName string) (mvdsv.Mvdsv, error) {
 		for _, server := range provider.Mvdsv() {
 			if 0 == server.PlayerSlots.Used {
 				continue
@@ -28,7 +28,7 @@ func FindPlayer(provider *dataprovider.DataProvider) func(c *fiber.Ctx) error {
 			}
 		}
 
-		return mvdsv.MvdsvExport{}, errors.New("player not found")
+		return mvdsv.Mvdsv{}, errors.New("player not found")
 	}
 
 	return func(c *fiber.Ctx) error {

@@ -52,7 +52,7 @@ func Servers(provider *dataprovider.DataProvider) func(c *fiber.Ctx) error {
 	}
 }
 
-func GameStateFromServer(server mvdsv.MvdsvExport) GameState {
+func GameStateFromServer(server mvdsv.Mvdsv) GameState {
 	players := make([]Player, 0)
 
 	for _, player := range server.Players {
@@ -76,7 +76,7 @@ func GameStateFromServer(server mvdsv.MvdsvExport) GameState {
 	}
 }
 
-func ToGameStates(servers []mvdsv.MvdsvExport) []GameState {
+func ToGameStates(servers []mvdsv.Mvdsv) []GameState {
 	states := make([]GameState, 0)
 
 	for _, server := range servers {
@@ -86,7 +86,7 @@ func ToGameStates(servers []mvdsv.MvdsvExport) []GameState {
 	return states
 }
 
-func ToStats(servers []mvdsv.MvdsvExport) ServerStats {
+func ToStats(servers []mvdsv.Mvdsv) ServerStats {
 	stats := ServerStats{
 		ServerCount:       len(servers),
 		ActiveServerCount: 0,
@@ -105,8 +105,8 @@ func ToStats(servers []mvdsv.MvdsvExport) ServerStats {
 	return stats
 }
 
-func FilterServersWithQtv(servers []mvdsv.MvdsvExport) []mvdsv.MvdsvExport {
-	result := make([]mvdsv.MvdsvExport, 0)
+func FilterServersWithQtv(servers []mvdsv.Mvdsv) []mvdsv.Mvdsv {
+	result := make([]mvdsv.Mvdsv, 0)
 
 	for _, server := range servers {
 		if "" != server.QtvStream.Address {

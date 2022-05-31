@@ -26,42 +26,42 @@ func (dp DataProvider) Generic() []qserver.GenericServer {
 	return dp.scraper.Servers()
 }
 
-func (dp DataProvider) Mvdsv() []mvdsv.MvdsvExport {
-	result := make([]mvdsv.MvdsvExport, 0)
+func (dp DataProvider) Mvdsv() []mvdsv.Mvdsv {
+	result := make([]mvdsv.Mvdsv, 0)
 
 	for _, server := range dp.scraper.Servers() {
 		if server.Version.IsMvdsv() {
-			mvdsvExport := convert.ToMvdsvExport(server)
-			mvdsvExport.Geo = dp.geoDb.GetByAddress(server.Address)
-			result = append(result, mvdsvExport)
+			mvdsvServer := convert.ToMvdsv(server)
+			mvdsvServer.Geo = dp.geoDb.GetByAddress(server.Address)
+			result = append(result, mvdsvServer)
 		}
 	}
 
 	return result
 }
 
-func (dp DataProvider) Qtv() []qtv.QtvExport {
-	result := make([]qtv.QtvExport, 0)
+func (dp DataProvider) Qtv() []qtv.Qtv {
+	result := make([]qtv.Qtv, 0)
 
 	for _, server := range dp.scraper.Servers() {
 		if server.Version.IsQtv() {
-			qtvExport := convert.ToQtvExport(server)
-			qtvExport.Geo = dp.geoDb.GetByAddress(server.Address)
-			result = append(result, qtvExport)
+			qtvServer := convert.ToQtv(server)
+			qtvServer.Geo = dp.geoDb.GetByAddress(server.Address)
+			result = append(result, qtvServer)
 		}
 	}
 
 	return result
 }
 
-func (dp DataProvider) Qwfwd() []qwfwd.QwfwdExport {
-	result := make([]qwfwd.QwfwdExport, 0)
+func (dp DataProvider) Qwfwd() []qwfwd.Qwfwd {
+	result := make([]qwfwd.Qwfwd, 0)
 
 	for _, server := range dp.scraper.Servers() {
 		if server.Version.IsQwfwd() {
-			qwfwdExport := convert.ToQwfwdExport(server)
-			qwfwdExport.Geo = dp.geoDb.GetByAddress(server.Address)
-			result = append(result, qwfwdExport)
+			qwfwdServer := convert.ToQwfwd(server)
+			qwfwdServer.Geo = dp.geoDb.GetByAddress(server.Address)
+			result = append(result, qwfwdServer)
 		}
 	}
 
