@@ -15,7 +15,7 @@ import (
 )
 
 func EqualStrings(expect string, actual string) bool {
-	return "" == expect || strings.EqualFold(expect, actual)
+	return "" == expect || (len(expect) == len(actual) && strings.EqualFold(expect, actual))
 }
 
 func Mvdsv(provider *dataprovider.DataProvider) func(c *fiber.Ctx) error {
