@@ -7,7 +7,7 @@ require (
 	github.com/goccy/go-json v0.9.7
 	github.com/gofiber/fiber/v2 v2.34.0
 	github.com/vikpe/masterstat v0.1.7
-	github.com/vikpe/serverstat v0.1.44
+	github.com/vikpe/serverstat v0.1.45
 	golang.org/x/exp v0.0.0-20220518171630-0b5c67f07fdf
 )
 
