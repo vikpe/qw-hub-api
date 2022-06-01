@@ -13,6 +13,7 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/compress"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/favicon"
+	"github.com/gofiber/fiber/v2/middleware/recover"
 	apiV1 "qws/api/v1"
 	apiV2 "qws/api/v2"
 	"qws/dataprovider"
@@ -34,6 +35,7 @@ func main() {
 
 	// serve
 	app := fiber.New()
+	app.Use(recover.New())
 	app.Use(cors.New())
 	app.Use(compress.New())
 	app.Use(favicon.New(favicon.Config{File: "./favicon.ico"}))
