@@ -1,4 +1,4 @@
-package geodb
+package sources
 
 import (
 	"encoding/json"
@@ -10,14 +10,14 @@ import (
 	"github.com/vikpe/serverstat/qserver/geo"
 )
 
-type Database map[string]geo.Info
+type GeoDatabase map[string]geo.Info
 
-func (db Database) GetByAddress(address string) geo.Info {
+func (db GeoDatabase) GetByAddress(address string) geo.Info {
 	ip := strings.Split(address, ":")[0]
 	return db.GetByIp(ip)
 }
 
-func (db Database) GetByIp(ip string) geo.Info {
+func (db GeoDatabase) GetByIp(ip string) geo.Info {
 	if _, ok := db[ip]; ok {
 		return db[ip]
 	} else {
@@ -29,7 +29,7 @@ func (db Database) GetByIp(ip string) geo.Info {
 	}
 }
 
-func New() (Database, error) {
+func NewGeoDatabase() (GeoDatabase, error) {
 	sourceUrl := "https://raw.githubusercontent.com/vikpe/qw-servers-geoip/main/ip_to_geo.json"
 	destPath := "ip_to_geo.json"
 	err := downloadFile(sourceUrl, destPath)
@@ -39,7 +39,7 @@ func New() (Database, error) {
 
 	geoJsonFile, _ := os.ReadFile(destPath)
 
-	var geoDatabase Database
+	var geoDatabase GeoDatabase
 	err = json.Unmarshal(geoJsonFile, &geoDatabase)
 	if err != nil {
 		return nil, err
