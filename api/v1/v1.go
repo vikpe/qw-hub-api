@@ -3,9 +3,9 @@ package api
 import (
 	"github.com/gofiber/fiber/v2"
 	"qws/api/v1/handlers"
-	"qws/dataprovider"
+	"qws/sources"
 )
 
-func Routes(router fiber.Router, provider *dataprovider.DataProvider) {
+func Init(router fiber.Router, provider *sources.Provider) {
 	router.Get("servers", handlers.Servers(provider))
 }
