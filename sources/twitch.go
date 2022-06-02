@@ -1,10 +1,13 @@
 package sources
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/nicklaw5/helix"
 )
+
+const quakeGameId = "7348"
 
 type TwitchScraper struct {
 	client     *helix.Client
@@ -14,19 +17,21 @@ type TwitchScraper struct {
 	interval   int
 }
 
-func NewTwitchScraper(clientID string, channels []string) (TwitchScraper, error) {
+func NewTwitchScraper(clientID string, userAccessToken string, channels []string) (TwitchScraper, error) {
 	client, err := helix.NewClient(&helix.Options{
-		ClientID: clientID,
+		ClientID:        clientID,
+		UserAccessToken: userAccessToken,
 	})
 
 	if err != nil {
+		fmt.Println("twitch client", err.Error())
 		return TwitchScraper{}, err
 	}
 
 	return TwitchScraper{
 		channels:   channels,
 		client:     client,
-		interval:   60,
+		interval:   30,
 		shouldStop: false,
 		Streams:    make([]helix.Stream, 0),
 	}, nil
@@ -52,12 +57,13 @@ func (s *TwitchScraper) Start() {
 
 				if isTimeToUpdate {
 					response, err := s.client.GetStreams(&helix.StreamsParams{
-						First: 10,
-						//GameIDs:    []string{"quake"},
+						First:      10,
+						GameIDs:    []string{quakeGameId},
 						UserLogins: s.channels,
 					})
 
 					if err != nil {
+						fmt.Println("error fetching twitch streams")
 						return
 					}
 
