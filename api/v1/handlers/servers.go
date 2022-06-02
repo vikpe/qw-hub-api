@@ -7,7 +7,6 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/vikpe/serverstat/qserver/mvdsv"
-	"qws/sources"
 )
 
 type Player struct {
@@ -29,7 +28,7 @@ type ServerStats struct {
 	ObserverCount     int
 }
 
-func Servers(provider *sources.Provider) func(c *fiber.Ctx) error {
+func Servers(serverSource func() []mvdsv.Mvdsv) func(c *fiber.Ctx) error {
 	outputFunc := func() any {
 		type server struct{ GameStates []GameState }
 		type result struct {
@@ -37,7 +36,7 @@ func Servers(provider *sources.Provider) func(c *fiber.Ctx) error {
 			ServerStats
 		}
 
-		serversWithQtv := FilterServersWithQtv(provider.Mvdsv())
+		serversWithQtv := FilterServersWithQtv(serverSource())
 
 		return result{
 			Servers: []server{

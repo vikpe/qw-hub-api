@@ -2,10 +2,10 @@ package api
 
 import (
 	"github.com/gofiber/fiber/v2"
+	"github.com/vikpe/serverstat/qserver/mvdsv"
 	"qws/api/v1/handlers"
-	"qws/sources"
 )
 
-func Init(router fiber.Router, provider *sources.Provider) {
-	router.Get("servers", handlers.Servers(provider))
+func Init(router fiber.Router, serverSource func() []mvdsv.Mvdsv) {
+	router.Get("servers", handlers.Servers(serverSource))
 }

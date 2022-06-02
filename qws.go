@@ -47,7 +47,7 @@ func main() {
 	app.Use(cache.New(cache.Config{
 		Expiration: time.Duration(config.servers.ActiveServerInterval) * time.Second,
 	}))
-	v1.Init(app.Group("/v1"), &dataProvider)
+	v1.Init(app.Group("/v1"), dataProvider.Mvdsv)
 	v2.Init(app.Group("/v2"), &dataProvider)
 
 	address := fmt.Sprintf(":%d", config.httpPort)
