@@ -14,24 +14,29 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/favicon"
 	"github.com/gofiber/fiber/v2/middleware/recover"
-	apiV1 "qws/api/v1"
-	apiV2 "qws/api/v2"
-	"qws/dataprovider"
-	"qws/geodb"
-	"qws/scrape/server"
+	v1 "qws/api/v1"
+	v2 "qws/api/v2"
+	"qws/sources"
 )
 
 func main() {
 	// config
-	conf := getConfig()
+	config := getConfig()
 
-	// data sources
-	scraper := server.NewScraper()
-	scraper.Config = conf.scrapeConfig
-	scraper.Start()
+	// provider sources
+	serverScraper := sources.NewServerScraper()
+	serverScraper.Config = config.servers
+	serverScraper.Start()
 
-	geoDatabase, _ := geodb.New()
-	dataProvider := dataprovider.New(&scraper, geoDatabase)
+	twitchScraper, _ := sources.NewTwitchScraper("foo", []string{"vikpe"})
+	twitchScraper.Start()
+
+	geoDatabase, _ := sources.NewGeoDatabase()
+	dataProvider := sources.NewProvider(
+		&serverScraper,
+		&twitchScraper,
+		geoDatabase,
+	)
 
 	// serve
 	app := fiber.New()
@@ -40,24 +45,23 @@ func main() {
 	app.Use(compress.New())
 	app.Use(favicon.New(favicon.Config{File: "./favicon.ico"}))
 	app.Use(cache.New(cache.Config{
-		Expiration: time.Duration(conf.scrapeConfig.ActiveServerInterval) * time.Second,
+		Expiration: time.Duration(config.servers.ActiveServerInterval) * time.Second,
 	}))
+	v1.Init(app.Group("/v1"), &dataProvider)
+	v2.Init(app.Group("/v2"), &dataProvider)
 
-	apiV1.Routes(app.Group("/v1"), &dataProvider)
-	apiV2.Routes(app.Group("/v2"), &dataProvider)
+	address := fmt.Sprintf(":%d", config.httpPort)
 
-	listenAddress := fmt.Sprintf(":%d", conf.httpPort)
-
-	if 443 == conf.httpPort {
-		log.Fatal(app.ListenTLS(listenAddress, "server.crt", "server.key"))
+	if 443 == config.httpPort {
+		log.Fatal(app.ListenTLS(address, "qserver.crt", "qserver.key"))
 	} else {
-		log.Fatal(app.Listen(listenAddress))
+		log.Fatal(app.Listen(address))
 	}
 }
 
 type AppConfig struct {
-	httpPort     int
-	scrapeConfig server.ScraperConfig
+	httpPort int
+	servers  sources.ServerScraperConfig
 }
 
 func getConfig() AppConfig {
@@ -69,9 +73,9 @@ func getConfig() AppConfig {
 	)
 
 	flag.IntVar(&httpPort, "port", 80, "HTTP listen port")
-	flag.IntVar(&masterInterval, "master", server.DefaultConfig.MasterInterval, "Master server update interval in seconds")
-	flag.IntVar(&serverInterval, "server", server.DefaultConfig.ServerInterval, "Server update interval in seconds")
-	flag.IntVar(&activeServerInterval, "active", server.DefaultConfig.ActiveServerInterval, "Active server update interval in seconds")
+	flag.IntVar(&masterInterval, "master", sources.DefaultServerScraperConfig.MasterInterval, "Master qserver update interval in seconds")
+	flag.IntVar(&serverInterval, "qserver", sources.DefaultServerScraperConfig.ServerInterval, "Server update interval in seconds")
+	flag.IntVar(&activeServerInterval, "active", sources.DefaultServerScraperConfig.ActiveServerInterval, "Active qserver update interval in seconds")
 	flag.Parse()
 
 	masterServers, err := getMasterServersFromJsonFile("master_servers.json")
@@ -83,7 +87,7 @@ func getConfig() AppConfig {
 
 	return AppConfig{
 		httpPort: httpPort,
-		scrapeConfig: server.ScraperConfig{
+		servers: sources.ServerScraperConfig{
 			MasterServers:        masterServers,
 			MasterInterval:       masterInterval,
 			ServerInterval:       serverInterval,
