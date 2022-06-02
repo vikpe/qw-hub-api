@@ -7,10 +7,10 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/vikpe/serverstat/qserver/mvdsv"
 	"golang.org/x/exp/slices"
-	"qws/dataprovider"
+	"qws/sources"
 )
 
-func FindPlayer(provider *dataprovider.DataProvider) func(c *fiber.Ctx) error {
+func FindPlayer(provider *sources.Provider) func(c *fiber.Ctx) error {
 	serverByPlayerName := func(playerName string) (mvdsv.Mvdsv, error) {
 		for _, server := range provider.Mvdsv() {
 			if 0 == server.PlayerSlots.Used {

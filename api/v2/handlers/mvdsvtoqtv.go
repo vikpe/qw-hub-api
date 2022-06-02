@@ -2,10 +2,10 @@ package handlers
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"qws/dataprovider"
+	"qws/sources"
 )
 
-func MvdsvToQtv(provider *dataprovider.DataProvider) func(c *fiber.Ctx) error {
+func MvdsvToQtv(provider *sources.Provider) func(c *fiber.Ctx) error {
 	addressToQtv := func() any {
 		result := make(map[string]string, 0)
 		for _, server := range provider.Generic() {

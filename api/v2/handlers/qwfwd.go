@@ -2,10 +2,10 @@ package handlers
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"qws/dataprovider"
+	"qws/sources"
 )
 
-func Qwfwd(provider *dataprovider.DataProvider) func(c *fiber.Ctx) error {
+func Qwfwd(provider *sources.Provider) func(c *fiber.Ctx) error {
 	return func(c *fiber.Ctx) error {
 		return c.JSON(provider.Qwfwd())
 	}

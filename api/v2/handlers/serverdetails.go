@@ -8,10 +8,10 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/vikpe/serverstat/qserver"
 	"github.com/vikpe/serverstat/qserver/convert"
-	"qws/dataprovider"
+	"qws/sources"
 )
 
-func ServerDetails(provider *dataprovider.DataProvider) func(c *fiber.Ctx) error {
+func ServerDetails(provider *sources.Provider) func(c *fiber.Ctx) error {
 	return func(c *fiber.Ctx) error {
 		server, err := serverByAddress(provider.Generic(), c.Params("address"))
 
@@ -50,5 +50,5 @@ func serverByAddress(servers []qserver.GenericServer, address string) (qserver.G
 			return server, nil
 		}
 	}
-	return qserver.GenericServer{}, errors.New("server not found")
+	return qserver.GenericServer{}, errors.New("qserver not found")
 }
