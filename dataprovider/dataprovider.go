@@ -7,15 +7,15 @@ import (
 	"github.com/vikpe/serverstat/qserver/qtv"
 	"github.com/vikpe/serverstat/qserver/qwfwd"
 	"qws/geodb"
-	"qws/scrape"
+	"qws/scrape/server"
 )
 
 type DataProvider struct {
-	scraper *scrape.ServerScraper
+	scraper *server.Scraper
 	geoDb   geodb.Database
 }
 
-func New(scraper *scrape.ServerScraper, geoDb geodb.Database) DataProvider {
+func New(scraper *server.Scraper, geoDb geodb.Database) DataProvider {
 	return DataProvider{
 		scraper: scraper,
 		geoDb:   geoDb,

@@ -1,4 +1,4 @@
-package scrape
+package server
 
 import (
 	"log"
@@ -10,10 +10,10 @@ import (
 	"github.com/vikpe/serverstat/qserver"
 )
 
-type ServerIndex map[string]qserver.GenericServer
+type Index map[string]qserver.GenericServer
 
-func NewServerIndex(servers []qserver.GenericServer) ServerIndex {
-	index := make(ServerIndex, 0)
+func NewIndex(servers []qserver.GenericServer) Index {
+	index := make(Index, 0)
 
 	for _, server := range servers {
 		index[server.Address] = server
@@ -22,20 +22,20 @@ func NewServerIndex(servers []qserver.GenericServer) ServerIndex {
 	return index
 }
 
-func (index ServerIndex) Servers() []qserver.GenericServer {
+func (i Index) Servers() []qserver.GenericServer {
 	servers := make([]qserver.GenericServer, 0)
 
-	for _, server := range index {
+	for _, server := range i {
 		servers = append(servers, server)
 	}
 
 	return servers
 }
 
-func (index ServerIndex) ActiveAddresses() []string {
+func (i Index) ActiveAddresses() []string {
 	activeAddresses := make([]string, 0)
 
-	for _, server := range index.Servers() {
+	for _, server := range i.Servers() {
 		if hasHumanPlayers(server) {
 			activeAddresses = append(activeAddresses, server.Address)
 		}
@@ -55,56 +55,56 @@ func hasHumanPlayers(server qserver.GenericServer) bool {
 	return false
 }
 
-func (index ServerIndex) Update(servers []qserver.GenericServer) {
+func (i Index) Update(servers []qserver.GenericServer) {
 	for _, server := range servers {
-		index[server.Address] = server
+		i[server.Address] = server
 	}
 }
 
-type ServerScraper struct {
-	Config          Config
-	index           ServerIndex
+type Scraper struct {
+	Config          ScraperConfig
+	index           Index
 	serverAddresses []string
 	shouldStop      bool
 }
 
-type Config struct {
+type ScraperConfig struct {
 	MasterServers        []string
 	MasterInterval       int
 	ServerInterval       int
 	ActiveServerInterval int
 }
 
-var DefaultConfig = Config{
+var DefaultConfig = ScraperConfig{
 	MasterServers:        make([]string, 0),
 	MasterInterval:       600,
 	ServerInterval:       30,
 	ActiveServerInterval: 3,
 }
 
-func NewServerScraper() ServerScraper {
-	return ServerScraper{
+func NewScraper() Scraper {
+	return Scraper{
 		Config:          DefaultConfig,
-		index:           make(ServerIndex, 0),
+		index:           make(Index, 0),
 		serverAddresses: make([]string, 0),
 		shouldStop:      false,
 	}
 }
 
-func (sp *ServerScraper) Servers() []qserver.GenericServer {
-	return sp.index.Servers()
+func (s *Scraper) Servers() []qserver.GenericServer {
+	return s.index.Servers()
 }
 
-func (sp *ServerScraper) Start() {
+func (s *Scraper) Start() {
 	serverAddresses := make([]string, 0)
-	sp.shouldStop = false
+	s.shouldStop = false
 
 	go func() {
 		ticker := time.NewTicker(time.Duration(1) * time.Second)
 		tick := -1
 
 		for ; true; <-ticker.C {
-			if sp.shouldStop {
+			if s.shouldStop {
 				return
 			}
 
@@ -117,7 +117,7 @@ func (sp *ServerScraper) Start() {
 
 				if isTimeToUpdateFromMasters {
 					var err error
-					serverAddresses, err = masterstat.GetServerAddressesFromMany(sp.Config.MasterServers)
+					serverAddresses, err = masterstat.GetServerAddressesFromMany(s.Config.MasterServers)
 
 					if err != nil {
 						log.Println("ERROR:", err)
@@ -125,24 +125,24 @@ func (sp *ServerScraper) Start() {
 					}
 				}
 
-				isTimeToUpdateAllServers := currentTick%sp.Config.ServerInterval == 0
-				isTimeToUpdateActiveServers := currentTick%sp.Config.ActiveServerInterval == 0
+				isTimeToUpdateAllServers := currentTick%s.Config.ServerInterval == 0
+				isTimeToUpdateActiveServers := currentTick%s.Config.ActiveServerInterval == 0
 
 				if isTimeToUpdateAllServers {
-					sp.index = NewServerIndex(serverstat.GetInfoFromMany(serverAddresses))
+					s.index = NewIndex(serverstat.GetInfoFromMany(serverAddresses))
 				} else if isTimeToUpdateActiveServers {
-					activeAddresses := sp.index.ActiveAddresses()
-					sp.index.Update(serverstat.GetInfoFromMany(activeAddresses))
+					activeAddresses := s.index.ActiveAddresses()
+					s.index.Update(serverstat.GetInfoFromMany(activeAddresses))
 				}
 			}()
 
-			if tick == sp.Config.MasterInterval {
+			if tick == s.Config.MasterInterval {
 				tick = 0
 			}
 		}
 	}()
 }
 
-func (sp *ServerScraper) Stop() {
-	sp.shouldStop = true
+func (s *Scraper) Stop() {
+	s.shouldStop = true
 }

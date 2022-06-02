@@ -18,7 +18,7 @@ import (
 	apiV2 "qws/api/v2"
 	"qws/dataprovider"
 	"qws/geodb"
-	"qws/scrape"
+	"qws/scrape/server"
 )
 
 func main() {
@@ -26,7 +26,7 @@ func main() {
 	conf := getConfig()
 
 	// data sources
-	scraper := scrape.NewServerScraper()
+	scraper := server.NewScraper()
 	scraper.Config = conf.scrapeConfig
 	scraper.Start()
 
@@ -57,7 +57,7 @@ func main() {
 
 type AppConfig struct {
 	httpPort     int
-	scrapeConfig scrape.Config
+	scrapeConfig server.ScraperConfig
 }
 
 func getConfig() AppConfig {
@@ -69,9 +69,9 @@ func getConfig() AppConfig {
 	)
 
 	flag.IntVar(&httpPort, "port", 80, "HTTP listen port")
-	flag.IntVar(&masterInterval, "master", scrape.DefaultConfig.MasterInterval, "Master server update interval in seconds")
-	flag.IntVar(&serverInterval, "server", scrape.DefaultConfig.ServerInterval, "Server update interval in seconds")
-	flag.IntVar(&activeServerInterval, "active", scrape.DefaultConfig.ActiveServerInterval, "Active server update interval in seconds")
+	flag.IntVar(&masterInterval, "master", server.DefaultConfig.MasterInterval, "Master server update interval in seconds")
+	flag.IntVar(&serverInterval, "server", server.DefaultConfig.ServerInterval, "Server update interval in seconds")
+	flag.IntVar(&activeServerInterval, "active", server.DefaultConfig.ActiveServerInterval, "Active server update interval in seconds")
 	flag.Parse()
 
 	masterServers, err := getMasterServersFromJsonFile("master_servers.json")
@@ -83,7 +83,7 @@ func getConfig() AppConfig {
 
 	return AppConfig{
 		httpPort: httpPort,
-		scrapeConfig: scrape.Config{
+		scrapeConfig: server.ScraperConfig{
 			MasterServers:        masterServers,
 			MasterInterval:       masterInterval,
 			ServerInterval:       serverInterval,
