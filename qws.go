@@ -73,7 +73,7 @@ func main() {
 	address := fmt.Sprintf(":%d", config.httpPort)
 
 	if 443 == config.httpPort {
-		log.Fatal(app.ListenTLS(address, "qserver.crt", "qserver.key"))
+		log.Fatal(app.ListenTLS(address, "server.crt", "server.key"))
 	} else {
 		log.Fatal(app.Listen(address))
 	}
