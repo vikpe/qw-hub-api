@@ -28,6 +28,7 @@ type TwitchStream struct {
 	ViewerCount int    `json:"viewers"`
 	Language    string `json:"language"`
 	Url         string `json:"url"`
+	Server      string `json:"server"`
 }
 
 type TwitchScraper struct {
