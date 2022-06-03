@@ -23,7 +23,7 @@ func (s StreamerIndex) Channels() []string {
 
 type TwitchStream struct {
 	Player      string `json:"player"`
-	Channel     string `json:"Channel"`
+	Channel     string `json:"channel"`
 	Title       string `json:"title"`
 	ViewerCount int    `json:"viewers"`
 	Language    string `json:"language"`
@@ -49,6 +49,7 @@ func (scraper TwitchScraper) Streams() []TwitchStream {
 			Title:       stream.Title,
 			ViewerCount: stream.ViewerCount,
 			Url:         fmt.Sprintf("https://twitch.tv/%s", stream.UserLogin),
+			Server:      "",
 		})
 	}
 
