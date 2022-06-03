@@ -9,15 +9,51 @@ import (
 
 const quakeGameId = "7348"
 
-type TwitchScraper struct {
-	client     *helix.Client
-	channels   []string
-	Streams    []helix.Stream
-	shouldStop bool
-	interval   int
+type StreamerIndex map[string]string
+
+func (s StreamerIndex) Channels() []string {
+	channels := make([]string, 0)
+
+	for ch := range s {
+		channels = append(channels, ch)
+	}
+
+	return channels
 }
 
-func NewTwitchScraper(clientID string, userAccessToken string, channels []string) (TwitchScraper, error) {
+type TwitchStream struct {
+	Player      string `json:"player"`
+	Title       string `json:"title"`
+	ViewerCount int    `json:"viewers"`
+	Language    string `json:"language"`
+	Url         string `json:"url"`
+}
+
+type TwitchScraper struct {
+	client       *helix.Client
+	streamers    StreamerIndex
+	helixStreams []helix.Stream
+	shouldStop   bool
+	interval     int
+}
+
+func (scraper TwitchScraper) Streams() []TwitchStream {
+	result := make([]TwitchStream, 0)
+
+	for _, stream := range scraper.helixStreams {
+		result = append(result, TwitchStream{
+			Player:      scraper.streamers[stream.UserLogin],
+			Language:    stream.Language,
+			Title:       stream.Title,
+			ViewerCount: stream.ViewerCount,
+			Url:         fmt.Sprintf("https://twitch.tv/%s", stream.UserLogin),
+		})
+	}
+
+	return result
+}
+
+func NewTwitchScraper(clientID string, userAccessToken string, streamers StreamerIndex) (TwitchScraper, error) {
 	client, err := helix.NewClient(&helix.Options{
 		ClientID:        clientID,
 		UserAccessToken: userAccessToken,
@@ -29,23 +65,23 @@ func NewTwitchScraper(clientID string, userAccessToken string, channels []string
 	}
 
 	return TwitchScraper{
-		channels:   channels,
-		client:     client,
-		interval:   30,
-		shouldStop: false,
-		Streams:    make([]helix.Stream, 0),
+		streamers:    streamers,
+		client:       client,
+		interval:     15,
+		shouldStop:   false,
+		helixStreams: make([]helix.Stream, 0),
 	}, nil
 }
 
-func (s *TwitchScraper) Start() {
-	s.shouldStop = false
+func (scraper *TwitchScraper) Start() {
+	scraper.shouldStop = false
 
 	go func() {
 		ticker := time.NewTicker(time.Duration(1) * time.Second)
 		tick := -1
 
 		for ; true; <-ticker.C {
-			if s.shouldStop {
+			if scraper.shouldStop {
 				return
 			}
 
@@ -53,13 +89,13 @@ func (s *TwitchScraper) Start() {
 
 			go func() {
 				currentTick := tick
-				isTimeToUpdate := currentTick%s.interval == 0
+				isTimeToUpdate := currentTick%scraper.interval == 0
 
 				if isTimeToUpdate {
-					response, err := s.client.GetStreams(&helix.StreamsParams{
+					response, err := scraper.client.GetStreams(&helix.StreamsParams{
 						First:      10,
 						GameIDs:    []string{quakeGameId},
-						UserLogins: s.channels,
+						UserLogins: scraper.streamers.Channels(),
 					})
 
 					if err != nil {
@@ -67,17 +103,17 @@ func (s *TwitchScraper) Start() {
 						return
 					}
 
-					s.Streams = response.Data.Streams
+					scraper.helixStreams = response.Data.Streams
 				}
 			}()
 
-			if tick == s.interval {
+			if tick == scraper.interval {
 				tick = 0
 			}
 		}
 	}()
 }
 
-func (s *TwitchScraper) Stop() {
-	s.shouldStop = true
+func (scraper *TwitchScraper) Stop() {
+	scraper.shouldStop = true
 }

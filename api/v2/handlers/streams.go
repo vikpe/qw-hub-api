@@ -7,6 +7,6 @@ import (
 
 func Streams(provider *sources.Provider) func(c *fiber.Ctx) error {
 	return func(c *fiber.Ctx) error {
-		return c.JSON(provider.Streams())
+		return c.JSON(provider.TwitchStreams())
 	}
 }

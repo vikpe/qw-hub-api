@@ -28,7 +28,7 @@ func main() {
 	serverScraper.Config = config.servers
 	serverScraper.Start()
 
-	streamers := map[string]string{
+	streamers := sources.StreamerIndex{
 		"vikpe":         "twitch.tv/vikpe",
 		"bps__":         "bps",
 		"badsebitv":     "badsebitv",
@@ -42,13 +42,7 @@ func main() {
 		"wimpeeh":       "Wimp",
 	}
 
-	channels := make([]string, 0)
-
-	for ch := range streamers {
-		channels = append(channels, ch)
-	}
-
-	twitchScraper, _ := sources.NewTwitchScraper(EnvTwitchCliendID, EnvTwitchUserAccessToken, channels)
+	twitchScraper, _ := sources.NewTwitchScraper(EnvTwitchCliendID, EnvTwitchUserAccessToken, streamers)
 	twitchScraper.Start()
 
 	geoDatabase, _ := sources.NewGeoDatabase()

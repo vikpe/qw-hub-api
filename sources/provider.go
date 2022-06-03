@@ -1,7 +1,6 @@
 package sources
 
 import (
-	"github.com/nicklaw5/helix"
 	"github.com/vikpe/serverstat/qserver"
 	"github.com/vikpe/serverstat/qserver/convert"
 	"github.com/vikpe/serverstat/qserver/mvdsv"
@@ -69,6 +68,6 @@ func (d Provider) Qwfwd() []qwfwd.Qwfwd {
 	return result
 }
 
-func (d Provider) Streams() []helix.Stream {
-	return d.twitchSource.Streams
+func (d Provider) TwitchStreams() []TwitchStream {
+	return d.twitchSource.Streams()
 }
