@@ -26,6 +26,17 @@ func (d Provider) Generic() []qserver.GenericServer {
 	return d.serverSource.Servers()
 }
 
+func (d Provider) AllServers() []qserver.GenericServer {
+	result := make([]qserver.GenericServer, 0)
+
+	for _, server := range d.serverSource.Servers() {
+		server.ExtraInfo.Geo = d.geoDb.GetByAddress(server.Address)
+		result = append(result, server)
+	}
+
+	return result
+}
+
 func (d Provider) Mvdsv() []mvdsv.Mvdsv {
 	result := make([]mvdsv.Mvdsv, 0)
 

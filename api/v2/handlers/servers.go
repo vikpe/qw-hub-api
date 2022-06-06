@@ -7,6 +7,6 @@ import (
 
 func Servers(provider *sources.Provider) func(c *fiber.Ctx) error {
 	return func(c *fiber.Ctx) error {
-		return c.JSON(provider.Generic())
+		return c.JSON(provider.AllServers())
 	}
 }
