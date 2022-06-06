@@ -68,7 +68,7 @@ type MvdsvParams struct {
 	SpectatorSlots slots.Slots `query:"spectator_slots"`
 	Geo            geo.Info
 	HasPlayer      string `query:"has_player"`
-	Limit          uint8  `validate:"min=0,max=50"`
+	Limit          uint8  `validate:"min=0,max=101"`
 }
 
 func serverMatchesParams(p MvdsvParams, server mvdsv.Mvdsv) bool {
