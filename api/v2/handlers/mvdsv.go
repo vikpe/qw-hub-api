@@ -32,7 +32,7 @@ func Mvdsv(provider *sources.Provider) func(c *fiber.Ctx) error {
 		return result[0:limit]
 	}
 
-	const defaultLimit = 10
+	const defaultLimit = 100
 
 	return func(c *fiber.Ctx) error {
 		params := new(MvdsvParams)
