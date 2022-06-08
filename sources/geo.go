@@ -22,9 +22,11 @@ func (db GeoDatabase) GetByIp(ip string) geo.Info {
 		return db[ip]
 	} else {
 		return geo.Info{
-			CC:      "",
-			Country: "",
-			Region:  "",
+			CC:          "",
+			Country:     "",
+			Region:      "",
+			City:        "",
+			Coordinates: [2]float32{0, 0},
 		}
 	}
 }
