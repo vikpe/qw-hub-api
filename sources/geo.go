@@ -2,7 +2,6 @@ package sources
 
 import (
 	"fmt"
-	"os"
 	"strings"
 
 	ipApi "github.com/BenB196/ip-api-go-pkg"
@@ -34,10 +33,12 @@ func NewGeoIPDatabase(ips []string) (GeoIPDatabase, error) {
 	fields := "continent,country,countryCode,city,lat,lon,query"
 
 	//lastIndex := len(ips) - 1
+	// TODO: remove static limit
 	lastIndex := 10
 	chunkSize := 100
 
 	geoDB := make(map[string]geo.Info, 0)
+	var err error
 
 	for indexFrom := 0; indexFrom <= lastIndex; indexFrom += chunkSize {
 		indexTo := indexFrom + chunkSize - 1
@@ -50,21 +51,20 @@ func NewGeoIPDatabase(ips []string) (GeoIPDatabase, error) {
 
 		if err != nil {
 			fmt.Println(err.Error())
-			os.Exit(1)
-		}
-
-		for _, l := range locations {
-			geoDB[l.Query] = geo.Info{
-				CC:          l.CountryCode,
-				Country:     l.Country,
-				Region:      l.Continent,
-				City:        l.City,
-				Coordinates: [2]float32{*l.Lat, *l.Lon},
+		} else {
+			for _, l := range locations {
+				geoDB[l.Query] = geo.Info{
+					CC:          l.CountryCode,
+					Country:     l.Country,
+					Region:      l.Continent,
+					City:        l.City,
+					Coordinates: [2]float32{*l.Lat, *l.Lon},
+				}
 			}
 		}
 	}
 
-	return geoDB, nil
+	return geoDB, err
 }
 
 func getLocations(ips []string, fields string) ([]ipApi.Location, error) {
