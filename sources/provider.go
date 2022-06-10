@@ -22,7 +22,7 @@ func NewProvider(servers *ServerScraper, twitch *TwitchScraper, geoDb GeoDatabas
 	}
 }
 
-func (d Provider) Generic() []qserver.GenericServer {
+func (d Provider) GenericServers() []qserver.GenericServer {
 	return d.serverSource.Servers()
 }
 

@@ -13,7 +13,7 @@ import (
 
 func ServerDetails(provider *sources.Provider) func(c *fiber.Ctx) error {
 	return func(c *fiber.Ctx) error {
-		server, err := serverByAddress(provider.Generic(), c.Params("address"))
+		server, err := serverByAddress(provider.GenericServers(), c.Params("address"))
 
 		if err == nil {
 			return c.Type("json").SendString(convert.ToJson(server))

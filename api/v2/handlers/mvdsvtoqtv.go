@@ -8,7 +8,7 @@ import (
 func MvdsvToQtv(provider *sources.Provider) func(c *fiber.Ctx) error {
 	addressToQtv := func() any {
 		result := make(map[string]string, 0)
-		for _, server := range provider.Generic() {
+		for _, server := range provider.GenericServers() {
 			if "" != server.ExtraInfo.QtvStream.Address {
 				result[server.Address] = server.ExtraInfo.QtvStream.Url
 			}
