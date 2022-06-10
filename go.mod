@@ -3,11 +3,11 @@ module qws
 go 1.18
 
 require (
-	github.com/BenB196/ip-api-go-pkg v0.0.9
 	github.com/go-playground/validator/v10 v10.11.0
 	github.com/goccy/go-json v0.9.7
 	github.com/gofiber/fiber/v2 v2.34.0
 	github.com/nicklaw5/helix v1.25.0
+	github.com/oschwald/maxminddb-golang v1.9.0
 	github.com/ssoroka/slice v0.0.0-20220402005549-78f0cea3df8b
 	github.com/vikpe/masterstat v0.1.8
 	github.com/vikpe/serverstat v0.1.50

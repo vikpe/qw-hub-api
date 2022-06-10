@@ -29,7 +29,7 @@ type ServerScraperConfig struct {
 
 var DefaultServerScraperConfig = ServerScraperConfig{
 	MasterServers:        make([]string, 0),
-	MasterInterval:       7200,
+	MasterInterval:       4 * 3600,
 	ServerInterval:       30,
 	ActiveServerInterval: 3,
 }
@@ -77,7 +77,7 @@ func (scraper *ServerScraper) Start() {
 					}
 
 					ips := serverAddressesToIps(serverAddresses)
-					scraper.geoDB, err = NewGeoIPDatabase(serverAddressesToIps(ips))
+					scraper.geoDB, err = NewFromMaxmindDB(serverAddressesToIps(ips))
 
 					if err != nil {
 						log.Println("ERROR:", err)
@@ -111,7 +111,7 @@ func serverAddressesToIps(addresses []string) []string {
 	result := make([]string, 0)
 
 	for _, address := range addresses {
-		parts := strings.SplitN(address, ":", 1)
+		parts := strings.SplitN(address, ":", 2)
 		result = append(result, parts[0])
 	}
 
