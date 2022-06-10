@@ -34,15 +34,14 @@ func (db GeoIPDatabase) GetByIp(ip string) geo.Info {
 }
 
 func NewFromMaxmindDB(ips []string) (GeoIPDatabase, error) {
-	dbName := "GeoLite2-City.mmdb"
-	dbUrl := "https://github.com/P3TERX/GeoLite.mmdb/raw/download/GeoLite2-City.mmdb"
-	err := downloadFile(dbUrl, dbName)
+	/*dbUrl := "https://github.com/P3TERX/GeoLite.mmdb/raw/download/GeoLite2-City.mmdb"
+	err := downloadFile(dbUrl, "GeoLite2-City.mmdb")
 
 	if err != nil {
 		log.Fatal(err)
-	}
+	}*/
 
-	db, err := maxminddb.Open(dbName)
+	db, err := maxminddb.Open("GeoLite2-City.mmdb")
 	if err != nil {
 		log.Fatal(err)
 	}
