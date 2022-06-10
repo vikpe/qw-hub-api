@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strconv"
 	"time"
 
 	"github.com/goccy/go-json"
@@ -55,6 +56,16 @@ func main() {
 	app.Use(favicon.New(favicon.Config{File: "./favicon.ico"}))
 	app.Use(cache.New(cache.Config{
 		Expiration: time.Duration(config.servers.ActiveServerInterval) * time.Second,
+		ExpirationGenerator: func(c *fiber.Ctx, cfg *cache.Config) time.Duration {
+			customExpiration := c.GetRespHeader("Cache-Time", "")
+
+			if customExpiration != "" {
+				newCacheTime, _ := strconv.Atoi(customExpiration)
+				return time.Second * time.Duration(newCacheTime)
+			}
+
+			return cfg.Expiration
+		},
 	}))
 	v1.Init(app.Group("/v1"), dataProvider.Mvdsv)
 	v2.Init(app.Group("/v2"), &dataProvider)
