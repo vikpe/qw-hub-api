@@ -1,23 +1,22 @@
 package sources
 
 import (
-	"encoding/json"
-	"io"
-	"net/http"
+	"fmt"
 	"os"
 	"strings"
 
+	ipApi "github.com/BenB196/ip-api-go-pkg"
 	"github.com/vikpe/serverstat/qserver/geo"
 )
 
-type GeoDatabase map[string]geo.Info
+type GeoIPDatabase map[string]geo.Info
 
-func (db GeoDatabase) GetByAddress(address string) geo.Info {
+func (db GeoIPDatabase) GetByAddress(address string) geo.Info {
 	ip := strings.Split(address, ":")[0]
 	return db.GetByIp(ip)
 }
 
-func (db GeoDatabase) GetByIp(ip string) geo.Info {
+func (db GeoIPDatabase) GetByIp(ip string) geo.Info {
 	if _, ok := db[ip]; ok {
 		return db[ip]
 	} else {
@@ -31,38 +30,61 @@ func (db GeoDatabase) GetByIp(ip string) geo.Info {
 	}
 }
 
-func NewGeoDatabase() (GeoDatabase, error) {
-	sourceUrl := "https://raw.githubusercontent.com/vikpe/qw-servers-geoip/main/ip_to_geo.json"
-	destPath := "ip_to_geo.json"
-	err := downloadFile(sourceUrl, destPath)
-	if err != nil {
-		return nil, err
+func NewGeoIPDatabase(ips []string) (GeoIPDatabase, error) {
+	fields := "continent,country,countryCode,city,lat,lon,query"
+
+	//lastIndex := len(ips) - 1
+	lastIndex := 10
+	chunkSize := 100
+
+	geoDB := make(map[string]geo.Info, 0)
+
+	for indexFrom := 0; indexFrom <= lastIndex; indexFrom += chunkSize {
+		indexTo := indexFrom + chunkSize - 1
+
+		if indexTo > lastIndex {
+			indexTo = lastIndex
+		}
+
+		locations, err := getLocations(ips[indexFrom:indexTo], fields)
+
+		if err != nil {
+			fmt.Println(err.Error())
+			os.Exit(1)
+		}
+
+		for _, l := range locations {
+			geoDB[l.Query] = geo.Info{
+				CC:          l.CountryCode,
+				Country:     l.Country,
+				Region:      l.Continent,
+				City:        l.City,
+				Coordinates: [2]float32{*l.Lat, *l.Lon},
+			}
+		}
 	}
 
-	geoJsonFile, _ := os.ReadFile(destPath)
-
-	var geoDatabase GeoDatabase
-	err = json.Unmarshal(geoJsonFile, &geoDatabase)
-	if err != nil {
-		return nil, err
-	}
-
-	return geoDatabase, nil
+	return geoDB, nil
 }
 
-func downloadFile(url string, dest string) error {
-	resp, err := http.Get(url)
-	if err != nil {
-		return err
-	}
-	defer resp.Body.Close()
+func getLocations(ips []string, fields string) ([]ipApi.Location, error) {
+	queries := make([]ipApi.QueryIP, 0)
 
-	out, err := os.Create(dest)
-	if err != nil {
-		return err
+	for _, ip := range ips {
+		queries = append(queries, ipApi.QueryIP{Query: ip})
 	}
-	defer out.Close()
 
-	_, err = io.Copy(out, resp.Body)
-	return err
+	apiKey := ""
+	baseUrl := "https://ip-api.com/"
+	debugging := false
+
+	return ipApi.BatchQuery(
+		ipApi.Query{
+			Queries: queries,
+			Fields:  fields,
+		},
+		apiKey,
+		baseUrl,
+		debugging,
+	)
 }

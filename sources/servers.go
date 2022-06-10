@@ -3,8 +3,10 @@ package sources
 import (
 	"log"
 	"sort"
+	"strings"
 	"time"
 
+	"github.com/ssoroka/slice"
 	"github.com/vikpe/masterstat"
 	"github.com/vikpe/serverstat"
 	"github.com/vikpe/serverstat/qserver"
@@ -12,6 +14,7 @@ import (
 
 type ServerScraper struct {
 	Config          ServerScraperConfig
+	geoDB           GeoIPDatabase
 	index           serverIndex
 	serverAddresses []string
 	shouldStop      bool
@@ -26,7 +29,7 @@ type ServerScraperConfig struct {
 
 var DefaultServerScraperConfig = ServerScraperConfig{
 	MasterServers:        make([]string, 0),
-	MasterInterval:       600,
+	MasterInterval:       7200,
 	ServerInterval:       30,
 	ActiveServerInterval: 3,
 }
@@ -40,20 +43,20 @@ func NewServerScraper() ServerScraper {
 	}
 }
 
-func (s *ServerScraper) Servers() []qserver.GenericServer {
-	return s.index.servers()
+func (scraper *ServerScraper) Servers() []qserver.GenericServer {
+	return scraper.index.serversWithGeo(&scraper.geoDB)
 }
 
-func (s *ServerScraper) Start() {
+func (scraper *ServerScraper) Start() {
 	serverAddresses := make([]string, 0)
-	s.shouldStop = false
+	scraper.shouldStop = false
 
 	go func() {
 		ticker := time.NewTicker(time.Duration(1) * time.Second)
 		tick := -1
 
 		for ; true; <-ticker.C {
-			if s.shouldStop {
+			if scraper.shouldStop {
 				return
 			}
 
@@ -66,7 +69,15 @@ func (s *ServerScraper) Start() {
 
 				if isTimeToUpdateFromMasters {
 					var err error
-					serverAddresses, err = masterstat.GetServerAddressesFromMany(s.Config.MasterServers)
+					serverAddresses, err = masterstat.GetServerAddressesFromMany(scraper.Config.MasterServers)
+
+					if err != nil {
+						log.Println("ERROR:", err)
+						return
+					}
+
+					ips := serverAddressesToIps(serverAddresses)
+					scraper.geoDB, err = NewGeoIPDatabase(serverAddressesToIps(ips))
 
 					if err != nil {
 						log.Println("ERROR:", err)
@@ -74,26 +85,37 @@ func (s *ServerScraper) Start() {
 					}
 				}
 
-				isTimeToUpdateAllServers := currentTick%s.Config.ServerInterval == 0
-				isTimeToUpdateActiveServers := currentTick%s.Config.ActiveServerInterval == 0
+				isTimeToUpdateAllServers := currentTick%scraper.Config.ServerInterval == 0
+				isTimeToUpdateActiveServers := currentTick%scraper.Config.ActiveServerInterval == 0
 
 				if isTimeToUpdateAllServers {
-					s.index = newServerIndex(serverstat.GetInfoFromMany(serverAddresses))
+					scraper.index = newServerIndex(serverstat.GetInfoFromMany(serverAddresses))
 				} else if isTimeToUpdateActiveServers {
-					activeAddresses := s.index.activeAddresses()
-					s.index.update(serverstat.GetInfoFromMany(activeAddresses))
+					activeAddresses := scraper.index.activeAddresses()
+					scraper.index.update(serverstat.GetInfoFromMany(activeAddresses))
 				}
 			}()
 
-			if tick == s.Config.MasterInterval {
+			if tick == scraper.Config.MasterInterval {
 				tick = 0
 			}
 		}
 	}()
 }
 
-func (s *ServerScraper) Stop() {
-	s.shouldStop = true
+func (scraper *ServerScraper) Stop() {
+	scraper.shouldStop = true
+}
+
+func serverAddressesToIps(addresses []string) []string {
+	result := make([]string, 0)
+
+	for _, address := range addresses {
+		parts := strings.SplitN(address, ":", 1)
+		result = append(result, parts[0])
+	}
+
+	return slice.Unique(result)
 }
 
 type serverIndex map[string]qserver.GenericServer
@@ -112,6 +134,17 @@ func (i serverIndex) servers() []qserver.GenericServer {
 	servers := make([]qserver.GenericServer, 0)
 
 	for _, server := range i {
+		servers = append(servers, server)
+	}
+
+	return servers
+}
+
+func (i serverIndex) serversWithGeo(geoDB *GeoIPDatabase) []qserver.GenericServer {
+	servers := make([]qserver.GenericServer, 0)
+
+	for _, server := range i {
+		server.ExtraInfo.Geo = geoDB.GetByAddress(server.Address)
 		servers = append(servers, server)
 	}
 

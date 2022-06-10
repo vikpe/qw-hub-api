@@ -45,12 +45,7 @@ func main() {
 	twitchScraper, _ := sources.NewTwitchScraper(EnvTwitchCliendID, EnvTwitchUserAccessToken, streamers)
 	twitchScraper.Start()
 
-	geoDatabase, _ := sources.NewGeoDatabase()
-	dataProvider := sources.NewProvider(
-		&serverScraper,
-		&twitchScraper,
-		geoDatabase,
-	)
+	dataProvider := sources.NewProvider(&serverScraper, &twitchScraper)
 
 	// serve
 	app := fiber.New()

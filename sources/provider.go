@@ -11,14 +11,12 @@ import (
 type Provider struct {
 	serverSource *ServerScraper
 	twitchSource *TwitchScraper
-	geoDb        GeoDatabase
 }
 
-func NewProvider(servers *ServerScraper, twitch *TwitchScraper, geoDb GeoDatabase) Provider {
+func NewProvider(servers *ServerScraper, twitch *TwitchScraper) Provider {
 	return Provider{
 		serverSource: servers,
 		twitchSource: twitch,
-		geoDb:        geoDb,
 	}
 }
 
@@ -26,25 +24,12 @@ func (d Provider) GenericServers() []qserver.GenericServer {
 	return d.serverSource.Servers()
 }
 
-func (d Provider) AllServers() []qserver.GenericServer {
-	result := make([]qserver.GenericServer, 0)
-
-	for _, server := range d.serverSource.Servers() {
-		server.ExtraInfo.Geo = d.geoDb.GetByAddress(server.Address)
-		result = append(result, server)
-	}
-
-	return result
-}
-
 func (d Provider) Mvdsv() []mvdsv.Mvdsv {
 	result := make([]mvdsv.Mvdsv, 0)
 
 	for _, server := range d.serverSource.Servers() {
 		if server.Version.IsMvdsv() {
-			mvdsvServer := convert.ToMvdsv(server)
-			mvdsvServer.Geo = d.geoDb.GetByAddress(server.Address)
-			result = append(result, mvdsvServer)
+			result = append(result, convert.ToMvdsv(server))
 		}
 	}
 
@@ -56,9 +41,7 @@ func (d Provider) Qtv() []qtv.Qtv {
 
 	for _, server := range d.serverSource.Servers() {
 		if server.Version.IsQtv() {
-			qtvServer := convert.ToQtv(server)
-			qtvServer.Geo = d.geoDb.GetByAddress(server.Address)
-			result = append(result, qtvServer)
+			result = append(result, convert.ToQtv(server))
 		}
 	}
 
@@ -70,9 +53,7 @@ func (d Provider) Qwfwd() []qwfwd.Qwfwd {
 
 	for _, server := range d.serverSource.Servers() {
 		if server.Version.IsQwfwd() {
-			qwfwdServer := convert.ToQwfwd(server)
-			qwfwdServer.Geo = d.geoDb.GetByAddress(server.Address)
-			result = append(result, qwfwdServer)
+			result = append(result, convert.ToQwfwd(server))
 		}
 	}
 
