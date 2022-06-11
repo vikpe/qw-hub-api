@@ -3,10 +3,8 @@ package sources
 import (
 	"log"
 	"sort"
-	"strings"
 	"time"
 
-	"github.com/ssoroka/slice"
 	"github.com/vikpe/masterstat"
 	"github.com/vikpe/serverstat"
 	"github.com/vikpe/serverstat/qserver"
@@ -14,7 +12,6 @@ import (
 
 type ServerScraper struct {
 	Config          ServerScraperConfig
-	geoDB           GeoIPDatabase
 	index           serverIndex
 	serverAddresses []string
 	shouldStop      bool
@@ -44,7 +41,7 @@ func NewServerScraper() ServerScraper {
 }
 
 func (scraper *ServerScraper) Servers() []qserver.GenericServer {
-	return scraper.index.serversWithGeo(&scraper.geoDB)
+	return scraper.index.servers()
 }
 
 func (scraper *ServerScraper) Start() {
@@ -76,9 +73,6 @@ func (scraper *ServerScraper) Start() {
 						return
 					}
 
-					ips := serverAddressesToIps(serverAddresses)
-					scraper.geoDB, err = NewFromMaxmindDB(serverAddressesToIps(ips))
-
 					if err != nil {
 						log.Println("ERROR:", err)
 						return
@@ -107,17 +101,6 @@ func (scraper *ServerScraper) Stop() {
 	scraper.shouldStop = true
 }
 
-func serverAddressesToIps(addresses []string) []string {
-	result := make([]string, 0)
-
-	for _, address := range addresses {
-		parts := strings.SplitN(address, ":", 2)
-		result = append(result, parts[0])
-	}
-
-	return slice.Unique(result)
-}
-
 type serverIndex map[string]qserver.GenericServer
 
 func newServerIndex(servers []qserver.GenericServer) serverIndex {
@@ -134,17 +117,6 @@ func (i serverIndex) servers() []qserver.GenericServer {
 	servers := make([]qserver.GenericServer, 0)
 
 	for _, server := range i {
-		servers = append(servers, server)
-	}
-
-	return servers
-}
-
-func (i serverIndex) serversWithGeo(geoDB *GeoIPDatabase) []qserver.GenericServer {
-	servers := make([]qserver.GenericServer, 0)
-
-	for _, server := range i {
-		server.ExtraInfo.Geo = geoDB.GetByAddress(server.Address)
 		servers = append(servers, server)
 	}
 
