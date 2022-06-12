@@ -120,6 +120,10 @@ func (i serverIndex) servers() []qserver.GenericServer {
 		servers = append(servers, server)
 	}
 
+	sort.Slice(servers, func(i, j int) bool {
+		return servers[i].Address < servers[j].Address
+	})
+
 	return servers
 }
 
