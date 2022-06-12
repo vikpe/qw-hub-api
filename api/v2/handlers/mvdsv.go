@@ -1,16 +1,11 @@
 package handlers
 
 import (
-	"math"
 	"strings"
 
 	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
-	"github.com/vikpe/serverstat/qserver/geo"
 	"github.com/vikpe/serverstat/qserver/mvdsv"
-	"github.com/vikpe/serverstat/qserver/qclient/slots"
-	"github.com/vikpe/serverstat/qserver/qtime"
-	"golang.org/x/exp/slices"
 	"qws/sources"
 )
 
@@ -28,11 +23,8 @@ func Mvdsv(provider *sources.Provider) func(c *fiber.Ctx) error {
 			}
 		}
 
-		limit := int(math.Min(float64(len(result)), float64(p.Limit)))
-		return result[0:limit]
+		return result
 	}
-
-	const defaultLimit = 100
 
 	return func(c *fiber.Ctx) error {
 		params := new(MvdsvParams)
@@ -48,40 +40,15 @@ func Mvdsv(provider *sources.Provider) func(c *fiber.Ctx) error {
 			return c.Status(fiber.StatusBadRequest).JSON(err.Error())
 		}
 
-		if "" == c.Query("limit", "") {
-			params.Limit = defaultLimit
-		}
-
 		return c.JSON(serversByParams(*params))
 	}
 }
 
-func equalStrings(expect string, actual string) bool {
-	return "" == expect || (len(expect) == len(actual) && strings.EqualFold(expect, actual))
-}
-
 type MvdsvParams struct {
-	Mode           []string
-	Status         string
-	Time           qtime.Time
-	PlayerSlots    slots.Slots `query:"player_slots"`
-	SpectatorSlots slots.Slots `query:"spectator_slots"`
-	Geo            geo.Info
-	HasPlayer      string `query:"has_player"`
-	Limit          uint8  `validate:"min=0,max=101"`
+	HasPlayer string `query:"has_player"`
 }
 
 func serverMatchesParams(p MvdsvParams, server mvdsv.Mvdsv) bool {
-	if len(p.Mode) > 0 && !slices.Contains(p.Mode, string(server.Mode)) {
-		return false
-	}
-
-	if !equalStrings(p.Geo.CC, server.Geo.CC) ||
-		!equalStrings(p.Geo.Country, server.Geo.Country) ||
-		!equalStrings(p.Geo.Region, server.Geo.Region) {
-		return false
-	}
-
 	if "" != p.HasPlayer && !serverHasPlayerByName(server, p.HasPlayer) {
 		return false
 	}
