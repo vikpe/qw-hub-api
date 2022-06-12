@@ -69,7 +69,7 @@ func GameStateFromServer(server mvdsv.Mvdsv) GameState {
 		Link: fmt.Sprintf(
 			"http://%s/watch.qtv?sid=%d",
 			server.QtvStream.Address,
-			server.QtvStream.Id,
+			server.QtvStream.ID,
 		),
 		Players: players,
 	}

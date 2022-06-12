@@ -53,8 +53,8 @@ github.com/valyala/tcplisten v1.0.0 h1:rBHj/Xf+E1tRGZyWIWwJDiRY0zc1Js+CV5DqwacVS
 github.com/valyala/tcplisten v1.0.0/go.mod h1:T0xQ8SeCZGxckz9qRXTfG43PvQ/mcWh7FwZEA7Ioqkc=
 github.com/vikpe/masterstat v0.1.8 h1:0iWbN7kdfbRAZd8pauXQD6W9r5eFPaH72ee52ep6LN4=
 github.com/vikpe/masterstat v0.1.8/go.mod h1:dWwVbHx/ilzsx5GLbXtX9x+S0pISmJzYPFdz6cgKrvo=
-github.com/vikpe/serverstat v0.1.51 h1:rCzfWf2ujD70Xc6qqTyQWKF3/yXeIr0nCP2sDYbUEjw=
-github.com/vikpe/serverstat v0.1.51/go.mod h1:gzgRz9ZP1z+paKe8+cyk84EBUtj1UAO3fWzpurL22L4=
+github.com/vikpe/serverstat v0.1.52 h1:6Ko/NT1tpm51ZSUCcL4DbaHDlR5SN+LnpD/ylp+CBMc=
+github.com/vikpe/serverstat v0.1.52/go.mod h1:mqs8QrZwQzQlEZI9MP079xsGCcHY3xRie95GL4XglJA=
 github.com/vikpe/udpclient v0.1.3 h1:VwNkvdGA5Kr2I4ynzEYJ3z2wIDshEPJXPP9DA68FPjU=
 github.com/vikpe/udpclient v0.1.3/go.mod h1:O6nNBpajBwgy6Uc8ewk5pbI5oMU1BhjNhxYpas174o4=
 github.com/vikpe/udphelper v0.1.3 h1:BAU/BuOIgJxk3ZmtWOJ39lfsmAr2l8cAMdDI1K2GD8s=
@@ -62,8 +62,8 @@ golang.org/x/crypto v0.0.0-20211215153901-e495a2d5b3d3/go.mod h1:IxCIyHEi3zRg3s0
 golang.org/x/crypto v0.0.0-20220214200702-86341886e292/go.mod h1:IxCIyHEi3zRg3s0A5j5BB6A9Jmi73HwBIUl50j+osU4=
 golang.org/x/crypto v0.0.0-20220525230936-793ad666bf5e h1:T8NU3HyQ8ClP4SEE+KbFlg6n0NhuTsN4MyznaarGsZM=
 golang.org/x/crypto v0.0.0-20220525230936-793ad666bf5e/go.mod h1:IxCIyHEi3zRg3s0A5j5BB6A9Jmi73HwBIUl50j+osU4=
-golang.org/x/exp v0.0.0-20220602145555-4a0574d9293f h1:KK6mxegmt5hGJRcAnEDjSNLxIRhZxDcgwMbcO/lMCRM=
-golang.org/x/exp v0.0.0-20220602145555-4a0574d9293f/go.mod h1:yh0Ynu2b5ZUe3MQfp2nM0ecK7wsgouWTDN0FNeJuIys=
+golang.org/x/exp v0.0.0-20220609121020-a51bd0440498 h1:TF0FvLUGEq/8wOt/9AV1nj6D4ViZGUIGCMQfCv7VRXY=
+golang.org/x/exp v0.0.0-20220609121020-a51bd0440498/go.mod h1:yh0Ynu2b5ZUe3MQfp2nM0ecK7wsgouWTDN0FNeJuIys=
 golang.org/x/net v0.0.0-20211112202133-69e39bad7dc2/go.mod h1:9nx3DQGgdP8bBQD5qxJ1jj9UTztislL4KSBs9R2vV5Y=
 golang.org/x/net v0.0.0-20220225172249-27dd8689420f/go.mod h1:CfG3xpIq0wQ8r1q4Su4UZFWDARRcnwPjda9FqA0JpMk=
 golang.org/x/sys v0.0.0-20201119102817-f84b799fce68/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
@@ -72,8 +72,8 @@ golang.org/x/sys v0.0.0-20210615035016-665e8c7367d1/go.mod h1:oPkhp1MJrh7nUepCBc
 golang.org/x/sys v0.0.0-20210806184541-e5e7981a1069/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
 golang.org/x/sys v0.0.0-20211216021012-1d35b9e2eb4e/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
 golang.org/x/sys v0.0.0-20220227234510-4e6760a101f9/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
-golang.org/x/sys v0.0.0-20220520151302-bc2c85ada10a h1:dGzPydgVsqGcTRVwiLJ1jVbufYwmzD3LfVPLKsKg+0k=
-golang.org/x/sys v0.0.0-20220520151302-bc2c85ada10a/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
+golang.org/x/sys v0.0.0-20220610221304-9f5ed59c137d h1:Zu/JngovGLVi6t2J3nmAf3AoTDwuzw85YZ3b9o4yU7s=
+golang.org/x/sys v0.0.0-20220610221304-9f5ed59c137d/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
 golang.org/x/term v0.0.0-20201126162022-7de9c90e9dd1/go.mod h1:bj7SfCRtBDWHUb9snDiAeCFNEtKQo2Wmx5Cou7ajbmo=
 golang.org/x/term v0.0.0-20210927222741-03fcf44c2211/go.mod h1:jbD1KX2456YbFQfuXm/mYQcufACuNUgVhRMnK/tPxf8=
 golang.org/x/text v0.3.6/go.mod h1:5Zoc/QRtKVWzQhOtBMvqHzDpF6irO9z98xDceosuGiQ=

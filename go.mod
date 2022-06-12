@@ -8,8 +8,8 @@ require (
 	github.com/gofiber/fiber/v2 v2.34.0
 	github.com/nicklaw5/helix v1.25.0
 	github.com/vikpe/masterstat v0.1.8
-	github.com/vikpe/serverstat v0.1.51
-	golang.org/x/exp v0.0.0-20220602145555-4a0574d9293f
+	github.com/vikpe/serverstat v0.1.52
+	golang.org/x/exp v0.0.0-20220609121020-a51bd0440498
 )
 
 require (
@@ -26,6 +26,6 @@ require (
 	github.com/valyala/tcplisten v1.0.0 // indirect
 	github.com/vikpe/udpclient v0.1.3 // indirect
 	golang.org/x/crypto v0.0.0-20220525230936-793ad666bf5e // indirect
-	golang.org/x/sys v0.0.0-20220520151302-bc2c85ada10a // indirect
+	golang.org/x/sys v0.0.0-20220610221304-9f5ed59c137d // indirect
 	golang.org/x/text v0.3.7 // indirect
 )
