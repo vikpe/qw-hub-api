@@ -8,7 +8,7 @@ require (
 	github.com/gofiber/fiber/v2 v2.34.0
 	github.com/nicklaw5/helix v1.25.0
 	github.com/vikpe/masterstat v0.1.8
-	github.com/vikpe/serverstat v0.1.52
+	github.com/vikpe/serverstat v0.1.55
 	golang.org/x/exp v0.0.0-20220609121020-a51bd0440498
 )
 
