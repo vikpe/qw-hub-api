@@ -72,11 +72,6 @@ func (scraper *ServerScraper) Start() {
 						log.Println("ERROR:", err)
 						return
 					}
-
-					if err != nil {
-						log.Println("ERROR:", err)
-						return
-					}
 				}
 
 				isTimeToUpdateAllServers := currentTick%scraper.Config.ServerInterval == 0
