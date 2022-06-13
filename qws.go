@@ -55,7 +55,7 @@ func main() {
 	app.Use(compress.New())
 	app.Use(favicon.New(favicon.Config{File: "./favicon.ico"}))
 	app.Use(cache.New(cache.Config{
-		Expiration: time.Duration(config.servers.ActiveServerInterval) * time.Second,
+		Expiration: time.Duration(2) * time.Second,
 		ExpirationGenerator: func(c *fiber.Ctx, cfg *cache.Config) time.Duration {
 			customExpiration := c.GetRespHeader("Cache-Time", "")
 
