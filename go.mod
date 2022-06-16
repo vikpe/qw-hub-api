@@ -5,11 +5,11 @@ go 1.18
 require (
 	github.com/go-playground/validator/v10 v10.11.0
 	github.com/goccy/go-json v0.9.7
-	github.com/gofiber/fiber/v2 v2.34.0
+	github.com/gofiber/fiber/v2 v2.34.1
 	github.com/nicklaw5/helix v1.25.0
 	github.com/vikpe/masterstat v0.1.8
-	github.com/vikpe/serverstat v0.1.64
-	golang.org/x/exp v0.0.0-20220609121020-a51bd0440498
+	github.com/vikpe/serverstat v0.1.65
+	golang.org/x/exp v0.0.0-20220613132600-b0d781184e0d
 )
 
 require (
@@ -26,6 +26,6 @@ require (
 	github.com/valyala/tcplisten v1.0.0 // indirect
 	github.com/vikpe/udpclient v0.1.3 // indirect
 	golang.org/x/crypto v0.0.0-20220525230936-793ad666bf5e // indirect
-	golang.org/x/sys v0.0.0-20220610221304-9f5ed59c137d // indirect
+	golang.org/x/sys v0.0.0-20220615213510-4f61da869c0c // indirect
 	golang.org/x/text v0.3.7 // indirect
 )
