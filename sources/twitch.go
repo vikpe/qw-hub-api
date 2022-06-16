@@ -22,13 +22,13 @@ func (s StreamerIndex) Channels() []string {
 }
 
 type TwitchStream struct {
-	Player      string `json:"player"`
-	Channel     string `json:"channel"`
-	Title       string `json:"title"`
-	ViewerCount int    `json:"viewers"`
-	Language    string `json:"language"`
-	Url         string `json:"url"`
-	Server      string `json:"server"`
+	Channel       string `json:"channel"`
+	Url           string `json:"url"`
+	Title         string `json:"title"`
+	ViewerCount   int    `json:"viewers"`
+	Language      string `json:"language"`
+	PlayerName    string `json:"player_name"`
+	ServerAddress string `json:"server_address"`
 }
 
 type TwitchScraper struct {
@@ -44,13 +44,13 @@ func (scraper TwitchScraper) Streams() []TwitchStream {
 
 	for _, stream := range scraper.helixStreams {
 		result = append(result, TwitchStream{
-			Player:      scraper.streamers[stream.UserLogin],
-			Channel:     stream.UserName,
-			Language:    stream.Language,
-			Title:       stream.Title,
-			ViewerCount: stream.ViewerCount,
-			Url:         fmt.Sprintf("https://twitch.tv/%s", stream.UserLogin),
-			Server:      "",
+			PlayerName:    scraper.streamers[stream.UserLogin],
+			Channel:       stream.UserName,
+			Language:      stream.Language,
+			Title:         stream.Title,
+			ViewerCount:   stream.ViewerCount,
+			Url:           fmt.Sprintf("https://twitch.tv/%s", stream.UserLogin),
+			ServerAddress: "",
 		})
 	}
 
