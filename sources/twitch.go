@@ -27,7 +27,7 @@ type TwitchStream struct {
 	Title         string `json:"title"`
 	ViewerCount   int    `json:"viewers"`
 	Language      string `json:"language"`
-	PlayerName    string `json:"player_name"`
+	ClientName    string `json:"client_name"`
 	ServerAddress string `json:"server_address"`
 }
 
@@ -44,7 +44,7 @@ func (scraper TwitchScraper) Streams() []TwitchStream {
 
 	for _, stream := range scraper.helixStreams {
 		result = append(result, TwitchStream{
-			PlayerName:    scraper.streamers[stream.UserLogin],
+			ClientName:    scraper.streamers[stream.UserLogin],
 			Channel:       stream.UserName,
 			Language:      stream.Language,
 			Title:         stream.Title,

@@ -12,7 +12,7 @@ func Streams(provider *sources.Provider) func(c *fiber.Ctx) error {
 		streams := provider.TwitchStreams()
 
 		for streamIndex, stream := range streams {
-			streams[streamIndex].ServerAddress = getStreamServerAddress(stream.PlayerName, provider.Mvdsv())
+			streams[streamIndex].ServerAddress = getStreamServerAddress(stream.ClientName, provider.Mvdsv())
 		}
 
 		return c.JSON(streams)
