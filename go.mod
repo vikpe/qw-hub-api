@@ -8,7 +8,7 @@ require (
 	github.com/gofiber/fiber/v2 v2.34.1
 	github.com/nicklaw5/helix v1.25.0
 	github.com/vikpe/masterstat v0.1.8
-	github.com/vikpe/serverstat v0.1.68
+	github.com/vikpe/serverstat v0.1.69
 	golang.org/x/exp v0.0.0-20220613132600-b0d781184e0d
 )
 
@@ -20,7 +20,7 @@ require (
 	github.com/klauspost/compress v1.15.6 // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect
 	github.com/ssoroka/slice v0.0.0-20220402005549-78f0cea3df8b // indirect
-	github.com/valyala/bytebufferpool v1.0.0 // indirects
+	github.com/valyala/bytebufferpool v1.0.0 // indirect; indirects
 	github.com/valyala/fasthttp v1.37.0 // indirect
 	github.com/valyala/fastjson v1.6.3 // indirect
 	github.com/valyala/tcplisten v1.0.0 // indirect
