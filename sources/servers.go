@@ -116,9 +116,11 @@ func (i serverIndex) servers() []qserver.GenericServer {
 		servers = append(servers, server)
 	}
 
-	sort.Slice(servers, func(i, j int) bool {
-		return servers[i].Address < servers[j].Address
-	})
+	if len(servers) > 0 {
+		sort.Slice(servers, func(i, j int) bool {
+			return servers[i].Address < servers[j].Address
+		})
+	}
 
 	return servers
 }
@@ -136,10 +138,6 @@ func (i serverIndex) activeAddresses() []string {
 		if len(server.Clients) > 0 && hasHumanPlayers(server.Clients) {
 			activeAddresses = append(activeAddresses, server.Address)
 		}
-	}
-
-	if len(activeAddresses) > 0 {
-		sort.Strings(activeAddresses)
 	}
 
 	return activeAddresses
