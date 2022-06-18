@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"sort"
 	"strings"
 
 	"github.com/go-playground/validator/v10"
@@ -14,7 +15,13 @@ func Mvdsv(provider *sources.Provider) func(c *fiber.Ctx) error {
 		result := make([]mvdsv.Mvdsv, 0)
 
 		if len(params.HasPlayer) > 0 {
-			for _, server := range provider.Mvdsv() {
+			allServers := provider.Mvdsv()
+
+			sort.Slice(allServers, func(i, j int) bool {
+				return allServers[i].Score > allServers[j].Score
+			})
+
+			for _, server := range allServers {
 				if serverHasPlayerByName(server, params.HasPlayer) {
 					result = append(result, server)
 				}
@@ -50,7 +57,7 @@ func Mvdsv(provider *sources.Provider) func(c *fiber.Ctx) error {
 }
 
 type MvdsvParams struct {
-	HasPlayer string `query:"has_player" validate:"min=2"`
+	HasPlayer string `query:"has_player" validate:"omitempty,min=2"`
 }
 
 func serverHasPlayerByName(server mvdsv.Mvdsv, playerName string) bool {
