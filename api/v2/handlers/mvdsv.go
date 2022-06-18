@@ -10,16 +10,21 @@ import (
 )
 
 func Mvdsv(provider *sources.Provider) func(c *fiber.Ctx) error {
-	serversByParams := func(p MvdsvParams) any {
+	serversByParams := func(params MvdsvParams) any {
 		result := make([]mvdsv.Mvdsv, 0)
 
-		for _, server := range provider.Mvdsv() {
-			if !serverMatchesParams(p, server) {
-				continue
+		if len(params.HasPlayer) > 0 {
+			for _, server := range provider.Mvdsv() {
+				if serverHasPlayerByName(server, params.HasPlayer) {
+					result = append(result, server)
+				}
 			}
 
-			if server.PlayerSlots.Used > 0 {
-				result = append(result, server)
+		} else {
+			for _, server := range provider.Mvdsv() {
+				if server.PlayerSlots.Used > 0 {
+					result = append(result, server)
+				}
 			}
 		}
 
@@ -45,20 +50,18 @@ func Mvdsv(provider *sources.Provider) func(c *fiber.Ctx) error {
 }
 
 type MvdsvParams struct {
-	HasPlayer string `query:"has_player"`
-}
-
-func serverMatchesParams(p MvdsvParams, server mvdsv.Mvdsv) bool {
-	if "" != p.HasPlayer && !serverHasPlayerByName(server, p.HasPlayer) {
-		return false
-	}
-
-	return true
+	HasPlayer string `query:"has_player" validate:"min=2"`
 }
 
 func serverHasPlayerByName(server mvdsv.Mvdsv, playerName string) bool {
+	if 0 == server.PlayerSlots.Used {
+		return false
+	}
+
 	for _, c := range server.Players {
-		if strings.EqualFold(c.Name.ToPlainString(), playerName) {
+		normalizedName := strings.ToLower(c.Name.ToPlainString())
+
+		if strings.Contains(normalizedName, playerName) {
 			return true
 		}
 	}
