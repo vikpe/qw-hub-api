@@ -8,6 +8,7 @@ import (
 	"github.com/vikpe/masterstat"
 	"github.com/vikpe/serverstat"
 	"github.com/vikpe/serverstat/qserver"
+	"github.com/vikpe/serverstat/qserver/qclient"
 )
 
 type ServerScraper struct {
@@ -126,17 +127,20 @@ func (i serverIndex) activeAddresses() []string {
 	activeAddresses := make([]string, 0)
 
 	for _, server := range i.servers() {
-		if hasHumanPlayers(server) {
+		if len(server.Clients) > 0 && hasHumanPlayers(server.Clients) {
 			activeAddresses = append(activeAddresses, server.Address)
 		}
 	}
 
-	sort.Strings(activeAddresses)
+	if len(activeAddresses) > 0 {
+		sort.Strings(activeAddresses)
+	}
+
 	return activeAddresses
 }
 
-func hasHumanPlayers(server qserver.GenericServer) bool {
-	for _, c := range server.Clients {
+func hasHumanPlayers(clients []qclient.Client) bool {
+	for _, c := range clients {
 		if !c.IsSpectator() && !c.IsBot() {
 			return true
 		}
