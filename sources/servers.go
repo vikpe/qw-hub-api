@@ -123,6 +123,12 @@ func (i serverIndex) servers() []qserver.GenericServer {
 	return servers
 }
 
+func (i serverIndex) update(servers []qserver.GenericServer) {
+	for _, server := range servers {
+		i[server.Address] = server
+	}
+}
+
 func (i serverIndex) activeAddresses() []string {
 	activeAddresses := make([]string, 0)
 
@@ -147,10 +153,4 @@ func hasHumanPlayers(clients []qclient.Client) bool {
 	}
 
 	return false
-}
-
-func (i serverIndex) update(servers []qserver.GenericServer) {
-	for _, server := range servers {
-		i[server.Address] = server
-	}
 }
