@@ -53,8 +53,8 @@ github.com/valyala/tcplisten v1.0.0 h1:rBHj/Xf+E1tRGZyWIWwJDiRY0zc1Js+CV5DqwacVS
 github.com/valyala/tcplisten v1.0.0/go.mod h1:T0xQ8SeCZGxckz9qRXTfG43PvQ/mcWh7FwZEA7Ioqkc=
 github.com/vikpe/masterstat v0.1.8 h1:0iWbN7kdfbRAZd8pauXQD6W9r5eFPaH72ee52ep6LN4=
 github.com/vikpe/masterstat v0.1.8/go.mod h1:dWwVbHx/ilzsx5GLbXtX9x+S0pISmJzYPFdz6cgKrvo=
-github.com/vikpe/serverstat v0.1.78 h1:H8SYO5K+K1P/ag3N2uNT3b4/zcgpQRqT9/BHgRvvkYE=
-github.com/vikpe/serverstat v0.1.78/go.mod h1:5wOBMeiIrd1HzzcKM3F4J3mu57nQMsKBHSXZz/KpqYM=
+github.com/vikpe/serverstat v0.1.80 h1:jTNq8PL+6/SRYjFz9dF1NCH1iKTxvqR3s6rf2lM7GWg=
+github.com/vikpe/serverstat v0.1.80/go.mod h1:5wOBMeiIrd1HzzcKM3F4J3mu57nQMsKBHSXZz/KpqYM=
 github.com/vikpe/udpclient v0.1.3 h1:VwNkvdGA5Kr2I4ynzEYJ3z2wIDshEPJXPP9DA68FPjU=
 github.com/vikpe/udpclient v0.1.3/go.mod h1:O6nNBpajBwgy6Uc8ewk5pbI5oMU1BhjNhxYpas174o4=
 github.com/vikpe/udphelper v0.1.3 h1:BAU/BuOIgJxk3ZmtWOJ39lfsmAr2l8cAMdDI1K2GD8s=
