@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"sort"
-	"strings"
 
 	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
@@ -22,11 +21,17 @@ func Mvdsv(provider *sources.Provider) func(c *fiber.Ctx) error {
 			})
 
 			for _, server := range allServers {
-				if serverHasPlayerByName(server, params.HasPlayer) {
+				if ServerHasPlayerByName(server, params.HasPlayer) {
 					result = append(result, server)
 				}
 			}
 
+		} else if len(params.HasClient) > 0 {
+			for _, server := range provider.Mvdsv() {
+				if ServerHasClientByName(server, params.HasClient) {
+					result = append(result, server)
+				}
+			}
 		} else {
 			for _, server := range provider.Mvdsv() {
 				if server.PlayerSlots.Used > 0 {
@@ -57,21 +62,6 @@ func Mvdsv(provider *sources.Provider) func(c *fiber.Ctx) error {
 }
 
 type MvdsvParams struct {
+	HasClient string `query:"has_client" validate:"omitempty,min=2"`
 	HasPlayer string `query:"has_player" validate:"omitempty,min=2"`
-}
-
-func serverHasPlayerByName(server mvdsv.Mvdsv, playerName string) bool {
-	if 0 == server.PlayerSlots.Used {
-		return false
-	}
-
-	for _, c := range server.Players {
-		normalizedName := strings.ToLower(c.Name.ToPlainString())
-
-		if strings.Contains(normalizedName, playerName) {
-			return true
-		}
-	}
-
-	return false
 }
