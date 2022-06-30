@@ -39,14 +39,14 @@ func toIpHostPort(hostPort string) (string, error) {
 }
 
 func serverByAddress(servers []qserver.GenericServer, address string) (qserver.GenericServer, error) {
-	address, err := toIpHostPort(address)
+	ipHostPort, err := toIpHostPort(address)
 
 	if err != nil {
 		return qserver.GenericServer{}, err
 	}
 
 	for _, server := range servers {
-		if server.Address == address {
+		if server.Address == ipHostPort {
 			return server, nil
 		}
 	}
