@@ -15,7 +15,7 @@ func ServerHasPlayerByName(server mvdsv.Mvdsv, playerName string) bool {
 	for _, c := range server.Players {
 		normalizedName := strings.ToLower(c.Name.ToPlainString())
 
-		if strings.Contains(normalizedName, playerName) {
+		if strings.Contains(normalizedName, strings.ToLower(playerName)) {
 			return true
 		}
 	}
@@ -43,7 +43,7 @@ func ServerHasClientByName(server mvdsv.Mvdsv, clientName string) bool {
 	}
 
 	for _, c := range server.Players {
-		if clientName == c.Name.ToPlainString() {
+		if strings.ToLower(clientName) == strings.ToLower(c.Name.ToPlainString()) {
 			return true
 		}
 	}
