@@ -102,8 +102,13 @@ func (scraper *TwitchScraper) Start() {
 						UserLogins: scraper.streamers.Channels(),
 					})
 
+					if len(response.ErrorMessage) > 0 {
+						fmt.Println("error fetching twitch streams:", response.ErrorMessage)
+						return
+					}
+
 					if err != nil {
-						fmt.Println("error fetching twitch streams")
+						fmt.Println("error fetching twitch streams", err)
 						return
 					}
 
