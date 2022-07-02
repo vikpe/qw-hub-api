@@ -11,14 +11,14 @@ const quakeGameId = "7348"
 
 type StreamerIndex map[string]string
 
-func (s StreamerIndex) Channels() []string {
-	channels := make([]string, 0)
+func (s StreamerIndex) UserLogins() []string {
+	result := make([]string, 0)
 
-	for ch := range s {
-		channels = append(channels, ch)
+	for userLogin := range s {
+		result = append(result, userLogin)
 	}
 
-	return channels
+	return result
 }
 
 type TwitchStream struct {
@@ -71,7 +71,7 @@ func NewTwitchScraper(clientID string, userAccessToken string, streamers Streame
 	return TwitchScraper{
 		streamers:    streamers,
 		client:       client,
-		interval:     15,
+		interval:     5,
 		shouldStop:   false,
 		helixStreams: make([]helix.Stream, 0),
 	}, nil
@@ -99,7 +99,7 @@ func (scraper *TwitchScraper) Start() {
 					response, err := scraper.client.GetStreams(&helix.StreamsParams{
 						First:      10,
 						GameIDs:    []string{quakeGameId},
-						UserLogins: scraper.streamers.Channels(),
+						UserLogins: scraper.streamers.UserLogins(),
 					})
 
 					if len(response.ErrorMessage) > 0 {
