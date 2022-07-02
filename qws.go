@@ -15,13 +15,15 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/favicon"
 	"github.com/gofiber/fiber/v2/middleware/recover"
+	"github.com/joho/godotenv"
 	v1 "qws/api/v1"
 	v2 "qws/api/v2"
 	"qws/sources"
 )
 
 func main() {
-	// config
+	// config, env
+	godotenv.Load()
 	config := getConfig()
 
 	// provider sources
@@ -43,7 +45,11 @@ func main() {
 		"wimpeeh":       "Wimp",
 	}
 
-	twitchScraper, _ := sources.NewTwitchScraper(EnvTwitchCliendID, EnvTwitchUserAccessToken, streamers)
+	twitchScraper, _ := sources.NewTwitchScraper(
+		os.Getenv("TWITCH_CLIENT_ID"),
+		os.Getenv("TWITCH_OATH_TOKEN"),
+		streamers,
+	)
 	twitchScraper.Start()
 
 	dataProvider := sources.NewProvider(&serverScraper, &twitchScraper)

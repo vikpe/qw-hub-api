@@ -12,6 +12,8 @@ require (
 	golang.org/x/exp v0.0.0-20220613132600-b0d781184e0d
 )
 
+require github.com/joho/godotenv v1.4.0
+
 require (
 	github.com/andybalholm/brotli v1.0.4 // indirect
 	github.com/go-playground/locales v0.14.0 // indirect
