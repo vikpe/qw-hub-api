@@ -61,10 +61,6 @@ func main() {
 	app.Use(compress.New())
 	app.Use(favicon.New(favicon.Config{File: "./favicon.ico"}))
 	app.Use(cache.New(cache.Config{
-		Next: func(c *fiber.Ctx) bool {
-			hasQueryString := len(c.Request().URI().QueryString()) > 0
-			return hasQueryString
-		},
 		Expiration: time.Duration(2) * time.Second,
 		ExpirationGenerator: func(c *fiber.Ctx, cfg *cache.Config) time.Duration {
 			customExpiration := c.GetRespHeader("Cache-Time", "")
@@ -75,6 +71,9 @@ func main() {
 			}
 
 			return cfg.Expiration
+		},
+		KeyGenerator: func(c *fiber.Ctx) string {
+			return c.Request().URI().String()
 		},
 	}))
 	v1.Init(app.Group("/v1"), dataProvider.Mvdsv)
