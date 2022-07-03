@@ -47,7 +47,7 @@ func main() {
 
 	twitchScraper, _ := sources.NewTwitchScraper(
 		os.Getenv("TWITCH_BOT_CLIENT_ID"),
-		os.Getenv("TWITCH_BOT_ACCESS_TOKEN"),
+		os.Getenv("TWITCH_CHANNEL_ACCESS_TOKEN"),
 		streamers,
 	)
 	twitchScraper.Start()
@@ -61,6 +61,10 @@ func main() {
 	app.Use(compress.New())
 	app.Use(favicon.New(favicon.Config{File: "./favicon.ico"}))
 	app.Use(cache.New(cache.Config{
+		Next: func(c *fiber.Ctx) bool {
+			hasQueryString := len(c.Request().URI().QueryString()) > 0
+			return hasQueryString
+		},
 		Expiration: time.Duration(2) * time.Second,
 		ExpirationGenerator: func(c *fiber.Ctx, cfg *cache.Config) time.Duration {
 			customExpiration := c.GetRespHeader("Cache-Time", "")
