@@ -6,6 +6,7 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
 	"github.com/vikpe/serverstat/qserver/mvdsv"
+	"github.com/vikpe/serverstat/qserver/mvdsv/analyze"
 	"qws/sources"
 )
 
@@ -21,14 +22,14 @@ func Mvdsv(provider *sources.Provider) func(c *fiber.Ctx) error {
 			})
 
 			for _, server := range allServers {
-				if ServerHasPlayerByName(server, params.HasPlayer) {
+				if analyze.HasPlayer(server, params.HasPlayer) {
 					result = append(result, server)
 				}
 			}
 
 		} else if len(params.HasClient) > 0 {
 			for _, server := range provider.Mvdsv() {
-				if ServerHasClientByName(server, params.HasClient) {
+				if analyze.HasClient(server, params.HasClient) {
 					result = append(result, server)
 				}
 			}
