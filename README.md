@@ -31,20 +31,8 @@ qws [-master INTERVAL] [-server INTERVAL] [-active INTERVAL] [-port PORT]
 
 | URL                 | description                                    |
 |---------------------|------------------------------------------------|
-| `status=started`    | Servers where `Status` is `Started`            |
-| `mode=ffa`          | Servers where `Mode` is `ffa`                  |
-| `mode=2on2,4on4`    | Servers where `Mode` is `2on2` or `4on4`       |
-|                     |                                                |
 | `has_player=xantom` | Servers where xantom is connected as player    |
-| `has_human_players` | Servers with at least 1 human player           |
-| `has_human_players` | Servers with at least 1 human player           |
-|                     |                                                |
-| `geo.cc=dk`         | Servers where `Country Code` is `DK` (Denmark) |
-| `geo.region=asia`   | Servers where `Region` is `Asia`               |
-|                     |                                                |
-| `sort_by=address`   | Sort by `server address`                       |
-| `sort_order=desc`   | Sort in `descending` order                     |
-| `limit=5`           | Limit result to `5` servers                    |
+| `has_client=xantom` | Servers where xantom is connected              |
 
 ## Config
 
