@@ -45,12 +45,12 @@ func main() {
 	)
 	go twitchScraper.Start()
 
-	dataProvider := sources.NewProvider(&serverScraper, &twitchScraper)
+	dataProvider := sources.NewProvider(serverScraper, twitchScraper)
 
 	// serve
 	webapp := app.New()
 	v1.Init(webapp.Group("/v1"), dataProvider.Mvdsv)
-	v2.Init(webapp.Group("/v2"), &dataProvider)
+	v2.Init(webapp.Group("/v2"), dataProvider)
 
 	address := fmt.Sprintf(":%d", config.httpPort)
 

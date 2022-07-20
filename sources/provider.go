@@ -13,18 +13,18 @@ type Provider struct {
 	twitchSource *TwitchScraper
 }
 
-func NewProvider(servers *ServerScraper, twitch *TwitchScraper) Provider {
-	return Provider{
+func NewProvider(servers *ServerScraper, twitch *TwitchScraper) *Provider {
+	return &Provider{
 		serverSource: servers,
 		twitchSource: twitch,
 	}
 }
 
-func (d Provider) GenericServers() []qserver.GenericServer {
+func (d *Provider) GenericServers() []qserver.GenericServer {
 	return d.serverSource.Servers()
 }
 
-func (d Provider) Mvdsv() []mvdsv.Mvdsv {
+func (d *Provider) Mvdsv() []mvdsv.Mvdsv {
 	result := make([]mvdsv.Mvdsv, 0)
 
 	for _, server := range d.serverSource.Servers() {
@@ -36,7 +36,7 @@ func (d Provider) Mvdsv() []mvdsv.Mvdsv {
 	return result
 }
 
-func (d Provider) Qtv() []qtv.Qtv {
+func (d *Provider) Qtv() []qtv.Qtv {
 	result := make([]qtv.Qtv, 0)
 
 	for _, server := range d.serverSource.Servers() {
@@ -48,7 +48,7 @@ func (d Provider) Qtv() []qtv.Qtv {
 	return result
 }
 
-func (d Provider) Qwfwd() []qwfwd.Qwfwd {
+func (d *Provider) Qwfwd() []qwfwd.Qwfwd {
 	result := make([]qwfwd.Qwfwd, 0)
 
 	for _, server := range d.serverSource.Servers() {
@@ -60,6 +60,6 @@ func (d Provider) Qwfwd() []qwfwd.Qwfwd {
 	return result
 }
 
-func (d Provider) TwitchStreams() []TwitchStream {
+func (d *Provider) TwitchStreams() []TwitchStream {
 	return d.twitchSource.Streams()
 }

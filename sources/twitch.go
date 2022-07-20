@@ -55,7 +55,7 @@ func (scraper TwitchScraper) Streams() []TwitchStream {
 	return result
 }
 
-func NewTwitchScraper(clientID string, userAccessToken string, streamers StreamerIndex) (TwitchScraper, error) {
+func NewTwitchScraper(clientID string, userAccessToken string, streamers StreamerIndex) (*TwitchScraper, error) {
 	client, err := helix.NewClient(&helix.Options{
 		ClientID:        clientID,
 		UserAccessToken: userAccessToken,
@@ -63,10 +63,10 @@ func NewTwitchScraper(clientID string, userAccessToken string, streamers Streame
 
 	if err != nil {
 		fmt.Println("twitch client", err.Error())
-		return TwitchScraper{}, err
+		return &TwitchScraper{}, err
 	}
 
-	return TwitchScraper{
+	return &TwitchScraper{
 		streamers:    streamers,
 		client:       client,
 		interval:     5,

@@ -32,8 +32,8 @@ var DefaultServerScraperConfig = ServerScraperConfig{
 	ActiveServerInterval: 4,
 }
 
-func NewServerScraper() ServerScraper {
-	return ServerScraper{
+func NewServerScraper() *ServerScraper {
+	return &ServerScraper{
 		Config:          DefaultServerScraperConfig,
 		index:           make(serverIndex, 0),
 		serverAddresses: make([]string, 0),
