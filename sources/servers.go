@@ -49,48 +49,46 @@ func (scraper *ServerScraper) Start() {
 	serverAddresses := make([]string, 0)
 	scraper.shouldStop = false
 
-	go func() {
-		ticker := time.NewTicker(time.Duration(1) * time.Second)
-		tick := -1
+	ticker := time.NewTicker(time.Duration(1) * time.Second)
+	tick := -1
 
-		for ; true; <-ticker.C {
-			if scraper.shouldStop {
-				return
-			}
-
-			tick++
-
-			go func() {
-				currentTick := tick
-
-				isTimeToUpdateFromMasters := 0 == currentTick
-
-				if isTimeToUpdateFromMasters {
-					var err error
-					serverAddresses, err = masterstat.GetServerAddressesFromMany(scraper.Config.MasterServers)
-
-					if err != nil {
-						log.Println("ERROR:", err)
-						return
-					}
-				}
-
-				isTimeToUpdateAllServers := currentTick%scraper.Config.ServerInterval == 0
-				isTimeToUpdateActiveServers := currentTick%scraper.Config.ActiveServerInterval == 0
-
-				if isTimeToUpdateAllServers {
-					scraper.index = newServerIndex(serverstat.GetInfoFromMany(serverAddresses))
-				} else if isTimeToUpdateActiveServers {
-					activeAddresses := scraper.index.activeAddresses()
-					scraper.index.update(serverstat.GetInfoFromMany(activeAddresses))
-				}
-			}()
-
-			if tick == scraper.Config.MasterInterval {
-				tick = 0
-			}
+	for ; true; <-ticker.C {
+		if scraper.shouldStop {
+			return
 		}
-	}()
+
+		tick++
+
+		go func() {
+			currentTick := tick
+
+			isTimeToUpdateFromMasters := 0 == currentTick
+
+			if isTimeToUpdateFromMasters {
+				var err error
+				serverAddresses, err = masterstat.GetServerAddressesFromMany(scraper.Config.MasterServers)
+
+				if err != nil {
+					log.Println("ERROR:", err)
+					return
+				}
+			}
+
+			isTimeToUpdateAllServers := currentTick%scraper.Config.ServerInterval == 0
+			isTimeToUpdateActiveServers := currentTick%scraper.Config.ActiveServerInterval == 0
+
+			if isTimeToUpdateAllServers {
+				scraper.index = newServerIndex(serverstat.GetInfoFromMany(serverAddresses))
+			} else if isTimeToUpdateActiveServers {
+				activeAddresses := scraper.index.activeAddresses()
+				scraper.index.update(serverstat.GetInfoFromMany(activeAddresses))
+			}
+		}()
+
+		if tick == scraper.Config.MasterInterval {
+			tick = 0
+		}
+	}
 }
 
 func (scraper *ServerScraper) Stop() {
