@@ -5,19 +5,12 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"strconv"
-	"time"
 
 	"github.com/goccy/go-json"
-	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/middleware/cache"
-	"github.com/gofiber/fiber/v2/middleware/compress"
-	"github.com/gofiber/fiber/v2/middleware/cors"
-	"github.com/gofiber/fiber/v2/middleware/favicon"
-	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/joho/godotenv"
 	v1 "qws/api/v1"
 	v2 "qws/api/v2"
+	"qws/app"
 	"qws/sources"
 )
 
@@ -29,7 +22,7 @@ func main() {
 	// provider sources
 	serverScraper := sources.NewServerScraper()
 	serverScraper.Config = config.servers
-	serverScraper.Start()
+	go serverScraper.Start()
 
 	streamers := sources.StreamerIndex{
 		"vikpe":         "twitch.tv/vikpe",
@@ -55,36 +48,16 @@ func main() {
 	dataProvider := sources.NewProvider(&serverScraper, &twitchScraper)
 
 	// serve
-	app := fiber.New()
-	app.Use(recover.New())
-	app.Use(cors.New())
-	app.Use(compress.New())
-	app.Use(favicon.New(favicon.Config{File: "./favicon.ico"}))
-	app.Use(cache.New(cache.Config{
-		Expiration: time.Duration(2) * time.Second,
-		ExpirationGenerator: func(c *fiber.Ctx, cfg *cache.Config) time.Duration {
-			customExpiration := c.GetRespHeader("Cache-Time", "")
-
-			if customExpiration != "" {
-				newCacheTime, _ := strconv.Atoi(customExpiration)
-				return time.Second * time.Duration(newCacheTime)
-			}
-
-			return cfg.Expiration
-		},
-		KeyGenerator: func(c *fiber.Ctx) string {
-			return c.Request().URI().String()
-		},
-	}))
-	v1.Init(app.Group("/v1"), dataProvider.Mvdsv)
-	v2.Init(app.Group("/v2"), &dataProvider)
+	webapp := app.New()
+	v1.Init(webapp.Group("/v1"), dataProvider.Mvdsv)
+	v2.Init(webapp.Group("/v2"), &dataProvider)
 
 	address := fmt.Sprintf(":%d", config.httpPort)
 
 	if 443 == config.httpPort {
-		log.Fatal(app.ListenTLS(address, "server.crt", "server.key"))
+		log.Fatal(webapp.ListenTLS(address, "server.crt", "server.key"))
 	} else {
-		log.Fatal(app.Listen(address))
+		log.Fatal(webapp.Listen(address))
 	}
 }
 
