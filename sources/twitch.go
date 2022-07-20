@@ -78,49 +78,47 @@ func NewTwitchScraper(clientID string, userAccessToken string, streamers Streame
 func (scraper *TwitchScraper) Start() {
 	scraper.shouldStop = false
 
-	go func() {
-		ticker := time.NewTicker(time.Duration(1) * time.Second)
-		tick := -1
+	ticker := time.NewTicker(time.Duration(1) * time.Second)
+	tick := -1
 
-		for ; true; <-ticker.C {
-			if scraper.shouldStop {
-				return
-			}
-
-			tick++
-
-			go func() {
-				currentTick := tick
-				isTimeToUpdate := currentTick%scraper.interval == 0
-
-				if isTimeToUpdate {
-					const quakeGameId = "7348"
-
-					response, err := scraper.client.GetStreams(&helix.StreamsParams{
-						First:      10,
-						GameIDs:    []string{quakeGameId},
-						UserLogins: scraper.streamers.UserLogins(),
-					})
-
-					if len(response.ErrorMessage) > 0 {
-						fmt.Println("error fetching twitch streams:", response.ErrorMessage)
-						return
-					}
-
-					if err != nil {
-						fmt.Println("error fetching twitch streams", err)
-						return
-					}
-
-					scraper.helixStreams = response.Data.Streams
-				}
-			}()
-
-			if tick == scraper.interval {
-				tick = 0
-			}
+	for ; true; <-ticker.C {
+		if scraper.shouldStop {
+			return
 		}
-	}()
+
+		tick++
+
+		go func() {
+			currentTick := tick
+			isTimeToUpdate := currentTick%scraper.interval == 0
+
+			if isTimeToUpdate {
+				const quakeGameId = "7348"
+
+				response, err := scraper.client.GetStreams(&helix.StreamsParams{
+					First:      10,
+					GameIDs:    []string{quakeGameId},
+					UserLogins: scraper.streamers.UserLogins(),
+				})
+
+				if len(response.ErrorMessage) > 0 {
+					fmt.Println("error fetching twitch streams:", response.ErrorMessage)
+					return
+				}
+
+				if err != nil {
+					fmt.Println("error fetching twitch streams", err)
+					return
+				}
+
+				scraper.helixStreams = response.Data.Streams
+			}
+		}()
+
+		if tick == scraper.interval {
+			tick = 0
+		}
+	}
 }
 
 func (scraper *TwitchScraper) Stop() {

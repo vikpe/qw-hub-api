@@ -43,7 +43,7 @@ func main() {
 		os.Getenv("TWITCH_CHANNEL_ACCESS_TOKEN"),
 		streamers,
 	)
-	twitchScraper.Start()
+	go twitchScraper.Start()
 
 	dataProvider := sources.NewProvider(&serverScraper, &twitchScraper)
 
