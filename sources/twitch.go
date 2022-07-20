@@ -7,8 +7,6 @@ import (
 	"github.com/nicklaw5/helix"
 )
 
-const quakeGameId = "7348"
-
 type StreamerIndex map[string]string
 
 func (s StreamerIndex) UserLogins() []string {
@@ -96,6 +94,8 @@ func (scraper *TwitchScraper) Start() {
 				isTimeToUpdate := currentTick%scraper.interval == 0
 
 				if isTimeToUpdate {
+					const quakeGameId = "7348"
+
 					response, err := scraper.client.GetStreams(&helix.StreamsParams{
 						First:      10,
 						GameIDs:    []string{quakeGameId},
