@@ -17,15 +17,12 @@ qws [-master INTERVAL] [-server INTERVAL] [-active INTERVAL] [-port PORT]
 
 ## API endpoints
 
-| URL                    | description                                  |  
-|------------------------|----------------------------------------------|
-| `/v2/server/<address>` | Server details                               |  
-| `/v2/mvdsv`            | Mvdsv servers                                |  
-| `/v2/qwfwd`            | Qwfwd servers (proxies)                      |  
-| `/v2/qtv`              | QTV servers                                  |  
-| `/v2/qtv_to_mvdsv`     | Map of QTV streams to mvdsv server addresses |  
-| `/v2/mvdsv_to_qtv`     | Map of mvdsv server addresses to QTV streams |
-| `/v2/clients`          | Clients                                      |
+| URL                     | description             |  
+|-------------------------|-------------------------|
+| `/v2/servers/<address>` | Server details          |  
+| `/v2/servers/mvdsv`     | Mvdsv servers           |  
+| `/v2/servers/qwfwd`     | Qwfwd servers (proxies) |  
+| `/v2/servers/qtv`       | QTV servers             |  
 
 ### Query params
 
