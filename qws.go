@@ -25,6 +25,7 @@ func main() {
 	go serverScraper.Start()
 
 	streamers := sources.StreamerIndex{
+		"quakeworld":    "[streambot]",
 		"vikpe":         "twitch.tv/vikpe",
 		"bps__":         "bps",
 		"badsebitv":     "badsebitv",
