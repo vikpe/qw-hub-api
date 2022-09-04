@@ -63,6 +63,7 @@ $ go build
 
 ## See also
 
+* [streambot](https://github.com/vikpe/qw-streambot)
 * [masterstat](https://github.com/vikpe/masterstat)
 * [masterstat-cli](https://github.com/vikpe/masterstat-cli)
 * [serverstat](https://github.com/vikpe/serverstat)
