@@ -96,7 +96,7 @@ func (scraper *TwitchScraper) Start() {
 				const quakeGameId = "7348"
 
 				response, err := scraper.client.GetStreams(&helix.StreamsParams{
-					First:      10,
+					First:      30,
 					GameIDs:    []string{quakeGameId},
 					UserLogins: scraper.streamers.UserLogins(),
 				})
