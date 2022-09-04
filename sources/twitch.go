@@ -69,7 +69,7 @@ func NewTwitchScraper(clientID string, userAccessToken string, streamers Streame
 	return &TwitchScraper{
 		streamers:    streamers,
 		client:       client,
-		interval:     5,
+		interval:     10,
 		shouldStop:   false,
 		helixStreams: make([]helix.Stream, 0),
 	}, nil
