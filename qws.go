@@ -40,8 +40,8 @@ func main() {
 	}
 
 	twitchScraper, _ := sources.NewTwitchScraper(
-		os.Getenv("TWITCH_CHANNEL_CLIENT_ID"),
-		os.Getenv("TWITCH_CHANNEL_ACCESS_TOKEN"),
+		os.Getenv("TWITCH_CLIENT_ID"),
+		os.Getenv("TWITCH_ACCESS_TOKEN"),
 		streamers,
 	)
 	go twitchScraper.Start()
