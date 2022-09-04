@@ -1,10 +1,10 @@
 # QWS
 
-> Web API serving QuakeWorld server info
+> Web API serving QuakeWorld info
 
 ## Usage
 
-```sh
+```shell
 qws [-master INTERVAL] [-server INTERVAL] [-active INTERVAL] [-port PORT]
 ```
 
@@ -17,14 +17,22 @@ qws [-master INTERVAL] [-server INTERVAL] [-active INTERVAL] [-port PORT]
 
 ## API endpoints
 
-| URL                     | description             |  
-|-------------------------|-------------------------|
-| `/v2/servers/<address>` | Server details          |  
-| `/v2/servers/mvdsv`     | Mvdsv servers           |  
-| `/v2/servers/qwfwd`     | Qwfwd servers (proxies) |  
-| `/v2/servers/qtv`       | QTV servers             |  
+| URL                     | description                  |  
+|-------------------------|------------------------------|
+| `/v2/servers`           | All servers                  |  
+| `/v2/servers/<address>` | Server details               |  
+| `/v2/servers/mvdsv`     | MVDSV servers                |  
+| `/v2/servers/qwfwd`     | QWFWD servers (proxies)      |  
+| `/v2/servers/qtv`       | QTV servers                  |  
+| `/v2/streams`           | Twitch streams casting Quake |  
 
-### Query params
+## Endpoint details
+
+### MVDSV servers
+
+> `/v2/servers/mvdsv`
+
+**Query params**
 
 | URL                 | description                                    |
 |---------------------|------------------------------------------------|
@@ -51,9 +59,19 @@ The QuakeWorld master servers to query for servers.
 
 ## Build
 
-```sh
-$ go build
+```she
+go build
 ```
+
+## Development
+
+Run locally on port `4000`.
+
+```shell
+./qws -port=4000
+```
+
+Now you try an endpoint, e.g. http://localhost:4000/v2/servers
 
 ## Credits
 
