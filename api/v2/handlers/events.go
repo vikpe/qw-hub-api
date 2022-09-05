@@ -19,8 +19,7 @@ type Event struct {
 }
 
 func Events() func(c *fiber.Ctx) error {
-	const wikiUrl = "https://www.quakeworld.nu/wiki/"
-	const quakeworldUrl = "https://www.quakeworld.nu/"
+	const quakeworldUrl = "https://www.quakeworld.nu"
 	const limit = 10
 	const indexLogoCell = 0
 	const indexLinkCell = 1
@@ -31,7 +30,7 @@ func Events() func(c *fiber.Ctx) error {
 		c.Response().Header.Add("Cache-Time", fmt.Sprintf("%d", 3600))
 
 		// request page
-		res, err := http.Get(wikiUrl)
+		res, err := http.Get("https://www.quakeworld.nu/wiki/Overview")
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -67,7 +66,7 @@ func Events() func(c *fiber.Ctx) error {
 					Title:   linkElement.AttrOr("title", "[parse fail]"),
 					Status:  statuses[t],
 					Date:    strings.TrimSpace(cells.Eq(indexDateCell).Text()),
-					WikiUrl: fmt.Sprintf("%s%s", wikiUrl, linkRelHref),
+					WikiUrl: fmt.Sprintf("%s%s", quakeworldUrl, linkRelHref),
 					LogoUrl: fmt.Sprintf("%s%s", quakeworldUrl, logoRelUrl),
 				}
 				events = append(events, event)
