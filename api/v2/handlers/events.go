@@ -19,7 +19,7 @@ type Event struct {
 }
 
 func Events() func(c *fiber.Ctx) error {
-	const wikiUrl = "https://www.quakeworld.nu/wiki/Overview"
+	const wikiUrl = "https://www.quakeworld.nu/wiki/"
 	const quakeworldUrl = "https://www.quakeworld.nu/"
 	const limit = 10
 	const indexLogoCell = 0
