@@ -19,6 +19,7 @@ type Event struct {
 
 func Events() func(c *fiber.Ctx) error {
 	const wikiUrl = "https://www.quakeworld.nu/wiki/Overview"
+	const quakeworldUrl = "https://www.quakeworld.nu/"
 	const limit = 10
 	const indexLogoCell = 0
 	const indexLinkCell = 1
@@ -59,12 +60,13 @@ func Events() func(c *fiber.Ctx) error {
 				linkElement := cells.Eq(indexLinkCell).Find("a").First()
 				linkRelHref := linkElement.AttrOr("href", "#")
 				logoRelUrl := cells.Eq(indexLogoCell).Find("img").First().AttrOr("src", "")
+				logoRelUrl = strings.Replace(logoRelUrl, "21px", "32px", 1) // use 32px size
 
 				event := Event{
 					Title:   linkElement.AttrOr("title", "[parse fail]"),
 					Date:    strings.TrimSpace(cells.Eq(indexDateCell).Text()),
 					WikiUrl: fmt.Sprintf("%s%s", wikiUrl, linkRelHref),
-					LogoUrl: fmt.Sprintf("%s%s", wikiUrl, logoRelUrl),
+					LogoUrl: fmt.Sprintf("%s%s", quakeworldUrl, logoRelUrl),
 				}
 				events[types[t]] = append(events[types[t]], event)
 			})
