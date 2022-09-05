@@ -12,6 +12,7 @@ import (
 
 type Event struct {
 	Title   string `json:"title"`
+	Status  string `json:"status"`
 	Date    string `json:"date"`
 	WikiUrl string `json:"wiki_url"`
 	LogoUrl string `json:"logo_url"`
@@ -46,11 +47,11 @@ func Events() func(c *fiber.Ctx) error {
 		}
 
 		// find and parse items
-		events := make(map[string][]Event, 0)
-		types := []string{"upcoming", "ongoing", "completed"}
+		events := make([]Event, 0)
+		statuses := []string{"upcoming", "ongoing", "completed"}
 
-		for t := range types {
-			doc.Find(fmt.Sprintf("#%s", types[t])).Find("tr").Each(func(i int, s *goquery.Selection) {
+		for t := range statuses {
+			doc.Find(fmt.Sprintf("#%s", statuses[t])).Find("tr").Each(func(i int, s *goquery.Selection) {
 				if 0 == i || i > limit { // skip heading and limit to x items
 					return
 				}
@@ -64,11 +65,12 @@ func Events() func(c *fiber.Ctx) error {
 
 				event := Event{
 					Title:   linkElement.AttrOr("title", "[parse fail]"),
+					Status:  statuses[t],
 					Date:    strings.TrimSpace(cells.Eq(indexDateCell).Text()),
 					WikiUrl: fmt.Sprintf("%s%s", wikiUrl, linkRelHref),
 					LogoUrl: fmt.Sprintf("%s%s", quakeworldUrl, logoRelUrl),
 				}
-				events[types[t]] = append(events[types[t]], event)
+				events = append(events, event)
 			})
 		}
 
