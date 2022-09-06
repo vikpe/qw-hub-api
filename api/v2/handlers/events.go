@@ -2,15 +2,14 @@ package handlers
 
 import (
 	"fmt"
-	"log"
-	"net/http"
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/gofiber/fiber/v2"
+	"qws/sources"
 )
 
-type Event struct {
+type event struct {
 	Title   string `json:"title"`
 	Status  string `json:"status"`
 	Date    string `json:"date"`
@@ -26,32 +25,20 @@ func Events() func(c *fiber.Ctx) error {
 	const indexDateCell = 2
 
 	return func(c *fiber.Ctx) error {
-		// set cache of 1 hour
-		c.Response().Header.Add("Cache-Time", fmt.Sprintf("%d", 3600))
+		// read source
+		doc, err := sources.ReadDocument("https://www.quakeworld.nu/wiki/Overview")
 
-		// request page
-		res, err := http.Get("https://www.quakeworld.nu/wiki/Overview")
 		if err != nil {
-			log.Fatal(err)
-		}
-		defer res.Body.Close()
-		if res.StatusCode != http.StatusOK {
-			log.Fatalf("status code error: %d %s", res.StatusCode, res.Status)
-		}
-
-		// load html
-		doc, err := goquery.NewDocumentFromReader(res.Body)
-		if err != nil {
-			log.Fatal(err)
+			return err
 		}
 
 		// find and parse items
-		events := make([]Event, 0)
+		events := make([]event, 0)
 		statuses := []string{"upcoming", "ongoing", "completed"}
 
 		for t := range statuses {
 			doc.Find(fmt.Sprintf("#%s", statuses[t])).Find("tr").Each(func(i int, s *goquery.Selection) {
-				if 0 == i || i > limit { // skip heading and limit to x items
+				if 0 == i || i >= limit { // skip heading and limit to x items
 					return
 				}
 
@@ -62,7 +49,7 @@ func Events() func(c *fiber.Ctx) error {
 				logoRelUrl := cells.Eq(indexLogoCell).Find("img").First().AttrOr("src", "")
 				logoRelUrl = strings.Replace(logoRelUrl, "21px", "32px", 1) // use 32px size
 
-				event := Event{
+				event := event{
 					Title:   linkElement.AttrOr("title", "[parse fail]"),
 					Status:  statuses[t],
 					Date:    strings.TrimSpace(cells.Eq(indexDateCell).Text()),
@@ -73,6 +60,8 @@ func Events() func(c *fiber.Ctx) error {
 			})
 		}
 
+		// send response
+		c.Response().Header.Add("Cache-Time", fmt.Sprintf("%d", 3600)) // 1h cache
 		return c.JSON(events)
 	}
 }
