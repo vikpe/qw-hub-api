@@ -19,9 +19,6 @@ func News() func(c *fiber.Ctx) error {
 	const limit = 10
 
 	return func(c *fiber.Ctx) error {
-		// set cache of 1 hour
-		c.Response().Header.Add("Cache-Time", fmt.Sprintf("%d", 3600))
-
 		// request page
 		res, err := http.Get("https://www.quakeworld.nu/feeds/news.php")
 		if err != nil {
@@ -32,7 +29,7 @@ func News() func(c *fiber.Ctx) error {
 			log.Fatalf("status code error: %d %s", res.StatusCode, res.Status)
 		}
 
-		// load html
+		// load document
 		doc, err := goquery.NewDocumentFromReader(res.Body)
 		if err != nil {
 			log.Fatal(err)
@@ -54,6 +51,9 @@ func News() func(c *fiber.Ctx) error {
 			}
 			newsItems = append(newsItems, event)
 		})
+
+		// set cache of 1 hour
+		c.Response().Header.Add("Cache-Time", fmt.Sprintf("%d", 3600))
 
 		return c.JSON(newsItems)
 	}
