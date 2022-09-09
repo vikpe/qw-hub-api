@@ -1,6 +1,7 @@
 package serverindex
 
 import (
+	"errors"
 	"sort"
 
 	"github.com/vikpe/serverstat/qserver"
@@ -51,6 +52,14 @@ func (i ServerIndex) ActiveAddresses() []string {
 	}
 
 	return activeAddresses
+}
+
+func (i ServerIndex) Get(address string) (qserver.GenericServer, error) {
+	if server, ok := i[address]; ok {
+		return server, nil
+	}
+
+	return qserver.GenericServer{}, errors.New("server not found")
 }
 
 func hasHumanPlayers(clients []qclient.Client) bool {
