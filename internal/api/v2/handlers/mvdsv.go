@@ -7,7 +7,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/vikpe/serverstat/qserver/mvdsv"
 	"github.com/vikpe/serverstat/qserver/mvdsv/analyze"
-	"qws/sources"
+	"qws/internal/sources"
 )
 
 func Mvdsv(provider *sources.Provider) func(c *fiber.Ctx) error {

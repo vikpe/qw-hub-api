@@ -7,7 +7,7 @@ import (
 	"github.com/vikpe/masterstat"
 	"github.com/vikpe/serverstat"
 	"github.com/vikpe/serverstat/qserver"
-	"qws/sources/serverindex"
+	"qws/internal/serverindex"
 )
 
 type ServerScraper struct {

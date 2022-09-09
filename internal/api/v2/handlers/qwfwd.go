@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"qws/sources"
+	"qws/internal/sources"
 )
 
 func Qwfwd(provider *sources.Provider) func(c *fiber.Ctx) error {

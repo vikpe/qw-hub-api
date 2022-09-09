@@ -5,7 +5,7 @@ import (
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/gofiber/fiber/v2"
-	"qws/sources"
+	"qws/internal/sources"
 )
 
 type newsItem struct {
