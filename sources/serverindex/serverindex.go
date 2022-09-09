@@ -6,6 +6,7 @@ import (
 
 	"github.com/vikpe/serverstat/qserver"
 	"github.com/vikpe/serverstat/qserver/qclient"
+	"qws/internal/qnet"
 )
 
 type ServerIndex map[string]qserver.GenericServer
@@ -54,14 +55,6 @@ func (i ServerIndex) ActiveAddresses() []string {
 	return activeAddresses
 }
 
-func (i ServerIndex) Get(address string) (qserver.GenericServer, error) {
-	if server, ok := i[address]; ok {
-		return server, nil
-	}
-
-	return qserver.GenericServer{}, errors.New("server not found")
-}
-
 func hasHumanPlayers(clients []qclient.Client) bool {
 	for _, c := range clients {
 		if !c.IsSpectator() && !c.IsBot() {
@@ -70,4 +63,18 @@ func hasHumanPlayers(clients []qclient.Client) bool {
 	}
 
 	return false
+}
+
+func (i ServerIndex) Get(address string) (qserver.GenericServer, error) {
+	ipHostPort, err := qnet.ToIpHostPort(address)
+
+	if err != nil {
+		return qserver.GenericServer{}, err
+	}
+
+	if server, ok := i[ipHostPort]; ok {
+		return server, nil
+	}
+
+	return qserver.GenericServer{}, errors.New("server not found")
 }

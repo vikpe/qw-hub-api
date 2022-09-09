@@ -20,6 +20,10 @@ func NewProvider(servers *ServerScraper, twitch *TwitchScraper) *Provider {
 	}
 }
 
+func (p *Provider) ServerByAddress(address string) (qserver.GenericServer, error) {
+	return p.serverSource.ServerIndex.Get(address)
+}
+
 func (p *Provider) GenericServers() []qserver.GenericServer {
 	return p.serverSource.Servers()
 }
