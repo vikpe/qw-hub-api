@@ -2,18 +2,17 @@ package sources
 
 import (
 	"log"
-	"sort"
 	"time"
 
 	"github.com/vikpe/masterstat"
 	"github.com/vikpe/serverstat"
 	"github.com/vikpe/serverstat/qserver"
-	"github.com/vikpe/serverstat/qserver/qclient"
+	"qws/sources/serverindex"
 )
 
 type ServerScraper struct {
 	Config          ServerScraperConfig
-	index           serverIndex
+	index           serverindex.ServerIndex
 	serverAddresses []string
 	shouldStop      bool
 }
@@ -35,14 +34,14 @@ var DefaultServerScraperConfig = ServerScraperConfig{
 func NewServerScraper() *ServerScraper {
 	return &ServerScraper{
 		Config:          DefaultServerScraperConfig,
-		index:           make(serverIndex, 0),
+		index:           make(serverindex.ServerIndex, 0),
 		serverAddresses: make([]string, 0),
 		shouldStop:      false,
 	}
 }
 
 func (scraper *ServerScraper) Servers() []qserver.GenericServer {
-	return scraper.index.servers()
+	return scraper.index.Servers()
 }
 
 func (scraper *ServerScraper) Start() {
@@ -78,10 +77,10 @@ func (scraper *ServerScraper) Start() {
 			isTimeToUpdateActiveServers := currentTick%scraper.Config.ActiveServerInterval == 0
 
 			if isTimeToUpdateAllServers {
-				scraper.index = newServerIndex(serverstat.GetInfoFromMany(serverAddresses))
+				scraper.index = serverindex.New(serverstat.GetInfoFromMany(serverAddresses))
 			} else if isTimeToUpdateActiveServers {
-				activeAddresses := scraper.index.activeAddresses()
-				scraper.index.update(serverstat.GetInfoFromMany(activeAddresses))
+				activeAddresses := scraper.index.ActiveAddresses()
+				scraper.index.Update(serverstat.GetInfoFromMany(activeAddresses))
 			}
 		}()
 
@@ -93,60 +92,4 @@ func (scraper *ServerScraper) Start() {
 
 func (scraper *ServerScraper) Stop() {
 	scraper.shouldStop = true
-}
-
-type serverIndex map[string]qserver.GenericServer
-
-func newServerIndex(servers []qserver.GenericServer) serverIndex {
-	index := make(serverIndex, 0)
-
-	for _, server := range servers {
-		index[server.Address] = server
-	}
-
-	return index
-}
-
-func (i serverIndex) servers() []qserver.GenericServer {
-	servers := make([]qserver.GenericServer, 0)
-
-	for _, server := range i {
-		servers = append(servers, server)
-	}
-
-	if len(servers) > 0 {
-		sort.Slice(servers, func(i, j int) bool {
-			return servers[i].Address < servers[j].Address
-		})
-	}
-
-	return servers
-}
-
-func (i serverIndex) update(servers []qserver.GenericServer) {
-	for _, server := range servers {
-		i[server.Address] = server
-	}
-}
-
-func (i serverIndex) activeAddresses() []string {
-	activeAddresses := make([]string, 0)
-
-	for _, server := range i.servers() {
-		if len(server.Clients) > 0 && hasHumanPlayers(server.Clients) {
-			activeAddresses = append(activeAddresses, server.Address)
-		}
-	}
-
-	return activeAddresses
-}
-
-func hasHumanPlayers(clients []qclient.Client) bool {
-	for _, c := range clients {
-		if !c.IsSpectator() && !c.IsBot() {
-			return true
-		}
-	}
-
-	return false
 }
