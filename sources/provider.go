@@ -20,14 +20,14 @@ func NewProvider(servers *ServerScraper, twitch *TwitchScraper) *Provider {
 	}
 }
 
-func (d *Provider) GenericServers() []qserver.GenericServer {
-	return d.serverSource.Servers()
+func (p *Provider) GenericServers() []qserver.GenericServer {
+	return p.serverSource.Servers()
 }
 
-func (d *Provider) Mvdsv() []mvdsv.Mvdsv {
+func (p *Provider) Mvdsv() []mvdsv.Mvdsv {
 	result := make([]mvdsv.Mvdsv, 0)
 
-	for _, server := range d.serverSource.Servers() {
+	for _, server := range p.serverSource.Servers() {
 		if server.Version.IsMvdsv() {
 			result = append(result, convert.ToMvdsv(server))
 		}
@@ -36,10 +36,10 @@ func (d *Provider) Mvdsv() []mvdsv.Mvdsv {
 	return result
 }
 
-func (d *Provider) Qtv() []qtv.Qtv {
+func (p *Provider) Qtv() []qtv.Qtv {
 	result := make([]qtv.Qtv, 0)
 
-	for _, server := range d.serverSource.Servers() {
+	for _, server := range p.serverSource.Servers() {
 		if server.Version.IsQtv() {
 			result = append(result, convert.ToQtv(server))
 		}
@@ -48,10 +48,10 @@ func (d *Provider) Qtv() []qtv.Qtv {
 	return result
 }
 
-func (d *Provider) Qwfwd() []qwfwd.Qwfwd {
+func (p *Provider) Qwfwd() []qwfwd.Qwfwd {
 	result := make([]qwfwd.Qwfwd, 0)
 
-	for _, server := range d.serverSource.Servers() {
+	for _, server := range p.serverSource.Servers() {
 		if server.Version.IsQwfwd() {
 			result = append(result, convert.ToQwfwd(server))
 		}
@@ -60,6 +60,6 @@ func (d *Provider) Qwfwd() []qwfwd.Qwfwd {
 	return result
 }
 
-func (d *Provider) TwitchStreams() []TwitchStream {
-	return d.twitchSource.Streams()
+func (p *Provider) TwitchStreams() []TwitchStream {
+	return p.twitchSource.Streams()
 }
