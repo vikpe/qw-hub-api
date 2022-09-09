@@ -3,9 +3,10 @@ module qws
 go 1.18
 
 require (
+	github.com/PuerkitoBio/goquery v1.8.0
 	github.com/go-playground/validator/v10 v10.11.0
 	github.com/goccy/go-json v0.9.11
-	github.com/gofiber/fiber/v2 v2.37.0
+	github.com/gofiber/fiber/v2 v2.37.1
 	github.com/joho/godotenv v1.4.0
 	github.com/nicklaw5/helix v1.25.0
 	github.com/vikpe/masterstat v0.1.8
@@ -13,7 +14,6 @@ require (
 )
 
 require (
-	github.com/PuerkitoBio/goquery v1.8.0 // indirect
 	github.com/andybalholm/brotli v1.0.4 // indirect
 	github.com/andybalholm/cascadia v1.3.1 // indirect
 	github.com/go-playground/locales v0.14.0 // indirect
@@ -24,14 +24,14 @@ require (
 	github.com/leodido/go-urn v1.2.1 // indirect
 	github.com/ssoroka/slice v0.0.0-20220402005549-78f0cea3df8b // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
-	github.com/valyala/fasthttp v1.39.0 // indirect
+	github.com/valyala/fasthttp v1.40.0 // indirect
 	github.com/valyala/fastjson v1.6.3 // indirect
 	github.com/valyala/tcplisten v1.0.0 // indirect
 	github.com/vikpe/udpclient v0.1.3 // indirect
 	github.com/vikpe/wildcard v0.1.0 // indirect
 	golang.org/x/crypto v0.0.0-20220829220503-c86fa9a7ed90 // indirect
-	golang.org/x/exp v0.0.0-20220827204233-334a2380cb91 // indirect
-	golang.org/x/net v0.0.0-20220225172249-27dd8689420f // indirect
-	golang.org/x/sys v0.0.0-20220829200755-d48e67d00261 // indirect
+	golang.org/x/exp v0.0.0-20220907003533-145caa8ea1d0 // indirect
+	golang.org/x/net v0.0.0-20220907135653-1e95f45603a7 // indirect
+	golang.org/x/sys v0.0.0-20220908164124-27713097b956 // indirect
 	golang.org/x/text v0.3.7 // indirect
 )
