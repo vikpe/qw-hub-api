@@ -11,10 +11,9 @@ import (
 )
 
 type ServerScraper struct {
-	Config          ServerScraperConfig
-	index           serverindex.ServerIndex
-	serverAddresses []string
-	shouldStop      bool
+	Config      ServerScraperConfig
+	ServerIndex serverindex.ServerIndex
+	shouldStop  bool
 }
 
 type ServerScraperConfig struct {
@@ -33,15 +32,14 @@ var DefaultServerScraperConfig = ServerScraperConfig{
 
 func NewServerScraper() *ServerScraper {
 	return &ServerScraper{
-		Config:          DefaultServerScraperConfig,
-		index:           make(serverindex.ServerIndex, 0),
-		serverAddresses: make([]string, 0),
-		shouldStop:      false,
+		Config:      DefaultServerScraperConfig,
+		ServerIndex: make(serverindex.ServerIndex, 0),
+		shouldStop:  false,
 	}
 }
 
 func (scraper *ServerScraper) Servers() []qserver.GenericServer {
-	return scraper.index.Servers()
+	return scraper.ServerIndex.Servers()
 }
 
 func (scraper *ServerScraper) Start() {
@@ -77,10 +75,10 @@ func (scraper *ServerScraper) Start() {
 			isTimeToUpdateActiveServers := currentTick%scraper.Config.ActiveServerInterval == 0
 
 			if isTimeToUpdateAllServers {
-				scraper.index = serverindex.New(serverstat.GetInfoFromMany(serverAddresses))
+				scraper.ServerIndex = serverindex.New(serverstat.GetInfoFromMany(serverAddresses))
 			} else if isTimeToUpdateActiveServers {
-				activeAddresses := scraper.index.ActiveAddresses()
-				scraper.index.Update(serverstat.GetInfoFromMany(activeAddresses))
+				activeAddresses := scraper.ServerIndex.ActiveAddresses()
+				scraper.ServerIndex.Update(serverstat.GetInfoFromMany(activeAddresses))
 			}
 		}()
 
