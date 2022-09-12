@@ -83,8 +83,8 @@ Now you try an endpoint, e.g. http://localhost:4000/v2/servers
 * Tuna
 * XantoM
 
-## See also
-
+## Related projects
+* [hub.quakeworld.nu](https://github.com/vikpe/hub.quakeworld.nu)
 * [streambot](https://github.com/vikpe/qw-streambot)
 * [masterstat](https://github.com/vikpe/masterstat)
 * [masterstat-cli](https://github.com/vikpe/masterstat-cli)
