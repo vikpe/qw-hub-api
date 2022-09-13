@@ -49,6 +49,8 @@ func (scraper *ServerScraper) Start() {
 	ticker := time.NewTicker(time.Duration(1) * time.Second)
 	tick := -1
 
+	statClient := serverstat.NewClient()
+
 	for ; true; <-ticker.C {
 		if scraper.shouldStop {
 			return
@@ -74,10 +76,10 @@ func (scraper *ServerScraper) Start() {
 			isTimeToUpdateActiveServers := currentTick%scraper.Config.ActiveServerInterval == 0
 
 			if isTimeToUpdateAllServers {
-				scraper.ServerIndex = serverindex.New(serverstat.GetInfoFromMany(serverAddresses))
+				scraper.ServerIndex = serverindex.New(statClient.GetInfoFromMany(serverAddresses))
 			} else if isTimeToUpdateActiveServers {
 				activeAddresses := scraper.ServerIndex.ActiveAddresses()
-				scraper.ServerIndex.Update(serverstat.GetInfoFromMany(activeAddresses))
+				scraper.ServerIndex.Update(statClient.GetInfoFromMany(activeAddresses))
 			}
 		}()
 
