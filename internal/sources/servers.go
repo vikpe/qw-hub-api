@@ -62,12 +62,11 @@ func (scraper *ServerScraper) Start() {
 			isTimeToUpdateFromMasters := 0 == currentTick
 
 			if isTimeToUpdateFromMasters {
-				var err error
-				serverAddresses, err = masterstat.GetServerAddressesFromMany(scraper.Config.MasterServers)
+				var errs []error
+				serverAddresses, errs = masterstat.GetServerAddressesFromMany(scraper.Config.MasterServers)
 
-				if err != nil {
-					log.Println("ERROR:", err)
-					return
+				if len(errs) > 0 {
+					log.Println("Errors occured when querying masters:", errs)
 				}
 			}
 
