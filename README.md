@@ -17,18 +17,20 @@ qws [-master INTERVAL] [-server INTERVAL] [-active INTERVAL] [-port PORT]
 
 ## API endpoints
 
-| URL                     | description                                                               |  
-|-------------------------|---------------------------------------------------------------------------|
-| `/v2/servers`           | All servers                                                               |  
-| `/v2/servers/<address>` | Server details                                                            |  
-| `/v2/servers/mvdsv`     | MVDSV servers                                                             |  
-| `/v2/servers/qwfwd`     | QWFWD servers (proxies)                                                   |  
-| `/v2/servers/qtv`       | QTV servers                                                               |
-|                         |                                                                           |
-| `/v2/streams`           | Twitch streams casting Quake                                              |  
-| `/v2/events`            | Events (from [Wiki](https://wiki.quakeworld.nu/))                         |  
-| `/v2/news`              | News (from [QuakeWorld.nu](https://www.quakeworld.nu/))                   |  
-| `/v2/forum_posts`       | Forum posts (from [QuakeWorld.nu Forum](https://www.quakeworld.nu/forum)) |  
+| URL                      | description                                                               |  
+|--------------------------|---------------------------------------------------------------------------|
+| `/v2/servers`            | All servers                                                               |  
+| `/v2/servers/<address>`  | Server details                                                            |  
+| `/v2/servers/mvdsv`      | MVDSV servers                                                             |  
+| `/v2/servers/qwfwd`      | QWFWD servers (proxies)                                                   |  
+| `/v2/servers/qtv`        | QTV servers                                                               |
+|                          |                                                                           |
+| `/v2/masters/<address>`  | List of servers on master                                                 |
+|                          |                                                                           |
+| `/v2/streams`            | Twitch streams casting Quake                                              |  
+| `/v2/events`             | Events (from [Wiki](https://wiki.quakeworld.nu/))                         |  
+| `/v2/news`               | News (from [QuakeWorld.nu](https://www.quakeworld.nu/))                   |  
+| `/v2/forum_posts`        | Forum posts (from [QuakeWorld.nu Forum](https://www.quakeworld.nu/forum)) |  
 
 ## Endpoint details
 
