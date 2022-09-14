@@ -55,7 +55,15 @@ func GameStateFromServer(server mvdsv.Mvdsv) GameState {
 	players := make([]Player, 0)
 
 	for _, player := range server.Players {
-		players = append(players, Player{Name: player.Name.ToPlainString()})
+		players = append(players, nameToPlayer(player.Name.ToPlainString()))
+	}
+
+	for _, name := range server.SpectatorNames {
+		if name == "[ServeMe]" {
+			continue
+		}
+
+		players = append(players, nameToPlayer(name))
 	}
 
 	addressParts := strings.Split(server.Address, ":")
@@ -73,6 +81,11 @@ func GameStateFromServer(server mvdsv.Mvdsv) GameState {
 		),
 		Players: players,
 	}
+}
+
+func nameToPlayer(name string) Player {
+	strippedName := strings.TrimSpace(strings.ReplaceAll(name, "•", " "))
+	return Player{Name: strippedName}
 }
 
 func ToGameStates(servers []mvdsv.Mvdsv) []GameState {
