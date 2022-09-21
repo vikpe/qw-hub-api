@@ -1,4 +1,4 @@
-module qws
+module github.com/vikpe/qw-hub-api
 
 go 1.18
 

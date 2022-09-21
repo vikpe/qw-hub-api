@@ -4,9 +4,9 @@ import (
 	"errors"
 	"sort"
 
+	"github.com/vikpe/qw-hub-api/internal/qnet"
 	"github.com/vikpe/serverstat/qserver"
 	"github.com/vikpe/serverstat/qserver/qclient"
-	"qws/internal/qnet"
 )
 
 type ServerIndex map[string]qserver.GenericServer

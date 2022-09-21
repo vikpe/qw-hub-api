@@ -8,10 +8,10 @@ import (
 
 	"github.com/goccy/go-json"
 	"github.com/joho/godotenv"
-	v1 "qws/internal/api/v1"
-	"qws/internal/api/v2"
-	"qws/internal/app"
-	sources2 "qws/internal/sources"
+	v1 "github.com/vikpe/qw-hub-api/internal/api/v1"
+	"github.com/vikpe/qw-hub-api/internal/api/v2"
+	"github.com/vikpe/qw-hub-api/internal/app"
+	"github.com/vikpe/qw-hub-api/internal/sources"
 )
 
 func main() {
@@ -20,11 +20,11 @@ func main() {
 	config := getConfig()
 
 	// provider sources
-	serverScraper := sources2.NewServerScraper()
+	serverScraper := sources.NewServerScraper()
 	serverScraper.Config = config.servers
 	go serverScraper.Start()
 
-	streamers := sources2.StreamerIndex{
+	streamers := sources.StreamerIndex{
 		"quakeworld":    "[streambot]",
 		"vikpe":         "twitch.tv/vikpe",
 		"bps__":         "bps",
@@ -39,14 +39,14 @@ func main() {
 		"wimpeeh":       "Wimp",
 	}
 
-	twitchScraper, _ := sources2.NewTwitchScraper(
+	twitchScraper, _ := sources.NewTwitchScraper(
 		os.Getenv("TWITCH_CLIENT_ID"),
 		os.Getenv("TWITCH_ACCESS_TOKEN"),
 		streamers,
 	)
 	go twitchScraper.Start()
 
-	dataProvider := sources2.NewProvider(serverScraper, twitchScraper)
+	dataProvider := sources.NewProvider(serverScraper, twitchScraper)
 
 	// serve
 	webapp := app.New()
@@ -64,7 +64,7 @@ func main() {
 
 type AppConfig struct {
 	httpPort int
-	servers  sources2.ServerScraperConfig
+	servers  sources.ServerScraperConfig
 }
 
 func getConfig() AppConfig {
@@ -76,9 +76,9 @@ func getConfig() AppConfig {
 	)
 
 	flag.IntVar(&httpPort, "port", 80, "HTTP listen port")
-	flag.IntVar(&masterInterval, "master", sources2.DefaultServerScraperConfig.MasterInterval, "Master qserver update interval in seconds")
-	flag.IntVar(&serverInterval, "qserver", sources2.DefaultServerScraperConfig.ServerInterval, "Server update interval in seconds")
-	flag.IntVar(&activeServerInterval, "active", sources2.DefaultServerScraperConfig.ActiveServerInterval, "Active qserver update interval in seconds")
+	flag.IntVar(&masterInterval, "master", sources.DefaultServerScraperConfig.MasterInterval, "Master qserver update interval in seconds")
+	flag.IntVar(&serverInterval, "qserver", sources.DefaultServerScraperConfig.ServerInterval, "Server update interval in seconds")
+	flag.IntVar(&activeServerInterval, "active", sources.DefaultServerScraperConfig.ActiveServerInterval, "Active qserver update interval in seconds")
 	flag.Parse()
 
 	masterServers, err := getMasterServersFromJsonFile("master_servers.json")
@@ -90,7 +90,7 @@ func getConfig() AppConfig {
 
 	return AppConfig{
 		httpPort: httpPort,
-		servers: sources2.ServerScraperConfig{
+		servers: sources.ServerScraperConfig{
 			MasterServers:        masterServers,
 			MasterInterval:       masterInterval,
 			ServerInterval:       serverInterval,

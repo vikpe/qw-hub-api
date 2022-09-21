@@ -5,14 +5,9 @@ import (
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/gofiber/fiber/v2"
-	"qws/internal/sources"
+	"github.com/vikpe/qw-hub-api/internal/sources"
+	"github.com/vikpe/qw-hub-api/types"
 )
-
-type newsItem struct {
-	Title string `json:"title"`
-	Date  string `json:"date"`
-	Url   string `json:"url"`
-}
 
 func News() func(c *fiber.Ctx) error {
 	const limit = 10
@@ -26,7 +21,7 @@ func News() func(c *fiber.Ctx) error {
 		}
 
 		// find and parse items
-		newsItems := make([]newsItem, 0)
+		newsItems := make([]types.NewsItem, 0)
 
 		doc.Find("item").Each(func(i int, s *goquery.Selection) {
 			if i >= limit { // limit to x items
@@ -34,7 +29,7 @@ func News() func(c *fiber.Ctx) error {
 			}
 
 			pubDate := s.Find("pubDate").Text()
-			event := newsItem{
+			event := types.NewsItem{
 				Title: s.Find("title").Text(),
 				Date:  pubDate[:len(pubDate)-len(" hh:mm:ss +0000")],
 				Url:   s.Find("guid").Text(),

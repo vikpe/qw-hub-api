@@ -6,16 +6,9 @@ import (
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/gofiber/fiber/v2"
-	"qws/internal/sources"
+	"github.com/vikpe/qw-hub-api/internal/sources"
+	"github.com/vikpe/qw-hub-api/types"
 )
-
-type event struct {
-	Title   string `json:"title"`
-	Status  string `json:"status"`
-	Date    string `json:"date"`
-	WikiUrl string `json:"wiki_url"`
-	LogoUrl string `json:"logo_url"`
-}
 
 func Events() func(c *fiber.Ctx) error {
 	const quakeworldUrl = "https://www.quakeworld.nu"
@@ -33,7 +26,7 @@ func Events() func(c *fiber.Ctx) error {
 		}
 
 		// find and parse items
-		events := make([]event, 0)
+		events := make([]types.Event, 0)
 		statuses := []string{"upcoming", "ongoing", "completed"}
 
 		for t := range statuses {
@@ -49,7 +42,7 @@ func Events() func(c *fiber.Ctx) error {
 				logoRelUrl := cells.Eq(indexLogoCell).Find("img").First().AttrOr("src", "")
 				logoRelUrl = strings.Replace(logoRelUrl, "21px", "32px", 1) // use 32px size
 
-				event := event{
+				event := types.Event{
 					Title:   linkElement.AttrOr("title", "[parse fail]"),
 					Status:  statuses[t],
 					Date:    strings.TrimSpace(cells.Eq(indexDateCell).Text()),

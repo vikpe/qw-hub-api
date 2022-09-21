@@ -5,9 +5,9 @@ import (
 	"time"
 
 	"github.com/vikpe/masterstat"
+	"github.com/vikpe/qw-hub-api/internal/serverindex"
 	"github.com/vikpe/serverstat"
 	"github.com/vikpe/serverstat/qserver"
-	"qws/internal/serverindex"
 )
 
 type ServerScraper struct {

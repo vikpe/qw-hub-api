@@ -1,6 +1,7 @@
 package sources
 
 import (
+	"github.com/vikpe/qw-hub-api/types"
 	"github.com/vikpe/serverstat/qserver"
 	"github.com/vikpe/serverstat/qserver/convert"
 	"github.com/vikpe/serverstat/qserver/mvdsv"
@@ -64,6 +65,6 @@ func (p *Provider) Qwfwd() []qwfwd.Qwfwd {
 	return result
 }
 
-func (p *Provider) TwitchStreams() []TwitchStream {
+func (p *Provider) TwitchStreams() []types.TwitchStream {
 	return p.twitchSource.Streams()
 }

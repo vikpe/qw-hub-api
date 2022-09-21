@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/nicklaw5/helix"
+	"github.com/vikpe/qw-hub-api/types"
 )
 
 type StreamerIndex map[string]string
@@ -19,16 +20,6 @@ func (s StreamerIndex) UserLogins() []string {
 	return result
 }
 
-type TwitchStream struct {
-	Channel       string `json:"channel"`
-	Url           string `json:"url"`
-	Title         string `json:"title"`
-	ViewerCount   int    `json:"viewers"`
-	Language      string `json:"language"`
-	ClientName    string `json:"client_name"`
-	ServerAddress string `json:"server_address"`
-}
-
 type TwitchScraper struct {
 	client       *helix.Client
 	streamers    StreamerIndex
@@ -37,11 +28,11 @@ type TwitchScraper struct {
 	interval     int
 }
 
-func (scraper TwitchScraper) Streams() []TwitchStream {
-	result := make([]TwitchStream, 0)
+func (scraper TwitchScraper) Streams() []types.TwitchStream {
+	result := make([]types.TwitchStream, 0)
 
 	for _, stream := range scraper.helixStreams {
-		result = append(result, TwitchStream{
+		result = append(result, types.TwitchStream{
 			ClientName:    scraper.streamers[stream.UserLogin],
 			Channel:       stream.UserName,
 			Language:      stream.Language,

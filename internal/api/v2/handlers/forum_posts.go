@@ -6,16 +6,9 @@ import (
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/gofiber/fiber/v2"
-	"qws/internal/sources"
+	"github.com/vikpe/qw-hub-api/internal/sources"
+	"github.com/vikpe/qw-hub-api/types"
 )
-
-type forumPost struct {
-	Title  string `json:"title"`
-	Forum  string `json:"forum"`
-	Author string `json:"author"`
-	Date   string `json:"date"`
-	Url    string `json:"url"`
-}
 
 func ForumPosts() func(c *fiber.Ctx) error {
 	const quakeworldUrl = "https://www.quakeworld.nu"
@@ -30,7 +23,7 @@ func ForumPosts() func(c *fiber.Ctx) error {
 		}
 
 		// find and parse items
-		forumPosts := make([]forumPost, 0)
+		forumPosts := make([]types.ForumPost, 0)
 
 		doc.Find("#frmForumActivity").Find("a").Each(func(i int, s *goquery.Selection) {
 			if i >= limit { // limit to x items
@@ -38,7 +31,7 @@ func ForumPosts() func(c *fiber.Ctx) error {
 			}
 
 			forumParts := strings.Split(s.Find(".link_recent_forum").Text(), " in ")
-			event := forumPost{
+			event := types.ForumPost{
 				Title:  s.Find("b").Text(),
 				Forum:  forumParts[1],
 				Author: s.Find("div.link_recent_author").Text()[len("By "):],

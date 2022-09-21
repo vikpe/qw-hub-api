@@ -5,9 +5,9 @@ import (
 
 	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
+	"github.com/vikpe/qw-hub-api/internal/sources"
 	"github.com/vikpe/serverstat/qserver/mvdsv"
 	"github.com/vikpe/serverstat/qserver/mvdsv/analyze"
-	"qws/internal/sources"
 )
 
 func Mvdsv(provider *sources.Provider) func(c *fiber.Ctx) error {

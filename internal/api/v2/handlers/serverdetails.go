@@ -4,8 +4,8 @@ import (
 	"net/http"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/vikpe/qw-hub-api/internal/sources"
 	"github.com/vikpe/serverstat/qserver/convert"
-	"qws/internal/sources"
 )
 
 func ServerDetails(provider *sources.Provider) func(c *fiber.Ctx) error {

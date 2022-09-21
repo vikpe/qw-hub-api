@@ -2,8 +2,8 @@ package v2
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"qws/internal/api/v2/handlers"
-	"qws/internal/sources"
+	"github.com/vikpe/qw-hub-api/internal/api/v2/handlers"
+	"github.com/vikpe/qw-hub-api/internal/sources"
 )
 
 func Init(router fiber.Router, provider *sources.Provider) {
