@@ -5,7 +5,7 @@
 ## Usage
 
 ```shell
-qws [-master INTERVAL] [-server INTERVAL] [-active INTERVAL] [-port PORT]
+qw-hub-api [-master INTERVAL] [-server INTERVAL] [-active INTERVAL] [-port PORT]
 ```
 
 | arg      | type  | description                   | default | 
