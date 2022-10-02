@@ -1,4 +1,4 @@
-# QWS
+# QW Hub API
 
 > Web API serving QuakeWorld info
 
@@ -74,7 +74,7 @@ go build
 Run locally on port `4000`.
 
 ```shell
-./qws -port=4000
+./qw-hub-api -port=4000
 ```
 
 Now you try an endpoint, e.g. http://localhost:4000/v2/servers
