@@ -1,4 +1,5 @@
 .idea/
+config.json
 qw-hub-api
 coverage.out
 .env

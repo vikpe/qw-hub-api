@@ -4,15 +4,15 @@
 
 ## Usage
 
-```shell
-./qw-hub-api
-```
+1) Rename `config.sample.json` to `config.json`.
+2) Build
+3) `./qw-hub-api`
 
 ## Config
 
-See [config.json](./config.json)
+See [config.sample.json](./config.sample.json)
 
-**Sample config**
+**Example**
 
 ```json
 {
@@ -30,9 +30,9 @@ See [config.json](./config.json)
   },
   "streamers": {
     "annihilazor": "anni",
-    "badsebitv": "badsebitv",
-    "bogojoker": "bogojoker",
-    "bps__": "bps"
+    "quakeworld": "[streambot]",
+    "suddendeathTV": "suddendeathTV",
+    "vikpe": "XantoM"
   }
 }
 ```
