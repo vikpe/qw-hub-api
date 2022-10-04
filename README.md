@@ -5,15 +5,37 @@
 ## Usage
 
 ```shell
-qw-hub-api [-master INTERVAL] [-server INTERVAL] [-active INTERVAL] [-port PORT]
+./qw-hub-api
 ```
 
-| arg      | type  | description                   | default | 
-|----------|-------|-------------------------------|---------|
-| `port`   | `int` | HTTP listen port              | `3000`  |
-| `master` | `int` | Master server update interval | `600`   |
-| `server` | `int` | Server update interval        | `30`    |
-| `active` | `int` | Active server update interval | `3`     |
+## Config
+
+See [config.json](./config.json)
+
+**Sample config**
+
+```json
+{
+  "port": 3000,
+  "servers": {
+    "active_server_interval": 4,
+    "server_interval": 30,
+    "master_interval": 14400,
+    "master_servers": [
+      "master.quakeworld.nu:27000",
+      "master.quakeservers.net:27000",
+      "qwmaster.ocrana.de:27000",
+      "qwmaster.fodquake.net:27000"
+    ]
+  },
+  "streamers": {
+    "annihilazor": "anni",
+    "badsebitv": "badsebitv",
+    "bogojoker": "bogojoker",
+    "bps__": "bps"
+  }
+}
+```
 
 ## API endpoints
 
@@ -45,24 +67,6 @@ qw-hub-api [-master INTERVAL] [-server INTERVAL] [-active INTERVAL] [-port PORT]
 | `has_player=xantom` | Servers where xantom is connected as player    |
 | `has_client=xantom` | Servers where xantom is connected              |
 
-## Config
-
-### Master servers
-
-The QuakeWorld master servers to query for servers.
-
-**Example**
-`master_servers.json`
-
-```json
-[
-  "master.quakeworld.nu:27000",
-  "master.quakeservers.net:27000",
-  "qwmaster.ocrana.de:27000",
-  "qwmaster.fodquake.net:27000"
-]
-```
-
 ## Build
 
 ```she
@@ -71,13 +75,13 @@ go build
 
 ## Development
 
-Run locally on port `4000`.
+Run locally.
 
 ```shell
-./qw-hub-api -port=4000
+./qw-hub-api
 ```
 
-Now you try an endpoint, e.g. http://localhost:4000/v2/servers
+Now you try an endpoint, e.g. http://localhost:3000/v2/servers
 
 ## Credits
 
@@ -86,6 +90,7 @@ Now you try an endpoint, e.g. http://localhost:4000/v2/servers
 * XantoM
 
 ## Related projects
+
 * [hub.quakeworld.nu](https://github.com/quakeworldnu/hub.quakeworld.nu)
 * [streambot](https://github.com/vikpe/qw-streambot)
 * [masterstat](https://github.com/vikpe/masterstat)
