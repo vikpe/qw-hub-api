@@ -8,8 +8,8 @@ import (
 
 	"github.com/goccy/go-json"
 	"github.com/joho/godotenv"
-	v1 "github.com/vikpe/qw-hub-api/internal/api/v1"
-	"github.com/vikpe/qw-hub-api/internal/api/v2"
+	apiV1 "github.com/vikpe/qw-hub-api/internal/api/v1"
+	apiV2 "github.com/vikpe/qw-hub-api/internal/api/v2"
 	"github.com/vikpe/qw-hub-api/internal/app"
 	"github.com/vikpe/qw-hub-api/internal/sources"
 )
@@ -51,8 +51,8 @@ func main() {
 
 	// serve
 	webapp := app.New()
-	v1.Init(webapp.Group("/v1"), dataProvider.Mvdsv)
-	v2.Init(webapp.Group("/v2"), dataProvider)
+	apiV1.Init(webapp.Group("/v1"), dataProvider.Mvdsv)
+	apiV2.Init(webapp.Group("/v2"), dataProvider)
 
 	address := fmt.Sprintf(":%d", config.httpPort)
 
