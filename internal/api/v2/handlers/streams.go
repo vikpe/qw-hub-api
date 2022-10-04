@@ -21,8 +21,6 @@ func Streams(provider *sources.Provider) func(c *fiber.Ctx) error {
 
 func getStreamServerAddress(streamPlayerName string, servers []mvdsv.Mvdsv) string {
 	for _, server := range servers {
-		analyze.HasClient(server, streamPlayerName)
-
 		if analyze.HasClient(server, streamPlayerName) {
 			return server.Address
 		}
