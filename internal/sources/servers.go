@@ -17,22 +17,15 @@ type ServerScraper struct {
 }
 
 type ServerScraperConfig struct {
-	MasterServers        []string
-	MasterInterval       int
-	ServerInterval       int
-	ActiveServerInterval int
+	MasterServers        []string `json:"master_servers"`
+	MasterInterval       int      `json:"master_interval"`
+	ServerInterval       int      `json:"server_interval"`
+	ActiveServerInterval int      `json:"active_server_interval"`
 }
 
-var DefaultServerScraperConfig = ServerScraperConfig{
-	MasterServers:        make([]string, 0),
-	MasterInterval:       4 * 3600,
-	ServerInterval:       30,
-	ActiveServerInterval: 4,
-}
-
-func NewServerScraper() *ServerScraper {
+func NewServerScraper(cfg ServerScraperConfig) *ServerScraper {
 	return &ServerScraper{
-		Config:      DefaultServerScraperConfig,
+		Config:      cfg,
 		ServerIndex: make(serverindex.ServerIndex, 0),
 		shouldStop:  false,
 	}
