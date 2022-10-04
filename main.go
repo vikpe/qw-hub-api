@@ -24,30 +24,14 @@ func main() {
 		os.Exit(1)
 	}
 
-	// provider sources
+	// data sources
 	serverScraper := sources.NewServerScraper(config.Servers)
 	go serverScraper.Start()
-
-	streamers := sources.StreamerIndex{
-		"maalox1":       "BLooD_DoGD(D_P)",
-		"quakeworld":    "[streambot]",
-		"vikpe":         "twitch.tv/vikpe",
-		"bps__":         "bps",
-		"badsebitv":     "badsebitv",
-		"reppie":        "reppie",
-		"miltonizer":    "Milton",
-		"bogojoker":     "bogojoker",
-		"hemostick":     "hemostick",
-		"dracsqw":       "dracs",
-		"niwsen":        "niw",
-		"suddendeathTV": "suddendeathTV",
-		"wimpeeh":       "Wimp",
-	}
 
 	twitchScraper, _ := sources.NewTwitchScraper(
 		os.Getenv("TWITCH_CLIENT_ID"),
 		os.Getenv("TWITCH_ACCESS_TOKEN"),
-		streamers,
+		config.Streamers,
 	)
 	go twitchScraper.Start()
 
@@ -68,8 +52,9 @@ func main() {
 }
 
 type AppConfig struct {
-	Port    int                         `json:"port"`
-	Servers sources.ServerScraperConfig `json:"servers"`
+	Port      int                         `json:"port"`
+	Servers   sources.ServerScraperConfig `json:"servers"`
+	Streamers sources.StreamerIndex       `json:"streamers"`
 }
 
 func getConfigFromJsonFile(filePath string) (AppConfig, error) {

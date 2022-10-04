@@ -10,5 +10,28 @@
       "qwmaster.ocrana.de:27000",
       "qwmaster.fodquake.net:27000"
     ]
+  },
+  "streamers": {
+    "annihilazor": "anni",
+    "badsebitv": "badsebitv",
+    "bogojoker": "bogojoker",
+    "bps__": "bps",
+    "chadmcdouche": "velocity",
+    "dracsqw": "dracs",
+    "hemostick": "hemostick",
+    "hangtime_of_qw": "HangTime",
+    "hiipe_qw": "hiipe",
+    "kliceo": "klice",
+    "maalox1": "BLooD_DoGD(D_P)",
+    "miltonizer": "Milton",
+    "niwsen": "niw",
+    "proudsausage": "eb",
+    "quakeworld": "[streambot]",
+    "reppie": "reppie",
+    "shining_ctf": "Shining",
+    "suddendeathTV": "suddendeathTV",
+    "vikpe": "XantoM",
+    "wimpeeh": "Wimp",
+    "zorakwar": "Zorak"
   }
 }
