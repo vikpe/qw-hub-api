@@ -40,6 +40,7 @@ func (scraper TwitchScraper) Streams() []types.TwitchStream {
 			ViewerCount:   stream.ViewerCount,
 			Url:           fmt.Sprintf("https://twitch.tv/%s", stream.UserLogin),
 			ServerAddress: "",
+			StartedAt:     stream.StartedAt,
 		})
 	}
 

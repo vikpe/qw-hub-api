@@ -1,6 +1,8 @@
 package types
 
 import (
+	"time"
+
 	"github.com/vikpe/serverstat/qserver/mvdsv"
 )
 
@@ -29,11 +31,12 @@ type NewsItem struct {
 }
 
 type TwitchStream struct {
-	Channel       string `json:"channel"`
-	Url           string `json:"url"`
-	Title         string `json:"title"`
-	ViewerCount   int    `json:"viewers"`
-	Language      string `json:"language"`
-	ClientName    string `json:"client_name"`
-	ServerAddress string `json:"server_address"`
+	Channel       string    `json:"channel"`
+	Url           string    `json:"url"`
+	Title         string    `json:"title"`
+	ViewerCount   int       `json:"viewers"`
+	Language      string    `json:"language"`
+	ClientName    string    `json:"client_name"`
+	ServerAddress string    `json:"server_address"`
+	StartedAt     time.Time `json:"started_at"`
 }
