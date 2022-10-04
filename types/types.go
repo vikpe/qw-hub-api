@@ -2,11 +2,7 @@ package types
 
 import (
 	"time"
-
-	"github.com/vikpe/serverstat/qserver/mvdsv"
 )
-
-type MvdsvServer mvdsv.Mvdsv
 
 type Event struct {
 	Title   string `json:"title"`
