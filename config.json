@@ -4,7 +4,7 @@
     "active_server_interval": 4,
     "server_interval": 30,
     "master_interval": 14400,
-    "master_iervers": [
+    "master_servers": [
       "master.quakeworld.nu:27000",
       "master.quakeservers.net:27000",
       "qwmaster.ocrana.de:27000",
