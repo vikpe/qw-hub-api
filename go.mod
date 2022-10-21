@@ -10,7 +10,7 @@ require (
 	github.com/joho/godotenv v1.4.0
 	github.com/nicklaw5/helix v1.25.0
 	github.com/vikpe/masterstat v0.2.0
-	github.com/vikpe/serverstat v0.2.2
+	github.com/vikpe/serverstat v0.2.3
 )
 
 require (
