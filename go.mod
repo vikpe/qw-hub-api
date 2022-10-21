@@ -10,7 +10,7 @@ require (
 	github.com/joho/godotenv v1.4.0
 	github.com/nicklaw5/helix v1.25.0
 	github.com/vikpe/masterstat v0.2.0
-	github.com/vikpe/serverstat v0.2.1
+	github.com/vikpe/serverstat v0.2.2
 )
 
 require (
@@ -29,9 +29,9 @@ require (
 	github.com/valyala/tcplisten v1.0.0 // indirect
 	github.com/vikpe/udpclient v0.1.3 // indirect
 	github.com/vikpe/wildcard v0.1.0 // indirect
-	golang.org/x/crypto v0.0.0-20220926161630-eccd6366d1be // indirect
-	golang.org/x/exp v0.0.0-20221002003631-540bb7301a08 // indirect
-	golang.org/x/net v0.0.0-20221002022538-bcab6841153b // indirect
-	golang.org/x/sys v0.0.0-20220928140112-f11e5e49a4ec // indirect
-	golang.org/x/text v0.3.7 // indirect
+	golang.org/x/crypto v0.1.0 // indirect
+	golang.org/x/exp v0.0.0-20221019170559-20944726eadf // indirect
+	golang.org/x/net v0.1.0 // indirect
+	golang.org/x/sys v0.1.0 // indirect
+	golang.org/x/text v0.4.0 // indirect
 )
