@@ -3,42 +3,21 @@ package handlers
 import (
 	"fmt"
 
-	"github.com/PuerkitoBio/goquery"
 	"github.com/gofiber/fiber/v2"
-	"github.com/vikpe/qw-hub-api/pkg/scrape"
-	"github.com/vikpe/qw-hub-api/types"
+	"github.com/vikpe/qw-hub-api/pkg/qwnu"
 )
 
 func News() func(c *fiber.Ctx) error {
 	const limit = 10
 
 	return func(c *fiber.Ctx) error {
-		// read source
-		doc, err := scrape.ReadDocument("https://www.quakeworld.nu/feeds/news.php")
+		newsPosts, err := qwnu.NewsPosts(limit)
 
 		if err != nil {
 			return err
 		}
 
-		// find and parse items
-		newsItems := make([]types.NewsItem, 0)
-
-		doc.Find("item").Each(func(i int, s *goquery.Selection) {
-			if i >= limit { // limit to x items
-				return
-			}
-
-			pubDate := s.Find("pubDate").Text()
-			event := types.NewsItem{
-				Title: s.Find("title").Text(),
-				Date:  pubDate[:len(pubDate)-len(" hh:mm:ss +0000")],
-				Url:   s.Find("guid").Text(),
-			}
-			newsItems = append(newsItems, event)
-		})
-
-		// send response
 		c.Response().Header.Add("Cache-Time", fmt.Sprintf("%d", 3600)) // 1h cache
-		return c.JSON(newsItems)
+		return c.JSON(newsPosts)
 	}
 }
