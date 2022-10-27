@@ -4,12 +4,12 @@ import (
 	"fmt"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/vikpe/qw-hub-api/internal/scrape"
+	"github.com/vikpe/qw-hub-api/pkg/scrape"
 )
 
 func GetDemoFilenames(qtvAddress string) ([]string, error) {
 	url := fmt.Sprintf("http://%s/demos/", qtvAddress)
-	doc, err := scrape.GetDocumentByUrl(url)
+	doc, err := scrape.ReadDocument(url)
 
 	if err != nil {
 		return make([]string, 0), err

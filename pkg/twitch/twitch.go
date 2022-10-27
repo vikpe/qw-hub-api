@@ -1,12 +1,22 @@
-package sources
+package twitch
 
 import (
 	"fmt"
 	"time"
 
 	"github.com/nicklaw5/helix"
-	"github.com/vikpe/qw-hub-api/types"
 )
+
+type Stream struct {
+	Channel       string    `json:"channel"`
+	Url           string    `json:"url"`
+	Title         string    `json:"title"`
+	ViewerCount   int       `json:"viewers"`
+	Language      string    `json:"language"`
+	ClientName    string    `json:"client_name"`
+	ServerAddress string    `json:"server_address"`
+	StartedAt     time.Time `json:"started_at"`
+}
 
 type StreamerIndex map[string]string
 
@@ -20,7 +30,7 @@ func (s StreamerIndex) UserLogins() []string {
 	return result
 }
 
-type TwitchScraper struct {
+type Scraper struct {
 	client       *helix.Client
 	streamers    StreamerIndex
 	helixStreams []helix.Stream
@@ -28,11 +38,31 @@ type TwitchScraper struct {
 	interval     int
 }
 
-func (scraper TwitchScraper) Streams() []types.TwitchStream {
-	result := make([]types.TwitchStream, 0)
+func NewScraper(clientID string, userAccessToken string, streamers StreamerIndex) (*Scraper, error) {
+	client, err := helix.NewClient(&helix.Options{
+		ClientID:        clientID,
+		UserAccessToken: userAccessToken,
+	})
+
+	if err != nil {
+		fmt.Println("twitch client", err.Error())
+		return &Scraper{}, err
+	}
+
+	return &Scraper{
+		streamers:    streamers,
+		client:       client,
+		interval:     10,
+		shouldStop:   false,
+		helixStreams: make([]helix.Stream, 0),
+	}, nil
+}
+
+func (scraper *Scraper) Streams() []Stream {
+	result := make([]Stream, 0)
 
 	for _, stream := range scraper.helixStreams {
-		result = append(result, types.TwitchStream{
+		result = append(result, Stream{
 			ClientName:    scraper.streamers[stream.UserLogin],
 			Channel:       stream.UserName,
 			Language:      stream.Language,
@@ -47,27 +77,7 @@ func (scraper TwitchScraper) Streams() []types.TwitchStream {
 	return result
 }
 
-func NewTwitchScraper(clientID string, userAccessToken string, streamers StreamerIndex) (*TwitchScraper, error) {
-	client, err := helix.NewClient(&helix.Options{
-		ClientID:        clientID,
-		UserAccessToken: userAccessToken,
-	})
-
-	if err != nil {
-		fmt.Println("twitch client", err.Error())
-		return &TwitchScraper{}, err
-	}
-
-	return &TwitchScraper{
-		streamers:    streamers,
-		client:       client,
-		interval:     10,
-		shouldStop:   false,
-		helixStreams: make([]helix.Stream, 0),
-	}, nil
-}
-
-func (scraper *TwitchScraper) Start() {
+func (scraper *Scraper) Start() {
 	scraper.shouldStop = false
 
 	ticker := time.NewTicker(time.Duration(1) * time.Second)
@@ -113,6 +123,6 @@ func (scraper *TwitchScraper) Start() {
 	}
 }
 
-func (scraper *TwitchScraper) Stop() {
+func (scraper *Scraper) Stop() {
 	scraper.shouldStop = true
 }
