@@ -5,7 +5,7 @@ import (
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/gofiber/fiber/v2"
-	"github.com/vikpe/qw-hub-api/internal/sources"
+	"github.com/vikpe/qw-hub-api/internal/sources/scrape"
 	"github.com/vikpe/qw-hub-api/types"
 )
 
@@ -14,7 +14,7 @@ func News() func(c *fiber.Ctx) error {
 
 	return func(c *fiber.Ctx) error {
 		// read source
-		doc, err := sources.ReadDocument("https://www.quakeworld.nu/feeds/news.php")
+		doc, err := scrape.GetDocumentByUrl("https://www.quakeworld.nu/feeds/news.php")
 
 		if err != nil {
 			return err
