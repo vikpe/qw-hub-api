@@ -5,7 +5,7 @@ import (
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/gofiber/fiber/v2"
-	"github.com/vikpe/qw-hub-api/internal/sources/scrape"
+	"github.com/vikpe/qw-hub-api/internal/scrape"
 	"github.com/vikpe/qw-hub-api/types"
 )
 
