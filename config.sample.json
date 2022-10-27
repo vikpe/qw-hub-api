@@ -11,9 +11,10 @@
       "qwmaster.fodquake.net:27000"
     ]
   },
-  "qtv_demo_sources": [
-    "qw.foppa.dk:28000",
-    "troopers.fi:28000"
+ "qtv_demo_sources": [
+    {"address": "qw.irc.ax:28000", "date_format": "ymd"},
+    {"address": "troopers.fi:28000", "date_format": "ymd"},
+    {"address": "qw.foppa.dk:28000", "date_format": "dmy"}
   ],
   "streamers": {
     "annihilazor": "anni",

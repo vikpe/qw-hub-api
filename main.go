@@ -65,7 +65,7 @@ type AppConfig struct {
 	Port           int                         `json:"port"`
 	Servers        sources.ServerScraperConfig `json:"servers"`
 	Streamers      sources.StreamerIndex       `json:"streamers"`
-	QtvDemoSources []string                    `json:"qtv_demo_sources"`
+	QtvDemoSources []sources.QtvServerConfig   `json:"qtv_demo_sources"`
 }
 
 func getConfigFromJsonFile(filePath string) (AppConfig, error) {
