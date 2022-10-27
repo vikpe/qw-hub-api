@@ -19,4 +19,6 @@ func Init(router fiber.Router, provider *sources.Provider) {
 	router.Get("events", handlers.Events())
 	router.Get("news", handlers.News())
 	router.Get("forum_posts", handlers.ForumPosts())
+
+	router.Get("demos", handlers.Demos(provider.Demos))
 }

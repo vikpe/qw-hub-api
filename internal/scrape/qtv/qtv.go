@@ -20,11 +20,5 @@ func GetDemoFilenames(qtvAddress string) ([]string, error) {
 		demoFilenames = append(demoFilenames, s.Text())
 	})
 
-	const limit = 25
-
-	if len(demoFilenames) > limit {
-		demoFilenames = demoFilenames[0:limit]
-	}
-
 	return demoFilenames, nil
 }
