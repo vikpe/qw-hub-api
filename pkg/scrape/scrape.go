@@ -1,4 +1,4 @@
-package sources
+package scrape
 
 import (
 	"log"
