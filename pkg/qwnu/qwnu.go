@@ -34,7 +34,7 @@ type NewsPost struct {
 
 func Events(limit int) ([]Event, error) {
 	wikiOverviewUrl := fmt.Sprintf("%s/wiki/Overview", qwnuURL)
-	doc, err := scrape.ReadDocument(wikiOverviewUrl)
+	doc, err := scrape.GetHtmlDocument(wikiOverviewUrl)
 
 	if err != nil {
 		return make([]Event, 0), err
@@ -75,7 +75,7 @@ func Events(limit int) ([]Event, error) {
 }
 
 func ForumPosts(limit int) ([]ForumPost, error) {
-	doc, err := scrape.ReadDocument(qwnuURL)
+	doc, err := scrape.GetHtmlDocument(qwnuURL)
 
 	if err != nil {
 		return make([]ForumPost, 0), err
@@ -104,7 +104,7 @@ func ForumPosts(limit int) ([]ForumPost, error) {
 
 func NewsPosts(limit int) ([]NewsPost, error) {
 	newsUrl := fmt.Sprintf("%s/feeds/news.php", qwnuURL)
-	doc, err := scrape.ReadDocument(newsUrl)
+	doc, err := scrape.GetHtmlDocument(newsUrl)
 
 	if err != nil {
 		return make([]NewsPost, 0), err

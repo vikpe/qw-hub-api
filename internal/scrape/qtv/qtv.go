@@ -9,7 +9,7 @@ import (
 
 func GetDemoFilenames(qtvAddress string) ([]string, error) {
 	url := fmt.Sprintf("http://%s/demos/", qtvAddress)
-	doc, err := scrape.ReadDocument(url)
+	doc, err := scrape.GetHtmlDocument(url)
 
 	if err != nil {
 		return make([]string, 0), err
