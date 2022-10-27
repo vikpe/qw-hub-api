@@ -40,3 +40,13 @@ func TestQtvServer(t *testing.T) {
 	assert.Equal(t, "http://qw.foppa.dk:28000/dl/demos/foo.mvd", server.DemoDownloadUrl("foo.mvd"))
 	assert.Equal(t, "http://qw.foppa.dk:28000/watch.qtv?demo=foo.mvd", server.DemoStreamUrl("foo.mvd"))
 }
+
+func TestQtvHostedDemo(t *testing.T) {
+	demo := types.QtvHostedDemo{
+		Filename: types.DemoFileName("duel_holy_vs_si7h[bravado]261022-2255.mvd"),
+		Server:   types.QtvServer{Address: "troopers.fi:28000"},
+	}
+
+	assert.Equal(t, "http://troopers.fi:28000/dl/demos/duel_holy_vs_si7h[bravado]261022-2255.mvd", demo.DownloadUrl())
+	assert.Equal(t, "http://troopers.fi:28000/watch.qtv?demo=duel_holy_vs_si7h[bravado]261022-2255.mvd", demo.StreamUrl())
+}

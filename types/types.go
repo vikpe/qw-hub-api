@@ -12,11 +12,11 @@ type QtvServer struct {
 	Address string
 }
 
-func (s QtvServer) DemoStreamUrl(filename string) string {
+func (s *QtvServer) DemoStreamUrl(filename string) string {
 	return fmt.Sprintf("http://%s/watch.qtv?demo=%s", s.Address, filename)
 }
 
-func (s QtvServer) DemoDownloadUrl(filename string) string {
+func (s *QtvServer) DemoDownloadUrl(filename string) string {
 	return fmt.Sprintf("http://%s/dl/demos/%s", s.Address, filename)
 }
 
@@ -42,7 +42,7 @@ func (d *QtvHostedDemo) MarshalJSON() ([]byte, error) {
 }
 
 func (d *QtvHostedDemo) StreamUrl() string {
-	return d.Server.DemoDownloadUrl(string(d.Filename))
+	return d.Server.DemoStreamUrl(string(d.Filename))
 }
 
 func (d *QtvHostedDemo) DownloadUrl() string {
