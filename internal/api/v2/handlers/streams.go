@@ -2,17 +2,17 @@ package handlers
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/vikpe/qw-hub-api/internal/sources"
+	"github.com/vikpe/qw-hub-api/pkg/twitch"
 	"github.com/vikpe/serverstat/qserver/mvdsv"
 	"github.com/vikpe/serverstat/qserver/mvdsv/analyze"
 )
 
-func Streams(provider *sources.Provider) func(c *fiber.Ctx) error {
+func Streams(getStreams func() []twitch.Stream, getMvdsvServers func() []mvdsv.Mvdsv) func(c *fiber.Ctx) error {
 	return func(c *fiber.Ctx) error {
-		streams := provider.TwitchStreams()
+		streams := getStreams()
 
 		for streamIndex, stream := range streams {
-			streams[streamIndex].ServerAddress = getStreamServerAddress(stream.ClientName, provider.MvdsvServers())
+			streams[streamIndex].ServerAddress = getStreamServerAddress(stream.ClientName, getMvdsvServers())
 		}
 
 		return c.JSON(streams)

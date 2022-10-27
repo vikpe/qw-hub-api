@@ -26,7 +26,6 @@ func main() {
 	}
 
 	// data sources
-	// 1. servers
 	serverScraper := sources.NewServerScraper(config.Servers)
 	go serverScraper.Start()
 
@@ -37,20 +36,17 @@ func main() {
 	)
 	go twitchScraper.Start()
 
-	// 3. servers (from qtv)
 	demoScraper := qtvserver.NewDemoScraper(config.QtvDemoSources)
 
-	// combine into data provider
-	dataProvider := sources.NewProvider(
+	// serve web app
+	webapp := app.New()
+	apiV1.Init(webapp.Group("/v1"), serverScraper.Mvdsv)
+	apiV2.Init(
+		webapp.Group("/v2"),
 		serverScraper,
 		twitchScraper,
 		demoScraper,
 	)
-
-	// serve web app
-	webapp := app.New()
-	apiV1.Init(webapp.Group("/v1"), dataProvider.MvdsvServers)
-	apiV2.Init(webapp.Group("/v2"), dataProvider)
 
 	address := fmt.Sprintf(":%d", config.Port)
 
