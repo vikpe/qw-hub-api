@@ -2,8 +2,8 @@ package qnet
 
 import "net"
 
-func ToIpHostPort(hostPort string) (string, error) {
-	host, port, err := net.SplitHostPort(hostPort)
+func ToIpHostPort(address string) (string, error) {
+	host, port, err := net.SplitHostPort(address)
 	if err != nil {
 		return "", err
 	}

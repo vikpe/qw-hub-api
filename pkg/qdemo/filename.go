@@ -1,12 +1,12 @@
-package types
+package qdemo
 
 import (
 	"strings"
 )
 
-type DemoFilename string
+type Filename string
 
-func (f DemoFilename) Mode() string {
+func (f Filename) Mode() string {
 	filename := string(f)
 
 	// special modes
@@ -22,7 +22,7 @@ func (f DemoFilename) Mode() string {
 	return filename[0:indexFirstUnderScore]
 }
 
-func (f DemoFilename) Participants() []string {
+func (f Filename) Participants() []string {
 	filename := string(f)
 	indexFrom := len(f.Mode()) + 1
 	indexTo := strings.LastIndexByte(filename, '[')
@@ -40,7 +40,7 @@ func (f DemoFilename) Participants() []string {
 	return []string{participantStr}
 }
 
-func (f DemoFilename) Map() string {
+func (f Filename) Map() string {
 	filename := string(f)
 	indexOpenBracket := strings.LastIndexByte(filename, '[')
 	if -1 == indexOpenBracket {
@@ -59,7 +59,7 @@ func (f DemoFilename) Map() string {
 	return filename[indexOpenBracket+1 : indexCloseBracket]
 }
 
-func (f DemoFilename) DateTime() string {
+func (f Filename) DateTime() string {
 	filename := string(f)
 	indexCloseBracket := strings.LastIndexByte(filename, ']')
 	if -1 == indexCloseBracket {
@@ -72,7 +72,7 @@ func (f DemoFilename) DateTime() string {
 	return filename[indexFrom:indexTo]
 }
 
-func (f DemoFilename) Date() string {
+func (f Filename) Date() string {
 	dateTime := f.DateTime()
 	if -1 == strings.IndexRune(dateTime, '-') {
 		return ""
@@ -81,7 +81,7 @@ func (f DemoFilename) Date() string {
 	return strings.SplitN(dateTime, "-", 2)[0]
 }
 
-func (f DemoFilename) Time() string {
+func (f Filename) Time() string {
 	dateTime := f.DateTime()
 	if -1 == strings.IndexRune(dateTime, '-') {
 		return ""
@@ -90,6 +90,6 @@ func (f DemoFilename) Time() string {
 	return strings.SplitN(dateTime, "-", 2)[1]
 }
 
-func (f DemoFilename) Number() string {
+func (f Filename) Number() string {
 	return "5"
 }

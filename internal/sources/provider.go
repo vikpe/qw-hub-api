@@ -1,8 +1,8 @@
 package sources
 
 import (
+	"github.com/vikpe/qw-hub-api/pkg/qtvserver"
 	"github.com/vikpe/qw-hub-api/pkg/twitch"
-	"github.com/vikpe/qw-hub-api/types"
 	"github.com/vikpe/serverstat/qserver"
 	"github.com/vikpe/serverstat/qserver/convert"
 	"github.com/vikpe/serverstat/qserver/mvdsv"
@@ -13,10 +13,10 @@ import (
 type Provider struct {
 	serverSource *ServerScraper
 	twitchSource *twitch.Scraper
-	demoSource   *QtvDemoScraper
+	demoSource   *qtvserver.DemoScraper
 }
 
-func NewProvider(servers *ServerScraper, twitch *twitch.Scraper, demos *QtvDemoScraper) *Provider {
+func NewProvider(servers *ServerScraper, twitch *twitch.Scraper, demos *qtvserver.DemoScraper) *Provider {
 	return &Provider{
 		demoSource:   demos,
 		serverSource: servers,
@@ -72,6 +72,6 @@ func (p *Provider) TwitchStreams() []twitch.Stream {
 	return p.twitchSource.Streams()
 }
 
-func (p *Provider) Demos() []types.QtvHostedDemo {
+func (p *Provider) Demos() []qtvserver.Demo {
 	return p.demoSource.Demos()
 }
