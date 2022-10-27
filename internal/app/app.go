@@ -1,16 +1,28 @@
 package app
 
 import (
+	"os"
 	"strconv"
 	"time"
 
+	"github.com/goccy/go-json"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cache"
 	"github.com/gofiber/fiber/v2/middleware/compress"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/favicon"
 	"github.com/gofiber/fiber/v2/middleware/recover"
+	"github.com/vikpe/qw-hub-api/internal/sources"
+	"github.com/vikpe/qw-hub-api/pkg/qtvserver"
+	"github.com/vikpe/qw-hub-api/pkg/twitch"
 )
+
+type Config struct {
+	Port           int                         `json:"port"`
+	Servers        sources.ServerScraperConfig `json:"servers"`
+	Streamers      twitch.StreamerIndex        `json:"streamers"`
+	QtvDemoSources []qtvserver.ServerConfig
+}
 
 func New() *fiber.App {
 	app := fiber.New()
@@ -39,4 +51,20 @@ func New() *fiber.App {
 	}))
 
 	return app
+}
+
+func ConfigFromJsonFile(filePath string) (Config, error) {
+	jsonFile, err := os.ReadFile(filePath)
+	if err != nil {
+		return Config{}, err
+	}
+
+	var cfg Config
+
+	err = json.Unmarshal(jsonFile, &cfg)
+	if err != nil {
+		return Config{}, err
+	}
+
+	return cfg, nil
 }
