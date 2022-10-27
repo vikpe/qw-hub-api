@@ -4,6 +4,7 @@ go 1.18
 
 require (
 	github.com/PuerkitoBio/goquery v1.8.0
+	github.com/go-playground/assert/v2 v2.0.1
 	github.com/go-playground/validator/v10 v10.11.1
 	github.com/goccy/go-json v0.9.11
 	github.com/gofiber/fiber/v2 v2.38.1
