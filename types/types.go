@@ -9,7 +9,8 @@ import (
 )
 
 type QtvServer struct {
-	Address string
+	Address        string
+	DemoDateFormat string
 }
 
 func (s *QtvServer) DemoStreamUrl(filename string) string {
@@ -70,7 +71,7 @@ func (d DemoFilename) Participants() []string {
 		return make([]string, 0)
 	}
 
-	indexOpenBracket := strings.IndexRune(strVal, '[')
+	indexOpenBracket := strings.LastIndexByte(strVal, '[')
 	if -1 == indexOpenBracket {
 		return make([]string, 0)
 	}
@@ -88,12 +89,12 @@ func (d DemoFilename) Participants() []string {
 func (d DemoFilename) Map() string {
 	strVal := string(d)
 
-	indexOpenBracket := strings.IndexRune(strVal, '[')
+	indexOpenBracket := strings.LastIndexByte(strVal, '[')
 	if -1 == indexOpenBracket {
 		return ""
 	}
 
-	indexCloseBracket := strings.IndexRune(strVal, ']')
+	indexCloseBracket := strings.LastIndexByte(strVal, ']')
 	if -1 == indexCloseBracket {
 		return ""
 	}
@@ -108,7 +109,7 @@ func (d DemoFilename) Map() string {
 func (d DemoFilename) DateTime() string {
 	strVal := string(d)
 
-	indexCloseBracket := strings.IndexRune(strVal, ']')
+	indexCloseBracket := strings.LastIndexByte(strVal, ']')
 	if -1 == indexCloseBracket {
 		return ""
 	}

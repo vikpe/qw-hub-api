@@ -25,6 +25,14 @@ func TestDemoFilename(t *testing.T) {
 			assert.Equal(t, "261022-2255", demoFileName.DateTime())
 		})
 
+		t.Run("multiple brackets", func(t *testing.T) {
+			demoFileName := types.DemoFilename("2on2_]a[_vs_]sr[[dm4]231022-2126.mvd")
+			assert.Equal(t, "2on2", demoFileName.Mode())
+			assert.Equal(t, []string{"]a[", "]sr["}, demoFileName.Participants())
+			assert.Equal(t, "dm4", demoFileName.Map())
+			assert.Equal(t, "231022-2126", demoFileName.DateTime())
+		})
+
 		t.Run("ffa", func(t *testing.T) {
 			demoFileName := types.DemoFilename("ffa_5[ztndm3]151022-2104.mvd")
 			assert.Equal(t, "ffa", demoFileName.Mode())
