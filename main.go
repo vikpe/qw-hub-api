@@ -11,6 +11,7 @@ import (
 	apiV2 "github.com/vikpe/qw-hub-api/internal/api/v2"
 	"github.com/vikpe/qw-hub-api/internal/app"
 	"github.com/vikpe/qw-hub-api/internal/sources"
+	"github.com/vikpe/qw-hub-api/pkg/twitch"
 )
 
 func main() {
@@ -28,7 +29,7 @@ func main() {
 	serverScraper := sources.NewServerScraper(config.Servers)
 	go serverScraper.Start()
 
-	twitchScraper, _ := sources.NewTwitchScraper(
+	twitchScraper, _ := twitch.NewScraper(
 		os.Getenv("TWITCH_CLIENT_ID"),
 		os.Getenv("TWITCH_ACCESS_TOKEN"),
 		config.Streamers,
@@ -54,7 +55,7 @@ func main() {
 type AppConfig struct {
 	Port      int                         `json:"port"`
 	Servers   sources.ServerScraperConfig `json:"servers"`
-	Streamers sources.StreamerIndex       `json:"streamers"`
+	Streamers twitch.StreamerIndex        `json:"streamers"`
 }
 
 func getConfigFromJsonFile(filePath string) (AppConfig, error) {
