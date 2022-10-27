@@ -7,9 +7,9 @@ import (
 	"github.com/vikpe/qw-hub-api/types"
 )
 
-func TestDemoFileName(t *testing.T) {
+func TestDemoFilename(t *testing.T) {
 	t.Run("invalid filename", func(t *testing.T) {
-		demoFileName := types.DemoFileName("")
+		demoFileName := types.DemoFilename("")
 		assert.Equal(t, "", demoFileName.Mode())
 		assert.Equal(t, make([]string, 0), demoFileName.Participants())
 		assert.Equal(t, "", demoFileName.Map())
@@ -18,7 +18,7 @@ func TestDemoFileName(t *testing.T) {
 
 	t.Run("valid filename", func(t *testing.T) {
 		t.Run("duel", func(t *testing.T) {
-			demoFileName := types.DemoFileName("duel_holy_vs_si7h[bravado]261022-2255.mvd")
+			demoFileName := types.DemoFilename("duel_holy_vs_si7h[bravado]261022-2255.mvd")
 			assert.Equal(t, "duel", demoFileName.Mode())
 			assert.Equal(t, []string{"holy", "si7h"}, demoFileName.Participants())
 			assert.Equal(t, "bravado", demoFileName.Map())
@@ -26,7 +26,7 @@ func TestDemoFileName(t *testing.T) {
 		})
 
 		t.Run("ffa", func(t *testing.T) {
-			demoFileName := types.DemoFileName("ffa_5[ztndm3]151022-2104.mvd")
+			demoFileName := types.DemoFilename("ffa_5[ztndm3]151022-2104.mvd")
 			assert.Equal(t, "ffa", demoFileName.Mode())
 			assert.Equal(t, []string{"5"}, demoFileName.Participants())
 			assert.Equal(t, "ztndm3", demoFileName.Map())
@@ -43,7 +43,7 @@ func TestQtvServer(t *testing.T) {
 
 func TestQtvHostedDemo(t *testing.T) {
 	demo := types.QtvHostedDemo{
-		Filename: types.DemoFileName("duel_holy_vs_si7h[bravado]261022-2255.mvd"),
+		Filename: types.DemoFilename("duel_holy_vs_si7h[bravado]261022-2255.mvd"),
 		Server:   types.QtvServer{Address: "troopers.fi:28000"},
 	}
 

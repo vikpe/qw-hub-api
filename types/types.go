@@ -21,7 +21,7 @@ func (s *QtvServer) DemoDownloadUrl(filename string) string {
 }
 
 type QtvHostedDemo struct {
-	Filename DemoFileName
+	Filename DemoFilename
 	Server   QtvServer
 }
 
@@ -49,9 +49,9 @@ func (d *QtvHostedDemo) DownloadUrl() string {
 	return d.Server.DemoDownloadUrl(string(d.Filename))
 }
 
-type DemoFileName string
+type DemoFilename string
 
-func (d DemoFileName) Mode() string {
+func (d DemoFilename) Mode() string {
 	strVal := string(d)
 
 	indexFirstUnderScore := strings.IndexRune(strVal, '_')
@@ -62,7 +62,7 @@ func (d DemoFileName) Mode() string {
 	return strVal[0:indexFirstUnderScore]
 }
 
-func (d DemoFileName) Participants() []string {
+func (d DemoFilename) Participants() []string {
 	strVal := string(d)
 
 	indexFirstUnderScore := strings.IndexRune(strVal, '_')
@@ -85,7 +85,7 @@ func (d DemoFileName) Participants() []string {
 	return []string{participantStr}
 }
 
-func (d DemoFileName) Map() string {
+func (d DemoFilename) Map() string {
 	strVal := string(d)
 
 	indexOpenBracket := strings.IndexRune(strVal, '[')
@@ -105,7 +105,7 @@ func (d DemoFileName) Map() string {
 	return strVal[indexOpenBracket+1 : indexCloseBracket]
 }
 
-func (d DemoFileName) DateTime() string {
+func (d DemoFilename) DateTime() string {
 	strVal := string(d)
 
 	indexCloseBracket := strings.IndexRune(strVal, ']')
