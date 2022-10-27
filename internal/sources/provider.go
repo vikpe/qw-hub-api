@@ -12,10 +12,12 @@ import (
 type Provider struct {
 	serverSource *ServerScraper
 	twitchSource *TwitchScraper
+	demoSource   *QtvDemoScraper
 }
 
-func NewProvider(servers *ServerScraper, twitch *TwitchScraper) *Provider {
+func NewProvider(servers *ServerScraper, twitch *TwitchScraper, demos *QtvDemoScraper) *Provider {
 	return &Provider{
+		demoSource:   demos,
 		serverSource: servers,
 		twitchSource: twitch,
 	}
@@ -67,4 +69,8 @@ func (p *Provider) Qwfwd() []qwfwd.Qwfwd {
 
 func (p *Provider) TwitchStreams() []types.TwitchStream {
 	return p.twitchSource.Streams()
+}
+
+func (p *Provider) Demos() []types.QtvHostedDemo {
+	return p.demoSource.Demos()
 }

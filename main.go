@@ -25,9 +25,11 @@ func main() {
 	}
 
 	// data sources
+	// 1. servers
 	serverScraper := sources.NewServerScraper(config.Servers)
 	go serverScraper.Start()
 
+	// 2. twitch streams
 	twitchScraper, _ := sources.NewTwitchScraper(
 		os.Getenv("TWITCH_CLIENT_ID"),
 		os.Getenv("TWITCH_ACCESS_TOKEN"),
@@ -35,9 +37,17 @@ func main() {
 	)
 	go twitchScraper.Start()
 
-	dataProvider := sources.NewProvider(serverScraper, twitchScraper)
+	// 3. servers (from qtv)
+	demoScraper := sources.NewQtvDemoScraper(config.QtvDemoSources)
 
-	// serve
+	// combine into data provider
+	dataProvider := sources.NewProvider(
+		serverScraper,
+		twitchScraper,
+		demoScraper,
+	)
+
+	// serve web app
 	webapp := app.New()
 	apiV1.Init(webapp.Group("/v1"), dataProvider.Mvdsv)
 	apiV2.Init(webapp.Group("/v2"), dataProvider)
@@ -52,9 +62,10 @@ func main() {
 }
 
 type AppConfig struct {
-	Port      int                         `json:"port"`
-	Servers   sources.ServerScraperConfig `json:"servers"`
-	Streamers sources.StreamerIndex       `json:"streamers"`
+	Port           int                         `json:"port"`
+	Servers        sources.ServerScraperConfig `json:"servers"`
+	Streamers      sources.StreamerIndex       `json:"streamers"`
+	QtvDemoSources []string                    `json:"qtv_demo_sources"`
 }
 
 func getConfigFromJsonFile(filePath string) (AppConfig, error) {
