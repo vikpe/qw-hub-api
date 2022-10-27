@@ -7,6 +7,6 @@ import (
 
 func Qwfwd(provider *sources.Provider) func(c *fiber.Ctx) error {
 	return func(c *fiber.Ctx) error {
-		return c.JSON(provider.Qwfwd())
+		return c.JSON(provider.QwfwdServers())
 	}
 }

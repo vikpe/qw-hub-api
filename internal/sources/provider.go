@@ -32,7 +32,7 @@ func (p *Provider) GenericServers() []qserver.GenericServer {
 	return p.serverSource.Servers()
 }
 
-func (p *Provider) Mvdsv() []mvdsv.Mvdsv {
+func (p *Provider) MvdsvServers() []mvdsv.Mvdsv {
 	result := make([]mvdsv.Mvdsv, 0)
 
 	for _, server := range p.serverSource.Servers() {
@@ -44,7 +44,7 @@ func (p *Provider) Mvdsv() []mvdsv.Mvdsv {
 	return result
 }
 
-func (p *Provider) Qtv() []qtv.Qtv {
+func (p *Provider) QtvServers() []qtv.Qtv {
 	result := make([]qtv.Qtv, 0)
 
 	for _, server := range p.serverSource.Servers() {
@@ -56,7 +56,7 @@ func (p *Provider) Qtv() []qtv.Qtv {
 	return result
 }
 
-func (p *Provider) Qwfwd() []qwfwd.Qwfwd {
+func (p *Provider) QwfwdServers() []qwfwd.Qwfwd {
 	result := make([]qwfwd.Qwfwd, 0)
 
 	for _, server := range p.serverSource.Servers() {

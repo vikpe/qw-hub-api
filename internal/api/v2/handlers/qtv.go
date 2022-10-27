@@ -7,6 +7,6 @@ import (
 
 func Qtv(provider *sources.Provider) func(c *fiber.Ctx) error {
 	return func(c *fiber.Ctx) error {
-		return c.JSON(provider.Qtv())
+		return c.JSON(provider.QtvServers())
 	}
 }

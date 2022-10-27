@@ -15,7 +15,7 @@ func Mvdsv(provider *sources.Provider) func(c *fiber.Ctx) error {
 		result := make([]mvdsv.Mvdsv, 0)
 
 		if len(params.HasPlayer) > 0 {
-			allServers := provider.Mvdsv()
+			allServers := provider.MvdsvServers()
 
 			sort.Slice(allServers, func(i, j int) bool {
 				return allServers[i].Score > allServers[j].Score
@@ -28,13 +28,13 @@ func Mvdsv(provider *sources.Provider) func(c *fiber.Ctx) error {
 			}
 
 		} else if len(params.HasClient) > 0 {
-			for _, server := range provider.Mvdsv() {
+			for _, server := range provider.MvdsvServers() {
 				if analyze.HasClient(server, params.HasClient) {
 					result = append(result, server)
 				}
 			}
 		} else {
-			for _, server := range provider.Mvdsv() {
+			for _, server := range provider.MvdsvServers() {
 				if server.PlayerSlots.Used > 0 {
 					result = append(result, server)
 				}
