@@ -11,6 +11,10 @@
       "qwmaster.fodquake.net:27000"
     ]
   },
+  "qtv_demo_sources": [
+    "qw.foppa.dk:28000",
+    "troopers.fi:28000"
+  ],
   "streamers": {
     "annihilazor": "anni",
     "quakeworld": "[streambot]",
