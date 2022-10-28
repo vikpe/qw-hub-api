@@ -1,7 +1,9 @@
 package qdemo
 
 import (
+	"fmt"
 	"strings"
+	"time"
 )
 
 type Filename string
@@ -90,6 +92,30 @@ func (f Filename) Time() string {
 	return strings.SplitN(dateTime, "-", 2)[1]
 }
 
-func (f Filename) Number() string {
-	return "5"
+func (f Filename) ParseDateTime(dateFormat string) time.Time {
+	layoutDate := dateFormatToTimeLayout(dateFormat)
+	layoutTime := "1504" // hhmm
+	layout := fmt.Sprintf("%s-%s", layoutDate, layoutTime)
+	demoTime, err := time.Parse(layout, f.DateTime())
+
+	if err != nil {
+		return time.Time{}
+	}
+
+	return demoTime
+}
+
+func dateFormatToTimeLayout(dateFormat string) string {
+	const YMD = "060102"
+	const YYYYMMDD = "20060102"
+	const DMY = "020106"
+
+	switch dateFormat {
+	case "Ymd":
+		return YYYYMMDD
+	case "dmy":
+		return DMY
+	default:
+		return YMD
+	}
 }

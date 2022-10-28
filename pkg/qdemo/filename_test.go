@@ -2,8 +2,9 @@ package qdemo_test
 
 import (
 	"testing"
+	"time"
 
-	"github.com/go-playground/assert/v2"
+	"github.com/stretchr/testify/assert"
 	"github.com/vikpe/qw-hub-api/pkg/qdemo"
 )
 
@@ -55,4 +56,16 @@ func TestFilename_Time(t *testing.T) {
 	assert.Equal(t, "2255", qdemo.Filename("duel_holy_vs_si7h[bravado]261022-2255.mvd").Time())
 	assert.Equal(t, "2255", qdemo.Filename("duel_holy_vs_si7h[bravado]261022-2255.qwd").Time())
 	assert.Equal(t, "2255", qdemo.Filename("duel_holy_vs_si7h[bravado]261022-2255_01.mvd").Time())
+}
+
+func TestFilename_ParseDateTime(t *testing.T) {
+	timeByDateStr := func(dateStr string) time.Time {
+		t, _ := time.Parse("20060102-1504", dateStr)
+		return t
+	}
+
+	assert.Equal(t, time.Time{}, qdemo.Filename("").ParseDateTime("ymd"))
+	assert.Equal(t, timeByDateStr("20010203-2255"), qdemo.Filename("duel_holy_vs_si7h[bravado]010203-2255.mvd").ParseDateTime("ymd"))
+	assert.Equal(t, timeByDateStr("20030201-2255"), qdemo.Filename("duel_holy_vs_si7h[bravado]010203-2255.mvd").ParseDateTime("dmy"))
+	assert.Equal(t, timeByDateStr("20010203-2255"), qdemo.Filename("duel_holy_vs_si7h[bravado]20010203-2255.mvd").ParseDateTime("Ymd"))
 }
