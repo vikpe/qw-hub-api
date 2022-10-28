@@ -61,7 +61,7 @@ func (scraper *Scraper) Start() {
 				serverAddresses, errs = masterstat.GetServerAddressesFromMany(scraper.Config.MasterServers)
 
 				if len(errs) > 0 {
-					log.Println("Errors occured when querying masters:", errs)
+					log.Println("Errors occurred when querying masters:", errs)
 				}
 			}
 
