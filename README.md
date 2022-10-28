@@ -28,6 +28,11 @@ See [config.sample.json](./config.sample.json)
       "qwmaster.fodquake.net:27000"
     ]
   },
+   "qtv_demo_sources": [
+    {"address": "qw.irc.ax:28000", "demo_date_format": "ymd"},
+    {"address": "troopers.fi:28000", "demo_date_format": "ymd"},
+    {"address": "qw.foppa.dk:28000", "demo_date_format": "dmy"}
+  ],
   "streamers": {
     "annihilazor": "anni",
     "quakeworld": "[streambot]",
