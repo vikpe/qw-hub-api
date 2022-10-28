@@ -70,8 +70,8 @@ See [config.sample.json](./config.sample.json)
 
 | URL                 | description                                    |
 |---------------------|------------------------------------------------|
-| `has_player=xantom` | Servers where xantom is connected as player    |
-| `has_client=xantom` | Servers where xantom is connected              |
+| `has_player=xantom` | Servers where `xantom` is connected as player    |
+| `has_client=xantom` | Servers where `xantom` is connected              |
 
 ### Demos
 
