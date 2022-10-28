@@ -4,6 +4,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"testing"
+	"time"
 
 	"github.com/jarcoal/httpmock"
 	"github.com/stretchr/testify/assert"
@@ -79,4 +80,15 @@ func TestScraper_Demos(t *testing.T) {
 
 	demos := scraper.Demos()
 	assert.Len(t, demos, 5)
+
+	expectedFirstDemoTime, _ := time.Parse("020106-1504", "261022-2234")
+	expectedFirstDemo := qtvscraper.Demo{
+		QtvAddress:  "foo:28000",
+		Time:        expectedFirstDemoTime,
+		Filename:    "duel_holy_vs_si7h[aerowalk]261022-2234.mvd",
+		DownloadUrl: "http://foo:28000/dl/demos/duel_holy_vs_si7h[aerowalk]261022-2234.mvd",
+		QtvplayUrl:  "file:duel_holy_vs_si7h[aerowalk]261022-2234.mvd@foo:28000",
+	}
+
+	assert.Equal(t, expectedFirstDemo, demos[0])
 }
