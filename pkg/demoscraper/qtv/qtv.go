@@ -1,9 +1,7 @@
-package qtvserver
+package qtv
 
 import (
-	"errors"
 	"fmt"
-	"sync"
 	"time"
 
 	"github.com/PuerkitoBio/goquery"
@@ -107,61 +105,4 @@ func GetDemoFilenames(qtvAddress string) ([]string, error) {
 type ServerConfig struct {
 	Address        string `json:"address"`
 	DemoDateFormat string `json:"date_format"`
-}
-
-type DemoScraper struct {
-	qtvServers []Server
-}
-
-func NewDemoScraper(serverConfigs []ServerConfig) *DemoScraper {
-	qtvs := make([]Server, 0)
-
-	for _, config := range serverConfigs {
-		qtvs = append(qtvs, Server{
-			Address:        config.Address,
-			DemoDateFormat: config.DemoDateFormat,
-		})
-	}
-
-	return &DemoScraper{
-		qtvServers: qtvs,
-	}
-}
-
-func (s *DemoScraper) Demos() []Demo {
-	var (
-		wg       sync.WaitGroup
-		mutex    sync.Mutex
-		allDemos = make([]Demo, 0)
-		errs     = make([]error, 0)
-	)
-
-	for _, qtvServer := range s.qtvServers {
-		wg.Add(1)
-
-		go func(qtvServer Server) {
-			defer wg.Done()
-
-			demoFilenames, err := GetDemoFilenames(qtvServer.Address)
-
-			if err != nil {
-				errs = append(errs, errors.New(fmt.Sprintf(`%s - %s`, qtvServer.Address, err)))
-				return
-			}
-
-			mutex.Lock()
-			for _, filename := range demoFilenames {
-				demo := Demo{
-					Filename: qdemo.Filename(filename),
-					Server:   qtvServer,
-				}
-				allDemos = append(allDemos, demo)
-			}
-			mutex.Unlock()
-		}(qtvServer)
-	}
-
-	wg.Wait()
-
-	return allDemos
 }

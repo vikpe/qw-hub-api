@@ -3,7 +3,7 @@ package api
 import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/vikpe/qw-hub-api/internal/api/v2/handlers"
-	"github.com/vikpe/qw-hub-api/pkg/qtvserver"
+	"github.com/vikpe/qw-hub-api/pkg/demoscraper"
 	"github.com/vikpe/qw-hub-api/pkg/serverscraper"
 	"github.com/vikpe/qw-hub-api/pkg/twitch"
 )
@@ -12,7 +12,7 @@ func Init(
 	router fiber.Router,
 	serverProvider *serverscraper.Scraper,
 	twitchProvider *twitch.Scraper,
-	demoProvider *qtvserver.DemoScraper,
+	demoProvider *demoscraper.DemoScraper,
 ) {
 	router.Get("servers/mvdsv", handlers.Mvdsv(serverProvider.Mvdsv))
 	router.Get("servers/qtv", handlers.Qtv(serverProvider.Qtv))

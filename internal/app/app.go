@@ -12,16 +12,16 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/favicon"
 	"github.com/gofiber/fiber/v2/middleware/recover"
-	"github.com/vikpe/qw-hub-api/pkg/qtvserver"
+	"github.com/vikpe/qw-hub-api/pkg/demoscraper/qtv"
 	"github.com/vikpe/qw-hub-api/pkg/serverscraper"
 	"github.com/vikpe/qw-hub-api/pkg/twitch"
 )
 
 type Config struct {
-	Port           int                      `json:"port"`
-	Servers        serverscraper.Config     `json:"servers"`
-	Streamers      twitch.StreamerIndex     `json:"streamers"`
-	QtvDemoSources []qtvserver.ServerConfig `json:"qtv_demo_sources"`
+	Port           int                  `json:"port"`
+	Servers        serverscraper.Config `json:"servers"`
+	Streamers      twitch.StreamerIndex `json:"streamers"`
+	QtvDemoSources []qtv.ServerConfig   `json:"qtv_demo_sources"`
 }
 
 func New() *fiber.App {

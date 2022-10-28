@@ -1,24 +1,24 @@
-package qtvserver_test
+package qtv_test
 
 import (
 	"testing"
 	"time"
 
 	"github.com/go-playground/assert/v2"
+	"github.com/vikpe/qw-hub-api/pkg/demoscraper/qtv"
 	"github.com/vikpe/qw-hub-api/pkg/qdemo"
-	"github.com/vikpe/qw-hub-api/pkg/qtvserver"
 )
 
 func TestQtvServer(t *testing.T) {
-	server := qtvserver.Server{Address: "qw.foppa.dk:28000"}
+	server := qtv.Server{Address: "qw.foppa.dk:28000"}
 	assert.Equal(t, "http://qw.foppa.dk:28000/dl/demos/foo.mvd", server.DemoDownloadUrl("foo.mvd"))
 	assert.Equal(t, "file:foo.mvd@qw.foppa.dk:28000", server.DemoQtvplayUrl("foo.mvd"))
 }
 
 func TestQtvHostedDemo(t *testing.T) {
-	demo := qtvserver.Demo{
+	demo := qtv.Demo{
 		Filename: qdemo.Filename("duel_holy_vs_si7h[bravado]261022-2255.mvd"),
-		Server: qtvserver.Server{
+		Server: qtv.Server{
 			Address:        "troopers.fi:28000",
 			DemoDateFormat: "dmy",
 		},

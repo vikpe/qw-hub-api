@@ -5,7 +5,7 @@ import (
 
 	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
-	"github.com/vikpe/qw-hub-api/pkg/qtvserver"
+	"github.com/vikpe/qw-hub-api/pkg/demoscraper/qtv"
 )
 
 type DemoParams struct {
@@ -13,7 +13,7 @@ type DemoParams struct {
 	Limit int    `query:"limit" validate:"omitempty,gte=1,lte=100"`
 }
 
-func Demos(demoProvider func() []qtvserver.Demo) func(c *fiber.Ctx) error {
+func Demos(demoProvider func() []qtv.Demo) func(c *fiber.Ctx) error {
 	return func(c *fiber.Ctx) error {
 		params := new(DemoParams)
 
@@ -41,8 +41,8 @@ func Demos(demoProvider func() []qtvserver.Demo) func(c *fiber.Ctx) error {
 	}
 }
 
-func FilterDemos(allDemos []qtvserver.Demo, params *DemoParams) []qtvserver.Demo {
-	result := make([]qtvserver.Demo, 0)
+func FilterDemos(allDemos []qtv.Demo, params *DemoParams) []qtv.Demo {
+	result := make([]qtv.Demo, 0)
 
 	if len(params.Mode) > 0 {
 		for _, demo := range allDemos {
