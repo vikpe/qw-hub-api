@@ -68,10 +68,10 @@ See [config.sample.json](./config.sample.json)
 
 **Query params**
 
-| URL                 | description                                    |
-|---------------------|------------------------------------------------|
-| `has_player=xantom` | Servers where `xantom` is connected as player    |
-| `has_client=xantom` | Servers where `xantom` is connected              |
+| Name               | Type      | Example              | Description                                   |
+|--------------------|-----------|----------------------|-----------------------------------------------|
+| **has_player**     | `string`  | `has_player=xantom`  | Servers where `xantom` is connected as player |
+| **has_client**     | `string`  | `has_client=xantom`  | Servers where `xantom` is connected           |
 
 ### Demos
 
@@ -79,12 +79,12 @@ See [config.sample.json](./config.sample.json)
 
 **Query params**
 
-| URL                       | description                                             |
-|---------------------------|---------------------------------------------------------|
-| `query=2on2 xantom dm3`   | Demos where filename matches `2on2`, `xantom` and `dm3` |
-| `mode=2on2`               | Demos with mode `2on2`                                  |
-| `qtv_address=qw.foppa.dk` | Demos from `qw.foppa.dk` servers                        |
-| `limit=10`                | Limit to `10` demos                                     |
+| Name          | Type     | Example                   | Description                                             |
+|---------------|----------|---------------------------|---------------------------------------------------------|
+| `query`       | `string` | `query=2on2 xantom dm3`   | Demos where filename matches `2on2`, `xantom` and `dm3` |
+| `mode`        | `sting`  | `mode=2on2`               | Demos with mode `2on2`                                  |
+| `qtv_address` | `string` | `qtv_address=qw.foppa.dk` | Demos from `qw.foppa.dk` servers                        |
+| `limit`       | `int`    | `limit=10`                | Limit to `10` demos                                     |
 
 ## Build
 
