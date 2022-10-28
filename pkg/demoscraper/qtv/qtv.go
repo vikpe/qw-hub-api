@@ -11,8 +11,8 @@ import (
 )
 
 type Server struct {
-	Address        string
-	DemoDateFormat string
+	Address        string `json:"address"`
+	DemoDateFormat string `json:"demo_date_format"`
 }
 
 func (s *Server) DemoDownloadUrl(filename string) string {
@@ -100,9 +100,4 @@ func GetDemoFilenames(qtvAddress string) ([]string, error) {
 	})
 
 	return demoFilenames, nil
-}
-
-type ServerConfig struct {
-	Address        string `json:"address"`
-	DemoDateFormat string `json:"date_format"`
 }

@@ -13,18 +13,9 @@ type DemoScraper struct {
 	qtvServers []qtv.Server
 }
 
-func New(configs []qtv.ServerConfig) *DemoScraper {
-	qtvs := make([]qtv.Server, 0)
-
-	for _, config := range configs {
-		qtvs = append(qtvs, qtv.Server{
-			Address:        config.Address,
-			DemoDateFormat: config.DemoDateFormat,
-		})
-	}
-
+func New(servers []qtv.Server) *DemoScraper {
 	return &DemoScraper{
-		qtvServers: qtvs,
+		qtvServers: servers,
 	}
 }
 

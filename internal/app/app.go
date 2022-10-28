@@ -21,7 +21,7 @@ type Config struct {
 	Port           int                  `json:"port"`
 	Servers        serverscraper.Config `json:"servers"`
 	Streamers      twitch.StreamerIndex `json:"streamers"`
-	QtvDemoSources []qtv.ServerConfig   `json:"qtv_demo_sources"`
+	QtvDemoSources []qtv.Server         `json:"qtv_demo_sources"`
 }
 
 func New() *fiber.App {
