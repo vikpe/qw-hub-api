@@ -5,6 +5,7 @@ import (
 
 	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
+	"github.com/vikpe/qw-hub-api/pkg/qdemo"
 	"github.com/vikpe/qw-hub-api/pkg/qtvscraper"
 )
 
@@ -30,9 +31,7 @@ func Demos(demoProvider func() []qtvscraper.Demo) func(c *fiber.Ctx) error {
 
 		demos := FilterDemos(demoProvider(), params)
 		sort.Slice(demos, func(i, j int) bool {
-			iTime := demos[i].Filename.ParseDateTime(demos[i].Server.DemoDateFormat)
-			jTime := demos[j].Filename.ParseDateTime(demos[j].Server.DemoDateFormat)
-			return iTime.After(jTime)
+			return demos[i].Time.After(demos[j].Time)
 		})
 
 		// c.Response().Header.Add("Cache-Time", fmt.Sprintf("%d", 600)) // 10 min cache
@@ -45,7 +44,7 @@ func FilterDemos(allDemos []qtvscraper.Demo, params *DemoParams) []qtvscraper.De
 
 	if len(params.Mode) > 0 {
 		for _, demo := range allDemos {
-			if demo.Filename.Mode() == params.Mode {
+			if qdemo.Filename(demo.Filename).Mode() == params.Mode {
 				result = append(result, demo)
 			}
 		}
