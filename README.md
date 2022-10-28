@@ -1,4 +1,4 @@
-# QW Hub API
+# QW Hub API [![Test](https://github.com/vikpe/qw-hub-api/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/vikpe/qw-hub-api/actions/workflows/test.yml) [![codecov](https://codecov.io/gh/vikpe/qw-hub-api/branch/main/graph/badge.svg)](https://codecov.io/gh/vikpe/qw-hub-api) [![Go Report Card](https://goreportcard.com/badge/github.com/vikpe/qw-hub-api)](https://goreportcard.com/report/github.com/vikpe/qw-hub-api)
 
 > Web API serving QuakeWorld info
 
