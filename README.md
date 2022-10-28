@@ -44,20 +44,21 @@ See [config.sample.json](./config.sample.json)
 
 ## API endpoints
 
-| URL                      | description                                                               |  
-|--------------------------|---------------------------------------------------------------------------|
-| `/v2/servers`            | All servers                                                               |  
-| `/v2/servers/<address>`  | Server details                                                            |  
-| `/v2/servers/mvdsv`      | MVDSV servers                                                             |  
-| `/v2/servers/qwfwd`      | QWFWD servers (proxies)                                                   |  
-| `/v2/servers/qtv`        | QTV servers                                                               |
-|                          |                                                                           |
-| `/v2/masters/<address>`  | List of servers on master                                                 |
-|                          |                                                                           |
-| `/v2/streams`            | Twitch streams casting Quake                                              |  
-| `/v2/events`             | Events (from [Wiki](https://wiki.quakeworld.nu/))                         |  
-| `/v2/news`               | News (from [QuakeWorld.nu](https://www.quakeworld.nu/))                   |  
-| `/v2/forum_posts`        | Forum posts (from [QuakeWorld.nu Forum](https://www.quakeworld.nu/forum)) |  
+| URL                     | description                                                               |  
+|-------------------------|---------------------------------------------------------------------------|
+| `/v2/servers`           | All servers                                                               |  
+| `/v2/servers/<address>` | Server details                                                            |  
+| `/v2/servers/mvdsv`     | MVDSV servers                                                             |  
+| `/v2/servers/qwfwd`     | QWFWD servers (proxies)                                                   |  
+| `/v2/servers/qtv`       | QTV servers                                                               |
+|                         |                                                                           |
+| `/v2/masters/<address>` | List of servers on master                                                 |
+|                         |                                                                           |
+| `/v2/demos`             | Demos from popular servers                                                |  
+| `/v2/streams`           | Twitch streams casting Quake                                              |  
+| `/v2/events`            | Events (from [Wiki](https://wiki.quakeworld.nu/))                         |  
+| `/v2/news`              | News (from [QuakeWorld.nu](https://www.quakeworld.nu/))                   |  
+| `/v2/forum_posts`       | Forum posts (from [QuakeWorld.nu Forum](https://www.quakeworld.nu/forum)) |  
 
 ## Endpoint details
 
@@ -71,6 +72,19 @@ See [config.sample.json](./config.sample.json)
 |---------------------|------------------------------------------------|
 | `has_player=xantom` | Servers where xantom is connected as player    |
 | `has_client=xantom` | Servers where xantom is connected              |
+
+### Demos
+
+> `/v2/demos`
+
+**Query params**
+
+| URL                       | description                                             |
+|---------------------------|---------------------------------------------------------|
+| `query=2on2 xantom dm3`   | Demos where filename matches `2on2`, `xantom` and `dm3` |
+| `mode=2on2`               | Demos with mode `2on2`                                  |
+| `qtv_address=qw.foppa.dk` | Demos from `qw.foppa.dk` servers                        |
+| `limit=10`                | Limit to `10` demos                                     |
 
 ## Build
 
