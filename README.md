@@ -1,4 +1,4 @@
-# QW Hub API
+# QW Hub API [![Test](https://github.com/vikpe/qw-hub-api/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/vikpe/qw-hub-api/actions/workflows/test.yml) [![codecov](https://codecov.io/gh/vikpe/qw-hub-api/branch/main/graph/badge.svg)](https://codecov.io/gh/vikpe/qw-hub-api) [![Go Report Card](https://goreportcard.com/badge/github.com/vikpe/qw-hub-api)](https://goreportcard.com/report/github.com/vikpe/qw-hub-api)
 
 > Web API serving QuakeWorld info
 
@@ -28,6 +28,11 @@ See [config.sample.json](./config.sample.json)
       "qwmaster.fodquake.net:27000"
     ]
   },
+   "qtv_demo_sources": [
+    {"address": "qw.irc.ax:28000", "demo_date_format": "ymd"},
+    {"address": "troopers.fi:28000", "demo_date_format": "ymd"},
+    {"address": "qw.foppa.dk:28000", "demo_date_format": "dmy"}
+  ],
   "streamers": {
     "annihilazor": "anni",
     "quakeworld": "[streambot]",

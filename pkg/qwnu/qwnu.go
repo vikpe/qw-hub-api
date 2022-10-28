@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/vikpe/qw-hub-api/pkg/scrape"
+	"github.com/vikpe/qw-hub-api/pkg/htmlparse"
 )
 
 const qwnuURL = "https://www.quakeworld.nu"
@@ -34,7 +34,7 @@ type NewsPost struct {
 
 func Events(limit int) ([]Event, error) {
 	wikiOverviewUrl := fmt.Sprintf("%s/wiki/Overview", qwnuURL)
-	doc, err := scrape.ReadDocument(wikiOverviewUrl)
+	doc, err := htmlparse.GetDocument(wikiOverviewUrl)
 
 	if err != nil {
 		return make([]Event, 0), err
@@ -75,7 +75,7 @@ func Events(limit int) ([]Event, error) {
 }
 
 func ForumPosts(limit int) ([]ForumPost, error) {
-	doc, err := scrape.ReadDocument(qwnuURL)
+	doc, err := htmlparse.GetDocument(qwnuURL)
 
 	if err != nil {
 		return make([]ForumPost, 0), err
@@ -104,7 +104,7 @@ func ForumPosts(limit int) ([]ForumPost, error) {
 
 func NewsPosts(limit int) ([]NewsPost, error) {
 	newsUrl := fmt.Sprintf("%s/feeds/news.php", qwnuURL)
-	doc, err := scrape.ReadDocument(newsUrl)
+	doc, err := htmlparse.GetDocument(newsUrl)
 
 	if err != nil {
 		return make([]NewsPost, 0), err

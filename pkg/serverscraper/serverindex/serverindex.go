@@ -4,7 +4,7 @@ import (
 	"errors"
 	"sort"
 
-	"github.com/vikpe/qw-hub-api/internal/qnet"
+	"github.com/vikpe/qw-hub-api/pkg/qnet"
 	"github.com/vikpe/serverstat/qserver"
 	"github.com/vikpe/serverstat/qserver/qclient"
 )

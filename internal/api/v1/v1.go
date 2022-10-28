@@ -6,6 +6,6 @@ import (
 	"github.com/vikpe/serverstat/qserver/mvdsv"
 )
 
-func Init(router fiber.Router, serverSource func() []mvdsv.Mvdsv) {
-	router.Get("servers", handlers.Servers(serverSource))
+func Init(router fiber.Router, getMvdsvServers func() []mvdsv.Mvdsv) {
+	router.Get("servers", handlers.Servers(getMvdsvServers))
 }

@@ -5,12 +5,12 @@ import (
 	"log"
 	"os"
 
-	"github.com/goccy/go-json"
 	"github.com/joho/godotenv"
 	apiV1 "github.com/vikpe/qw-hub-api/internal/api/v1"
 	apiV2 "github.com/vikpe/qw-hub-api/internal/api/v2"
 	"github.com/vikpe/qw-hub-api/internal/app"
-	"github.com/vikpe/qw-hub-api/internal/sources"
+	"github.com/vikpe/qw-hub-api/pkg/qtvscraper"
+	"github.com/vikpe/qw-hub-api/pkg/serverscraper"
 	"github.com/vikpe/qw-hub-api/pkg/twitch"
 )
 
@@ -18,7 +18,7 @@ func main() {
 	// config, env
 	godotenv.Load()
 	configFilePath := "config.json"
-	config, err := getConfigFromJsonFile(configFilePath)
+	config, err := app.ConfigFromJsonFile(configFilePath)
 
 	if err != nil {
 		log.Println(fmt.Sprintf("Unable to read %s", configFilePath))
@@ -26,7 +26,7 @@ func main() {
 	}
 
 	// data sources
-	serverScraper := sources.NewServerScraper(config.Servers)
+	serverScraper := serverscraper.New(config.Servers)
 	go serverScraper.Start()
 
 	twitchScraper, _ := twitch.NewScraper(
@@ -36,12 +36,17 @@ func main() {
 	)
 	go twitchScraper.Start()
 
-	dataProvider := sources.NewProvider(serverScraper, twitchScraper)
+	demoScraper := qtvscraper.NewScraper(config.QtvDemoSources)
 
-	// serve
+	// serve web app
 	webapp := app.New()
-	apiV1.Init(webapp.Group("/v1"), dataProvider.Mvdsv)
-	apiV2.Init(webapp.Group("/v2"), dataProvider)
+	apiV1.Init(webapp.Group("/v1"), serverScraper.Mvdsv)
+	apiV2.Init(
+		webapp.Group("/v2"),
+		serverScraper,
+		twitchScraper,
+		demoScraper,
+	)
 
 	address := fmt.Sprintf(":%d", config.Port)
 
@@ -50,26 +55,4 @@ func main() {
 	} else {
 		log.Fatal(webapp.Listen(address))
 	}
-}
-
-type AppConfig struct {
-	Port      int                         `json:"port"`
-	Servers   sources.ServerScraperConfig `json:"servers"`
-	Streamers twitch.StreamerIndex        `json:"streamers"`
-}
-
-func getConfigFromJsonFile(filePath string) (AppConfig, error) {
-	jsonFile, err := os.ReadFile(filePath)
-	if err != nil {
-		return AppConfig{}, err
-	}
-
-	var cfg AppConfig
-
-	err = json.Unmarshal(jsonFile, &cfg)
-	if err != nil {
-		return AppConfig{}, err
-	}
-
-	return cfg, nil
 }
