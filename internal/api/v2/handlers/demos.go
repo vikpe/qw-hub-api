@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/go-playground/validator/v10"
@@ -10,9 +11,10 @@ import (
 )
 
 type DemoParams struct {
-	Mode  string `query:"mode" validate:"omitempty"`
-	Query string `query:"q" validate:"omitempty"`
-	Limit int    `query:"limit" validate:"omitempty,gte=1,lte=100"`
+	Mode       string `query:"mode" validate:"omitempty"`
+	Query      string `query:"q" validate:"omitempty"`
+	QtvAddress string `query:"qtv_address" validate:"omitempty"`
+	Limit      int    `query:"limit" validate:"omitempty,gte=1,lte=100"`
 }
 
 func Demos(demoProvider func() []qtvscraper.Demo) func(c *fiber.Ctx) error {
@@ -32,17 +34,33 @@ func Demos(demoProvider func() []qtvscraper.Demo) func(c *fiber.Ctx) error {
 
 		demos := FilterDemos(demoProvider(), params)
 
-		// c.Response().Header.Add("Cache-Time", fmt.Sprintf("%d", 600)) // 10 min cache
+		c.Response().Header.Add("Cache-Time", fmt.Sprintf("%d", 5*60)) // 5 min cache
 		return c.JSON(demos)
 	}
 }
 
 func FilterDemos(demos []qtvscraper.Demo, params *DemoParams) []qtvscraper.Demo {
-	result := FilterByMode(demos, params.Mode)
-	result = FilterByQuery(demos, params.Query)
+	result := FilterByQtvAddress(demos, params.QtvAddress)
+	result = FilterByMode(result, params.Mode)
+	result = FilterByQuery(result, params.Query)
 
 	if params.Limit > 0 && len(result) > params.Limit {
 		result = result[0:params.Limit]
+	}
+
+	return result
+}
+
+func FilterByQtvAddress(demos []qtvscraper.Demo, qtvAddress string) []qtvscraper.Demo {
+	if 0 == len(qtvAddress) {
+		return demos
+	}
+
+	result := make([]qtvscraper.Demo, 0)
+	for _, demo := range demos {
+		if strings.Contains(demo.QtvAddress, qtvAddress) {
+			result = append(result, demo)
+		}
 	}
 
 	return result
