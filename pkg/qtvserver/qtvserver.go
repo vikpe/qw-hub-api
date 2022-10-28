@@ -8,8 +8,8 @@ import (
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/goccy/go-json"
+	"github.com/vikpe/qw-hub-api/pkg/htmlparse"
 	"github.com/vikpe/qw-hub-api/pkg/qdemo"
-	"github.com/vikpe/qw-hub-api/pkg/scrape"
 )
 
 type Server struct {
@@ -90,7 +90,7 @@ func (d *Demo) Time() time.Time {
 
 func GetDemoFilenames(qtvAddress string) ([]string, error) {
 	url := fmt.Sprintf("http://%s/demos/", qtvAddress)
-	doc, err := scrape.GetHtmlDocument(url)
+	doc, err := htmlparse.GetDocument(url)
 
 	if err != nil {
 		return make([]string, 0), err

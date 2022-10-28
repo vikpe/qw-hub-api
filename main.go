@@ -9,8 +9,8 @@ import (
 	apiV1 "github.com/vikpe/qw-hub-api/internal/api/v1"
 	apiV2 "github.com/vikpe/qw-hub-api/internal/api/v2"
 	"github.com/vikpe/qw-hub-api/internal/app"
-	"github.com/vikpe/qw-hub-api/internal/sources"
 	"github.com/vikpe/qw-hub-api/pkg/qtvserver"
+	"github.com/vikpe/qw-hub-api/pkg/serverscraper"
 	"github.com/vikpe/qw-hub-api/pkg/twitch"
 )
 
@@ -26,7 +26,7 @@ func main() {
 	}
 
 	// data sources
-	serverScraper := sources.NewServerScraper(config.Servers)
+	serverScraper := serverscraper.New(config.Servers)
 	go serverScraper.Start()
 
 	twitchScraper, _ := twitch.NewScraper(

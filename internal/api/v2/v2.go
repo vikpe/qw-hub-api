@@ -3,14 +3,14 @@ package api
 import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/vikpe/qw-hub-api/internal/api/v2/handlers"
-	"github.com/vikpe/qw-hub-api/internal/sources"
 	"github.com/vikpe/qw-hub-api/pkg/qtvserver"
+	"github.com/vikpe/qw-hub-api/pkg/serverscraper"
 	"github.com/vikpe/qw-hub-api/pkg/twitch"
 )
 
 func Init(
 	router fiber.Router,
-	serverProvider *sources.ServerScraper,
+	serverProvider *serverscraper.Scraper,
 	twitchProvider *twitch.Scraper,
 	demoProvider *qtvserver.DemoScraper,
 ) {

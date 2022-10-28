@@ -1,11 +1,11 @@
-package sources
+package serverscraper
 
 import (
 	"log"
 	"time"
 
 	"github.com/vikpe/masterstat"
-	"github.com/vikpe/qw-hub-api/internal/serverindex"
+	"github.com/vikpe/qw-hub-api/pkg/serverscraper/serverindex"
 	"github.com/vikpe/serverstat"
 	"github.com/vikpe/serverstat/qserver"
 	"github.com/vikpe/serverstat/qserver/convert"
@@ -14,28 +14,28 @@ import (
 	"github.com/vikpe/serverstat/qserver/qwfwd"
 )
 
-type ServerScraper struct {
-	Config      ServerScraperConfig
-	ServerIndex serverindex.ServerIndex
-	shouldStop  bool
-}
-
-type ServerScraperConfig struct {
+type Config struct {
 	MasterServers        []string `json:"master_servers"`
 	MasterInterval       int      `json:"master_interval"`
 	ServerInterval       int      `json:"server_interval"`
 	ActiveServerInterval int      `json:"active_server_interval"`
 }
 
-func NewServerScraper(cfg ServerScraperConfig) *ServerScraper {
-	return &ServerScraper{
+type Scraper struct {
+	Config      Config
+	ServerIndex serverindex.ServerIndex
+	shouldStop  bool
+}
+
+func New(cfg Config) *Scraper {
+	return &Scraper{
 		Config:      cfg,
 		ServerIndex: make(serverindex.ServerIndex, 0),
 		shouldStop:  false,
 	}
 }
 
-func (scraper *ServerScraper) Start() {
+func (scraper *Scraper) Start() {
 	serverAddresses := make([]string, 0)
 	scraper.shouldStop = false
 
@@ -82,19 +82,19 @@ func (scraper *ServerScraper) Start() {
 	}
 }
 
-func (scraper *ServerScraper) Stop() {
+func (scraper *Scraper) Stop() {
 	scraper.shouldStop = true
 }
 
-func (scraper *ServerScraper) Servers() []qserver.GenericServer {
+func (scraper *Scraper) Servers() []qserver.GenericServer {
 	return scraper.ServerIndex.Servers()
 }
 
-func (scraper *ServerScraper) ServerByAddress(address string) (qserver.GenericServer, error) {
+func (scraper *Scraper) ServerByAddress(address string) (qserver.GenericServer, error) {
 	return scraper.ServerIndex.Get(address)
 }
 
-func (scraper *ServerScraper) Mvdsv() []mvdsv.Mvdsv {
+func (scraper *Scraper) Mvdsv() []mvdsv.Mvdsv {
 	result := make([]mvdsv.Mvdsv, 0)
 
 	for _, server := range scraper.Servers() {
@@ -106,7 +106,7 @@ func (scraper *ServerScraper) Mvdsv() []mvdsv.Mvdsv {
 	return result
 }
 
-func (scraper *ServerScraper) Qtv() []qtv.Qtv {
+func (scraper *Scraper) Qtv() []qtv.Qtv {
 	result := make([]qtv.Qtv, 0)
 
 	for _, server := range scraper.Servers() {
@@ -118,7 +118,7 @@ func (scraper *ServerScraper) Qtv() []qtv.Qtv {
 	return result
 }
 
-func (scraper *ServerScraper) Qwdfwd() []qwfwd.Qwfwd {
+func (scraper *Scraper) Qwdfwd() []qwfwd.Qwfwd {
 	result := make([]qwfwd.Qwfwd, 0)
 
 	for _, server := range scraper.Servers() {
