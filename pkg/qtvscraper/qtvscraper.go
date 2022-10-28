@@ -85,7 +85,7 @@ func (s *Server) DemoQtvplayUrl(filename string) string {
 }
 
 func (s *Server) DemoFilenames() ([]string, error) {
-	url := fmt.Sprintf("http://%s/demos/", s.DemoDateFormat)
+	url := fmt.Sprintf("http://%s/demos/", s.Address)
 	doc, err := htmlparse.GetDocument(url)
 
 	if err != nil {
