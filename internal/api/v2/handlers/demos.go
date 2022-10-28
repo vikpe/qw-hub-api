@@ -5,7 +5,7 @@ import (
 
 	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
-	"github.com/vikpe/qw-hub-api/pkg/demoscraper/qtv"
+	"github.com/vikpe/qw-hub-api/pkg/qtvscraper"
 )
 
 type DemoParams struct {
@@ -13,7 +13,7 @@ type DemoParams struct {
 	Limit int    `query:"limit" validate:"omitempty,gte=1,lte=100"`
 }
 
-func Demos(demoProvider func() []qtv.Demo) func(c *fiber.Ctx) error {
+func Demos(demoProvider func() []qtvscraper.Demo) func(c *fiber.Ctx) error {
 	return func(c *fiber.Ctx) error {
 		params := new(DemoParams)
 
@@ -29,10 +29,9 @@ func Demos(demoProvider func() []qtv.Demo) func(c *fiber.Ctx) error {
 		}
 
 		demos := FilterDemos(demoProvider(), params)
-
 		sort.Slice(demos, func(i, j int) bool {
-			iTime := demos[i].Server.DemoTime(string(demos[i].Filename))
-			jTime := demos[j].Server.DemoTime(string(demos[j].Filename))
+			iTime := demos[i].Filename.ParseDateTime(demos[i].Server.DemoDateFormat)
+			jTime := demos[j].Filename.ParseDateTime(demos[j].Server.DemoDateFormat)
 			return iTime.After(jTime)
 		})
 
@@ -41,8 +40,8 @@ func Demos(demoProvider func() []qtv.Demo) func(c *fiber.Ctx) error {
 	}
 }
 
-func FilterDemos(allDemos []qtv.Demo, params *DemoParams) []qtv.Demo {
-	result := make([]qtv.Demo, 0)
+func FilterDemos(allDemos []qtvscraper.Demo, params *DemoParams) []qtvscraper.Demo {
+	result := make([]qtvscraper.Demo, 0)
 
 	if len(params.Mode) > 0 {
 		for _, demo := range allDemos {

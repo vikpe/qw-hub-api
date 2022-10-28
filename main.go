@@ -9,7 +9,7 @@ import (
 	apiV1 "github.com/vikpe/qw-hub-api/internal/api/v1"
 	apiV2 "github.com/vikpe/qw-hub-api/internal/api/v2"
 	"github.com/vikpe/qw-hub-api/internal/app"
-	"github.com/vikpe/qw-hub-api/pkg/demoscraper"
+	"github.com/vikpe/qw-hub-api/pkg/qtvscraper"
 	"github.com/vikpe/qw-hub-api/pkg/serverscraper"
 	"github.com/vikpe/qw-hub-api/pkg/twitch"
 )
@@ -36,7 +36,7 @@ func main() {
 	)
 	go twitchScraper.Start()
 
-	demoScraper := demoscraper.New(config.QtvDemoSources)
+	demoScraper := qtvscraper.NewScraper(config.QtvDemoSources)
 
 	// serve web app
 	webapp := app.New()
