@@ -1,4 +1,4 @@
-package scrape
+package htmlparse
 
 import (
 	"log"
@@ -7,7 +7,7 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-func GetHtmlDocument(url string) (*goquery.Document, error) {
+func GetDocument(url string) (*goquery.Document, error) {
 	// request page
 	res, err := http.Get(url)
 	if err != nil {
