@@ -11,7 +11,7 @@
       "qwmaster.fodquake.net:27000"
     ]
   },
- "qtv_demo_sources": [
+  "qtv_demo_sources": [
     {"address": "qw.irc.ax:28000", "demo_date_format": "ymd"},
     {"address": "troopers.fi:28000", "demo_date_format": "ymd"},
     {"address": "qw.foppa.dk:28000", "demo_date_format": "dmy"}
