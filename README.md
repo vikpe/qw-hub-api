@@ -75,12 +75,12 @@ See [config.sample.json](./config.sample.json)
 
 > `/v2/demos`
 
-| Param           | Type     | Example                   | Description                                             |
-|-----------------|----------|---------------------------|---------------------------------------------------------|
-| **q**           | `string` | `q=2on2 xantom dm3`       | Demos where filename matches `2on2`, `xantom` and `dm3` |
-| **mode**        | `sting`  | `mode=2on2`               | Demos with mode `2on2`                                  |
-| **qtv_address** | `string` | `qtv_address=qw.foppa.dk` | Demos from `qw.foppa.dk` servers                        |
-| **limit**       | `int`    | `limit=10`                | Limit to `10` demos                                     |
+| Param           | Type       | Example                   | Description                                             |
+|-----------------|------------|---------------------------|---------------------------------------------------------|
+| **q**           | `string`   | `q=2on2 xantom dm3`       | Demos where filename matches `2on2`, `xantom` and `dm3` |
+| **mode**        | `string`   | `mode=2on2`               | Demos with mode `2on2`                                  |
+| **qtv_address** | `string`   | `qtv_address=qw.foppa.dk` | Demos from `qw.foppa.dk` servers                        |
+| **limit**       | `int`      | `limit=10`                | Limit to `10` demos                                     |
 
 ## Build
 
