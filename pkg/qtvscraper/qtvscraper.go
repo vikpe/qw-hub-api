@@ -3,6 +3,7 @@ package qtvscraper
 import (
 	"errors"
 	"fmt"
+	"sort"
 	"sync"
 	"time"
 
@@ -67,6 +68,10 @@ func (s *Scraper) Demos() []Demo {
 	}
 
 	wg.Wait()
+
+	sort.Slice(allDemos, func(i, j int) bool {
+		return allDemos[i].Time.After(allDemos[j].Time)
+	})
 
 	return allDemos
 }

@@ -81,13 +81,13 @@ func TestScraper_Demos(t *testing.T) {
 	demos := scraper.Demos()
 	assert.Len(t, demos, 5)
 
-	expectedFirstDemoTime, _ := time.Parse("020106-1504", "261022-2234")
+	expectedFirstDemoTime, _ := time.Parse("060102-1504", "221028-0355")
 	expectedFirstDemo := qtvscraper.Demo{
-		QtvAddress:  "foo:28000",
+		QtvAddress:  "bar:28000",
 		Time:        expectedFirstDemoTime,
-		Filename:    "duel_holy_vs_si7h[aerowalk]261022-2234.mvd",
-		DownloadUrl: "http://foo:28000/dl/demos/duel_holy_vs_si7h[aerowalk]261022-2234.mvd",
-		QtvplayUrl:  "file:duel_holy_vs_si7h[aerowalk]261022-2234.mvd@foo:28000",
+		Filename:    "duel_gombok_gombot_vs_bro[povdmm4]221028-0355.mvd",
+		DownloadUrl: "http://bar:28000/dl/demos/duel_gombok_gombot_vs_bro[povdmm4]221028-0355.mvd",
+		QtvplayUrl:  "file:duel_gombok_gombot_vs_bro[povdmm4]221028-0355.mvd@bar:28000",
 	}
 
 	assert.Equal(t, expectedFirstDemo, demos[0])

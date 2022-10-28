@@ -1,8 +1,6 @@
 package handlers
 
 import (
-	"sort"
-
 	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
 	"github.com/vikpe/qw-hub-api/pkg/qdemo"
@@ -30,9 +28,6 @@ func Demos(demoProvider func() []qtvscraper.Demo) func(c *fiber.Ctx) error {
 		}
 
 		demos := FilterDemos(demoProvider(), params)
-		sort.Slice(demos, func(i, j int) bool {
-			return demos[i].Time.After(demos[j].Time)
-		})
 
 		// c.Response().Header.Add("Cache-Time", fmt.Sprintf("%d", 600)) // 10 min cache
 		return c.JSON(demos)
