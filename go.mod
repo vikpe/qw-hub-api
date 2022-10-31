@@ -38,7 +38,7 @@ require (
 	github.com/vikpe/udpclient v0.1.3 // indirect
 	github.com/vikpe/wildcard v0.1.0 // indirect
 	golang.org/x/crypto v0.1.0 // indirect
-	golang.org/x/exp v0.0.0-20221026153819-32f3d567a233 // indirect
+	golang.org/x/exp v0.0.0-20221028150844-83b7d23a625f // indirect
 	golang.org/x/net v0.1.0 // indirect
 	golang.org/x/sys v0.1.0 // indirect
 	golang.org/x/text v0.4.0 // indirect
