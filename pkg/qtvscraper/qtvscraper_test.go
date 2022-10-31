@@ -8,6 +8,7 @@ import (
 
 	"github.com/jarcoal/httpmock"
 	"github.com/stretchr/testify/assert"
+	"github.com/vikpe/qw-hub-api/pkg/qdemo"
 	"github.com/vikpe/qw-hub-api/pkg/qtvscraper"
 )
 
@@ -79,16 +80,37 @@ func TestScraper_Demos(t *testing.T) {
 	})
 
 	demos := scraper.Demos()
-	assert.Len(t, demos, 5)
+	assert.Len(t, demos, 4)
 
 	expectedFirstDemoTime, _ := time.Parse("060102-1504", "221028-0355")
 	expectedFirstDemo := qtvscraper.Demo{
 		QtvAddress:  "bar:28000",
 		Time:        expectedFirstDemoTime,
-		Filename:    "duel_gombok_gombot_vs_bro[povdmm4]221028-0355.mvd",
-		DownloadUrl: "http://bar:28000/dl/demos/duel_gombok_gombot_vs_bro[povdmm4]221028-0355.mvd",
-		QtvplayUrl:  "file:duel_gombok_gombot_vs_bro[povdmm4]221028-0355.mvd@bar:28000",
+		Filename:    "duel_gombok_gombot_vs_bro[dm6]221028-0355.mvd",
+		DownloadUrl: "http://bar:28000/dl/demos/duel_gombok_gombot_vs_bro[dm6]221028-0355.mvd",
+		QtvplayUrl:  "file:duel_gombok_gombot_vs_bro[dm6]221028-0355.mvd@bar:28000",
 	}
 
 	assert.Equal(t, expectedFirstDemo, demos[0])
+}
+
+func TestShouldIncludeDemo(t *testing.T) {
+	testCases := map[string]bool{
+		"ffa_1[dm3]220101-2055.mvd":               false,
+		"wipeout_blue_vs_red[dm3]220101-2055.mvd": false,
+		"duel_foo_vs_bar[povdmm4]220101-2055.mvd": false,
+		"2on2_foo_vs_bar[povdmm4]220101-2055.mvd": false,
+
+		"duel_foo_vs_bar[bravado]220101-2055.mvd": true,
+		"2on2_blue_vs_red[dm3]220101-2055.mvd":    true,
+		"4on4_blue_vs_red[dm3]220101-2055.mvd":    true,
+		"4on4_foo_vs_bar[povdmm4]220101-2055.mvd": true,
+	}
+
+	for filename, expect := range testCases {
+		t.Run(filename, func(t *testing.T) {
+			demoFilename := qdemo.Filename(filename)
+			assert.Equal(t, expect, qtvscraper.ShouldIncludeDemo(demoFilename))
+		})
+	}
 }

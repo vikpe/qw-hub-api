@@ -10,6 +10,7 @@ import (
 	"github.com/PuerkitoBio/goquery"
 	"github.com/vikpe/qw-hub-api/pkg/htmlparse"
 	"github.com/vikpe/qw-hub-api/pkg/qdemo"
+	"golang.org/x/exp/slices"
 )
 
 type Demo struct {
@@ -54,6 +55,11 @@ func (s *Scraper) Demos() []Demo {
 			mutex.Lock()
 			for _, filename := range demoFilenames {
 				demoFilename := qdemo.Filename(filename)
+
+				if !ShouldIncludeDemo(demoFilename) {
+					continue
+				}
+
 				demo := Demo{
 					QtvAddress:  server.Address,
 					Time:        demoFilename.ParseDateTime(server.DemoDateFormat),
@@ -74,6 +80,28 @@ func (s *Scraper) Demos() []Demo {
 	})
 
 	return allDemos
+}
+
+func ShouldIncludeDemo(demoFilename qdemo.Filename) bool {
+	mode := demoFilename.Mode()
+
+	if "4on4" == mode {
+		return true
+	}
+
+	if !slices.Contains([]string{"duel", "1on1", "2on2"}, mode) {
+		return false
+	}
+
+	excludedMaps := []string{
+		"amphi", "amphi2",
+		"dm2dmm4", "dm3hill", "dm6dmm4",
+		"end",
+		"povdmm4", "povdmm4b", "pov2022",
+		"midair", "nacmidair",
+	}
+
+	return !slices.Contains(excludedMaps, demoFilename.Map())
 }
 
 type Server struct {
