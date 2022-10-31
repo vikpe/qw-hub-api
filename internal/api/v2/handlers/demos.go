@@ -10,11 +10,13 @@ import (
 	"github.com/vikpe/qw-hub-api/pkg/qtvscraper"
 )
 
+const DefaultLimit = 500
+
 type DemoParams struct {
 	Mode       string `query:"mode" validate:"omitempty"`
 	Query      string `query:"q" validate:"omitempty"`
 	QtvAddress string `query:"qtv_address" validate:"omitempty"`
-	Limit      int    `query:"limit" validate:"omitempty,gte=1,lte=100"`
+	Limit      int    `query:"limit" validate:"omitempty,gte=1,lte=500"`
 }
 
 func Demos(demoProvider func() []qtvscraper.Demo) func(c *fiber.Ctx) error {
@@ -44,7 +46,11 @@ func FilterDemos(demos []qtvscraper.Demo, params *DemoParams) []qtvscraper.Demo 
 	result = FilterByMode(result, params.Mode)
 	result = FilterByQuery(result, params.Query)
 
-	if params.Limit > 0 && len(result) > params.Limit {
+	if 0 == params.Limit {
+		params.Limit = DefaultLimit
+	}
+
+	if len(result) > params.Limit {
 		result = result[0:params.Limit]
 	}
 
