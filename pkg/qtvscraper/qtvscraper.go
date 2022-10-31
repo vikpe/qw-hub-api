@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"sort"
+	"strings"
 	"sync"
 	"time"
 
@@ -109,15 +110,21 @@ func ShouldIncludeDemo(demoFilename qdemo.Filename) bool {
 		return false
 	}
 
+	mapName := demoFilename.Map()
+
+	if strings.Contains(mapName, "dmm4") {
+		return false
+	}
+
 	excludedMaps := []string{
 		"amphi", "amphi2",
-		"dm2dmm4", "dm3hill", "dm6dmm4",
+		"dm3hill",
 		"end",
-		"povdmm4", "povdmm4b", "pov2022",
+		"pov2022",
 		"midair", "nacmidair",
 	}
 
-	return !slices.Contains(excludedMaps, demoFilename.Map())
+	return !slices.Contains(excludedMaps, mapName)
 }
 
 type Server struct {

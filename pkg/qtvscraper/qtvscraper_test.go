@@ -118,10 +118,12 @@ func TestScraper_Demos(t *testing.T) {
 
 func TestShouldIncludeDemo(t *testing.T) {
 	testCases := map[string]bool{
-		"ffa_1[dm3]220101-2055.mvd":               false,
-		"wipeout_blue_vs_red[dm3]220101-2055.mvd": false,
-		"duel_foo_vs_bar[povdmm4]220101-2055.mvd": false,
-		"2on2_foo_vs_bar[povdmm4]220101-2055.mvd": false,
+		"ffa_1[dm3]220101-2055.mvd":                false,
+		"wipeout_blue_vs_red[dm3]220101-2055.mvd":  false,
+		"duel_foo_vs_bar[povdmm4]220101-2055.mvd":  false,
+		"2on2_foo_vs_bar[povdmm4]220101-2055.mvd":  false,
+		"2on2_foo_vs_bar[foo_dmm4]220101-2055.mvd": false,
+		"2on2_foo_vs_bar[dmm4_foo]220101-2055.mvd": false,
 
 		"duel_foo_vs_bar[bravado]220101-2055.mvd": true,
 		"2on2_blue_vs_red[dm3]220101-2055.mvd":    true,
