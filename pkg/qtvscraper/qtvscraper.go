@@ -22,16 +22,21 @@ type Demo struct {
 }
 
 type Scraper struct {
-	servers []Server
+	servers       []Server
+	demos         []Demo
+	lastScrape    time.Time
+	CacheDuration time.Duration
 }
 
 func NewScraper(servers []Server) *Scraper {
 	return &Scraper{
-		servers: servers,
+		servers:       servers,
+		demos:         make([]Demo, 0),
+		CacheDuration: 5 * time.Minute,
 	}
 }
 
-func (s *Scraper) Demos() []Demo {
+func (s *Scraper) scrapeDemos() []Demo {
 	var (
 		wg       sync.WaitGroup
 		mutex    sync.Mutex
@@ -80,6 +85,17 @@ func (s *Scraper) Demos() []Demo {
 	})
 
 	return allDemos
+}
+
+func (s *Scraper) Demos() []Demo {
+	hasValidCache := !s.lastScrape.IsZero() && time.Since(s.lastScrape) < s.CacheDuration
+
+	if !hasValidCache {
+		s.demos = s.scrapeDemos()
+		s.lastScrape = time.Now()
+	}
+
+	return s.demos
 }
 
 func ShouldIncludeDemo(demoFilename qdemo.Filename) bool {

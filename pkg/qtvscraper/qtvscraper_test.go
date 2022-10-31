@@ -1,6 +1,7 @@
 package qtvscraper_test
 
 import (
+	"errors"
 	"io/ioutil"
 	"net/http"
 	"testing"
@@ -65,33 +66,54 @@ func TestScraper_Demos(t *testing.T) {
 	httpmock.Activate()
 	defer httpmock.DeactivateAndReset()
 
-	responseFoo, _ := ioutil.ReadFile("./test_files/demos_1.html")
-	responderFoo := httpmock.NewBytesResponder(http.StatusOK, responseFoo)
-	httpmock.RegisterResponder("GET", "http://foo:28000/demos/", responderFoo)
+	serverAlphaResponse, _ := ioutil.ReadFile("./test_files/demos_1.html")
+	httpmock.RegisterResponder(
+		"GET", "http://alpha:28000/demos/",
+		httpmock.NewBytesResponder(http.StatusOK, serverAlphaResponse),
+	)
 
-	responseBar, _ := ioutil.ReadFile("./test_files/demos_2.html")
-	responderBar := httpmock.NewBytesResponder(http.StatusOK, responseBar)
-	httpmock.RegisterResponder("GET", "http://bar:28000/demos/", responderBar)
+	serverBetaResponse, _ := ioutil.ReadFile("./test_files/demos_2.html")
+	httpmock.RegisterResponder(
+		"GET", "http://beta:28000/demos/",
+		httpmock.NewBytesResponder(http.StatusOK, serverBetaResponse),
+	)
+
+	serverGammaResponse := errors.New("fail")
+	httpmock.RegisterResponder(
+		"GET", "http://gamma:28000/demos/",
+		httpmock.NewErrorResponder(serverGammaResponse),
+	)
 
 	scraper := qtvscraper.NewScraper([]qtvscraper.Server{
-		{Address: "foo:28000", DemoDateFormat: "dmy"},
-		{Address: "bar:28000", DemoDateFormat: "ymd"},
-		{Address: "INVALID:28000", DemoDateFormat: "ymd"},
+		{Address: "alpha:28000", DemoDateFormat: "dmy"},
+		{Address: "beta:28000", DemoDateFormat: "ymd"},
+		{Address: "gamma:28000", DemoDateFormat: "ymd"},
 	})
 
+	// check result
 	demos := scraper.Demos()
 	assert.Len(t, demos, 4)
 
 	expectedFirstDemoTime, _ := time.Parse("060102-1504", "221028-0355")
 	expectedFirstDemo := qtvscraper.Demo{
-		QtvAddress:  "bar:28000",
+		QtvAddress:  "beta:28000",
 		Time:        expectedFirstDemoTime,
 		Filename:    "duel_gombok_gombot_vs_bro[dm6]221028-0355.mvd",
-		DownloadUrl: "http://bar:28000/dl/demos/duel_gombok_gombot_vs_bro[dm6]221028-0355.mvd",
-		QtvplayUrl:  "file:duel_gombok_gombot_vs_bro[dm6]221028-0355.mvd@bar:28000",
+		DownloadUrl: "http://beta:28000/dl/demos/duel_gombok_gombot_vs_bro[dm6]221028-0355.mvd",
+		QtvplayUrl:  "file:duel_gombok_gombot_vs_bro[dm6]221028-0355.mvd@beta:28000",
 	}
 
 	assert.Equal(t, expectedFirstDemo, demos[0])
+
+	// check requests/cache
+	assert.Equal(t, 3, httpmock.GetTotalCallCount())
+
+	scraper.Demos() // should use cache (no new request)
+	assert.Equal(t, 3, httpmock.GetTotalCallCount())
+
+	scraper.CacheDuration = 0
+	scraper.Demos() // should scrape again (2 new requests)
+	assert.Equal(t, 6, httpmock.GetTotalCallCount())
 }
 
 func TestShouldIncludeDemo(t *testing.T) {
