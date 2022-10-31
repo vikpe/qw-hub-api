@@ -3,6 +3,7 @@ package api
 import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/vikpe/qw-hub-api/internal/api/v2/handlers"
+	"github.com/vikpe/qw-hub-api/internal/api/v2/handlers/demoh"
 	"github.com/vikpe/qw-hub-api/pkg/qtvscraper"
 	"github.com/vikpe/qw-hub-api/pkg/serverscraper"
 	"github.com/vikpe/qw-hub-api/pkg/twitch"
@@ -27,5 +28,5 @@ func Init(
 	router.Get("news", handlers.News())
 	router.Get("forum_posts", handlers.ForumPosts())
 
-	router.Get("demos", handlers.Demos(demoProvider.Demos))
+	router.Get("demos", demoh.Handler(demoProvider.Demos))
 }

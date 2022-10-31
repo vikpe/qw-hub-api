@@ -1,11 +1,8 @@
-package handlers
+package demoh
 
 import (
-	"fmt"
 	"strings"
 
-	"github.com/go-playground/validator/v10"
-	"github.com/gofiber/fiber/v2"
 	"github.com/vikpe/qw-hub-api/pkg/qdemo"
 	"github.com/vikpe/qw-hub-api/pkg/qtvscraper"
 )
@@ -19,29 +16,7 @@ type DemoParams struct {
 	Limit      int    `query:"limit" validate:"omitempty,gte=1,lte=500"`
 }
 
-func Demos(demoProvider func() []qtvscraper.Demo) func(c *fiber.Ctx) error {
-	return func(c *fiber.Ctx) error {
-		params := new(DemoParams)
-
-		if err := c.QueryParser(params); err != nil {
-			return c.Status(fiber.StatusBadRequest).JSON(err.Error())
-		}
-
-		validate := validator.New()
-
-		err := validate.Struct(params)
-		if err != nil {
-			return c.Status(fiber.StatusBadRequest).JSON(err.Error())
-		}
-
-		demos := FilterDemos(demoProvider(), params)
-
-		c.Response().Header.Add("Cache-Time", fmt.Sprintf("%d", 5*60)) // 5 min cache
-		return c.JSON(demos)
-	}
-}
-
-func FilterDemos(demos []qtvscraper.Demo, params *DemoParams) []qtvscraper.Demo {
+func FilterByParams(demos []qtvscraper.Demo, params *DemoParams) []qtvscraper.Demo {
 	result := FilterByQtvAddress(demos, params.QtvAddress)
 	result = FilterByMode(result, params.Mode)
 	result = FilterByQuery(result, params.Query)
@@ -95,7 +70,7 @@ func FilterByQuery(demos []qtvscraper.Demo, query string) []qtvscraper.Demo {
 	result := make([]qtvscraper.Demo, 0)
 
 	for _, demo := range demos {
-		if queryMatch(demo.Filename, query) {
+		if SubstringMatch(demo.Filename, query) {
 			result = append(result, demo)
 		}
 	}
@@ -103,12 +78,16 @@ func FilterByQuery(demos []qtvscraper.Demo, query string) []qtvscraper.Demo {
 	return result
 }
 
-func queryMatch(haystack string, query string) bool {
+func SubstringMatch(haystack string, query string) bool {
 	if 0 == len(query) {
 		return false
 	}
 
 	if 0 == len(haystack) {
+		return false
+	}
+
+	if len(query) > len(haystack) {
 		return false
 	}
 
