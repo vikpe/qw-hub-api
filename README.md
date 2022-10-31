@@ -80,7 +80,7 @@ See [config.sample.json](./config.sample.json)
 | **q**           | `string`      |         | `q=2on2 xantom dm3`       | Demos where filename matches `2on2`, `xantom` and `dm3` |
 | **mode**        | `string`      |         | `mode=2on2`               | Demos with mode `2on2`                                  |
 | **qtv_address** | `string`      |         | `qtv_address=qw.foppa.dk` | Demos from `qw.foppa.dk` qtv server                     |
-| **limit**       | `int [1-500]` | `500`   | `limit=10`                | Limit to `10` demos                                     |
+| **limit**       | `int [1-500]` | `100`   | `limit=10`                | Limit to `10` demos                                     |
 
 ## Build
 

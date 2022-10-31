@@ -10,7 +10,7 @@ import (
 	"github.com/vikpe/qw-hub-api/pkg/qtvscraper"
 )
 
-const DefaultLimit = 500
+const DefaultLimit = 100
 
 type DemoParams struct {
 	Mode       string `query:"mode" validate:"omitempty"`
