@@ -7,13 +7,11 @@ import (
 	"github.com/vikpe/qw-hub-api/pkg/qtvscraper"
 )
 
-const DefaultLimit = 100
-
 type DemoParams struct {
 	Mode       string `query:"mode" validate:"omitempty"`
 	Query      string `query:"q" validate:"omitempty"`
 	QtvAddress string `query:"qtv_address" validate:"omitempty"`
-	Limit      int    `query:"limit" validate:"omitempty,gte=1,lte=500"`
+	Limit      int    `query:"limit" validate:"omitempty"`
 }
 
 func FilterByParams(demos []qtvscraper.Demo, params *DemoParams) []qtvscraper.Demo {
@@ -21,11 +19,7 @@ func FilterByParams(demos []qtvscraper.Demo, params *DemoParams) []qtvscraper.De
 	result = FilterByMode(result, params.Mode)
 	result = FilterByQuery(result, params.Query)
 
-	if 0 == params.Limit {
-		params.Limit = DefaultLimit
-	}
-
-	if len(result) > params.Limit {
+	if params.Limit > 0 && len(result) > params.Limit {
 		result = result[0:params.Limit]
 	}
 
