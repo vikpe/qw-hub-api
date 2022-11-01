@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"time"
 
 	"github.com/joho/godotenv"
 	apiV1 "github.com/vikpe/qw-hub-api/internal/api/v1"
@@ -37,6 +38,7 @@ func main() {
 	go twitchScraper.Start()
 
 	demoScraper := qtvscraper.NewScraper(config.QtvDemoSources)
+	demoScraper.DemoMaxAge = 2 * 30 * 24 * time.Hour // 2 months
 
 	// serve web app
 	webapp := app.New()
