@@ -106,6 +106,10 @@ func ShouldIncludeDemo(demoFilename qdemo.Filename) bool {
 		return true
 	}
 
+	if "duel" == mode && slices.Contains(demoFilename.Participants(), "bro") {
+		return false
+	}
+
 	if !slices.Contains([]string{"duel", "1on1", "2on2"}, mode) {
 		return false
 	}
@@ -117,11 +121,8 @@ func ShouldIncludeDemo(demoFilename qdemo.Filename) bool {
 	}
 
 	excludedMaps := []string{
-		"amphi", "amphi2",
-		"dm3hill",
-		"end",
-		"pov2022",
-		"midair", "nacmidair",
+		"amphi", "amphi2", "dm3hill", "end", "pov2022",
+		"endif", "midair", "nacmidair",
 	}
 
 	return !slices.Contains(excludedMaps, mapName)

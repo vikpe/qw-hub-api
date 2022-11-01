@@ -98,9 +98,9 @@ func TestScraper_Demos(t *testing.T) {
 	expectedFirstDemo := qtvscraper.Demo{
 		QtvAddress:  "beta:28000",
 		Time:        expectedFirstDemoTime,
-		Filename:    "duel_gombok_gombot_vs_bro[dm6]221028-0355.mvd",
-		DownloadUrl: "http://beta:28000/dl/demos/duel_gombok_gombot_vs_bro[dm6]221028-0355.mvd",
-		QtvplayUrl:  "file:duel_gombok_gombot_vs_bro[dm6]221028-0355.mvd@beta:28000",
+		Filename:    "duel_alpha_vs_beta[dm6]221028-0355.mvd",
+		DownloadUrl: "http://beta:28000/dl/demos/duel_alpha_vs_beta[dm6]221028-0355.mvd",
+		QtvplayUrl:  "file:duel_alpha_vs_beta[dm6]221028-0355.mvd@beta:28000",
 	}
 
 	assert.Equal(t, expectedFirstDemo, demos[0])
@@ -124,6 +124,9 @@ func TestShouldIncludeDemo(t *testing.T) {
 		"2on2_foo_vs_bar[povdmm4]220101-2055.mvd":  false,
 		"2on2_foo_vs_bar[foo_dmm4]220101-2055.mvd": false,
 		"2on2_foo_vs_bar[dmm4_foo]220101-2055.mvd": false,
+		"duel_foo_vs_bro[dm4]221101-0445.mvd":      false,
+		"duel_bro_vs_foo[dm4]221101-0445.mvd":      false,
+		"duel_foo_vs_bar[endif]220101-2055.mvd":    false,
 
 		"duel_foo_vs_bar[bravado]220101-2055.mvd": true,
 		"2on2_blue_vs_red[dm3]220101-2055.mvd":    true,
