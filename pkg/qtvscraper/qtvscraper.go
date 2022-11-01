@@ -99,8 +99,12 @@ func (s *Scraper) Demos() []Demo {
 	return s.demos
 }
 
-func ShouldIncludeDemo(demoFilename qdemo.Filename) bool {
+func IsRelevantDemo(demoFilename qdemo.Filename) bool {
 	mode := demoFilename.Mode()
+
+	if "" == demoFilename.DateTime() {
+		return false
+	}
 
 	if "4on4" == mode {
 		return true
