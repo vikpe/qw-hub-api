@@ -116,8 +116,9 @@ func TestScraper_Demos(t *testing.T) {
 	assert.Equal(t, 6, httpmock.GetTotalCallCount())
 }
 
-func TestShouldIncludeDemo(t *testing.T) {
+func TestIsRelevantDemo(t *testing.T) {
 	testCases := map[string]bool{
+		"duel_testcfg_vs_mj23[dm2].mvd":            false,
 		"ffa_1[dm3]220101-2055.mvd":                false,
 		"wipeout_blue_vs_red[dm3]220101-2055.mvd":  false,
 		"duel_foo_vs_bar[povdmm4]220101-2055.mvd":  false,
@@ -137,7 +138,7 @@ func TestShouldIncludeDemo(t *testing.T) {
 	for filename, expect := range testCases {
 		t.Run(filename, func(t *testing.T) {
 			demoFilename := qdemo.Filename(filename)
-			assert.Equal(t, expect, qtvscraper.ShouldIncludeDemo(demoFilename))
+			assert.Equal(t, expect, qtvscraper.IsRelevantDemo(demoFilename))
 		})
 	}
 }

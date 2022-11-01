@@ -62,7 +62,7 @@ func (s *Scraper) scrapeDemos() []Demo {
 			for _, filename := range demoFilenames {
 				demoFilename := qdemo.Filename(filename)
 
-				if !ShouldIncludeDemo(demoFilename) {
+				if !IsRelevantDemo(demoFilename) {
 					continue
 				}
 
