@@ -2,6 +2,7 @@ package qtvscraper_test
 
 import (
 	"errors"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"testing"
@@ -63,57 +64,112 @@ func TestServer_DemoFilenames(t *testing.T) {
 }
 
 func TestScraper_Demos(t *testing.T) {
-	httpmock.Activate()
-	defer httpmock.DeactivateAndReset()
+	t.Run("default params", func(t *testing.T) {
+		httpmock.Activate()
+		defer httpmock.DeactivateAndReset()
 
-	serverAlphaResponse, _ := ioutil.ReadFile("./test_files/demos_1.html")
-	httpmock.RegisterResponder(
-		"GET", "http://alpha:28000/demos/",
-		httpmock.NewBytesResponder(http.StatusOK, serverAlphaResponse),
-	)
+		serverAlphaResponse, _ := ioutil.ReadFile("./test_files/demos_1.html")
+		httpmock.RegisterResponder(
+			"GET", "http://alpha:28000/demos/",
+			httpmock.NewBytesResponder(http.StatusOK, serverAlphaResponse),
+		)
 
-	serverBetaResponse, _ := ioutil.ReadFile("./test_files/demos_2.html")
-	httpmock.RegisterResponder(
-		"GET", "http://beta:28000/demos/",
-		httpmock.NewBytesResponder(http.StatusOK, serverBetaResponse),
-	)
+		serverBetaResponse, _ := ioutil.ReadFile("./test_files/demos_2.html")
+		httpmock.RegisterResponder(
+			"GET", "http://beta:28000/demos/",
+			httpmock.NewBytesResponder(http.StatusOK, serverBetaResponse),
+		)
 
-	serverGammaResponse := errors.New("fail")
-	httpmock.RegisterResponder(
-		"GET", "http://gamma:28000/demos/",
-		httpmock.NewErrorResponder(serverGammaResponse),
-	)
+		serverGammaResponse := errors.New("fail")
+		httpmock.RegisterResponder(
+			"GET", "http://gamma:28000/demos/",
+			httpmock.NewErrorResponder(serverGammaResponse),
+		)
 
-	scraper := qtvscraper.NewScraper([]qtvscraper.Server{
-		{Address: "alpha:28000", DemoDateFormat: "dmy"},
-		{Address: "beta:28000", DemoDateFormat: "ymd"},
-		{Address: "gamma:28000", DemoDateFormat: "ymd"},
+		scraper := qtvscraper.NewScraper([]qtvscraper.Server{
+			{Address: "alpha:28000", DemoDateFormat: "dmy"},
+			{Address: "beta:28000", DemoDateFormat: "ymd"},
+			{Address: "gamma:28000", DemoDateFormat: "ymd"},
+		})
+
+		// check result
+		demos := scraper.Demos()
+		assert.Len(t, demos, 4)
+
+		expectedFirstDemoTime, _ := time.Parse("060102-1504", "221028-0355")
+		expectedFirstDemo := qtvscraper.Demo{
+			QtvAddress:  "beta:28000",
+			Time:        expectedFirstDemoTime,
+			Filename:    "duel_alpha_vs_beta[dm6]221028-0355.mvd",
+			DownloadUrl: "http://beta:28000/dl/demos/duel_alpha_vs_beta[dm6]221028-0355.mvd",
+			QtvplayUrl:  "file:duel_alpha_vs_beta[dm6]221028-0355.mvd@beta:28000",
+		}
+
+		assert.Equal(t, expectedFirstDemo, demos[0])
+
+		// check requests/cache
+		assert.Equal(t, 3, httpmock.GetTotalCallCount())
+
+		scraper.Demos() // should use cache (no new request)
+		assert.Equal(t, 3, httpmock.GetTotalCallCount())
+
+		scraper.CacheDuration = 0
+		scraper.Demos() // should scrape again (2 new requests)
+		assert.Equal(t, 6, httpmock.GetTotalCallCount())
 	})
 
-	// check result
-	demos := scraper.Demos()
-	assert.Len(t, demos, 4)
+	t.Run("demo max age", func(t *testing.T) {
+		httpmock.Activate()
+		defer httpmock.DeactivateAndReset()
 
-	expectedFirstDemoTime, _ := time.Parse("060102-1504", "221028-0355")
-	expectedFirstDemo := qtvscraper.Demo{
-		QtvAddress:  "beta:28000",
-		Time:        expectedFirstDemoTime,
-		Filename:    "duel_alpha_vs_beta[dm6]221028-0355.mvd",
-		DownloadUrl: "http://beta:28000/dl/demos/duel_alpha_vs_beta[dm6]221028-0355.mvd",
-		QtvplayUrl:  "file:duel_alpha_vs_beta[dm6]221028-0355.mvd@beta:28000",
-	}
+		const day = 24 * time.Hour
+		const timeLayout = "060102-1504"
+		demo1Timestamp := time.Now().Add(-5 * day).Format(timeLayout)
+		demo2Timestamp := time.Now().Add(-25 * day).Format(timeLayout)
 
-	assert.Equal(t, expectedFirstDemo, demos[0])
+		serverResponseBody := fmt.Sprintf(`
+<table id="demos" cellspacing="0">
+      <thead>
+        <tr>
+          <th class="stream">stream</th>
+          <th class="save">Download</th>
+          <th class="name">Demoname</th>
+          <th class="size">Size</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="even">
+          <td class="name">duel_foo_vs_bar[aerowalk]%s.mvd</td><td class="size">1144 kB</td>
+        </tr>
+        <tr class="odd">
+          <td class="name">duel_foo_vs_bar[aerowalk]%s.mvd</td><td class="size">1178 kB</td>
+        </tr>
+      </tbody>
+    </table>
+`, demo1Timestamp, demo2Timestamp)
 
-	// check requests/cache
-	assert.Equal(t, 3, httpmock.GetTotalCallCount())
+		httpmock.RegisterResponder(
+			"GET", "http://delta:28000/demos/",
+			httpmock.NewStringResponder(http.StatusOK, serverResponseBody),
+		)
 
-	scraper.Demos() // should use cache (no new request)
-	assert.Equal(t, 3, httpmock.GetTotalCallCount())
+		fmt.Println("serverResponseBody", serverResponseBody)
 
-	scraper.CacheDuration = 0
-	scraper.Demos() // should scrape again (2 new requests)
-	assert.Equal(t, 6, httpmock.GetTotalCallCount())
+		scraper := qtvscraper.NewScraper([]qtvscraper.Server{
+			{Address: "delta:28000", DemoDateFormat: "ymd"},
+		})
+		scraper.CacheDuration = 1 * time.Nanosecond
+
+		// check result
+		scraper.DemoMaxAge = 30 * day
+		assert.Len(t, scraper.Demos(), 2)
+
+		scraper.DemoMaxAge = 6 * day
+		assert.Len(t, scraper.Demos(), 1)
+
+		scraper.DemoMaxAge = 3 * day
+		assert.Len(t, scraper.Demos(), 0)
+	})
 }
 
 func TestIsRelevantDemo(t *testing.T) {

@@ -27,6 +27,7 @@ type Scraper struct {
 	demos         []Demo
 	lastScrape    time.Time
 	CacheDuration time.Duration
+	DemoMaxAge    time.Duration
 }
 
 func NewScraper(servers []Server) *Scraper {
@@ -45,6 +46,8 @@ func (s *Scraper) scrapeDemos() []Demo {
 		errs     = make([]error, 0)
 	)
 
+	minDemoTime := time.Now().Add(-s.DemoMaxAge)
+
 	for _, qtvServer := range s.servers {
 		wg.Add(1)
 
@@ -58,24 +61,30 @@ func (s *Scraper) scrapeDemos() []Demo {
 				return
 			}
 
-			mutex.Lock()
 			for _, filename := range demoFilenames {
+				// check relevance
 				demoFilename := qdemo.Filename(filename)
-
 				if !IsRelevantDemo(demoFilename) {
+					continue
+				}
+
+				// check age
+				demoTime := demoFilename.ParseDateTime(server.DemoDateFormat)
+				if s.DemoMaxAge.Seconds() > 0 && demoTime.Before(minDemoTime) {
 					continue
 				}
 
 				demo := Demo{
 					QtvAddress:  server.Address,
-					Time:        demoFilename.ParseDateTime(server.DemoDateFormat),
+					Time:        demoTime,
 					Filename:    filename,
 					DownloadUrl: server.DemoDownloadUrl(filename),
 					QtvplayUrl:  server.DemoQtvplayUrl(filename),
 				}
+				mutex.Lock()
 				allDemos = append(allDemos, demo)
+				mutex.Unlock()
 			}
-			mutex.Unlock()
 		}(qtvServer)
 	}
 
