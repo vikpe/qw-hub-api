@@ -134,7 +134,7 @@ func IsRelevantDemo(demoFilename qdemo.Filename) bool {
 	}
 
 	excludedMaps := []string{
-		"amphi", "amphi2", "dm3hill", "end", "pov2022",
+		"amphi", "amphi2", "dm3hill", "end", "outpost", "pov2022",
 		"endif", "midair", "nacmidair",
 	}
 
