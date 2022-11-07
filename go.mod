@@ -11,7 +11,8 @@ require (
 	github.com/nicklaw5/helix v1.25.0
 	github.com/stretchr/testify v1.8.0
 	github.com/vikpe/masterstat v0.2.0
-	github.com/vikpe/serverstat v0.2.5
+	github.com/vikpe/serverstat v0.3.0
+	golang.org/x/exp v0.0.0-20221106115401-f9659909a136
 )
 
 require (
@@ -35,10 +36,9 @@ require (
 	github.com/valyala/fasthttp v1.41.0 // indirect
 	github.com/valyala/fastjson v1.6.3 // indirect
 	github.com/valyala/tcplisten v1.0.0 // indirect
-	github.com/vikpe/udpclient v0.1.3 // indirect
+	github.com/vikpe/udpclient v0.2.0 // indirect
 	github.com/vikpe/wildcard v0.1.0 // indirect
 	golang.org/x/crypto v0.1.0 // indirect
-	golang.org/x/exp v0.0.0-20221028150844-83b7d23a625f // indirect
 	golang.org/x/net v0.1.0 // indirect
 	golang.org/x/sys v0.1.0 // indirect
 	golang.org/x/text v0.4.0 // indirect
