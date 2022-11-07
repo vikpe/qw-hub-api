@@ -18,6 +18,8 @@ func Init(
 	router.Get("servers/mvdsv", handlers.Mvdsv(serverProvider.Mvdsv))
 	router.Get("servers/qtv", handlers.Qtv(serverProvider.Qtv))
 	router.Get("servers/qwfwd", handlers.Qwfwd(serverProvider.Qwdfwd))
+	router.Get("servers/:address/lastscores", handlers.ServerLastScores())
+	router.Get("servers/:address/laststats", handlers.ServerLastStats())
 	router.Get("servers/:address", handlers.ServerDetails(serverProvider.ServerByAddress))
 	router.Get("servers", handlers.Servers(serverProvider.Servers))
 
