@@ -183,6 +183,7 @@ func TestIsRelevantDemo(t *testing.T) {
 		"2on2_foo_vs_bar[dmm4_foo]220101-2055.mvd": false,
 		"duel_foo_vs_bro[dm4]221101-0445.mvd":      false,
 		"duel_bro_vs_foo[dm4]221101-0445.mvd":      false,
+		"duel_timber_vs_foo[dm4]221101-0445.mvd":   false,
 		"duel_foo_vs_bar[endif]220101-2055.mvd":    false,
 
 		"duel_foo_vs_bar[bravado]220101-2055.mvd": true,

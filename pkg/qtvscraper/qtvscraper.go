@@ -119,7 +119,7 @@ func IsRelevantDemo(demoFilename qdemo.Filename) bool {
 		return true
 	}
 
-	if "duel" == mode && slices.Contains(demoFilename.Participants(), "bro") {
+	if "duel" == mode && containsBotName(demoFilename.Participants()) {
 		return false
 	}
 
@@ -139,6 +139,18 @@ func IsRelevantDemo(demoFilename qdemo.Filename) bool {
 	}
 
 	return !slices.Contains(excludedMaps, mapName)
+}
+
+func containsBotName(participants []string) bool {
+	botNames := []string{"bro", "timber", "goldenboy", "tincan"}
+
+	for _, name := range botNames {
+		if slices.Contains(participants, name) {
+			return true
+		}
+	}
+
+	return false
 }
 
 type Server struct {
