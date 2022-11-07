@@ -48,6 +48,7 @@ github.com/mattn/go-isatty v0.0.16 h1:bq3VjFmv/sOjHtdEhmkEV4x1AJtvUvOJ2PFAZ5+peK
 github.com/mattn/go-isatty v0.0.16/go.mod h1:kYGgaQfpe5nmfYZH+SKPsOc2e4SrIfOl2e/yFXSvRLM=
 github.com/mattn/go-runewidth v0.0.14 h1:+xnbZSEeDbOIg5/mE6JF0w6n9duR1l3/WmbinWVwUuU=
 github.com/mattn/go-runewidth v0.0.14/go.mod h1:Jdepj2loyihRzMpdS35Xk/zdY8IAYHsh153qUoGf23w=
+github.com/maxatome/go-testdeep v1.11.0 h1:Tgh5efyCYyJFGUYiT0qxBSIDeXw0F5zSoatlou685kk=
 github.com/nicklaw5/helix v1.25.0 h1:Mrz537izZVsGdM3I46uGAAlslj61frgkhS/9xQqyT/M=
 github.com/nicklaw5/helix v1.25.0/go.mod h1:yvXZFapT6afIoxnAvlWiJiUMsYnoHl7tNs+t0bloAMw=
 github.com/pkg/diff v0.0.0-20210226163009-20ebb0f2a09e/go.mod h1:pJLUxLENpZxwdsKMEsNbx1VGcRFpLqf3715MtcvvzbA=
@@ -78,14 +79,10 @@ github.com/valyala/tcplisten v1.0.0 h1:rBHj/Xf+E1tRGZyWIWwJDiRY0zc1Js+CV5DqwacVS
 github.com/valyala/tcplisten v1.0.0/go.mod h1:T0xQ8SeCZGxckz9qRXTfG43PvQ/mcWh7FwZEA7Ioqkc=
 github.com/vikpe/masterstat v0.2.0 h1:xwLeK/eyWWlTwacGQr+B6Sw32g43oukjh/eidwkeHIE=
 github.com/vikpe/masterstat v0.2.0/go.mod h1:dWwVbHx/ilzsx5GLbXtX9x+S0pISmJzYPFdz6cgKrvo=
-github.com/vikpe/serverstat v0.2.5 h1:wKyZ1ThGZRwMl2dZdTirtBiMXm8r2Wc6SVnZvCRCHe8=
-github.com/vikpe/serverstat v0.2.5/go.mod h1:j5Pk63C0MatWo4EAo0Xnt8yYGxG+1QWy1OcuGaK6atU=
-github.com/vikpe/serverstat v0.3.0 h1:tnRQaJClHhurRLJANLONuQ3kP9mj3XbT5JBv6PtiSzQ=
-github.com/vikpe/serverstat v0.3.0/go.mod h1:fgHTdQF6CTbKqH2ahxGVJ1G60a8V20I8zhYH/fbgzk4=
-github.com/vikpe/udpclient v0.1.3 h1:VwNkvdGA5Kr2I4ynzEYJ3z2wIDshEPJXPP9DA68FPjU=
-github.com/vikpe/udpclient v0.1.3/go.mod h1:O6nNBpajBwgy6Uc8ewk5pbI5oMU1BhjNhxYpas174o4=
-github.com/vikpe/udpclient v0.2.0 h1:vke1MObE6gV8ppjMeqJfC+t/dJar2SivDMg7Pxo4cLk=
-github.com/vikpe/udpclient v0.2.0/go.mod h1:visFAJMzrT6Ns/G4NCq+GS65DcmePYNX/z9z8UrruL4=
+github.com/vikpe/serverstat v0.3.1 h1:d+sPTVu6RNCIFneV5C1HBVVVZ4itdrYfHQleuccMp+M=
+github.com/vikpe/serverstat v0.3.1/go.mod h1:xt2I71Q5dmyoOIptcDhjwI4Ei8VQsNbAJx5kk+9WDEY=
+github.com/vikpe/udpclient v0.2.1 h1:C5GKJnNb/2KTtIa+Nf7q6SRTC4DRbLCDQLtJnpur0zk=
+github.com/vikpe/udpclient v0.2.1/go.mod h1:visFAJMzrT6Ns/G4NCq+GS65DcmePYNX/z9z8UrruL4=
 github.com/vikpe/udphelper v0.1.3 h1:BAU/BuOIgJxk3ZmtWOJ39lfsmAr2l8cAMdDI1K2GD8s=
 github.com/vikpe/wildcard v0.1.0 h1:tdxmeeZAFtGJy+pGMz1A7NawdclY9SC+L8d0hOCp+J8=
 github.com/vikpe/wildcard v0.1.0/go.mod h1:68ZRgRpcnlRwA4vei4pKZRu3AUgsyq1k7qPmhVuLko8=
@@ -93,10 +90,6 @@ golang.org/x/crypto v0.0.0-20211215153901-e495a2d5b3d3/go.mod h1:IxCIyHEi3zRg3s0
 golang.org/x/crypto v0.0.0-20220214200702-86341886e292/go.mod h1:IxCIyHEi3zRg3s0A5j5BB6A9Jmi73HwBIUl50j+osU4=
 golang.org/x/crypto v0.1.0 h1:MDRAIl0xIo9Io2xV565hzXHw3zVseKrJKodhohM5CjU=
 golang.org/x/crypto v0.1.0/go.mod h1:RecgLatLF4+eUMCP1PoPZQb+cVrJcOPbHkTkbkB9sbw=
-golang.org/x/exp v0.0.0-20221026153819-32f3d567a233 h1:9bNbSKT4RPLEzne0Xh1v3NaNecsa1DKjkOuTbY6V9rI=
-golang.org/x/exp v0.0.0-20221026153819-32f3d567a233/go.mod h1:CxIveKay+FTh1D0yPZemJVgC/95VzuuOLq5Qi4xnoYc=
-golang.org/x/exp v0.0.0-20221028150844-83b7d23a625f h1:Al51T6tzvuh3oiwX11vex3QgJ2XTedFPGmbEVh8cdoc=
-golang.org/x/exp v0.0.0-20221028150844-83b7d23a625f/go.mod h1:CxIveKay+FTh1D0yPZemJVgC/95VzuuOLq5Qi4xnoYc=
 golang.org/x/exp v0.0.0-20221106115401-f9659909a136 h1:Fq7F/w7MAa1KJ5bt2aJ62ihqp9HDcRuyILskkpIAurw=
 golang.org/x/exp v0.0.0-20221106115401-f9659909a136/go.mod h1:CxIveKay+FTh1D0yPZemJVgC/95VzuuOLq5Qi4xnoYc=
 golang.org/x/net v0.0.0-20210916014120-12bc252f5db8/go.mod h1:9nx3DQGgdP8bBQD5qxJ1jj9UTztislL4KSBs9R2vV5Y=
