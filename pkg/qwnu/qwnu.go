@@ -117,9 +117,16 @@ func NewsPosts(limit int) ([]NewsPost, error) {
 		}
 
 		pubDate := s.Find("pubDate").Text()
+		dateFormat := " hh:mm:ss +0000"
+		date := ""
+
+		if len(pubDate) > len(dateFormat) {
+			date = pubDate[:len(pubDate)-len(dateFormat)]
+		}
+
 		newsPost := NewsPost{
 			Title: s.Find("title").Text(),
-			Date:  pubDate[:len(pubDate)-len(" hh:mm:ss +0000")],
+			Date:  date,
 			Url:   s.Find("guid").Text(),
 		}
 		newsPosts = append(newsPosts, newsPost)
