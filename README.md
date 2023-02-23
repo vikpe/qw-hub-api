@@ -31,7 +31,7 @@ See [config.sample.json](./config.sample.json)
    "qtv_demo_sources": [
     {"address": "qw.irc.ax:28000", "demo_date_format": "ymd"},
     {"address": "troopers.fi:28000", "demo_date_format": "ymd"},
-    {"address": "qw.foppa.dk:28000", "demo_date_format": "dmy"}
+    {"address": "quake.se:28000", "demo_date_format": "Ymd"}
   ],
   "streamers": {
     "annihilazor": "anni",
@@ -75,12 +75,12 @@ See [config.sample.json](./config.sample.json)
 
 > `/v2/demos`
 
-| Param           | Type          | Default | Example                   | Description                                             |
-|-----------------|---------------|---------|---------------------------|---------------------------------------------------------|
-| **q**           | `string`      |         | `q=2on2 xantom dm3`       | Demos where filename matches `2on2`, `xantom` and `dm3` |
-| **mode**        | `string`      |         | `mode=2on2`               | Demos with mode `2on2`                                  |
-| **qtv_address** | `string`      |         | `qtv_address=qw.foppa.dk` | Demos from `qw.foppa.dk` qtv server                     |
-| **limit**       | `int [1-500]` | `100`   | `limit=10`                | Limit to `10` demos                                     |
+| Param           | Type          | Default | Example                | Description                                             |
+|-----------------|---------------|---------|------------------------|---------------------------------------------------------|
+| **q**           | `string`      |         | `q=2on2 xantom dm3`    | Demos where filename matches `2on2`, `xantom` and `dm3` |
+| **mode**        | `string`      |         | `mode=2on2`            | Demos with mode `2on2`                                  |
+| **qtv_address** | `string`      |         | `qtv_address=quake.se` | Demos from `quake.se` qtv server                        |
+| **limit**       | `int [1-500]` | `100`   | `limit=10`             | Limit to `10` demos                                     |
 
 ## Build
 

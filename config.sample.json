@@ -14,7 +14,7 @@
   "qtv_demo_sources": [
     {"address": "qw.irc.ax:28000", "demo_date_format": "ymd"},
     {"address": "troopers.fi:28000", "demo_date_format": "ymd"},
-    {"address": "qw.foppa.dk:28000", "demo_date_format": "dmy"}
+    {"address": "quake.se:28000", "demo_date_format": "Ymd"}
   ],
   "streamers": {
     "annihilazor": "anni",
