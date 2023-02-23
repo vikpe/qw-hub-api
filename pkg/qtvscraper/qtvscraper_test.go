@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"strings"
 	"testing"
 	"time"
 
@@ -29,7 +30,10 @@ func TestServer_DemoFilenames(t *testing.T) {
 		server := qtvscraper.Server{Address: "foo:28000", DemoDateFormat: "ymd"}
 		filenames, err := server.DemoFilenames()
 		assert.Empty(t, filenames)
-		assert.ErrorContains(t, err, "no such host")
+		assert.True(
+			t,
+			strings.Contains(err.Error(), "failure in name resolution") || strings.Contains(err.Error(), "no such host"),
+		)
 	})
 
 	t.Run("http request fail", func(t *testing.T) {
