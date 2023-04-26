@@ -90,6 +90,8 @@ github.com/vikpe/serverstat v0.3.5 h1:e5U6RAC1/0mt9Py5AQwcoW1EOyuSLHDmHdII2fVCiE
 github.com/vikpe/serverstat v0.3.5/go.mod h1:U30JvYBb3pPk1/eIfHCtwEK00Epq2lUndu93ZI1DW/s=
 github.com/vikpe/serverstat v1.0.0 h1:o0/swahfsKL3GU3E15+99S0D6KFVEH2XQiTpeAQHAHc=
 github.com/vikpe/serverstat v1.0.0/go.mod h1:X9XEmLn4ZPAKXhmqdG4eogYcM9H/rGVSbiAW0DhkeQM=
+github.com/vikpe/serverstat v1.0.1 h1:Gl+sIRZSyF8IHjplxIzH7YwwtDRcViUVKFVB5rFZZfc=
+github.com/vikpe/serverstat v1.0.1/go.mod h1:X9XEmLn4ZPAKXhmqdG4eogYcM9H/rGVSbiAW0DhkeQM=
 github.com/vikpe/udpclient v0.2.1 h1:C5GKJnNb/2KTtIa+Nf7q6SRTC4DRbLCDQLtJnpur0zk=
 github.com/vikpe/udpclient v0.2.1/go.mod h1:visFAJMzrT6Ns/G4NCq+GS65DcmePYNX/z9z8UrruL4=
 github.com/vikpe/udpclient v1.0.0 h1:xamjn2Vbwz9bEFTo9FJM2mAFdH4j3TXD7KHysyxK+lI=
