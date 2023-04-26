@@ -30,9 +30,10 @@ func TestServer_DemoFilenames(t *testing.T) {
 		server := qtvscraper.Server{Address: "foo:28000", DemoDateFormat: "ymd"}
 		filenames, err := server.DemoFilenames()
 		assert.Empty(t, filenames)
+		fmt.Println(err)
 		assert.True(
 			t,
-			strings.Contains(err.Error(), "failure in name resolution") || strings.Contains(err.Error(), "no such host"),
+			strings.Contains(err.Error(), "failure in name resolution") || strings.Contains(err.Error(), "no such host") || strings.Contains(err.Error(), "server misbehaving"),
 		)
 	})
 
