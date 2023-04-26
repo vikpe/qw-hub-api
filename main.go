@@ -38,7 +38,7 @@ func main() {
 	go twitchScraper.Start()
 
 	demoScraper := qtvscraper.NewScraper(config.QtvDemoSources)
-	demoScraper.DemoMaxAge = 2 * 30 * 24 * time.Hour // 2 months
+	demoScraper.DemoMaxAge = 30 * 24 * time.Hour // 1 months
 
 	// serve web app
 	webapp := app.New()
