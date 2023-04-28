@@ -182,7 +182,6 @@ func cleanHtmlText(htmlText string) string {
 }
 
 func wikiLinkHref(href string) string {
-	fmt.Println("#### HREF", href)
 	if len(href) == 0 {
 		return href
 	} else if strings.HasPrefix(href, "/") {
