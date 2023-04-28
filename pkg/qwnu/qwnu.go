@@ -2,6 +2,7 @@ package qwnu
 
 import (
 	"fmt"
+	"regexp"
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
@@ -9,6 +10,9 @@ import (
 )
 
 const qwnuURL = "https://www.quakeworld.nu"
+
+var wikiURL = "https://www.quakeworld.nu/wiki"
+var wikiOverviewUrl = fmt.Sprintf("%s/Overview", wikiURL)
 
 type Event struct {
 	Title   string `json:"title"`
@@ -32,8 +36,15 @@ type NewsPost struct {
 	Url   string `json:"url"`
 }
 
+type GameInSpotlight struct {
+	Participants string              `json:"participants"`
+	Description  string              `json:"description"`
+	Stream       GameInSpotlightLink `json:"stream"`
+	Event        GameInSpotlightLink `json:"event"`
+	Date         string              `json:"date"`
+}
+
 func Events(limit int) ([]Event, error) {
-	wikiOverviewUrl := fmt.Sprintf("%s/wiki/Overview", qwnuURL)
 	doc, err := htmlparse.GetDocument(wikiOverviewUrl)
 
 	if err != nil {
@@ -100,6 +111,85 @@ func ForumPosts(limit int) ([]ForumPost, error) {
 
 	return forumPosts, nil
 
+}
+
+type GameInSpotlightLink struct {
+	Title string `json:"title"`
+	Url   string `json:"url"`
+}
+
+func GamesInSpotlight() ([]GameInSpotlight, error) {
+	doc, err := htmlparse.GetDocument(wikiOverviewUrl)
+
+	if err != nil {
+		return make([]GameInSpotlight, 0), err
+	}
+
+	gamesDiv := doc.Find(".GameInSpotlight")
+
+	descriptions := make([]string, 0)
+	gamesDiv.ChildrenFiltered("div").Each(func(i int, s *goquery.Selection) {
+		descriptions = append(descriptions, cleanHtmlText(s.Text()))
+	})
+
+	games := make([]GameInSpotlight, 0)
+
+	gamesDiv.Find("tbody").Each(func(i int, s *goquery.Selection) {
+		rows := s.ChildrenFiltered("tr")
+		secondRow := rows.Next()
+
+		// stream
+		stream := GameInSpotlightLink{}
+		streamLink := secondRow.Find(".twitchlink a")
+		if streamLink.Length() > 0 {
+			stream.Title = streamLink.Text()
+			stream.Url = streamLink.AttrOr("href", "#")
+		}
+
+		// event
+		eventLink := secondRow.ChildrenFiltered("td").Last().Find("a")
+		event := GameInSpotlightLink{}
+
+		if eventLink.Length() > 0 {
+			event.Title = eventLink.Text()
+			event.Url = wikiLinkHref(eventLink.AttrOr("href", "#"))
+		}
+
+		// result
+		game := GameInSpotlight{
+			Participants: cleanHtmlText(rows.First().Text()),
+			Stream:       stream,
+			Event:        event,
+			Date:         secondRow.Find(".datetime").Text(),
+		}
+
+		// description
+		if len(descriptions) >= i {
+			game.Description = descriptions[i]
+		}
+
+		games = append(games, game)
+	})
+
+	return games, nil
+}
+
+func cleanHtmlText(htmlText string) string {
+	result := regexp.MustCompile(`\s+`).ReplaceAllString(htmlText, " ")
+	result = strings.ReplaceAll(result, "\u00a0", "")
+	result = strings.TrimSpace(result)
+	return result
+}
+
+func wikiLinkHref(href string) string {
+	fmt.Println("#### HREF", href)
+	if len(href) == 0 {
+		return href
+	} else if strings.HasPrefix(href, "/") {
+		return fmt.Sprintf("%s%s", qwnuURL, href)
+	} else {
+		return href
+	}
 }
 
 func NewsPosts(limit int) ([]NewsPost, error) {
