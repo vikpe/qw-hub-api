@@ -4,9 +4,10 @@
 
 ## Usage
 
-1) Rename `config.sample.json` to `config.json`.
-2) Build
-3) `./qw-hub-api`
+1) Rename/edit `config.sample.json` to `config.json`.
+2) Rename/edit `.env.example` to `.env`.
+3) Build
+4) `./qw-hub-api`
 
 ## Config
 
