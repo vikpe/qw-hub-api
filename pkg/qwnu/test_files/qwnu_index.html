@@ -1,0 +1,1456 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html style="background-color:#707070;">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>QuakeWorld.nu</title>
+
+    <link rel="shortcut icon" href="//www.quakeworld.nu/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/default.css"/>
+    <link rel="styleSheet" type="text/css" href="/stylesheets/qwnetbar.css"/>
+    <link rel="stylesheet" type="text/css" href="/markitup/skins/simple/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/markitup/sets/bbcode/style.css"/>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.6.2.min.js"></script>
+    <script type="text/javascript" src="/javascripts/jquery.vticker.js"></script>
+    <script type="text/javascript" src="/javascripts/common.js"></script>
+    <script type="text/javascript" src="/javascripts/mootools-core-1.4.5-full-nocompat.js"></script>
+    <script type="text/javascript" src="/javascripts/mootools-more-1.4.0.1.js"></script>
+    <script type="text/javascript" src="/markitup/jquery.markitup.js"></script>
+    <script type="text/javascript" src="/markitup/sets/bbcode/set.js"></script>
+</head>
+
+<body style="background-color:#707070;">
+<div id="top" style="width:100%; height:100%;">
+
+    <table style="width:100%; height:100%;" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+            <td colspan="3" style="height:23px; text-align:center;">
+                <iframe src="//network.quakeworld.nu"
+                        style="width:100%;height:24px;border:0;padding:0;margin:0"></iframe>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="bgr-left">
+                <div style="width:1px; height:1px;"></div>
+            </td>
+
+            <td style="width:1004px; height:100%; background-image:url('/images/block-bgr-mid.jpg');">
+                <table style="width:100%; height:100%;" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td style="height:1px;"><img src="/images/block-bgr-top.gif" alt="" width="1004" height="1"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td valign="top" style="padding:5px 6px 6px 6px;">
+                            <div><img src="/images/win-logo-top.gif" alt=""/></div>
+
+                            <div style="float:left;"><img src="/images/win-logo-mid-1.gif" alt=""/></div>
+                            <div style="float:left;"><a href="/"><img src="/images/logo.gif" alt="" border="0"/></a>
+                            </div>
+                            <div style="float:left;"><img src="/images/win-logo-mid-2.gif" alt=""/></div>
+                            <div class="bannerframe"><a href="http://www.maverickservers.com"><img
+                                    src="/images/bners/maverick-swi-bw.png" alt="" border="0"/></a></div>
+                            <div style="float:left;"><img src="/images/win-logo-mid-3.gif" alt=""/></div>
+
+                            <div><img src="/images/win-logo-center.gif" alt=""/></div>
+
+                            <div class="menubar" xstyle="width:100%; height:45px;">
+                                <div style="float:left;"><img src="/images/blank.gif" width="11" height="45" alt=""/>
+                                </div>
+                                <div style="float:left;"><a href="/" title=""><img src="/images/menu/menu-home-3.png"
+                                                                                   alt="Home"
+                                                                                   onmouseover="gChangeImg(this, 'menu/menu-home-3.png');"
+                                                                                   onmouseout="gChangeImg(this, 'menu/menu-home-3.png');"
+                                                                                   alt="" border="0"/></a></div>
+                                <div style="float:left;"><a href="/guide" title=""><img
+                                        src="/images/menu/menu-guides-1.png" alt="Guides"
+                                        onmouseover="gChangeImg(this, 'menu/menu-guides-2.png');"
+                                        onmouseout="gChangeImg(this, 'menu/menu-guides-1.png');" alt="" border="0"/></a>
+                                </div>
+                                <div style="float:left;"><a href="/forum" title=""><img
+                                        src="/images/menu/menu-forum-1.png" alt="Forum"
+                                        onmouseover="gChangeImg(this, 'menu/menu-forum-2.png');"
+                                        onmouseout="gChangeImg(this, 'menu/menu-forum-1.png');" alt="" border="0"/></a>
+                                </div>
+                                <div style="float:left;"><a href="/blog" title=""><img
+                                        src="/images/menu/menu-blogs-1.png" alt="Blogs"
+                                        onmouseover="gChangeImg(this, 'menu/menu-blogs-2.png');"
+                                        onmouseout="gChangeImg(this, 'menu/menu-blogs-1.png');" alt="" border="0"/></a>
+                                </div>
+                                <div style="float:left;"><a href="/gamecontent" title=""><img
+                                        src="/images/menu/menu-game-1.png" alt="Game content"
+                                        onmouseover="gChangeImg(this, 'menu/menu-game-2.png');"
+                                        onmouseout="gChangeImg(this, 'menu/menu-game-1.png');" alt="" border="0"/></a>
+                                </div>
+                                <div style="float:left;"><a href="/media" title=""><img
+                                        src="/images/menu/menu-media-1.png" alt="Media"
+                                        onmouseover="gChangeImg(this, 'menu/menu-media-2.png');"
+                                        onmouseout="gChangeImg(this, 'menu/menu-media-1.png');" alt="" border="0"/></a>
+                                </div>
+                                <div style="float:left;"><a href="/about" title=""><img
+                                        src="/images/menu/menu-site-1.png" alt="Site"
+                                        onmouseover="gChangeImg(this, 'menu/menu-site-2.png');"
+                                        onmouseout="gChangeImg(this, 'menu/menu-site-1.png');" alt="" border="0"/></a>
+                                </div>
+
+                                <div style="float:left;"><img src="/images/menu-line.png" alt=""/></div>
+                            </div>
+
+                            <div style="float:left; width:212px; height:45px; background-image:url('/images/win-logo-search.gif');">
+                                <div style="float:left; padding-left:5px; padding-top:12px;">
+                                    <form name="frmGlobalSearch" id="frmGlobalSearch"><input type="text"
+                                                                                             name="txtSearch"
+                                                                                             value="Search QuakeWorld.nu"
+                                                                                             class="search"
+                                                                                             onfocus="FocusSearch(this);"
+                                                                                             onblur="BlurSearch(this);"
+                                                                                             onkeydown="return KeyHandler(event, this);"/>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div><img src="/images/win-logo-bottom.gif" alt=""/></div>
+
+                            <div>
+                                <div style="float:left;">
+                                    <div>
+                                        <!-- app window -->
+
+                                        <form name="frmHomeFront" id="frmHomeFront" method="post" action="/front">
+                                            <input type="hidden" name="app" value="HOME_FRONT"/>
+                                            <input type="hidden" name="cmd"/>
+
+                                            <div class="app-wide">
+                                                <div style="height:52px; background-image:url('/images/apps/app-wide-top.gif');">
+                                                    <div class="submenu-holder">
+                                                        <div class="submenu-item"><a href="/">
+                                                            <div class="submenu"
+                                                                 style="background-image:url('/images/submenu-3.gif');"
+                                                                 onmouseover="gChangeBgrImg(this, 'submenu-3.gif');"
+                                                                 onmouseout="gChangeBgrImg(this, 'submenu-3.gif');"/>
+                                                            <div>News</div></div>
+                                                        </a></div>
+                                                    <div class="submenu-item"><a href="/updates">
+                                                        <div class="submenu"
+                                                             style="background-image:url('/images/submenu-1.gif');"
+                                                             onmouseover="gChangeBgrImg(this, 'submenu-2.gif');"
+                                                             onmouseout="gChangeBgrImg(this, 'submenu-1.gif');"/>
+                                                        <div>Updates</div></div>
+                                                    </a></div>
+                                            </div>
+                                    </div>
+                                    <div style="height:34px; background-image:url('/images/apps/app-wide-ticker.gif');">
+                                        <div style="padding-left:25px; padding-top:10px; width:500px; height:14px; overflow:hidden;">
+                                            <div class="ticker">
+                                                <ul style="list-style:none;">
+
+                                                    <li style="font-family:arial; font-size:11px; color:#4c3e30;"><a
+                                                            href="http://discord.quake.world" class="link_ticker">QuakeWorld
+                                                        Discord chat server</a> &nbsp;<img src="/images/ticker-link.gif"
+                                                                                           align="absmiddle"/></li>
+                                                    <li style="font-family:arial; font-size:11px; color:#4c3e30;"><a
+                                                            href="https://www.qhlan.org/" class="link_ticker">QHLAN2022
+                                                        in November!</a> &nbsp;<img src="/images/ticker-link.gif"
+                                                                                    align="absmiddle"/></li>
+                                                    <li style="font-family:arial; font-size:11px; color:#4c3e30;"><a
+                                                            href="http://wiki.quakeworld.nu" class="link_ticker">The
+                                                        Wiki is now accepting new users!</a> &nbsp;<img
+                                                            src="/images/ticker-link.gif" align="absmiddle"/></li>
+                                                    <li style="font-family:arial; font-size:11px; color:#4c3e30;"><a
+                                                            href="https://twitter.com/qw_tips/" class="link_ticker">Follow
+                                                        qw_tips on twitter!</a> &nbsp;<img src="/images/ticker-link.gif"
+                                                                                           align="absmiddle"/></li>
+                                                    <li style="font-family:arial; font-size:11px; color:#4c3e30;"><a
+                                                            href="http://www.reddit.com/r/quake" class="link_ticker">Reddit
+                                                        is fun!</a> &nbsp;<img src="/images/ticker-link.gif"
+                                                                               align="absmiddle"/></li>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="app-wide-top"></div>
+                                    <div class="app-wide-mid">
+                                        <div class="app-wide-content">
+
+                                            <!-- content start -->
+
+
+                                            <div style="width:716px; height:161px; background-image:url('/images/latest-wide.png');">
+                                                <div style="position:relative;">
+                                                    <div style="position:absolute; top:10px; left:10px;"><a
+                                                            href="http://discord.quake.world/"><img
+                                                            src="/archive/images/hotbox/discord-hotbox.png"
+                                                            alt="Join us at Discord!" border="0"/></a></div>
+
+                                                    <div class="txt_latest_name"
+                                                         style="position:absolute; top:6px; left:208px;"><a
+                                                            href="/configs/200" title="Latest config"><img
+                                                            src="/images/blank.gif" width="26" height="25"
+                                                            alt="Latest config" border="0"/></a></div>
+                                                    <div class="txt_latest_name"
+                                                         style="position:absolute; top:11px; left:247px;"><a
+                                                            href="/configs/200" class="link_latest">dirtbox 21:9
+                                                        ultrawide config</a></div>
+                                                    <div class="txt_latest_date"
+                                                         style="position:absolute; top:11px; left:600px; width:103px; text-align:right;">
+                                                        3/4, 05:08
+                                                    </div>
+
+                                                    <div class="txt_latest_name"
+                                                         style="position:absolute; top:37px; left:208px;"><a
+                                                            href="/gallery/picture/2982" title="Latest image"><img
+                                                            src="/images/blank.gif" width="26" height="25"
+                                                            alt="Latest config" border="0"/></a></div>
+                                                    <div class="txt_latest_name"
+                                                         style="position:absolute; top:42px; left:247px;"><a
+                                                            href="/gallery/picture/2982" class="link_latest">QHLAN #15 -
+                                                        Stockholm, Sweden</a></div>
+                                                    <div class="txt_latest_date"
+                                                         style="position:absolute; top:42px; left:600px; width:103px; text-align:right;">
+                                                        13/4, 00:03
+                                                    </div>
+
+                                                    <div class="txt_latest_name"
+                                                         style="position:absolute; top:68px; left:208px;"><a
+                                                            href="/blog/414/its-back-qhlan-2022"
+                                                            title="Latest blog article"><img src="/images/blank.gif"
+                                                                                             width="26" height="25"
+                                                                                             alt="Latest config"
+                                                                                             border="0"/></a></div>
+                                                    <div class="txt_latest_name"
+                                                         style="position:absolute; top:73px; left:247px;"><a
+                                                            href="/blog/414/its-back-qhlan-2022" class="link_latest">Its
+                                                        back - QHLAN 2022</a></div>
+                                                    <div class="txt_latest_date"
+                                                         style="position:absolute; top:73px; left:600px; width:103px; text-align:right;">
+                                                        2/11, 13:29
+                                                    </div>
+
+                                                    <div class="txt_latest_name"
+                                                         style="position:absolute; top:99px; left:208px;"><a
+                                                            href="/forum/topic/7690#110144"
+                                                            title="Latest forum post"><img src="/images/blank.gif"
+                                                                                           width="26" height="25"
+                                                                                           alt="Latest config"
+                                                                                           border="0"/></a></div>
+                                                    <div class="txt_latest_name"
+                                                         style="position:absolute; top:104px; left:247px;"><a
+                                                            href="/forum/topic/7690#110144" class="link_latest">Map
+                                                        "trick", last stage</a></div>
+                                                    <div class="txt_latest_date"
+                                                         style="position:absolute; top:104px; left:600px; width:103px; text-align:right;">
+                                                        1/7, 23:50
+                                                    </div>
+
+                                                    <div class="txt_latest_name"
+                                                         style="position:absolute; top:135px; left:247px;"></div>
+                                                    <div class="txt_latest_date"
+                                                         style="position:absolute; top:135px; left:600px; width:103px; text-align:right;"></div>
+                                                </div>
+                                            </div>
+                                            <!-- content end -->
+
+                                        </div>
+                                    </div>
+                                    <div class="app-wide-bottom-2"></div>
+
+                                    <div class="app-wide-top-alt"></div>
+                                    <div class="app-wide-mid-alt">
+                                        <div class="app-wide-content-alt">
+
+                                            <!-- content start -->
+
+
+                                            <div>
+                                                <div style="padding-left:15px;">
+                                                    <div class="bar-red-left"></div>
+                                                    <div class="bar-red" style="width:702px;">
+                                                        <div class="bar-text-left">Events</div>
+                                                        <div class="bar-text-right"><a href="/profiles/830">XantoM</a>
+                                                            &nbsp;/&nbsp; 6 Jun 2023, 21:36
+                                                        </div>
+                                                    </div>
+                                                    <div class="bar-red-right"></div>
+                                                    <div class="bar-text-topic"><a
+                                                            href="/news/1185/qhlan-2024-signups-open">QHLAN 2024 -
+                                                        Signups Open</a></div>
+                                                    <div class="bar-text-body" style="width:630px;">
+                                                        <div style="padding-top:5px;">
+                                                            <table cellspacing="0" cellpadding="0" border="0">
+                                                                <tr>
+                                                                    <td height="3" width="3"><img
+                                                                            src="/images/frame-1.gif" width="3"
+                                                                            height="3" alt=""/></td>
+                                                                    <td height="3"
+                                                                        style="background-image:url('/images/frame-2.gif');"></td>
+                                                                    <td height="3" width="3"><img
+                                                                            src="/images/frame-3.gif" width="3"
+                                                                            height="3" alt=""/></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="background-image:url('/images/frame-4.gif');"></td>
+                                                                    <td height="100%" class="framecontent_default">
+                                                                        <div style="padding:4px;"><a
+                                                                                href="https://www.qhlan.org/assets/img/qhlan2024_social.png"><img
+                                                                                src="https://www.qhlan.org/assets/img/qhlan2024_social.png"
+                                                                                alt="https://www.qhlan.org/assets/img/qhlan2024_social.png"
+                                                                                class="bb-image"/></a></div>
+                                                                    </td>
+                                                                    <td style="background-image:url('/images/frame-5.gif');"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td height="3" width="3"><img
+                                                                            src="/images/frame-6.gif" width="3"
+                                                                            height="3" alt=""/></td>
+                                                                    <td height="3"
+                                                                        style="background-image:url('/images/frame-7.gif');"></td>
+                                                                    <td height="3" width="3"><img
+                                                                            src="/images/frame-8.gif" width="3"
+                                                                            height="3" alt=""/></td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                        <br/><br/>QHLAN2024 will take place on 10-14 Jan 2024 in Epic
+                                                        Studios, Stockholm.<br/><br/><span style="font-weight:bold">Signup now</span>
+                                                        at <a href="https://www.qhlan.org/" class="bb-url"><span
+                                                            style="font-weight:bold">QHLAN.org</span></a> !
+                                                    </div>
+                                                    <div class="line" style="width:704px; margin-bottom:9px;"></div>
+                                                    <div class="cell" style="width:700px; padding-bottom:4px;">
+
+                                                        <div class="txt_small" style="float:right;"><a
+                                                                href="/news/1185/qhlan-2024-signups-open/#comments"><img
+                                                                src="/images/ico-comment.gif" alt="" border="0"
+                                                                style="padding-right:3px; vertical-align:middle;"/>1</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div><img src="/images/apps/app-wide-altcontent-between.gif"></div>
+                                            <div>
+                                                <div style="padding-left:15px;">
+                                                    <div class="bar-grey-left"></div>
+                                                    <div class="bar-grey" style="width:702px;">
+                                                        <div class="bar-text-left">Tournaments</div>
+                                                        <div class="bar-text-right"><a href="/profiles/107">dirtbox</a>
+                                                            &nbsp;/&nbsp; 2 Jun 2023, 08:01
+                                                        </div>
+                                                    </div>
+                                                    <div class="bar-grey-right"></div>
+                                                    <div class="bar-text-topic"><a
+                                                            href="/news/1184/duelmania-downunder-2023-signups-op">Duelmania
+                                                        DownUnder 2023 - Signups Open</a></div>
+                                                    <div class="bar-text-body" style="width:630px;">Deja vu anyone?
+                                                        #weriseagain<br/><br/>After a 1-year hiatus, to coincide with
+                                                        winter, the world's most prestigious online Quakeworld duel
+                                                        tournament is back in its DownUnder format.<br/><br/>This year
+                                                        we are extending the server base from <img alt=""
+                                                                                                   src="/images/flags/au.gif"
+                                                                                                   class="bb-flag"/>
+                                                        Australia and <img alt="" src="/images/flags/nz.gif"
+                                                                           class="bb-flag"/> New Zealand to also include
+                                                        servers in the pool such as <img alt=""
+                                                                                         src="/images/flags/sg.gif"
+                                                                                         class="bb-flag"/> Singapore and
+                                                        <img alt="" src="/images/flags/gu.gif" class="bb-flag"/> Guam in
+                                                        order to appeal to a broader player base (Asia and West Coast
+                                                        USA). The idea is to include all servers that allow for 100ms or
+                                                        less.
+                                                    </div>
+                                                    <div class="line" style="width:704px; margin-bottom:9px;"></div>
+                                                    <div class="cell" style="width:700px; padding-bottom:4px;">
+                                                        <div class="txt_small"
+                                                             style="float:left; padding-left:3px; padding-right:15px;">
+                                                            <a href="/news/1184/duelmania-downunder-2023-signups-op"><img
+                                                                    src="/images/btn-read-1.gif" border="0" alt=""
+                                                                    onmouseover="gChangeImg(this, 'btn-read-2.gif');"
+                                                                    onmouseout="gChangeImg(this, 'btn-read-1.gif');"/></a>
+                                                        </div>
+                                                        <div class="txt_small" style="float:right;"><a
+                                                                href="/news/1184/duelmania-downunder-2023-signups-op/#comments"><img
+                                                                src="/images/ico-comment.gif" alt="" border="0"
+                                                                style="padding-right:3px; vertical-align:middle;"/>1</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div><img src="/images/apps/app-wide-altcontent-between.gif"></div>
+                                            <div>
+                                                <div style="padding-left:15px;">
+                                                    <div class="bar-red-left"></div>
+                                                    <div class="bar-red" style="width:702px;">
+                                                        <div class="bar-text-left">Events</div>
+                                                        <div class="bar-text-right"><a href="/profiles/145">bps</a>
+                                                            &nbsp;/&nbsp; 29 May 2023, 08:57
+                                                        </div>
+                                                    </div>
+                                                    <div class="bar-red-right"></div>
+                                                    <div class="bar-text-topic"><a
+                                                            href="/news/1183/qhlan2024-dates-set-trailer-out">QHLAN2024
+                                                        dates set, trailer out</a></div>
+                                                    <div class="bar-text-body" style="width:630px;"><span
+                                                            style="font-weight:bold">QHLAN2024 announced!</span><br/>•
+                                                        10—14 January 2024<br/>• Epic Studios, Stockholm<br/>• Website
+                                                        with more info coming shortly<br/><br/><span
+                                                                style="font-weight:bold">Watch <a
+                                                                href="https://youtu.be/0VROwdt-kWI" class="bb-url">Hype trailer on youtube</a></span>
+                                                    </div>
+                                                    <div class="line" style="width:704px; margin-bottom:9px;"></div>
+                                                    <div class="cell" style="width:700px; padding-bottom:4px;">
+
+                                                        <div class="txt_small" style="float:right;"><a
+                                                                href="/news/1183/qhlan2024-dates-set-trailer-out/#comments"><img
+                                                                src="/images/ico-comment.gif" alt="" border="0"
+                                                                style="padding-right:3px; vertical-align:middle;"/>1</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div><img src="/images/apps/app-wide-altcontent-between.gif"></div>
+                                            <div>
+                                                <div style="padding-left:15px;">
+                                                    <div class="bar-brown-left"></div>
+                                                    <div class="bar-brown" style="width:702px;">
+                                                        <div class="bar-text-left">Tournaments</div>
+                                                        <div class="bar-text-right"><a href="/profiles/524">Link</a>
+                                                            &nbsp;/&nbsp; 24 Apr 2023, 17:14
+                                                        </div>
+                                                    </div>
+                                                    <div class="bar-brown-right"></div>
+                                                    <div class="bar-text-topic"><a href="/news/1182/allstar-game">All-Star
+                                                        Game</a></div>
+                                                    <div class="bar-text-body" style="width:630px;">
+                                                        <div style="padding-top:5px;">
+                                                            <table cellspacing="0" cellpadding="0" border="0">
+                                                                <tr>
+                                                                    <td height="3" width="3"><img
+                                                                            src="/images/frame-1.gif" width="3"
+                                                                            height="3" alt=""/></td>
+                                                                    <td height="3"
+                                                                        style="background-image:url('/images/frame-2.gif');"></td>
+                                                                    <td height="3" width="3"><img
+                                                                            src="/images/frame-3.gif" width="3"
+                                                                            height="3" alt=""/></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="background-image:url('/images/frame-4.gif');"></td>
+                                                                    <td height="100%" class="framecontent_default">
+                                                                        <div style="padding:4px;"><a
+                                                                                href="https://www.quakeworld.nu/w/images/f/ff/Qenya2_qwnu.png"><img
+                                                                                src="https://www.quakeworld.nu/w/images/f/ff/Qenya2_qwnu.png"
+                                                                                alt="https://www.quakeworld.nu/w/images/f/ff/Qenya2_qwnu.png"
+                                                                                class="bb-image"/></a></div>
+                                                                    </td>
+                                                                    <td style="background-image:url('/images/frame-5.gif');"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td height="3" width="3"><img
+                                                                            src="/images/frame-6.gif" width="3"
+                                                                            height="3" alt=""/></td>
+                                                                    <td height="3"
+                                                                        style="background-image:url('/images/frame-7.gif');"></td>
+                                                                    <td height="3" width="3"><img
+                                                                            src="/images/frame-8.gif" width="3"
+                                                                            height="3" alt=""/></td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                        <br/>On Wednesday 26 April @ 22:00 CEST we will have a great
+                                                        4on4 showoff on some great custom maps. Some of the best 4on4
+                                                        players will battle it out on rocka, obsidian and phantoma.
+                                                    </div>
+                                                    <div class="line" style="width:704px; margin-bottom:9px;"></div>
+                                                    <div class="cell" style="width:700px; padding-bottom:4px;">
+                                                        <div class="txt_small"
+                                                             style="float:left; padding-left:3px; padding-right:15px;">
+                                                            <a href="/news/1182/allstar-game"><img
+                                                                    src="/images/btn-read-1.gif" border="0" alt=""
+                                                                    onmouseover="gChangeImg(this, 'btn-read-2.gif');"
+                                                                    onmouseout="gChangeImg(this, 'btn-read-1.gif');"/></a>
+                                                        </div>
+                                                        <div class="txt_small" style="float:right;"><a
+                                                                href="/news/1182/allstar-game/#comments"><img
+                                                                src="/images/ico-comment.gif" alt="" border="0"
+                                                                style="padding-right:3px; vertical-align:middle;"/>0</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div><img src="/images/apps/app-wide-altcontent-between.gif"></div>
+                                            <div>
+                                                <div style="padding-left:15px;">
+                                                    <div class="bar-green-left"></div>
+                                                    <div class="bar-green" style="width:702px;">
+                                                        <div class="bar-text-left">Lans</div>
+                                                        <div class="bar-text-right"><a href="/profiles/9741">RaggA</a>
+                                                            &nbsp;/&nbsp; 9 Apr 2023, 14:10
+                                                        </div>
+                                                    </div>
+                                                    <div class="bar-green-right"></div>
+                                                    <div class="bar-text-topic"><a
+                                                            href="/news/1181/qw-lan-party-poland-2023">QW LAN PARTY
+                                                        Poland 2023</a></div>
+                                                    <div class="bar-text-body" style="width:630px;">Hello fellow Quakers
+                                                        <br/><br/>We are pleased to announce that signups for QW LAN PL
+                                                        2023 are now open!<br/><br/>
+                                                        <div style="padding-top:5px;">
+                                                            <table cellspacing="0" cellpadding="0" border="0">
+                                                                <tr>
+                                                                    <td height="3" width="3"><img
+                                                                            src="/images/frame-1.gif" width="3"
+                                                                            height="3" alt=""/></td>
+                                                                    <td height="3"
+                                                                        style="background-image:url('/images/frame-2.gif');"></td>
+                                                                    <td height="3" width="3"><img
+                                                                            src="/images/frame-3.gif" width="3"
+                                                                            height="3" alt=""/></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="background-image:url('/images/frame-4.gif');"></td>
+                                                                    <td height="100%" class="framecontent_default">
+                                                                        <div style="padding:4px;"><a
+                                                                                href="https://www.quakeworld.nu/w/images/thumb/2/20/Dqer-black.png/1280px-Dqer-black.png"><img
+                                                                                src="https://www.quakeworld.nu/w/images/thumb/2/20/Dqer-black.png/1280px-Dqer-black.png"
+                                                                                alt="https://www.quakeworld.nu/w/images/thumb/2/20/Dqer-black.png/1280px-Dqer-black.png"
+                                                                                class="bb-image"/></a></div>
+                                                                    </td>
+                                                                    <td style="background-image:url('/images/frame-5.gif');"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td height="3" width="3"><img
+                                                                            src="/images/frame-6.gif" width="3"
+                                                                            height="3" alt=""/></td>
+                                                                    <td height="3"
+                                                                        style="background-image:url('/images/frame-7.gif');"></td>
+                                                                    <td height="3" width="3"><img
+                                                                            src="/images/frame-8.gif" width="3"
+                                                                            height="3" alt=""/></td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <div class="line" style="width:704px; margin-bottom:9px;"></div>
+                                                    <div class="cell" style="width:700px; padding-bottom:4px;">
+                                                        <div class="txt_small"
+                                                             style="float:left; padding-left:3px; padding-right:15px;">
+                                                            <a href="/news/1181/qw-lan-party-poland-2023"><img
+                                                                    src="/images/btn-read-1.gif" border="0" alt=""
+                                                                    onmouseover="gChangeImg(this, 'btn-read-2.gif');"
+                                                                    onmouseout="gChangeImg(this, 'btn-read-1.gif');"/></a>
+                                                        </div>
+                                                        <div class="txt_small" style="float:right;"><a
+                                                                href="/news/1181/qw-lan-party-poland-2023/#comments"><img
+                                                                src="/images/ico-comment.gif" alt="" border="0"
+                                                                style="padding-right:3px; vertical-align:middle;"/>0</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div><img src="/images/apps/app-wide-altcontent-between.gif"></div>
+                                            <div>
+                                                <div style="padding-left:15px;">
+                                                    <div class="bar-grey-left"></div>
+                                                    <div class="bar-grey" style="width:702px;">
+                                                        <div class="bar-text-left">Client software</div>
+                                                        <div class="bar-text-right"><a href="/profiles/9822">toma</a>
+                                                            &nbsp;/&nbsp; 19 Mar 2023, 21:49
+                                                        </div>
+                                                    </div>
+                                                    <div class="bar-grey-right"></div>
+                                                    <div class="bar-text-topic"><a
+                                                            href="/news/1180/ezquake-362-released">ezQuake 3.6.2
+                                                        released</a></div>
+                                                    <div class="bar-text-body" style="width:630px;">ezQuake 3.6.2 has
+                                                        been released!<br/><br/>Thanks to all contributors! Without you
+                                                        guys, there will be just void!
+                                                    </div>
+                                                    <div class="line" style="width:704px; margin-bottom:9px;"></div>
+                                                    <div class="cell" style="width:700px; padding-bottom:4px;">
+                                                        <div class="txt_small"
+                                                             style="float:left; padding-left:3px; padding-right:15px;">
+                                                            <a href="/news/1180/ezquake-362-released"><img
+                                                                    src="/images/btn-read-1.gif" border="0" alt=""
+                                                                    onmouseover="gChangeImg(this, 'btn-read-2.gif');"
+                                                                    onmouseout="gChangeImg(this, 'btn-read-1.gif');"/></a>
+                                                        </div>
+                                                        <div class="txt_small" style="float:right;"><a
+                                                                href="/news/1180/ezquake-362-released/#comments"><img
+                                                                src="/images/ico-comment.gif" alt="" border="0"
+                                                                style="padding-right:3px; vertical-align:middle;"/>4</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div><img src="/images/apps/app-wide-altcontent-between.gif"></div>
+                                            <div>
+                                                <div style="padding-left:15px;">
+                                                    <div class="bar-brown-left"></div>
+                                                    <div class="bar-brown" style="width:702px;">
+                                                        <div class="bar-text-left">Servers</div>
+                                                        <div class="bar-text-right"><a href="/profiles/9822">toma</a>
+                                                            &nbsp;/&nbsp; 19 Feb 2023, 21:43
+                                                        </div>
+                                                    </div>
+                                                    <div class="bar-brown-right"></div>
+                                                    <div class="bar-text-topic"><a
+                                                            href="/news/1179/mvdsv-036-is-released">MVDSV 0.36 is
+                                                        released</a></div>
+                                                    <div class="bar-text-body" style="width:630px;"><a
+                                                            href="https://github.com/QW-Group/mvdsv/releases/tag/0.36"
+                                                            class="bb-url">MVDSV Release Notes</a><br/><br/>Compiled
+                                                        binaries:<br/><a
+                                                                href="https://builds.quakeworld.nu/mvdsv/releases/0.36"
+                                                                class="bb-url">https://builds.quakeworld.nu/mvdsv/releases/0.36</a>
+                                                    </div>
+                                                    <div class="line" style="width:704px; margin-bottom:9px;"></div>
+                                                    <div class="cell" style="width:700px; padding-bottom:4px;">
+
+                                                        <div class="txt_small" style="float:right;"><a
+                                                                href="/news/1179/mvdsv-036-is-released/#comments"><img
+                                                                src="/images/ico-comment.gif" alt="" border="0"
+                                                                style="padding-right:3px; vertical-align:middle;"/>0</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div><img src="/images/apps/app-wide-altcontent-between.gif"></div>
+                                            <div>
+                                                <div style="padding-left:15px;">
+                                                    <div class="bar-brown-left"></div>
+                                                    <div class="bar-brown" style="width:702px;">
+                                                        <div class="bar-text-left">Servers</div>
+                                                        <div class="bar-text-right"><a href="/profiles/145">bps</a>
+                                                            &nbsp;/&nbsp; 19 Jan 2023, 07:58
+                                                        </div>
+                                                    </div>
+                                                    <div class="bar-brown-right"></div>
+                                                    <div class="bar-text-topic"><a
+                                                            href="/news/1178/qwfoppadk-put-to-rest-leaving-a">qw.foppa.dk
+                                                        put to rest, leaving a void</a></div>
+                                                    <div class="bar-text-body" style="width:630px;"><img alt=""
+                                                                                                         src="/images/flags/dk.gif"
+                                                                                                         class="bb-flag"/>
+                                                        Forsberg, the server admin of qw.foppa.dk, recently declared the
+                                                        much beloved foppa server end of life:<br/>
+                                                        <div class="bb-quote-header">Quote:</div>
+                                                        <div class="bb-quote">&quot;An epoke is over, qw.foppa.dk went
+                                                            down again, and I do not think it's coming up at its current
+                                                            location again. I will try to bring it back up another
+                                                            place, but I dont have high hopes for routing etc. I want to
+                                                            thank everyone who used or helped with the quake servers, it
+                                                            has been a pleasure to give a little to this great game we
+                                                            all love &lt;3&quot;
+                                                        </div>
+                                                    </div>
+                                                    <div class="line" style="width:704px; margin-bottom:9px;"></div>
+                                                    <div class="cell" style="width:700px; padding-bottom:4px;">
+                                                        <div class="txt_small"
+                                                             style="float:left; padding-left:3px; padding-right:15px;">
+                                                            <a href="/news/1178/qwfoppadk-put-to-rest-leaving-a"><img
+                                                                    src="/images/btn-read-1.gif" border="0" alt=""
+                                                                    onmouseover="gChangeImg(this, 'btn-read-2.gif');"
+                                                                    onmouseout="gChangeImg(this, 'btn-read-1.gif');"/></a>
+                                                        </div>
+                                                        <div class="txt_small" style="float:right;"><a
+                                                                href="/news/1178/qwfoppadk-put-to-rest-leaving-a/#comments"><img
+                                                                src="/images/ico-comment.gif" alt="" border="0"
+                                                                style="padding-right:3px; vertical-align:middle;"/>7</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div><img src="/images/apps/app-wide-altcontent-between.gif"></div>
+                                            <div>
+                                                <div style="padding-left:15px;">
+                                                    <div class="bar-brown-left"></div>
+                                                    <div class="bar-brown" style="width:702px;">
+                                                        <div class="bar-text-left">Tournaments</div>
+                                                        <div class="bar-text-right"><a href="/profiles/9822">toma</a>
+                                                            &nbsp;/&nbsp; 19 Dec 2022, 12:26
+                                                        </div>
+                                                    </div>
+                                                    <div class="bar-brown-right"></div>
+                                                    <div class="bar-text-topic"><a
+                                                            href="/news/1177/getquad-draft-season-6-grand-final">GetQuad
+                                                        Draft Season 6 Grand Final today</a></div>
+                                                    <div class="bar-text-body" style="width:630px;"><span
+                                                            style="font-weight:bold">The match to end it all!</span><br/><span
+                                                            style="font-weight:bold"></span><br/>Today from 21:00CET the
+                                                        Grand Final of GetQuad Draft Season6 between Milton's Mutants
+                                                        and Diki's Cocks will finish yet another outstanding and
+                                                        exciting season of the GetQuad franchise. Let's see who will sit
+                                                        on the throne of QuakeWorld!
+                                                    </div>
+                                                    <div class="line" style="width:704px; margin-bottom:9px;"></div>
+                                                    <div class="cell" style="width:700px; padding-bottom:4px;">
+                                                        <div class="txt_small"
+                                                             style="float:left; padding-left:3px; padding-right:15px;">
+                                                            <a href="/news/1177/getquad-draft-season-6-grand-final"><img
+                                                                    src="/images/btn-read-1.gif" border="0" alt=""
+                                                                    onmouseover="gChangeImg(this, 'btn-read-2.gif');"
+                                                                    onmouseout="gChangeImg(this, 'btn-read-1.gif');"/></a>
+                                                        </div>
+                                                        <div class="txt_small" style="float:right;"><a
+                                                                href="/news/1177/getquad-draft-season-6-grand-final/#comments"><img
+                                                                src="/images/ico-comment.gif" alt="" border="0"
+                                                                style="padding-right:3px; vertical-align:middle;"/>0</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div><img src="/images/apps/app-wide-altcontent-between.gif"></div>
+                                            <div>
+                                                <div style="padding-left:15px;">
+                                                    <div class="bar-brown-left"></div>
+                                                    <div class="bar-brown" style="width:702px;">
+                                                        <div class="bar-text-left">Tournaments</div>
+                                                        <div class="bar-text-right"><a href="/profiles/9741">RaggA</a>
+                                                            &nbsp;/&nbsp; 11 Dec 2022, 08:27
+                                                        </div>
+                                                    </div>
+                                                    <div class="bar-brown-right"></div>
+                                                    <div class="bar-text-topic"><a
+                                                            href="/news/1176/time2hammer-season-4-signups-open">Time2Hammer
+                                                        Season 4 - Signups Open.</a></div>
+                                                    <div class="bar-text-body" style="width:630px;">
+                                                        <div style="padding-top:5px;">
+                                                            <table cellspacing="0" cellpadding="0" border="0">
+                                                                <tr>
+                                                                    <td height="3" width="3"><img
+                                                                            src="/images/frame-1.gif" width="3"
+                                                                            height="3" alt=""/></td>
+                                                                    <td height="3"
+                                                                        style="background-image:url('/images/frame-2.gif');"></td>
+                                                                    <td height="3" width="3"><img
+                                                                            src="/images/frame-3.gif" width="3"
+                                                                            height="3" alt=""/></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="background-image:url('/images/frame-4.gif');"></td>
+                                                                    <td height="100%" class="framecontent_default">
+                                                                        <div style="padding:4px;"><a
+                                                                                href="https://cdn.discordapp.com/attachments/597909415420493834/1037785763556884511/Hammertime_-_Season_4_-_1080.png"><img
+                                                                                src="https://cdn.discordapp.com/attachments/597909415420493834/1037785763556884511/Hammertime_-_Season_4_-_1080.png"
+                                                                                alt="https://cdn.discordapp.com/attachments/597909415420493834/1037785763556884511/Hammertime_-_Season_4_-_1080.png"
+                                                                                class="bb-image"/></a></div>
+                                                                    </td>
+                                                                    <td style="background-image:url('/images/frame-5.gif');"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td height="3" width="3"><img
+                                                                            src="/images/frame-6.gif" width="3"
+                                                                            height="3" alt=""/></td>
+                                                                    <td height="3"
+                                                                        style="background-image:url('/images/frame-7.gif');"></td>
+                                                                    <td height="3" width="3"><img
+                                                                            src="/images/frame-8.gif" width="3"
+                                                                            height="3" alt=""/></td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                        <br/><br/><span style="font-weight:bold"> Seasons greetings Quakers. We are happy to announce that the Time2Hammer 2on2 League will be returning in January 2023! </span>
+                                                    </div>
+                                                    <div class="line" style="width:704px; margin-bottom:9px;"></div>
+                                                    <div class="cell" style="width:700px; padding-bottom:4px;">
+                                                        <div class="txt_small"
+                                                             style="float:left; padding-left:3px; padding-right:15px;">
+                                                            <a href="/news/1176/time2hammer-season-4-signups-open"><img
+                                                                    src="/images/btn-read-1.gif" border="0" alt=""
+                                                                    onmouseover="gChangeImg(this, 'btn-read-2.gif');"
+                                                                    onmouseout="gChangeImg(this, 'btn-read-1.gif');"/></a>
+                                                        </div>
+                                                        <div class="txt_small" style="float:right;"><a
+                                                                href="/news/1176/time2hammer-season-4-signups-open/#comments"><img
+                                                                src="/images/ico-comment.gif" alt="" border="0"
+                                                                style="padding-right:3px; vertical-align:middle;"/>1</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div><img src="/images/apps/app-wide-altcontent-between.gif"></div>
+                                            <div style="width:705px; display:table; padding-left:15px; padding-bottom:2px;">
+                                                <div class="table" style="width:100%;">
+                                                    <span class="pagenav-bar-left">&nbsp;</span>
+                                                    <span class="pagenav-bar-mid"
+                                                          style="padding-left:10px; cursor:pointer; text-align:center"
+                                                          onclick="location.href = '/front/page/108';">1079 articles on 108 pages</span>
+                                                    <span class="pagenav-bar-right">&nbsp;</span><span
+                                                        class="pagenav-spacer"></span><span class="pagenav"
+                                                                                            onmouseover="gChangeBgrImg(this, 'page-navi-hover.gif');"
+                                                                                            onmouseout="gChangeBgrImg(this, 'page-navi.gif');"
+                                                                                            onclick="location.href = '/front/page/1';"><img
+                                                        src="/images/page-navi-first.png" alt="First page"
+                                                        title="First page"/></span><span
+                                                        class="pagenav-spacer"></span><span class="pagenav-sel"
+                                                                                            onmouseover="gChangeBgrImg(this, 'page-navi-sel.gif');"
+                                                                                            onmouseout="gChangeBgrImg(this, 'page-navi-sel.gif');"
+                                                                                            onclick="location.href = '/front/page/1';">1</span><span
+                                                        class="pagenav-spacer"></span><span class="pagenav"
+                                                                                            onmouseover="gChangeBgrImg(this, 'page-navi-hover.gif');"
+                                                                                            onmouseout="gChangeBgrImg(this, 'page-navi.gif');"
+                                                                                            onclick="location.href = '/front/page/2';">2</span><span
+                                                        class="pagenav-spacer"></span><span class="pagenav"
+                                                                                            onmouseover="gChangeBgrImg(this, 'page-navi-hover.gif');"
+                                                                                            onmouseout="gChangeBgrImg(this, 'page-navi.gif');"
+                                                                                            onclick="location.href = '/front/page/3';">3</span><span
+                                                        class="pagenav-spacer"></span><span class="pagenav"
+                                                                                            onmouseover="gChangeBgrImg(this, 'page-navi-hover.gif');"
+                                                                                            onmouseout="gChangeBgrImg(this, 'page-navi.gif');"
+                                                                                            onclick="location.href = '/front/page/4';">4</span><span
+                                                        class="pagenav-spacer"></span><span class="pagenav"
+                                                                                            onmouseover="gChangeBgrImg(this, 'page-navi-hover.gif');"
+                                                                                            onmouseout="gChangeBgrImg(this, 'page-navi.gif');"
+                                                                                            onclick="location.href = '/front/page/5';">5</span><span
+                                                        class="pagenav-spacer"></span><span class="pagenav"
+                                                                                            onmouseover="gChangeBgrImg(this, 'page-navi-hover.gif');"
+                                                                                            onmouseout="gChangeBgrImg(this, 'page-navi.gif');"
+                                                                                            onclick="location.href = '/front/page/6';">6</span><span
+                                                        class="pagenav-spacer"></span><span class="pagenav"
+                                                                                            onmouseover="gChangeBgrImg(this, 'page-navi-hover.gif');"
+                                                                                            onmouseout="gChangeBgrImg(this, 'page-navi.gif');"
+                                                                                            onclick="location.href = '/front/page/7';">7</span><span
+                                                        class="pagenav-spacer"></span><span class="pagenav"
+                                                                                            onmouseover="gChangeBgrImg(this, 'page-navi-hover.gif');"
+                                                                                            onmouseout="gChangeBgrImg(this, 'page-navi.gif');"
+                                                                                            onclick="location.href = '/front/page/8';">8</span><span
+                                                        class="pagenav-spacer"></span><span class="pagenav"
+                                                                                            onmouseover="gChangeBgrImg(this, 'page-navi-hover.gif');"
+                                                                                            onmouseout="gChangeBgrImg(this, 'page-navi.gif');"
+                                                                                            onclick="location.href = '/front/page/9';">9</span><span
+                                                        class="pagenav-spacer"></span><span class="pagenav"
+                                                                                            onmouseover="gChangeBgrImg(this, 'page-navi-hover.gif');"
+                                                                                            onmouseout="gChangeBgrImg(this, 'page-navi.gif');"
+                                                                                            onclick="location.href = '/front/page/10';">10</span><span
+                                                        class="pagenav-spacer"></span><span class="pagenav"
+                                                                                            onmouseover="gChangeBgrImg(this, 'page-navi-hover.gif');"
+                                                                                            onmouseout="gChangeBgrImg(this, 'page-navi.gif');"
+                                                                                            onclick="location.href = '/front/page/108';"><img
+                                                        src="/images/page-navi-last.png" alt="Last page"
+                                                        title="Last page"/></span></div>
+                                            </div>
+                                            <div><img src="/images/apps/app-wide-altcontent-bottom-3.gif"></div>
+                                            <!-- content end -->
+
+                                        </div>
+                                    </div>
+                                    <div class="app-wide-bottom-alt"><a href="#top">
+                                        <div style="float:right; width:60px; height:34px;"></div>
+                                    </a></div>
+                                </div>
+                                </form>
+
+
+                                <!-- app javascript -->
+
+                                <script type="text/javascript">
+	$('.ticker').vTicker({
+		speed: 400,
+		pause: 4000,
+		showItems: 3,
+		animation: 'fade',
+		mousePause: true,
+		height: 17,
+		direction: 'up'
+	});
+
+
+
+                                </script>
+
+                            </div>
+</div>
+<div style="float:left;">
+    <div>
+        <!-- app window -->
+
+        <form name="frmLogin" id="frmLogin" method="post" action="/front"
+              onsubmit="return AppLogin.ValidateLoginForm();">
+            <input type="hidden" name="app" value="LOGIN"/>
+            <input type="hidden" name="cmd"/>
+
+            <div class="app-small">
+
+                <!-- content start -->
+
+
+                <div><img src="/images/apps/app-small-login.gif"/></div>
+                <div class="app-small-top"></div>
+                <div class="app-small-mid">
+                    <div class="app-small-content">
+                        <div class="txt_field_name" style="padding-top:5px;">Username:</div>
+                        <div>
+                            <table height="20" cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                    <td width="3"><img src="/images/field-1.gif" width="3" height="20"></td>
+                                    <td style="background-image:url('/images/field-2.gif');"><input type="text"
+                                                                                                    name="txtLoginUsername"
+                                                                                                    value=""
+                                                                                                    class="fld_content"
+                                                                                                    style="width:181px;"/>
+                                    </td>
+                                    <td width="4"><img src="/images/field-3.gif" width="4" height="20"></td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="txt_field_name" style="padding-top:5px;">Password:</div>
+                        <div>
+                            <table height="20" cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                    <td width="3"><img src="/images/field-1.gif" width="3" height="20"></td>
+                                    <td style="background-image:url('/images/field-2.gif');"><input type="password"
+                                                                                                    name="txtLoginPassword"
+                                                                                                    class="fld_content"
+                                                                                                    style="width:181px;"/>
+                                    </td>
+                                    <td width="4"><img src="/images/field-3.gif" width="4" height="20"></td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="buttonbar" style="padding-top:9px;">
+                            <div class="button" style="width:84px;"><input type="submit" name="btnLogin" value="Login"
+                                                                           class="btn_common"/></div>
+                            <div class="button" style="width:84px;"><input type="button" name="btnRegister"
+                                                                           value="Register" class="btn_common"
+                                                                           onclick="location.href = '/register';"/>
+                            </div>
+                            <div class="button" style="width:20px;"><input type="button" name="btnReset" value="?"
+                                                                           title="Forgot password?"
+                                                                           class="btn_common_sqr"
+                                                                           onclick="location.href = '/resetpassword';"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="app-small-bottom"></div>
+                <!-- content end -->
+
+            </div>
+        </form>
+
+        <!-- app javascript -->
+
+        <script type="text/javascript">
+	var AppLogin = {
+		ValidateLoginForm: function() {
+			var oForm = document.getElementById("frmLogin");
+
+			if (oForm.txtLoginUsername.value == "") {
+				oForm.txtLoginUsername.focus();
+			}
+			else if (oForm.txtLoginPassword.value == "") {
+				oForm.txtLoginPassword.focus();
+			}
+			else {
+				gDoCmd("frmLogin", "Login");
+			}
+
+			return false;
+		}
+	}
+
+
+
+        </script>
+
+    </div>
+    <div>
+        <!-- app window -->
+
+        <form name="frmGuidePromo" id="frmGuidePromo" method="post" action="/front">
+            <input type="hidden" name="app" value="GUIDE_PROMO"/>
+            <input type="hidden" name="cmd"/>
+
+            <div class="app-small">
+                <div style="position:relative; width:226px; height:92px; background-image:url('/images/apps/app-guide-promo.png');">
+                    <div style="position:absolute; top:15px; left:15px;"><a href="/guide/getstarted"><img
+                            src="/images/blank.gif" width="196" height="62" border="0" alt=""/></a></div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <div>
+        <!-- app window -->
+
+        <form name="frmQWnetSmall" id="frmQWnetSmall" method="post" action="/front">
+            <input type="hidden" name="app" value="QWNET_SMALL"/>
+            <input type="hidden" name="cmd"/>
+
+            <div class="app-small">
+                <div><img src="/images/apps/app-small-qwnet.gif"/></div>
+                <div class="app-small-yellow-top"></div>
+                <div class="app-small-yellow-mid">
+                    <div class="app-small-content">
+
+                        <!-- content start -->
+
+                        <div id="divQWnetSmallList">
+                            <div style="width:183px; margin-left:3px; margin-top:2px; margin-bottom:4px;">
+                                <div class="txt_small"><b>13:30</b> <span
+                                        style="color:#847059;">by OneManClan:</span><br/>Rock2ober 2022: 32 players! 10
+                                    hours to go!: https://www.attackersgored.com/?p=3603<br/><span class="col_beige">//quakeworld.nu</span>
+                                </div>
+                                <div class="line-brown" style="margin-top:5px; margin-bottom:5px;"></div>
+                                <div class="txt_small"><b>09:38</b> <span style="color:#847059;">by sassa:</span><br/>FYI:
+                                    AdMortem site restored https://admortem.herokuapp.com/<br/><span class="col_beige">//quakeworld.nu</span>
+                                </div>
+                                <div class="line-brown" style="margin-top:5px; margin-bottom:5px;"></div>
+                                <div class="txt_small"><b>03:22</b> <span
+                                        style="color:#847059;">by OneManClan:</span><br/>Rock2ober 2019 = THIS Saturday!
+                                    https://www.attackersgored.com/?p=3194<br/><span class="col_beige"><a
+                                            href="http://quakeworld.nu" class="link_orange_nl" title="Open link">quakeworld.nu</a></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- content end -->
+
+                    </div>
+                </div>
+                <div style="width:226px; height:43px; background-image: url('/images/apps/app-qwnet-bottom.gif');">
+                    <div style="padding-top:8px; padding-left:15px;">
+                        <a href="/qwnet/post">
+                            <div class="qwnet-btn-long" style="float:left"
+                                 onmouseover="gChangeBgrImg(this, 'btn-qwnet-long-2.gif');"
+                                 onmouseout="gChangeBgrImg(this, 'btn-qwnet-long-1.gif');">
+                                <div>Post message</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div style="padding-right:15px;">
+                        <a href="/qwnet">
+                            <div class="qwnet-btn-short" style="float:right;"
+                                 onmouseover="gChangeBgrImg(this, 'btn-qwnet-short-2.gif');"
+                                 onmouseout="gChangeBgrImg(this, 'btn-qwnet-short-1.gif');">
+                                <div>More</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <!-- app javascript -->
+
+        <script type="text/javascript">
+	var AppQWnetSmall = {
+
+		// refresh list
+
+		RefreshList: function() {
+			var oXML = gGetXMLHTTPObject();
+
+			oXML.open("GET", "/qwnet/refresh/small/?rnd=" + Math.random(), false);
+			oXML.send(null);
+
+			document.getElementById("divQWnetSmallList").innerHTML = oXML.responseText;
+
+			return false;
+		}
+ 	};
+
+	var iTimerID = setInterval(AppQWnetSmall.RefreshList, 5000);
+
+
+
+        </script>
+
+    </div>
+    <div>
+        <!-- app javascript -->
+
+        <!-- app window -->
+        <div class="app-small">
+            <div class="app-small-top"></div>
+            <div class="app-small-mid">
+                <div class="app-small-content">
+
+                    <!-- content start -->
+
+                    <div id="divQWnetSmallList">
+                        <div style="width:183px; margin-left:3px; margin-top:2px; margin-bottom:4px;">No streams
+                            online.
+                        </div>
+                    </div>
+
+                    <!-- content end -->
+
+                </div>
+            </div>
+            <div style="width:226px; height:13px; background-image: url('/images/apps/app-small-content-bottom.gif');">
+                <!-- Empty -->
+            </div>
+        </div>
+
+    </div>
+    <div>
+        <!-- app window -->
+
+        <form name="frmForumActivity" id="frmForumActivity" method="post" action="/front">
+            <input type="hidden" name="app" value="FORUM_ACTIVITY"/>
+            <input type="hidden" name="cmd"/>
+
+            <div class="app-small">
+                <div><img src="/images/apps/app-small-forum-activity.gif"/></div>
+
+                <!-- content start -->
+
+                <div style="width:100%;">
+                    <div style="background-image:url('/images/apps/app-recentforum-content-mid-top-hover.gif');">
+                        <div style="padding-left:19px; padding-right:19px; cursor:pointer;"
+                             onmouseover="gChangeBgrImg(this, 'apps/app-recentforum-content-mid-top.gif');"
+                             onmouseout="gChangeBgrImg(this, '');" title="View post">
+                            <a href="/forum/topic/7690/110144/map-trick-last-stage#110144"
+                               style="text-decoration:none;">
+                                <div class="app-small-content">
+                                    <div style="padding-left:5px; padding-top:8px; padding-bottom:8px;">
+                                        <div class="link_recent_topic"><b>Map "trick", last stage</b></div>
+                                        <div class="link_recent_forum">2 days ago in General Discussion</div>
+                                        <div class="link_recent_author">By JSS</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div style="background-image:url('/images/apps/app-recentforum-content-mid-0-hover.gif');">
+                        <div style="padding-left:19px; padding-right:19px; cursor:pointer;"
+                             onmouseover="gChangeBgrImg(this, 'apps/app-recentforum-content-mid-0.gif');"
+                             onmouseout="gChangeBgrImg(this, '');" title="View post">
+                            <a href="/forum/topic/7676/110142/revisiting-quakeworld-advice-for-a-#110142"
+                               style="text-decoration:none;">
+                                <div class="app-small-content">
+                                    <div style="padding-left:5px; padding-top:8px; padding-bottom:8px;">
+                                        <div class="link_recent_topic"><b>Revisiting QuakeWorld: Advice for a Linux or
+                                            Wind...</b></div>
+                                        <div class="link_recent_forum">4 days ago in Rookies' Corner</div>
+                                        <div class="link_recent_author">By ParadokS</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div style="background-image:url('/images/apps/app-recentforum-content-mid-1-hover.gif');">
+                        <div style="padding-left:19px; padding-right:19px; cursor:pointer;"
+                             onmouseover="gChangeBgrImg(this, 'apps/app-recentforum-content-mid-1.gif');"
+                             onmouseout="gChangeBgrImg(this, '');" title="View post">
+                            <a href="/forum/topic/7524/110141/humanoid#110141" style="text-decoration:none;">
+                                <div class="app-small-content">
+                                    <div style="padding-left:5px; padding-top:8px; padding-bottom:8px;">
+                                        <div class="link_recent_topic"><b>Humanoid</b></div>
+                                        <div class="link_recent_forum">4 days ago in General Discussion</div>
+                                        <div class="link_recent_author">By lemonjuiced</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div style="background-image:url('/images/apps/app-recentforum-content-mid-0-hover.gif');">
+                        <div style="padding-left:19px; padding-right:19px; cursor:pointer;"
+                             onmouseover="gChangeBgrImg(this, 'apps/app-recentforum-content-mid-0.gif');"
+                             onmouseout="gChangeBgrImg(this, '');" title="View post">
+                            <a href="/forum/topic/7310/110121/gaming-monitor#110121" style="text-decoration:none;">
+                                <div class="app-small-content">
+                                    <div style="padding-left:5px; padding-top:8px; padding-bottom:8px;">
+                                        <div class="link_recent_topic"><b>gaming monitor</b></div>
+                                        <div class="link_recent_forum">1 month ago in General Discussion</div>
+                                        <div class="link_recent_author">By alexey</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div style="background-image:url('/images/apps/app-recentforum-content-mid-1-hover.gif');">
+                        <div style="padding-left:19px; padding-right:19px; cursor:pointer;"
+                             onmouseover="gChangeBgrImg(this, 'apps/app-recentforum-content-mid-1.gif');"
+                             onmouseout="gChangeBgrImg(this, '');" title="View post">
+                            <a href="/forum/topic/7654/110120/someone-gave-me-quake-4#110120"
+                               style="text-decoration:none;">
+                                <div class="app-small-content">
+                                    <div style="padding-left:5px; padding-top:8px; padding-bottom:8px;">
+                                        <div class="link_recent_topic"><b>SOMEONE GAVE ME QUAKE 4</b></div>
+                                        <div class="link_recent_forum">2 months ago in General Discussion</div>
+                                        <div class="link_recent_author">By Samopal VanoZ</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div style="background-image:url('/images/apps/app-recentforum-content-mid-bottom-hover.gif');">
+                        <div style="padding-left:19px; padding-right:19px; cursor:pointer;"
+                             onmouseover="gChangeBgrImg(this, 'apps/app-recentforum-content-mid-bottom.gif');"
+                             onmouseout="gChangeBgrImg(this, '');" title="View post">
+                            <a href="/forum/topic/7644/110116/ezquake-361-released#110116"
+                               style="text-decoration:none;">
+                                <div class="app-small-content">
+                                    <div style="padding-left:5px; padding-top:8px; padding-bottom:8px;">
+                                        <div class="link_recent_topic"><b>ezquake 3.6.1 released</b></div>
+                                        <div class="link_recent_forum">2 months ago in Client Talk</div>
+                                        <div class="link_recent_author">By xboxownz</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- content end -->
+
+                <div class="app-small-bottom"
+                     style="background-image:url('/images/apps/app-recentforum-content-bottom.gif'); height:15px;"></div>
+            </div>
+
+        </form>
+
+
+        <!-- app javascript -->
+
+        <script type="text/javascript">
+	var AppForumActivity = {
+
+		// open toppic
+
+		OpenTopic: function(iTopicID, iCommentID) {
+			location.href = "/forum/topic/" + iTopicID + "/page/last#" + iCommentID;
+		}
+	}
+
+
+
+        </script>
+
+    </div>
+    <div>
+        <!-- app window -->
+
+        <form name="frmBlogLatest" id="frmBlogLatest" method="post" action="/front">
+            <input type="hidden" name="app" value="BLOG_LATEST"/>
+            <input type="hidden" name="cmd"/>
+
+            <div class="app-small">
+                <div><img src="/images/apps/app-small-blogs.gif"/></div>
+                <div class="app-small-top"></div>
+                <div class="app-small-mid">
+                    <div class="app-small-content">
+
+                        <!-- content start -->
+
+                        <div style="width:100%;">
+                            <div>
+                                <div class="bar-green-left"></div>
+                                <div class="bar-green" style="width:184px;">
+                                    <div class="bar-text-left" style="padding-top:4px; padding-right:2px;"><img
+                                            src="/images/forum/icon-recent-blog.png" alt="New blog article by sassa"
+                                            title="New blog article by sassa"/></div>
+                                    <div class="bar-text-left"><a href="/blog/sassa">sassa</a></div>
+                                    <div class="bar-text-right">2 Nov</div>
+                                </div>
+                                <div class="bar-green-right"></div>
+                                <div class="bar-text-small"><a href="/blog/414/its-back-qhlan-2022">Its back - QHLAN
+                                    2022</a></div>
+                            </div>
+                            <div class="line" style="margin-top:6px; margin-bottom:4px;"></div>
+
+                            <div>
+                                <div class="bar-green-left"></div>
+                                <div class="bar-green" style="width:184px;">
+                                    <div class="bar-text-left" style="padding-top:4px; padding-right:2px;"><img
+                                            src="/images/forum/icon-recent-blog.png" alt="New blog article by sassa"
+                                            title="New blog article by sassa"/></div>
+                                    <div class="bar-text-left"><a href="/blog/sassa">sassa</a></div>
+                                    <div class="bar-text-right">23 Feb</div>
+                                </div>
+                                <div class="bar-green-right"></div>
+                                <div class="bar-text-small"><a href="/blog/412/is-nitram-the-real-mvp-of">Is Nitram the
+                                    real MVP of COM?</a></div>
+                            </div>
+                            <div class="line" style="margin-top:6px; margin-bottom:4px;"></div>
+
+                            <div>
+                                <div class="bar-green-left"></div>
+                                <div class="bar-green" style="width:184px;">
+                                    <div class="bar-text-left" style="padding-top:4px; padding-right:2px;"><img
+                                            src="/images/forum/icon-recent-blog.png" alt="New blog article by sassa"
+                                            title="New blog article by sassa"/></div>
+                                    <div class="bar-text-left"><a href="/blog/sassa">sassa</a></div>
+                                    <div class="bar-text-right">8 Feb</div>
+                                </div>
+                                <div class="bar-green-right"></div>
+                                <div class="bar-text-small"><a href="/blog/411/guess-whos-back-but-where-is">Guess whos
+                                    back?! But where is the dramah?</a></div>
+                            </div>
+                        </div>
+
+                        <!-- content end -->
+
+                    </div>
+                </div>
+                <div class="app-small-bottom"></div>
+            </div>
+        </form>
+
+    </div>
+    <div>
+        <!-- app window -->
+
+        <form name="frmRandomPhoto" id="frmRandomPhoto" method="post" action="/front">
+            <input type="hidden" name="app" value="RANDOMPHOTO"/>
+            <input type="hidden" name="cmd"/>
+
+            <div class="app-small">
+                <div><img src="/images/apps/app-small-randomphoto.gif"/></div>
+                <div class="app-small-top"></div>
+                <div class="app-small-mid">
+                    <div class="app-small-content">
+
+                        <!-- content start -->
+
+
+                        <a href="/gallery/picture/1895"><img src="/assets/images/pictures/0000001895_thumb.jpg"
+                                                             width="188" height="141" border="0" alt=""/></a><br/>
+                        <div class="txt_small"
+                             style="width:126px; height:52px; display:table-cell; padding-top:5px; vertical-align:middle;">
+                            <a href="/gallery/15" class="link_image">Reunion eSports Challenge</a></div>
+                        <!-- content end -->
+
+                    </div>
+                </div>
+                <div class="app-small-bottom"></div>
+            </div>
+        </form>
+
+    </div>
+    <div>
+        <!-- app window -->
+
+        <form name="frmGossip" id="frmGossip" method="post" action="/front">
+            <input type="hidden" name="app" value="HOME_GOSSIP"/>
+            <input type="hidden" name="cmd"/>
+
+            <div class="app-small">
+                <div><img src="/images/apps/app-small-gossip.gif"/></div>
+                <div class="app-small-top"></div>
+                <div class="app-small-mid">
+                    <div class="app-small-content">
+
+                        <!-- content start -->
+
+                        <div style="margin:6px 6px 6px 6px;">
+                            <div class="txt_topic" style="text-align:center;"><img src="/images/gossip.png" alt=""/>
+                            </div>
+                            <div class="line" style="margin:10px 0 10px 0;"></div>
+
+                            <div class="txt_small">
+                                Do you know about something quake related that you think we should post an article
+                                about?<br/><img src="/images/blank.gif" width="1" height="7"/><br/>
+                                <a href="/contact">Please let us know</a>
+                            </div>
+                        </div>
+
+                        <!-- content end -->
+
+                    </div>
+                </div>
+                <div class="app-small-bottom"></div>
+            </div>
+        </form>
+
+    </div>
+</div>
+</div>
+</td>
+</tr>
+
+<tr>
+    <td style="width:1004px; height:151px; background-image:url('/images/block-bgr-bottom.jpg');"/>
+    <div style="position:relative; height:121px;">
+        <div style="position:absolute; top:31px; left:60px;"><img src="/images/logo-bottom.png" alt="" border="0"/>
+        </div>
+
+        <div class="line-grey" style="position:absolute; left:166px; width:1px; height:100%;"></div>
+
+        <div style="position:absolute; top:6px; left:176px;">
+            <div style="height:22px; color:#a17230; font-size:12px;">RSS FEEDS</div>
+            <div style="height:18px;"><a href="/feeds/news.php" class="link_bottom"><img src="/images/icon-feed.png"
+                                                                                         alt="" border="0"
+                                                                                         align="absmiddle"/>News</a>
+            </div>
+            <div style="height:18px;"><a href="/feeds/blogs.php" class="link_bottom"><img src="/images/icon-feed.png"
+                                                                                          alt="" border="0"
+                                                                                          align="absmiddle"/>Blogs</a>
+            </div>
+        </div>
+
+        <div class="line-grey" style="position:absolute; left:333px; width:1px; height:100%;"></div>
+
+        <div style="position:absolute; top:6px; left:343px;">
+            <div style="height:22px; color:#a17230; font-size:12px;">SITE SECTIONS</div>
+            <div style="height:18px;"><a href="/news" class="link_bottom">News</a></div>
+            <div style="height:18px;"><a href="/blogs" class="link_bottom">Blogs</a></div>
+            <div style="height:18px;"><a href="/guides" class="link_bottom">Guides</a></div>
+            <div style="height:18px;"><a href="/forum" class="link_bottom">Forum</a></div>
+            <div style="height:18px;"><a href="/media" class="link_bottom">Media</a></div>
+        </div>
+
+        <div class="line-grey" style="position:absolute; left:500px; width:1px; height:100%;"></div>
+
+        <div style="position:absolute; top:6px; left:510px;">
+            <div style="height:22px; color:#a17230; font-size:12px;">SOCIAL MEDIA</div>
+            <div style="height:18px;"><a href="https://www.facebook.com/QuakeWorld" class="link_bottom">Facebook</a>
+            </div>
+            <div style="height:18px;"><a href="https://twitter.com/QuakeWorldnu" class="link_bottom">Twitter</a></div>
+            <div style="height:18px;"><a href="https://www.youtube.com/QuakeWorldnu" class="link_bottom">YouTube</a>
+            </div>
+            <div style="height:18px;"><a href="https://www.own3d.tv/QuakeWorld" class="link_bottom">own3D.tv</a></div>
+            <div style="height:18px;"><a
+                    href="https://webchat.quakenet.org/?nick=&channels=quakeworld&prompt=1&uio=MTE9MTIz7c"
+                    class="link_bottom">IRC chat</a></div>
+        </div>
+
+        <div class="line-grey" style="position:absolute; left:667px; width:1px; height:100%;"></div>
+
+        <div style="position:absolute; top:6px; left:677px;">
+            <div style="height:22px; color:#a17230; font-size:12px;">MEDIA</div>
+            <div style="height:18px;"><a href="/gallery" class="link_bottom">Images</a></div>
+            <div style="height:18px;"><a href="/video" class="link_bottom">Videos</a></div>
+            <div style="height:18px;"><a href="/gamecontent" class="link_bottom">Game content</a></div>
+        </div>
+
+        <div class="line-grey" style="position:absolute; left:834px; width:1px; height:100%;"></div>
+
+        <div style="position:absolute; top:6px; left:844px;">
+            <div style="height:22px; color:#a17230; font-size:12px;">INFORMATION</div>
+            <div style="height:18px;"><a href="/about" class="link_bottom">About</a></div>
+            <div style="height:18px;"><a href="/contact" class="link_bottom">Contact</a></div>
+            <div style="height:18px;"><a href="/sitemedia" class="link_bottom">Site media</a></div>
+            <div style="height:18px;"><a href="/staff" class="link_bottom">Staff & credits</a></div>
+        </div>
+
+    </div>
+    </td>
+</tr>
+</table>
+</td>
+
+<td class="bgr-right">
+    <div style="width:1px; height:1px;"></div>
+</td>
+</tr>
+</table>
+
+<div id="bottom">
+
+</div>
+</div>
+<div class="chat">
+    <a href="https://webchat.quakenet.org/?nick=&channels=quakeworld&prompt=1&uio=MTE9MTIz7c" onclick=""><img
+            src="/images/btn-chat.png" border="0" alt=""/></a>
+</div>
+</body>
+</html>

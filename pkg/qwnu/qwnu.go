@@ -30,18 +30,18 @@ type ForumPost struct {
 	Url    string `json:"url"`
 }
 
-type NewsPost struct {
-	Title string `json:"title"`
-	Date  string `json:"date"`
-	Url   string `json:"url"`
-}
-
 type GameInSpotlight struct {
 	Participants string              `json:"participants"`
 	Description  string              `json:"description"`
 	Stream       GameInSpotlightLink `json:"stream"`
 	Event        GameInSpotlightLink `json:"event"`
 	Date         string              `json:"date"`
+}
+
+type NewsPost struct {
+	Title string `json:"title"`
+	Date  string `json:"date"`
+	Url   string `json:"url"`
 }
 
 func Events(limit int) ([]Event, error) {
@@ -60,7 +60,7 @@ func Events(limit int) ([]Event, error) {
 
 	for t := range statuses {
 		doc.Find(fmt.Sprintf("#%s", statuses[t])).Find("tr").Each(func(i int, s *goquery.Selection) {
-			if 0 == i || i >= limit { // skip heading and limit to x items
+			if 0 == i || len(events) >= limit { // skip heading and limit to x items
 				return
 			}
 
@@ -174,23 +174,6 @@ func GamesInSpotlight() ([]GameInSpotlight, error) {
 	return games, nil
 }
 
-func cleanHtmlText(htmlText string) string {
-	result := regexp.MustCompile(`\s+`).ReplaceAllString(htmlText, " ")
-	result = strings.ReplaceAll(result, "\u00a0", "")
-	result = strings.TrimSpace(result)
-	return result
-}
-
-func wikiLinkHref(href string) string {
-	if len(href) == 0 {
-		return href
-	} else if strings.HasPrefix(href, "/") {
-		return fmt.Sprintf("%s%s", qwnuURL, href)
-	} else {
-		return href
-	}
-}
-
 func NewsPosts(limit int) ([]NewsPost, error) {
 	newsUrl := fmt.Sprintf("%s/feeds/news.php", qwnuURL)
 	doc, err := htmlparse.GetDocument(newsUrl)
@@ -222,4 +205,21 @@ func NewsPosts(limit int) ([]NewsPost, error) {
 	})
 
 	return newsPosts, nil
+}
+
+func cleanHtmlText(htmlText string) string {
+	result := regexp.MustCompile(`\s+`).ReplaceAllString(htmlText, " ")
+	result = strings.ReplaceAll(result, "\u00a0", "")
+	result = strings.TrimSpace(result)
+	return result
+}
+
+func wikiLinkHref(href string) string {
+	if len(href) == 0 {
+		return href
+	} else if strings.HasPrefix(href, "/") {
+		return fmt.Sprintf("%s%s", qwnuURL, href)
+	} else {
+		return href
+	}
 }

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <atom:link href="https://www.quakeworld.nu/feeds/news.php" rel="self" type="application/rss+xml"/>
+        <title>QuakeWorld.nu News Feed</title>
+        <description>A feed from QuakeWorld.nu.</description>
+        <link>https://www.quakeworld.nu</link>
+        <language>en-us</language>
+        <pubDate>Mon, 03 Jul 2023 15:28:53 +0000</pubDate>
+        <lastBuildDate>Mon, 03 Jul 2023 15:28:53 +0000</lastBuildDate>
+        <item>
+            <title>QHLAN 2024 - Signups Open</title>
+            <link>https://www.quakeworld.nu/news/1185</link>
+            <description>QHLAN2024 will take place on 10-14 Jan 2024 in Epic Studios, Stockholm.Signup now at QHLAN.org
+                !
+            </description>
+            <pubDate>Tue, 06 Jun 2023 21:36:47 +0000</pubDate>
+            <category>XantoM</category>
+            <guid isPermaLink="true">https://www.quakeworld.nu/news/1185</guid>
+        </item>
+        <item>
+            <title>Duelmania DownUnder 2023 - Signups Open</title>
+            <link>https://www.quakeworld.nu/news/1184</link>
+            <description>Deja vu anyone? #weriseagainAfter a 1-year hiatus, to coincide with winter, the world's most
+                prestigious online Quakeworld duel tournament is back in its DownUnder format.This year we are extending
+                the server base from Australia and New Zealand to also include servers in the pool such as Singapore and
+                Guam in order to appeal to a broader player base (Asia and West Coast USA). The idea is to include all
+                servers that allow for 100ms or less.
+            </description>
+            <pubDate>Fri, 02 Jun 2023 08:01:14 +0000</pubDate>
+            <category>dirtbox</category>
+            <guid isPermaLink="true">https://www.quakeworld.nu/news/1184</guid>
+        </item>
+        <item>
+            <title>QHLAN2024 dates set, trailer out</title>
+            <link>https://www.quakeworld.nu/news/1183</link>
+            <description>QHLAN2024 announced!• 10—14 January 2024• Epic Studios, Stockholm• Website with more info
+                coming shortlyWatch Hype trailer on youtube
+            </description>
+            <pubDate>Mon, 29 May 2023 08:57:48 +0000</pubDate>
+            <category>bps</category>
+            <guid isPermaLink="true">https://www.quakeworld.nu/news/1183</guid>
+        </item>
+    </channel>
+</rss>

@@ -34,3 +34,61 @@ func TestGamesInSpotlight(t *testing.T) {
 		Date: "29 April 2023 20:00",
 	}, games[0])
 }
+
+func TestEvents(t *testing.T) {
+	httpmock.Activate()
+	defer httpmock.DeactivateAndReset()
+	wikiIndexHtml, _ := os.ReadFile("./test_files/wiki_index.html")
+	response := httpmock.NewStringResponder(200, string(wikiIndexHtml))
+	httpmock.RegisterResponder("GET", "https://www.quakeworld.nu/wiki/Overview", response)
+
+	events, err := qwnu.Events(2)
+	assert.Len(t, events, 2)
+	assert.Nil(t, err)
+
+	assert.Equal(t, qwnu.Event{
+		Title:   "QW LAN PL 2023",
+		Status:  "upcoming",
+		Date:    "08 Nov",
+		WikiUrl: "https://www.quakeworld.nu/wiki/QW_LAN_PL_2023",
+		LogoUrl: "https://www.quakeworld.nu/w/images/thumb/b/b8/Dqer-icon.png/32px-Dqer-icon.png",
+	}, events[0])
+}
+
+func TestNewsPosts(t *testing.T) {
+	httpmock.Activate()
+	defer httpmock.DeactivateAndReset()
+	newsFeedXml, _ := os.ReadFile("./test_files/feed_news.xml")
+	response := httpmock.NewStringResponder(200, string(newsFeedXml))
+	httpmock.RegisterResponder("GET", "https://www.quakeworld.nu/feeds/news.php", response)
+
+	newsPosts, err := qwnu.NewsPosts(2)
+	assert.Len(t, newsPosts, 2)
+	assert.Nil(t, err)
+
+	assert.Equal(t, qwnu.NewsPost{
+		Title: "QHLAN 2024 - Signups Open",
+		Date:  "Tue, 06 Jun 2023",
+		Url:   "https://www.quakeworld.nu/news/1185",
+	}, newsPosts[0])
+}
+
+func TestForumPosts(t *testing.T) {
+	httpmock.Activate()
+	defer httpmock.DeactivateAndReset()
+	qwnuIndexHtml, _ := os.ReadFile("./test_files/qwnu_index.html")
+	response := httpmock.NewStringResponder(200, string(qwnuIndexHtml))
+	httpmock.RegisterResponder("GET", "https://www.quakeworld.nu", response)
+
+	forumPosts, err := qwnu.ForumPosts(2)
+	assert.Len(t, forumPosts, 2)
+	assert.Nil(t, err)
+
+	assert.Equal(t, qwnu.ForumPost{
+		Title:  "Map \"trick\", last stage",
+		Forum:  "General Discussion",
+		Author: "JSS",
+		Date:   "2 days ago",
+		Url:    "https://www.quakeworld.nu/forum/topic/7690/110144/map-trick-last-stage#110144",
+	}, forumPosts[0])
+}
