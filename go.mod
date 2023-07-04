@@ -12,7 +12,7 @@ require (
 	github.com/nicklaw5/helix v1.25.0
 	github.com/stretchr/testify v1.8.4
 	github.com/vikpe/masterstat v0.2.0
-	github.com/vikpe/serverstat v1.0.2
+	github.com/vikpe/serverstat v1.0.3
 	golang.org/x/exp v0.0.0-20230626212559-97b1e661b5df
 )
 
