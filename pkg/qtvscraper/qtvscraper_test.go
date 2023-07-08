@@ -3,7 +3,6 @@ package qtvscraper_test
 import (
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"net/http"
 	"os"
 	"strings"
@@ -41,6 +40,7 @@ func TestServer_DemoFilenames(t *testing.T) {
 	t.Run("http request fail", func(t *testing.T) {
 		httpmock.Activate()
 		defer httpmock.DeactivateAndReset()
+		httpmock.RegisterResponder("GET", "http://foo:28000/demo_filenames.txt", httpmock.NewStringResponder(404, "page not found"))
 		httpmock.RegisterResponder("GET", "http://foo:28000/demos/", httpmock.NewStringResponder(404, "page not found"))
 
 		server := qtvscraper.Server{Address: "foo:28000", DemoDateFormat: "ymd"}
@@ -50,22 +50,45 @@ func TestServer_DemoFilenames(t *testing.T) {
 	})
 
 	t.Run("success", func(t *testing.T) {
-		httpmock.Activate()
-		defer httpmock.DeactivateAndReset()
+		t.Run("by reading /demo_filenames.txt", func(t *testing.T) {
+			httpmock.Activate()
+			defer httpmock.DeactivateAndReset()
 
-		mockedRepsonseBody, _ := ioutil.ReadFile("./test_files/demos_1.html")
-		responder := httpmock.NewBytesResponder(http.StatusOK, mockedRepsonseBody)
-		httpmock.RegisterResponder("GET", "http://foo:28000/demos/", responder)
+			mockedRepsonseBody, _ := os.ReadFile("./test_files/demo_filenames.txt")
+			responder := httpmock.NewBytesResponder(http.StatusOK, mockedRepsonseBody)
+			httpmock.RegisterResponder("GET", "http://foo:28000/demo_filenames.txt", responder)
+			httpmock.RegisterResponder("GET", "http://foo:28000/demos/", httpmock.NewStringResponder(404, "page not found"))
 
-		server := qtvscraper.Server{Address: "foo:28000", DemoDateFormat: "ymd"}
-		expectedFilenames := []string{
-			"duel_holy_vs_si7h[aerowalk]261022-2234.mvd",
-			"duel_igggy_vs_rasta[aerowalk]261022-2224.mvd",
-			"4on4_blue_vs_red[dm3]261022-2206.mvd",
-		}
-		filenames, err := server.DemoFilenames()
-		assert.Equal(t, expectedFilenames, filenames)
-		assert.Nil(t, err)
+			server := qtvscraper.Server{Address: "foo:28000", DemoDateFormat: "Ymd"}
+			expectedFilenames := []string{
+				"2on2_red_vs_blue[dm4]20230708-1645.mvd",
+				"2on2_blue_vs_red[dm4]20230708-1625.mvd",
+				"2on2_blue_vs_red[dm4]20230708-1611.mvd",
+			}
+			filenames, err := server.DemoFilenames()
+			assert.Equal(t, expectedFilenames, filenames)
+			assert.Nil(t, err)
+		})
+
+		t.Run("by parsing /demos/", func(t *testing.T) {
+			httpmock.Activate()
+			defer httpmock.DeactivateAndReset()
+
+			mockedRepsonseBody, _ := os.ReadFile("./test_files/demos_1.html")
+			responder := httpmock.NewBytesResponder(http.StatusOK, mockedRepsonseBody)
+			httpmock.RegisterResponder("GET", "http://foo:28000/demo_filenames.txt", httpmock.NewStringResponder(404, "page not found"))
+			httpmock.RegisterResponder("GET", "http://foo:28000/demos/", responder)
+
+			server := qtvscraper.Server{Address: "foo:28000", DemoDateFormat: "ymd"}
+			expectedFilenames := []string{
+				"duel_holy_vs_si7h[aerowalk]261022-2234.mvd",
+				"duel_igggy_vs_rasta[aerowalk]261022-2224.mvd",
+				"4on4_blue_vs_red[dm3]261022-2206.mvd",
+			}
+			filenames, err := server.DemoFilenames()
+			assert.Equal(t, expectedFilenames, filenames)
+			assert.Nil(t, err)
+		})
 	})
 }
 

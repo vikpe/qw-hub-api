@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/PuerkitoBio/goquery"
+	"github.com/samber/lo"
 	"github.com/vikpe/qw-hub-api/pkg/htmlparse"
 	"github.com/vikpe/qw-hub-api/pkg/qdemo"
 	"golang.org/x/exp/slices"
@@ -167,17 +168,34 @@ func (s *Server) DemoQtvplayUrl(filename string) string {
 }
 
 func (s *Server) DemoFilenames() ([]string, error) {
-	url := fmt.Sprintf("http://%s/demos/", s.Address)
-	doc, err := htmlparse.GetDocument(url)
+	// prefer demo_filenames.txt
+	demoFilenamesUrl := fmt.Sprintf("http://%s/demo_filenames.txt", s.Address)
+	filenamesDoc, err := htmlparse.GetDocument(demoFilenamesUrl)
+
+	if err == nil {
+		demoFilenames := strings.Split(filenamesDoc.Text(), "\n")
+		return filterDemoFilenames(demoFilenames), nil
+	}
+
+	// secondly parse HTML from /demos/
+	demosHtmlUrl := fmt.Sprintf("http://%s/demos/", s.Address)
+	demosDoc, err := htmlparse.GetDocument(demosHtmlUrl)
 
 	if err != nil {
 		return make([]string, 0), err
 	}
 
 	demoFilenames := make([]string, 0)
-	doc.Find("#demos").Find("td.name").Each(func(i int, s *goquery.Selection) {
+	demosDoc.Find("#demos").Find("td.name").Each(func(i int, s *goquery.Selection) {
 		demoFilenames = append(demoFilenames, s.Text())
 	})
 
-	return demoFilenames, nil
+	return filterDemoFilenames(demoFilenames), nil
+}
+
+func filterDemoFilenames(filenames []string) []string {
+	return lo.Filter(filenames, func(item string, index int) bool {
+		// fmt.Println(item, len(item))
+		return len(item) > 0
+	})
 }
