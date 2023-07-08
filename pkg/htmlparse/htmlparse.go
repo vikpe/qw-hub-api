@@ -4,13 +4,17 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"time"
 
 	"github.com/PuerkitoBio/goquery"
 )
 
 func GetDocument(url string) (*goquery.Document, error) {
 	// request page
-	res, err := http.Get(url)
+	client := http.Client{
+		Timeout: 3 * time.Second,
+	}
+	res, err := client.Get(url)
 	if err != nil {
 		return &goquery.Document{}, err
 	}

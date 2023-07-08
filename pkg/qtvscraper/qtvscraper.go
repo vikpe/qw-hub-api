@@ -55,7 +55,9 @@ func (s *Scraper) scrapeDemos() []Demo {
 		go func(server Server) {
 			defer wg.Done()
 
+			start := time.Now()
 			demoFilenames, err := server.DemoFilenames()
+			fmt.Println(server.Address, "DONE", len(demoFilenames), time.Since(start))
 
 			if err != nil {
 				errs = append(errs, errors.New(fmt.Sprintf(`%s - %s`, server.Address, err)))
