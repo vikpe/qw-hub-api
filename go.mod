@@ -13,7 +13,7 @@ require (
 	github.com/samber/lo v1.38.1
 	github.com/stretchr/testify v1.8.4
 	github.com/vikpe/masterstat v0.2.0
-	github.com/vikpe/serverstat v1.0.5
+	github.com/vikpe/serverstat v1.0.6
 	golang.org/x/exp v0.0.0-20230626212559-97b1e661b5df
 )
 
