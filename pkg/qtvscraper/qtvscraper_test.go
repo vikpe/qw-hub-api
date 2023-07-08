@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"os"
 	"strings"
 	"testing"
 	"time"
@@ -73,13 +74,13 @@ func TestScraper_Demos(t *testing.T) {
 		httpmock.Activate()
 		defer httpmock.DeactivateAndReset()
 
-		serverAlphaResponse, _ := ioutil.ReadFile("./test_files/demos_1.html")
+		serverAlphaResponse, _ := os.ReadFile("./test_files/demos_1.html")
 		httpmock.RegisterResponder(
 			"GET", "http://alpha:28000/demos/",
 			httpmock.NewBytesResponder(http.StatusOK, serverAlphaResponse),
 		)
 
-		serverBetaResponse, _ := ioutil.ReadFile("./test_files/demos_2.html")
+		serverBetaResponse, _ := os.ReadFile("./test_files/demos_2.html")
 		httpmock.RegisterResponder(
 			"GET", "http://beta:28000/demos/",
 			httpmock.NewBytesResponder(http.StatusOK, serverBetaResponse),
