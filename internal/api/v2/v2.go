@@ -30,6 +30,7 @@ func Init(
 	router.Get("news", handlers.News())
 	router.Get("forum_posts", handlers.ForumPosts())
 	router.Get("games_in_spotlight", handlers.GamesInSpotlight())
+	router.Get("wiki_recent_changes", handlers.WikiRecentChanges())
 
 	router.Get("demos", demoh.Handler(demoProvider.Demos))
 }

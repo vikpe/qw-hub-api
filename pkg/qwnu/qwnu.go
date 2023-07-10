@@ -44,6 +44,12 @@ type NewsPost struct {
 	Url   string `json:"url"`
 }
 
+type WikiArticle struct {
+	Title string `json:"title"`
+	Url   string `json:"url"`
+	Date  string `json:"date"`
+}
+
 func Events(limit int) ([]Event, error) {
 	doc, err := htmlparse.GetDocument(wikiOverviewUrl)
 
@@ -205,6 +211,31 @@ func NewsPosts(limit int) ([]NewsPost, error) {
 	})
 
 	return newsPosts, nil
+}
+
+func WikiRecentChanges(limit int) ([]WikiArticle, error) {
+	feedUrl := fmt.Sprintf("%s/w/api.php?hidebots=1&urlversion=2&days=100&action=feedrecentchanges&feedformat=rss&limit=%d", qwnuURL, limit)
+	doc, err := htmlparse.GetDocument(feedUrl)
+
+	if err != nil {
+		return make([]WikiArticle, 0), err
+	}
+
+	articles := make([]WikiArticle, 0)
+	doc.Find("item").Each(func(i int, s *goquery.Selection) {
+		if i > limit { // limit to x items
+			return
+		}
+
+		newsPost := WikiArticle{
+			Title: s.ChildrenFiltered("title").Text(),
+			Url:   strings.Replace(s.ChildrenFiltered("comments").Text(), "Talk:", "", 1),
+			Date:  s.ChildrenFiltered("pubDate").Text(),
+		}
+		articles = append(articles, newsPost)
+	})
+
+	return articles, nil
 }
 
 func cleanHtmlText(htmlText string) string {

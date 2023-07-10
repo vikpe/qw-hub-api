@@ -1,0 +1,361 @@
+<?xml version="1.0"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <title>QWiki - Recent changes [en]</title>
+        <link>https://www.quakeworld.nu/wiki/Special:RecentChanges</link>
+        <description>Track the most recent changes to the wiki in this feed.</description>
+        <language>en</language>
+        <generator>MediaWiki 1.35.10</generator>
+        <lastBuildDate>Mon, 10 Jul 2023 15:14:42 GMT</lastBuildDate>
+        <item>
+            <title>Brunowa</title>
+            <link>https://www.quakeworld.nu/w/index.php?title=Brunowa&amp;diff=55944&amp;oldid=55693</link>
+            <guid isPermaLink="false">
+                https://www.quakeworld.nu/w/index.php?title=Brunowa&amp;diff=55944&amp;oldid=55693
+            </guid>
+            <description>&lt;p&gt;&lt;/p&gt;
+                &lt;table class=&quot;diff diff-contentalign-left diff-editfont-monospace&quot; data-mw=&quot;interface&quot;&gt;
+                &lt;col class=&quot;diff-marker&quot; /&gt;
+                &lt;col class=&quot;diff-content&quot; /&gt;
+                &lt;col class=&quot;diff-marker&quot; /&gt;
+                &lt;col class=&quot;diff-content&quot; /&gt;
+                &lt;tr class=&quot;diff-title&quot; lang=&quot;en&quot;&gt;
+                &lt;td colspan=&quot;2&quot; style=&quot;background-color: #fff; color: #202122; text-align: center;&quot;&gt;←
+                Older revision&lt;/td&gt;
+                &lt;td colspan=&quot;2&quot; style=&quot;background-color: #fff; color: #202122; text-align: center;&quot;&gt;Revision
+                as of 05:42, 10 July 2023&lt;/td&gt;
+                &lt;/tr&gt;&lt;tr&gt;&lt;td colspan=&quot;2&quot; class=&quot;diff-lineno&quot; id=&quot;mw-diff-left-l1&quot;
+                &gt;Line 1:&lt;/td&gt;
+                &lt;td colspan=&quot;2&quot; class=&quot;diff-lineno&quot;&gt;Line 1:&lt;/td&gt;&lt;/tr&gt;
+                &lt;tr&gt;&lt;td class='diff-marker'&gt;−&lt;/td&gt;&lt;td style=&quot;color: #202122; font-size: 88%;
+                border-style: solid; border-width: 1px 1px 1px 4px; border-radius: 0.33em; border-color: #ffe49c;
+                vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt;Australian player &lt;del class=&quot;diffchange
+                diffchange-inline&quot;&gt;originally known as Die-na-mite &lt;/del&gt;who &lt;del class=&quot;diffchange
+                diffchange-inline&quot;&gt;dominated games &lt;/del&gt;on his local ISP (tig/iHug - Sydney) between
+                1996-2000.&lt;/div&gt;&lt;/td&gt;&lt;td class='diff-marker'&gt;+&lt;/td&gt;&lt;td style=&quot;color:
+                #202122; font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px; border-radius: 0.33em;
+                border-color: #a3d3ff; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt;Australian player
+                who &lt;ins class=&quot;diffchange diffchange-inline&quot;&gt;was a top player &lt;/ins&gt;on his local
+                ISP (tig/iHug - Sydney) between 1996-2000.&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;
+                &lt;tr&gt;&lt;td class='diff-marker'&gt; &lt;/td&gt;&lt;td style=&quot;background-color: #f8f9fa; color:
+                #202122; font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px; border-radius: 0.33em;
+                border-color: #eaecf0; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;/td&gt;&lt;td
+                class='diff-marker'&gt; &lt;/td&gt;&lt;td style=&quot;background-color: #f8f9fa; color: #202122;
+                font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px; border-radius: 0.33em; border-color:
+                #eaecf0; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;/td&gt;&lt;/tr&gt;
+                &lt;tr&gt;&lt;td class='diff-marker'&gt; &lt;/td&gt;&lt;td style=&quot;background-color: #f8f9fa; color:
+                #202122; font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px; border-radius: 0.33em;
+                border-color: #eaecf0; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt;Known for
+                organising various Australian competitions as well as making many of the famous Rocket Arena maps
+                playable as DMM4 maps.&lt;/div&gt;&lt;/td&gt;&lt;td class='diff-marker'&gt; &lt;/td&gt;&lt;td style=&quot;background-color:
+                #f8f9fa; color: #202122; font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px;
+                border-radius: 0.33em; border-color: #eaecf0; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt;Known
+                for organising various Australian competitions as well as making many of the famous Rocket Arena maps
+                playable as DMM4 maps.&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;
+                &lt;tr&gt;&lt;td colspan=&quot;2&quot; class=&quot;diff-lineno&quot; id=&quot;mw-diff-left-l21&quot;
+                &gt;Line 21:&lt;/td&gt;
+                &lt;td colspan=&quot;2&quot; class=&quot;diff-lineno&quot;&gt;Line 21:&lt;/td&gt;&lt;/tr&gt;
+                &lt;tr&gt;&lt;td class='diff-marker'&gt; &lt;/td&gt;&lt;td style=&quot;background-color: #f8f9fa; color:
+                #202122; font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px; border-radius: 0.33em;
+                border-color: #eaecf0; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;/td&gt;&lt;td
+                class='diff-marker'&gt; &lt;/td&gt;&lt;td style=&quot;background-color: #f8f9fa; color: #202122;
+                font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px; border-radius: 0.33em; border-color:
+                #eaecf0; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;/td&gt;&lt;/tr&gt;
+                &lt;tr&gt;&lt;td class='diff-marker'&gt; &lt;/td&gt;&lt;td style=&quot;background-color: #f8f9fa; color:
+                #202122; font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px; border-radius: 0.33em;
+                border-color: #eaecf0; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt;{{Player-info&lt;/div&gt;&lt;/td&gt;&lt;td
+                class='diff-marker'&gt; &lt;/td&gt;&lt;td style=&quot;background-color: #f8f9fa; color: #202122;
+                font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px; border-radius: 0.33em; border-color:
+                #eaecf0; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt;{{Player-info&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;
+                &lt;tr&gt;&lt;td class='diff-marker'&gt;−&lt;/td&gt;&lt;td style=&quot;color: #202122; font-size: 88%;
+                border-style: solid; border-width: 1px 1px 1px 4px; border-radius: 0.33em; border-color: #ffe49c;
+                vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt;  | aka = Bruno &lt;del class=&quot;diffchange
+                diffchange-inline&quot;&gt;/ Die.na.mite&lt;/del&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class='diff-marker'&gt;+&lt;/td&gt;&lt;td
+                style=&quot;color: #202122; font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px;
+                border-radius: 0.33em; border-color: #a3d3ff; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt; 
+                | aka = Bruno&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;
+                &lt;tr&gt;&lt;td class='diff-marker'&gt; &lt;/td&gt;&lt;td style=&quot;background-color: #f8f9fa; color:
+                #202122; font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px; border-radius: 0.33em;
+                border-color: #eaecf0; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt;  | nationality =
+                Australian&lt;/div&gt;&lt;/td&gt;&lt;td class='diff-marker'&gt; &lt;/td&gt;&lt;td style=&quot;background-color:
+                #f8f9fa; color: #202122; font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px;
+                border-radius: 0.33em; border-color: #eaecf0; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt; 
+                | nationality = Australian&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;
+                &lt;tr&gt;&lt;td class='diff-marker'&gt; &lt;/td&gt;&lt;td style=&quot;background-color: #f8f9fa; color:
+                #202122; font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px; border-radius: 0.33em;
+                border-color: #eaecf0; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt;  |
+                shortnationality = au&lt;/div&gt;&lt;/td&gt;&lt;td class='diff-marker'&gt; &lt;/td&gt;&lt;td style=&quot;background-color:
+                #f8f9fa; color: #202122; font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px;
+                border-radius: 0.33em; border-color: #eaecf0; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt; 
+                | shortnationality = au&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;
+                &lt;/table&gt;
+            </description>
+            <pubDate>Mon, 10 Jul 2023 05:42:05 GMT</pubDate>
+            <dc:creator>Brunowa</dc:creator>
+            <comments>https://www.quakeworld.nu/wiki/Talk:Brunowa</comments>
+        </item>
+        <item>
+            <title>EQL-SPL</title>
+            <link>https://www.quakeworld.nu/w/index.php?title=EQL-SPL&amp;diff=55943&amp;oldid=55931</link>
+            <guid isPermaLink="false">
+                https://www.quakeworld.nu/w/index.php?title=EQL-SPL&amp;diff=55943&amp;oldid=55931
+            </guid>
+            <description>&lt;p&gt;&lt;span dir=&quot;auto&quot;&gt;&lt;span class=&quot;autocomment&quot;&gt;Ladder&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+                &lt;table class=&quot;diff diff-contentalign-left diff-editfont-monospace&quot; data-mw=&quot;interface&quot;&gt;
+                &lt;col class=&quot;diff-marker&quot; /&gt;
+                &lt;col class=&quot;diff-content&quot; /&gt;
+                &lt;col class=&quot;diff-marker&quot; /&gt;
+                &lt;col class=&quot;diff-content&quot; /&gt;
+                &lt;tr class=&quot;diff-title&quot; lang=&quot;en&quot;&gt;
+                &lt;td colspan=&quot;2&quot; style=&quot;background-color: #fff; color: #202122; text-align: center;&quot;&gt;←
+                Older revision&lt;/td&gt;
+                &lt;td colspan=&quot;2&quot; style=&quot;background-color: #fff; color: #202122; text-align: center;&quot;&gt;Revision
+                as of 22:22, 8 July 2023&lt;/td&gt;
+                &lt;/tr&gt;&lt;tr&gt;&lt;td colspan=&quot;2&quot; class=&quot;diff-lineno&quot; id=&quot;mw-diff-left-l27&quot;
+                &gt;Line 27:&lt;/td&gt;
+                &lt;td colspan=&quot;2&quot; class=&quot;diff-lineno&quot;&gt;Line 27:&lt;/td&gt;&lt;/tr&gt;
+                &lt;tr&gt;&lt;td class='diff-marker'&gt; &lt;/td&gt;&lt;td style=&quot;background-color: #f8f9fa; color:
+                #202122; font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px; border-radius: 0.33em;
+                border-color: #eaecf0; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt;== Ladder ==&lt;/div&gt;&lt;/td&gt;&lt;td
+                class='diff-marker'&gt; &lt;/td&gt;&lt;td style=&quot;background-color: #f8f9fa; color: #202122;
+                font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px; border-radius: 0.33em; border-color:
+                #eaecf0; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt;== Ladder ==&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;
+                &lt;tr&gt;&lt;td class='diff-marker'&gt; &lt;/td&gt;&lt;td style=&quot;background-color: #f8f9fa; color:
+                #202122; font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px; border-radius: 0.33em;
+                border-color: #eaecf0; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt;{{LeagueTableStartEQLSPL}}&lt;/div&gt;&lt;/td&gt;&lt;td
+                class='diff-marker'&gt; &lt;/td&gt;&lt;td style=&quot;background-color: #f8f9fa; color: #202122;
+                font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px; border-radius: 0.33em; border-color:
+                #eaecf0; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt;{{LeagueTableStartEQLSPL}}&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;
+                &lt;tr&gt;&lt;td class='diff-marker'&gt;−&lt;/td&gt;&lt;td style=&quot;color: #202122; font-size: 88%;
+                border-style: solid; border-width: 1px 1px 1px 4px; border-radius: 0.33em; border-color: #ffe49c;
+                vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt;{{LeagueTableSlotEQLSPL|Fraggers
+                United|flag=fi|link=|place=1|prax=&lt;del class=&quot;diffchange diffchange-inline&quot;&gt;26&lt;/del&gt;|m=&lt;del
+                class=&quot;diffchange diffchange-inline&quot;&gt;94&lt;/del&gt;|mw=&lt;del class=&quot;diffchange
+                diffchange-inline&quot;&gt;42&lt;/del&gt;|ml=52|p=&lt;del class=&quot;diffchange diffchange-inline&quot;&gt;329&lt;/del&gt;|p2=67}}&lt;/div&gt;&lt;/td&gt;&lt;td
+                class='diff-marker'&gt;+&lt;/td&gt;&lt;td style=&quot;color: #202122; font-size: 88%; border-style:
+                solid; border-width: 1px 1px 1px 4px; border-radius: 0.33em; border-color: #a3d3ff; vertical-align: top;
+                white-space: pre-wrap;&quot;&gt;&lt;div&gt;{{LeagueTableSlotEQLSPL|Fraggers
+                United|flag=fi|link=|place=1|prax=&lt;ins class=&quot;diffchange diffchange-inline&quot;&gt;27&lt;/ins&gt;|m=&lt;ins
+                class=&quot;diffchange diffchange-inline&quot;&gt;95&lt;/ins&gt;|mw=&lt;ins class=&quot;diffchange
+                diffchange-inline&quot;&gt;43&lt;/ins&gt;|ml=52|p=&lt;ins class=&quot;diffchange diffchange-inline&quot;&gt;334&lt;/ins&gt;|p2=67}}&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;
+                &lt;tr&gt;&lt;td class='diff-marker'&gt; &lt;/td&gt;&lt;td style=&quot;background-color: #f8f9fa; color:
+                #202122; font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px; border-radius: 0.33em;
+                border-color: #eaecf0; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt;{{LeagueTableSlotEQLSPL|The
+                Axemen|flag=no|link=|place=2|prax=11|m=37|mw=24|ml=13|p=183|p2=50}}&lt;/div&gt;&lt;/td&gt;&lt;td
+                class='diff-marker'&gt; &lt;/td&gt;&lt;td style=&quot;background-color: #f8f9fa; color: #202122;
+                font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px; border-radius: 0.33em; border-color:
+                #eaecf0; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt;{{LeagueTableSlotEQLSPL|The
+                Axemen|flag=no|link=|place=2|prax=11|m=37|mw=24|ml=13|p=183|p2=50}}&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;
+                &lt;tr&gt;&lt;td class='diff-marker'&gt; &lt;/td&gt;&lt;td style=&quot;background-color: #f8f9fa; color:
+                #202122; font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px; border-radius: 0.33em;
+                border-color: #eaecf0; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt;{{LeagueTableSlotEQLSPL|Koff|flag=fi|link=|place=3|prax=6|m=18|mw=5|ml=13|p=128|p2=90}}&lt;/div&gt;&lt;/td&gt;&lt;td
+                class='diff-marker'&gt; &lt;/td&gt;&lt;td style=&quot;background-color: #f8f9fa; color: #202122;
+                font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px; border-radius: 0.33em; border-color:
+                #eaecf0; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt;{{LeagueTableSlotEQLSPL|Koff|flag=fi|link=|place=3|prax=6|m=18|mw=5|ml=13|p=128|p2=90}}&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;
+                &lt;/table&gt;
+            </description>
+            <pubDate>Sat, 08 Jul 2023 22:22:51 GMT</pubDate>
+            <dc:creator>Hooraytio</dc:creator>
+            <comments>https://www.quakeworld.nu/wiki/Talk:EQL-SPL</comments>
+        </item>
+        <item>
+            <title>Smok</title>
+            <link>https://www.quakeworld.nu/w/index.php?title=Smok&amp;diff=55942&amp;oldid=0</link>
+            <guid isPermaLink="false">https://www.quakeworld.nu/w/index.php?title=Smok&amp;diff=55942&amp;oldid=0</guid>
+            <description>&lt;p&gt;Created page with &amp;quot;{{Infobox player |id=smok |image= |ids= |name=
+                |birth_date= |death_date= |role= |hadcovid= |sponsor= |color= 1 2 |favmap1on1= |favmap2on2= |favmap4on4=
+                |country=Poland |countr...&amp;quot;&lt;/p&gt;
+                &lt;p&gt;&lt;b&gt;New page&lt;/b&gt;&lt;/p&gt;&lt;div&gt;{{Infobox player&lt;br /&gt;
+                |id=smok&lt;br /&gt;
+                |image=&lt;br /&gt;
+                |ids=&lt;br /&gt;
+                |name=&lt;br /&gt;
+                |birth_date=&lt;br /&gt;
+                |death_date=&lt;br /&gt;
+                |role=&lt;br /&gt;
+                |hadcovid=&lt;br /&gt;
+                |sponsor=&lt;br /&gt;
+                |color= 1 2&lt;br /&gt;
+                |favmap1on1=&lt;br /&gt;
+                |favmap2on2=&lt;br /&gt;
+                |favmap4on4=&lt;br /&gt;
+                |country=Poland&lt;br /&gt;
+                |country2=&lt;br /&gt;
+                |spawned=&lt;br /&gt;
+                |status=Active&lt;br /&gt;
+                |years_active=&lt;br /&gt;
+                |years_active_admin=&lt;br /&gt;
+                |team=&lt;br /&gt;
+                |team2=&lt;br /&gt;
+                |clan=&lt;br /&gt;
+                |twitch=&lt;br /&gt;
+                |youtube=&lt;br /&gt;
+                |history=&lt;br /&gt;
+                }}&lt;br /&gt;
+                Smok is a Polish QuakeWorld FFA player. His true identity is unknown.&lt;br /&gt;
+                &lt;br /&gt;
+                == Achievements ==&lt;br /&gt;
+                ???&lt;br /&gt;
+                &lt;br /&gt;
+                == Quotes ==&lt;br /&gt;
+                ???&lt;br /&gt;
+                &lt;br /&gt;
+                == External links ==&lt;br /&gt;
+                http://stats.quakeworld.nu/index.php?a=qwplayer&amp;amp;currentPlayer=smok&lt;br /&gt;
+                &lt;br /&gt;
+                [[Category:Players]]&lt;br /&gt;
+                [[Category:Polish Players]]&lt;br /&gt;
+                &lt;br /&gt;
+                __NOTOC__&lt;/div&gt;
+            </description>
+            <pubDate>Sat, 08 Jul 2023 19:37:36 GMT</pubDate>
+            <dc:creator>Record</dc:creator>
+            <comments>https://www.quakeworld.nu/wiki/Talk:Smok</comments>
+        </item>
+        <item>
+            <title>Epicmissclick</title>
+            <link>https://www.quakeworld.nu/w/index.php?title=Epicmissclick&amp;diff=55941&amp;oldid=0</link>
+            <guid isPermaLink="false">https://www.quakeworld.nu/w/index.php?title=Epicmissclick&amp;diff=55941&amp;oldid=0</guid>
+            <description>&lt;p&gt;Redirected page to &lt;a href=&quot;/wiki/Azael&quot; title=&quot;Azael&quot;&gt;Azael&lt;/a&gt;&lt;/p&gt;
+                &lt;p&gt;&lt;b&gt;New page&lt;/b&gt;&lt;/p&gt;&lt;div&gt;#redirect [[azael]]&lt;/div&gt;
+            </description>
+            <pubDate>Sat, 08 Jul 2023 17:47:12 GMT</pubDate>
+            <dc:creator>Record</dc:creator>
+            <comments>https://www.quakeworld.nu/wiki/Talk:Epicmissclick</comments>
+        </item>
+        <item>
+            <title>Azael</title>
+            <link>https://www.quakeworld.nu/w/index.php?title=Azael&amp;diff=55940&amp;oldid=10549</link>
+            <guid isPermaLink="false">https://www.quakeworld.nu/w/index.php?title=Azael&amp;diff=55940&amp;oldid=10549
+            </guid>
+            <description>&lt;p&gt;&lt;/p&gt;
+                &lt;table class=&quot;diff diff-contentalign-left diff-editfont-monospace&quot; data-mw=&quot;interface&quot;&gt;
+                &lt;col class=&quot;diff-marker&quot; /&gt;
+                &lt;col class=&quot;diff-content&quot; /&gt;
+                &lt;col class=&quot;diff-marker&quot; /&gt;
+                &lt;col class=&quot;diff-content&quot; /&gt;
+                &lt;tr class=&quot;diff-title&quot; lang=&quot;en&quot;&gt;
+                &lt;td colspan=&quot;2&quot; style=&quot;background-color: #fff; color: #202122; text-align: center;&quot;&gt;←
+                Older revision&lt;/td&gt;
+                &lt;td colspan=&quot;2&quot; style=&quot;background-color: #fff; color: #202122; text-align: center;&quot;&gt;Revision
+                as of 17:46, 8 July 2023&lt;/td&gt;
+                &lt;/tr&gt;&lt;tr&gt;&lt;td colspan=&quot;2&quot; class=&quot;diff-lineno&quot; id=&quot;mw-diff-left-l1&quot;
+                &gt;Line 1:&lt;/td&gt;
+                &lt;td colspan=&quot;2&quot; class=&quot;diff-lineno&quot;&gt;Line 1:&lt;/td&gt;&lt;/tr&gt;
+                &lt;tr&gt;&lt;td class='diff-marker'&gt; &lt;/td&gt;&lt;td style=&quot;background-color: #f8f9fa; color:
+                #202122; font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px; border-radius: 0.33em;
+                border-color: #eaecf0; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt;player
+                introduction&lt;/div&gt;&lt;/td&gt;&lt;td class='diff-marker'&gt; &lt;/td&gt;&lt;td style=&quot;background-color:
+                #f8f9fa; color: #202122; font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px;
+                border-radius: 0.33em; border-color: #eaecf0; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt;player
+                introduction&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;
+                &lt;tr&gt;&lt;td class='diff-marker'&gt; &lt;/td&gt;&lt;td style=&quot;background-color: #f8f9fa; color:
+                #202122; font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px; border-radius: 0.33em;
+                border-color: #eaecf0; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;/td&gt;&lt;td
+                class='diff-marker'&gt; &lt;/td&gt;&lt;td style=&quot;background-color: #f8f9fa; color: #202122;
+                font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px; border-radius: 0.33em; border-color:
+                #eaecf0; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;/td&gt;&lt;/tr&gt;
+                &lt;tr&gt;&lt;td class='diff-marker'&gt;−&lt;/td&gt;&lt;td style=&quot;color: #202122; font-size: 88%;
+                border-style: solid; border-width: 1px 1px 1px 4px; border-radius: 0.33em; border-color: #ffe49c;
+                vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt;&lt;del class=&quot;diffchange
+                diffchange-inline&quot;&gt;* '''Real name''': Peter &lt;/del&gt;C.&lt;/div&gt;&lt;/td&gt;&lt;td
+                class='diff-marker'&gt;+&lt;/td&gt;&lt;td style=&quot;color: #202122; font-size: 88%; border-style:
+                solid; border-width: 1px 1px 1px 4px; border-radius: 0.33em; border-color: #a3d3ff; vertical-align: top;
+                white-space: pre-wrap;&quot;&gt;&lt;div&gt;&lt;ins class=&quot;diffchange diffchange-inline&quot;&gt;{{Player-info&lt;/ins&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;
+                &lt;tr&gt;&lt;td class='diff-marker'&gt;−&lt;/td&gt;&lt;td style=&quot;color: #202122; font-size: 88%;
+                border-style: solid; border-width: 1px 1px 1px 4px; border-radius: 0.33em; border-color: #ffe49c;
+                vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt;&lt;del class=&quot;diffchange
+                diffchange-inline&quot;&gt;* '''Born''': &lt;/del&gt;1982&lt;/div&gt;&lt;/td&gt;&lt;td
+                class='diff-marker'&gt;+&lt;/td&gt;&lt;td style=&quot;color: #202122; font-size: 88%; border-style:
+                solid; border-width: 1px 1px 1px 4px; border-radius: 0.33em; border-color: #a3d3ff; vertical-align: top;
+                white-space: pre-wrap;&quot;&gt;&lt;div&gt;&lt;ins class=&quot;diffchange diffchange-inline&quot;&gt; |
+                realname = Piotr &lt;/ins&gt;C.&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;
+                &lt;tr&gt;&lt;td class='diff-marker'&gt;−&lt;/td&gt;&lt;td style=&quot;color: #202122; font-size: 88%;
+                border-style: solid; border-width: 1px 1px 1px 4px; border-radius: 0.33em; border-color: #ffe49c;
+                vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt;&lt;del class=&quot;diffchange
+                diffchange-inline&quot;&gt;* '''Nationality''': [[Image:flag_pl.gif]] &lt;/del&gt;Polish&lt;/div&gt;&lt;/td&gt;&lt;td
+                class='diff-marker'&gt;+&lt;/td&gt;&lt;td style=&quot;color: #202122; font-size: 88%; border-style:
+                solid; border-width: 1px 1px 1px 4px; border-radius: 0.33em; border-color: #a3d3ff; vertical-align: top;
+                white-space: pre-wrap;&quot;&gt;&lt;div&gt;&lt;ins class=&quot;diffchange diffchange-inline&quot;&gt; |
+                birthyear = &lt;/ins&gt;1982&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;
+                &lt;tr&gt;&lt;td class='diff-marker'&gt;−&lt;/td&gt;&lt;td style=&quot;color: #202122; font-size: 88%;
+                border-style: solid; border-width: 1px 1px 1px 4px; border-radius: 0.33em; border-color: #ffe49c;
+                vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt;&lt;del class=&quot;diffchange
+                diffchange-inline&quot;&gt;* '''Current clan''': -&lt;/del&gt;&lt;/div&gt;&lt;/td&gt;&lt;td
+                class='diff-marker'&gt;+&lt;/td&gt;&lt;td style=&quot;color: #202122; font-size: 88%; border-style:
+                solid; border-width: 1px 1px 1px 4px; border-radius: 0.33em; border-color: #a3d3ff; vertical-align: top;
+                white-space: pre-wrap;&quot;&gt;&lt;div&gt;&lt;ins class=&quot;diffchange diffchange-inline&quot;&gt; |
+                birthmonth =&lt;/ins&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;
+                &lt;tr&gt;&lt;td colspan=&quot;2&quot;&gt; &lt;/td&gt;&lt;td class='diff-marker'&gt;+&lt;/td&gt;&lt;td
+                style=&quot;color: #202122; font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px;
+                border-radius: 0.33em; border-color: #a3d3ff; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt;&lt;ins
+                class=&quot;diffchange diffchange-inline&quot;&gt; | birthday =&lt;/ins&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;
+                &lt;tr&gt;&lt;td colspan=&quot;2&quot;&gt; &lt;/td&gt;&lt;td class='diff-marker'&gt;+&lt;/td&gt;&lt;td
+                style=&quot;color: #202122; font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px;
+                border-radius: 0.33em; border-color: #a3d3ff; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt;&lt;ins
+                class=&quot;diffchange diffchange-inline&quot;&gt; | nationality = &lt;/ins&gt;Polish&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;
+                &lt;tr&gt;&lt;td colspan=&quot;2&quot;&gt; &lt;/td&gt;&lt;td class='diff-marker'&gt;+&lt;/td&gt;&lt;td
+                style=&quot;color: #202122; font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px;
+                border-radius: 0.33em; border-color: #a3d3ff; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt;&lt;ins
+                class=&quot;diffchange diffchange-inline&quot;&gt; | shortnationality = pl&lt;/ins&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;
+                &lt;tr&gt;&lt;td colspan=&quot;2&quot;&gt; &lt;/td&gt;&lt;td class='diff-marker'&gt;+&lt;/td&gt;&lt;td
+                style=&quot;color: #202122; font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px;
+                border-radius: 0.33em; border-color: #a3d3ff; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt;&lt;ins
+                class=&quot;diffchange diffchange-inline&quot;&gt; | currentclan =&lt;/ins&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;
+                &lt;tr&gt;&lt;td colspan=&quot;2&quot;&gt; &lt;/td&gt;&lt;td class='diff-marker'&gt;+&lt;/td&gt;&lt;td
+                style=&quot;color: #202122; font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px;
+                border-radius: 0.33em; border-color: #a3d3ff; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt;&lt;ins
+                class=&quot;diffchange diffchange-inline&quot;&gt; | clannationality = &lt;/ins&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;
+                &lt;tr&gt;&lt;td colspan=&quot;2&quot;&gt; &lt;/td&gt;&lt;td class='diff-marker'&gt;+&lt;/td&gt;&lt;td
+                style=&quot;color: #202122; font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px;
+                border-radius: 0.33em; border-color: #a3d3ff; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt;&lt;ins
+                class=&quot;diffchange diffchange-inline&quot;&gt; | adminof =&lt;/ins&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;
+                &lt;tr&gt;&lt;td colspan=&quot;2&quot;&gt; &lt;/td&gt;&lt;td class='diff-marker'&gt;+&lt;/td&gt;&lt;td
+                style=&quot;color: #202122; font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px;
+                border-radius: 0.33em; border-color: #a3d3ff; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt;&lt;ins
+                class=&quot;diffchange diffchange-inline&quot;&gt; | aka = epicmissclick&lt;/ins&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;
+                &lt;tr&gt;&lt;td colspan=&quot;2&quot;&gt; &lt;/td&gt;&lt;td class='diff-marker'&gt;+&lt;/td&gt;&lt;td
+                style=&quot;color: #202122; font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px;
+                border-radius: 0.33em; border-color: #a3d3ff; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt;&lt;ins
+                class=&quot;diffchange diffchange-inline&quot;&gt; | foundquake = &lt;/ins&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;
+                &lt;tr&gt;&lt;td colspan=&quot;2&quot;&gt; &lt;/td&gt;&lt;td class='diff-marker'&gt;+&lt;/td&gt;&lt;td
+                style=&quot;color: #202122; font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px;
+                border-radius: 0.33em; border-color: #a3d3ff; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt;&lt;ins
+                class=&quot;diffchange diffchange-inline&quot;&gt; | retired = &lt;/ins&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;
+                &lt;tr&gt;&lt;td colspan=&quot;2&quot;&gt; &lt;/td&gt;&lt;td class='diff-marker'&gt;+&lt;/td&gt;&lt;td
+                style=&quot;color: #202122; font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px;
+                border-radius: 0.33em; border-color: #a3d3ff; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt;&lt;ins
+                class=&quot;diffchange diffchange-inline&quot;&gt; | color1 = &lt;/ins&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;
+                &lt;tr&gt;&lt;td colspan=&quot;2&quot;&gt; &lt;/td&gt;&lt;td class='diff-marker'&gt;+&lt;/td&gt;&lt;td
+                style=&quot;color: #202122; font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px;
+                border-radius: 0.33em; border-color: #a3d3ff; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt;&lt;ins
+                class=&quot;diffchange diffchange-inline&quot;&gt; | color2 = &lt;/ins&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;
+                &lt;tr&gt;&lt;td colspan=&quot;2&quot;&gt; &lt;/td&gt;&lt;td class='diff-marker'&gt;+&lt;/td&gt;&lt;td
+                style=&quot;color: #202122; font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px;
+                border-radius: 0.33em; border-color: #a3d3ff; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt;&lt;ins
+                class=&quot;diffchange diffchange-inline&quot;&gt; | favmap = &lt;/ins&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;
+                &lt;tr&gt;&lt;td colspan=&quot;2&quot;&gt; &lt;/td&gt;&lt;td class='diff-marker'&gt;+&lt;/td&gt;&lt;td
+                style=&quot;color: #202122; font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px;
+                border-radius: 0.33em; border-color: #a3d3ff; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt;&lt;ins
+                class=&quot;diffchange diffchange-inline&quot;&gt;}}&lt;/ins&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;
+                &lt;tr&gt;&lt;td class='diff-marker'&gt; &lt;/td&gt;&lt;td style=&quot;background-color: #f8f9fa; color:
+                #202122; font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px; border-radius: 0.33em;
+                border-color: #eaecf0; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;/td&gt;&lt;td
+                class='diff-marker'&gt; &lt;/td&gt;&lt;td style=&quot;background-color: #f8f9fa; color: #202122;
+                font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px; border-radius: 0.33em; border-color:
+                #eaecf0; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;/td&gt;&lt;/tr&gt;
+                &lt;tr&gt;&lt;td class='diff-marker'&gt; &lt;/td&gt;&lt;td style=&quot;background-color: #f8f9fa; color:
+                #202122; font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px; border-radius: 0.33em;
+                border-color: #eaecf0; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt;== Clan history
+                ==&lt;/div&gt;&lt;/td&gt;&lt;td class='diff-marker'&gt; &lt;/td&gt;&lt;td style=&quot;background-color:
+                #f8f9fa; color: #202122; font-size: 88%; border-style: solid; border-width: 1px 1px 1px 4px;
+                border-radius: 0.33em; border-color: #eaecf0; vertical-align: top; white-space: pre-wrap;&quot;&gt;&lt;div&gt;==
+                Clan history ==&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;
+                &lt;/table&gt;
+            </description>
+            <pubDate>Sat, 08 Jul 2023 17:46:31 GMT</pubDate>
+            <dc:creator>Record</dc:creator>
+            <comments>https://www.quakeworld.nu/wiki/Talk:Azael</comments>
+        </item>
+    </channel>
+</rss>

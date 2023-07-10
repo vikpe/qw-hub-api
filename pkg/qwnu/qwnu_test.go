@@ -92,3 +92,21 @@ func TestForumPosts(t *testing.T) {
 		Url:    "https://www.quakeworld.nu/forum/topic/7690/110144/map-trick-last-stage#110144",
 	}, forumPosts[0])
 }
+
+func TestWikiRecentChanges(t *testing.T) {
+	httpmock.Activate()
+	defer httpmock.DeactivateAndReset()
+	qwnuIndexHtml, _ := os.ReadFile("./test_files/feed_wiki_recent_changes.xml")
+	response := httpmock.NewStringResponder(200, string(qwnuIndexHtml))
+	httpmock.RegisterResponder("GET", "https://www.quakeworld.nu/w/api.php?hidebots=1&urlversion=2&days=100&action=feedrecentchanges&feedformat=rss&limit=5", response)
+
+	articles, err := qwnu.WikiRecentChanges(5)
+	assert.Len(t, articles, 5)
+	assert.Nil(t, err)
+
+	assert.Equal(t, qwnu.WikiArticle{
+		Title: "Brunowa",
+		Url:   "https://www.quakeworld.nu/wiki/Brunowa",
+		Date:  "Mon, 10 Jul 2023 05:42:05 GMT",
+	}, articles[0])
+}
