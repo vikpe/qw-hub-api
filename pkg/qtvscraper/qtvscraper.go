@@ -12,7 +12,6 @@ import (
 	"github.com/samber/lo"
 	"github.com/vikpe/qw-hub-api/pkg/htmlparse"
 	"github.com/vikpe/qw-hub-api/pkg/qdemo"
-	"golang.org/x/exp/slices"
 )
 
 type Demo struct {
@@ -126,7 +125,7 @@ func IsRelevantDemo(demoFilename qdemo.Filename) bool {
 		return false
 	}
 
-	if !slices.Contains([]string{"duel", "1on1", "2on2"}, mode) {
+	if !lo.Contains([]string{"duel", "1on1", "2on2"}, mode) {
 		return false
 	}
 
@@ -141,14 +140,14 @@ func IsRelevantDemo(demoFilename qdemo.Filename) bool {
 		"endif", "midair", "nacmidair",
 	}
 
-	return !slices.Contains(excludedMaps, mapName)
+	return !lo.Contains(excludedMaps, mapName)
 }
 
 func containsBotName(participants []string) bool {
 	botNames := []string{"bro", "timber", "goldenboy", "tincan"}
 
 	for _, name := range botNames {
-		if slices.Contains(participants, name) {
+		if lo.Contains(participants, name) {
 			return true
 		}
 	}
