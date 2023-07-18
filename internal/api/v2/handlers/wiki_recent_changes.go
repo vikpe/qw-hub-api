@@ -25,7 +25,7 @@ func WikiRecentChanges(scrapeCache *cache.Cache) func(c *fiber.Ctx) error {
 			return err
 		}
 
-		scrapeCache.Set(cacheKey, articles, cache.DefaultExpiration)
+		scrapeCache.SetDefault(cacheKey, articles)
 		return c.JSON(articles)
 	}
 }
