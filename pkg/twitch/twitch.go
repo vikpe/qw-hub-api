@@ -8,6 +8,7 @@ import (
 )
 
 type Stream struct {
+	Id            string    `json:"id"`
 	Channel       string    `json:"channel"`
 	Url           string    `json:"url"`
 	Title         string    `json:"title"`
@@ -64,6 +65,7 @@ func (scraper *Scraper) Streams() []Stream {
 	for _, stream := range scraper.helixStreams {
 		result = append(result, Stream{
 			ClientName:    scraper.streamers[stream.UserLogin],
+			Id:            stream.ID,
 			Channel:       stream.UserName,
 			Language:      stream.Language,
 			Title:         stream.Title,
