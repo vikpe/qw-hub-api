@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/bytedance/sonic"
+	"github.com/goccy/go-json"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cache"
 	"github.com/gofiber/fiber/v2/middleware/compress"
@@ -26,8 +26,8 @@ type Config struct {
 
 func New() *fiber.App {
 	app := fiber.New(fiber.Config{
-		JSONEncoder: sonic.Marshal,
-		JSONDecoder: sonic.Unmarshal,
+		JSONEncoder: json.Marshal,
+		JSONDecoder: json.Unmarshal,
 	})
 
 	// middleware
@@ -64,7 +64,7 @@ func ConfigFromJsonFile(filePath string) (Config, error) {
 
 	var cfg Config
 
-	err = sonic.Unmarshal(jsonFile, &cfg)
+	err = json.Unmarshal(jsonFile, &cfg)
 	if err != nil {
 		return Config{}, err
 	}
