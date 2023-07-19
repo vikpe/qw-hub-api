@@ -65,7 +65,7 @@ func (scraper *Scraper) Streams() []Stream {
 	for _, stream := range scraper.helixStreams {
 		result = append(result, Stream{
 			ClientName:    scraper.streamers[stream.UserLogin],
-			Id:            stream.ID,
+			Id:            stream.UserID,
 			Channel:       stream.UserName,
 			Language:      stream.Language,
 			Title:         stream.Title,
