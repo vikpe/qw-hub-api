@@ -12,8 +12,17 @@ func TestFilename_Mode(t *testing.T) {
 	assert.Equal(t, "", qdemo.Filename("").Mode())
 	assert.Equal(t, "2on2", qdemo.Filename("2on2_]a[_vs_]sr[[dm4]231022-2126.mvd").Mode())
 	assert.Equal(t, "duel", qdemo.Filename("duel_holy_vs_si7h[bravado]261022-2255.mvd").Mode())
-	assert.Equal(t, "duel_midair", qdemo.Filename("duel_midair_holy_vs_si7h[bravado]261022-2255.mvd").Mode())
+	assert.Equal(t, "duel", qdemo.Filename("duel_midair_holy_vs_si7h[bravado]261022-2255.mvd").Mode())
 	assert.Equal(t, "ffa", qdemo.Filename("ffa_3[dm6]261022-2255_01.mvd").Mode())
+}
+
+func TestFilename_Submode(t *testing.T) {
+	assert.Equal(t, "", qdemo.Filename("").Submode())
+	assert.Equal(t, "", qdemo.Filename("2on2_]a[_vs_]sr[[dm4]231022-2126.mvd").Submode())
+	assert.Equal(t, "", qdemo.Filename("duel_holy_vs_si7h[bravado]261022-2255.mvd").Submode())
+	assert.Equal(t, "midair", qdemo.Filename("duel_midair_holy_vs_si7h[endif]261022-2255.mvd").Submode())
+	assert.Equal(t, "midair", qdemo.Filename("2on2_midair_red_vs_blue[endif]261022-2255.mvd").Submode())
+	assert.Equal(t, "", qdemo.Filename("ffa_3[dm6]261022-2255_01.mvd").Submode())
 }
 
 func TestFilename_Participants(t *testing.T) {

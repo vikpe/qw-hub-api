@@ -11,11 +11,6 @@ type Filename string
 func (f Filename) Mode() string {
 	filename := string(f)
 
-	// special modes
-	if strings.HasPrefix(filename, "duel_midair") {
-		return "duel_midair"
-	}
-
 	indexFirstUnderScore := strings.IndexRune(filename, '_')
 	if -1 == indexFirstUnderScore {
 		return ""
@@ -24,9 +19,35 @@ func (f Filename) Mode() string {
 	return filename[0:indexFirstUnderScore]
 }
 
-func (f Filename) Participants() []string {
+func (f Filename) Submode() string {
+	modes := []string{"duel", "2on2", "4on4", "3on3"}
+	submodes := []string{"midair", "bf"}
 	filename := string(f)
-	indexFrom := len(f.Mode()) + 1
+
+	for _, mode := range modes {
+		for _, submode := range submodes {
+			prefix := fmt.Sprintf("%s_%s", mode, submode)
+
+			if strings.HasPrefix(filename, prefix) {
+				return submode
+			}
+		}
+	}
+
+	return ""
+}
+
+func (f Filename) Participants() []string {
+	var indexFrom int
+	submode := f.Submode()
+	filename := string(f)
+
+	if len(submode) > 0 {
+		indexFrom = len(strings.Join([]string{f.Mode(), submode}, "_")) + 1
+	} else {
+		indexFrom = len(f.Mode()) + 1
+	}
+
 	indexTo := strings.LastIndexByte(filename, '[')
 	if -1 == indexTo {
 		return make([]string, 0)
