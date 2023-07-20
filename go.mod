@@ -14,7 +14,7 @@ require (
 	github.com/samber/lo v1.38.1
 	github.com/stretchr/testify v1.8.4
 	github.com/vikpe/masterstat v0.2.0
-	github.com/vikpe/serverstat v1.0.8
+	github.com/vikpe/serverstat v1.1.0
 )
 
 require (
