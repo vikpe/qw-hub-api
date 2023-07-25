@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
+	"github.com/samber/lo"
 	"github.com/vikpe/qw-hub-api/pkg/htmlparse"
 )
 
@@ -214,7 +215,7 @@ func NewsPosts(limit int) ([]NewsPost, error) {
 }
 
 func WikiRecentChanges(limit int) ([]WikiArticle, error) {
-	feedUrl := fmt.Sprintf("%s/w/api.php?hidebots=1&urlversion=2&days=100&action=feedrecentchanges&feedformat=rss&limit=%d", qwnuURL, limit)
+	feedUrl := fmt.Sprintf("%s/w/api.php?hidebots=1&hidepreviousrevisions=1&namespace=0&urlversion=2&days=100&limit=20&action=feedrecentchanges&feedformat=rss", qwnuURL)
 	doc, err := htmlparse.GetDocument(feedUrl)
 
 	if err != nil {
@@ -222,17 +223,24 @@ func WikiRecentChanges(limit int) ([]WikiArticle, error) {
 	}
 
 	articles := make([]WikiArticle, 0)
+	titles := make([]string, 0)
 	doc.Find("item").Each(func(i int, s *goquery.Selection) {
-		if i > limit { // limit to x items
+		if len(articles) >= limit { // limit to x items
 			return
 		}
 
-		newsPost := WikiArticle{
+		article := WikiArticle{
 			Title: s.ChildrenFiltered("title").Text(),
 			Url:   strings.Replace(s.ChildrenFiltered("comments").Text(), "Talk:", "", 1),
 			Date:  s.ChildrenFiltered("pubDate").Text(),
 		}
-		articles = append(articles, newsPost)
+
+		if lo.Contains(titles, article.Title) {
+			return
+		}
+
+		articles = append(articles, article)
+		titles = append(titles, article.Title)
 	})
 
 	return articles, nil

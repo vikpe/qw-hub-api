@@ -98,7 +98,7 @@ func TestWikiRecentChanges(t *testing.T) {
 	defer httpmock.DeactivateAndReset()
 	qwnuIndexHtml, _ := os.ReadFile("./test_files/feed_wiki_recent_changes.xml")
 	response := httpmock.NewStringResponder(200, string(qwnuIndexHtml))
-	httpmock.RegisterResponder("GET", "https://www.quakeworld.nu/w/api.php?hidebots=1&urlversion=2&days=100&action=feedrecentchanges&feedformat=rss&limit=5", response)
+	httpmock.RegisterResponder("GET", "https://www.quakeworld.nu/w/api.php?hidebots=1&hidepreviousrevisions=1&namespace=0&urlversion=2&days=100&limit=20&action=feedrecentchanges&feedformat=rss", response)
 
 	articles, err := qwnu.WikiRecentChanges(5)
 	assert.Len(t, articles, 5)
