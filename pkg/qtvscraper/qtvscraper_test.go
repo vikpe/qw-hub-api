@@ -205,7 +205,6 @@ func TestIsRelevantDemo(t *testing.T) {
 	testCases := map[string]bool{
 		"duel_testcfg_vs_mj23[dm2].mvd":            false,
 		"ffa_1[dm3]220101-2055.mvd":                false,
-		"wipeout_blue_vs_red[dm3]220101-2055.mvd":  false,
 		"duel_foo_vs_bar[povdmm4]220101-2055.mvd":  false,
 		"2on2_foo_vs_bar[povdmm4]220101-2055.mvd":  false,
 		"2on2_foo_vs_bar[foo_dmm4]220101-2055.mvd": false,
@@ -217,6 +216,7 @@ func TestIsRelevantDemo(t *testing.T) {
 
 		"duel_foo_vs_bar[bravado]220101-2055.mvd": true,
 		"2on2_blue_vs_red[dm3]220101-2055.mvd":    true,
+		"wipeout_blue_vs_red[dm3]220101-2055.mvd": true,
 		"4on4_blue_vs_red[dm3]220101-2055.mvd":    true,
 		"4on4_foo_vs_bar[povdmm4]220101-2055.mvd": true,
 	}
