@@ -8,6 +8,8 @@ import (
 	"github.com/nicklaw5/helix"
 )
 
+const quakeGameId = "7348"
+
 type Stream struct {
 	Id              string    `json:"id"`
 	Channel         string    `json:"channel"`
@@ -75,6 +77,10 @@ func (scraper *Scraper) Streams() []Stream {
 	featuredLogins := scraper.streamers.UserLogins()
 
 	for _, stream := range scraper.helixStreams {
+		if stream.GameID != quakeGameId {
+			continue
+		}
+
 		elems := Stream{
 			ClientName:      scraper.streamers.GetClientName(stream),
 			Id:              stream.UserID,
@@ -113,7 +119,6 @@ func (scraper *Scraper) Start() {
 			isTimeToUpdate := currentTick%scraper.interval == 0
 
 			if isTimeToUpdate {
-				const quakeGameId = "7348"
 
 				response, err := scraper.client.GetStreams(&helix.StreamsParams{
 					First:   20,
