@@ -34,12 +34,11 @@ func (s StreamerIndex) UserLogins() []string {
 	return result
 }
 
-func (s StreamerIndex) GetUsername(stream helix.Stream) string {
+func (s StreamerIndex) GetClientName(stream helix.Stream) string {
 	if _, ok := s[stream.UserLogin]; ok {
 		return s[stream.UserLogin]
 	}
-
-	return ""
+	return stream.UserName
 }
 
 type Scraper struct {
@@ -76,7 +75,7 @@ func (scraper *Scraper) Streams() []Stream {
 
 	for _, stream := range scraper.helixStreams {
 		elems := Stream{
-			ClientName:    scraper.streamers.GetUsername(stream),
+			ClientName:    scraper.streamers.GetClientName(stream),
 			Id:            stream.UserID,
 			Channel:       stream.UserName,
 			Language:      stream.Language,
