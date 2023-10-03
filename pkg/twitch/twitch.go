@@ -2,6 +2,7 @@ package twitch
 
 import (
 	"fmt"
+	"golang.org/x/exp/slices"
 	"time"
 
 	"github.com/nicklaw5/helix"
@@ -17,6 +18,7 @@ type Stream struct {
 	ClientName    string    `json:"client_name"`
 	ServerAddress string    `json:"server_address"`
 	StartedAt     time.Time `json:"started_at"`
+	IsFeatured    bool      `json:"is_featured"`
 }
 
 type StreamerIndex map[string]string
@@ -61,6 +63,7 @@ func NewScraper(clientID string, userAccessToken string, streamers StreamerIndex
 
 func (scraper *Scraper) Streams() []Stream {
 	result := make([]Stream, 0)
+	featuredLogins := scraper.streamers.UserLogins()
 
 	for _, stream := range scraper.helixStreams {
 		result = append(result, Stream{
@@ -73,6 +76,7 @@ func (scraper *Scraper) Streams() []Stream {
 			Url:           fmt.Sprintf("https://twitch.tv/%s", stream.UserLogin),
 			ServerAddress: "",
 			StartedAt:     stream.StartedAt,
+			IsFeatured:    slices.Contains(featuredLogins, stream.UserLogin),
 		})
 	}
 
@@ -100,9 +104,8 @@ func (scraper *Scraper) Start() {
 				const quakeGameId = "7348"
 
 				response, err := scraper.client.GetStreams(&helix.StreamsParams{
-					First:      30,
-					GameIDs:    []string{quakeGameId},
-					UserLogins: scraper.streamers.UserLogins(),
+					First:   60,
+					GameIDs: []string{quakeGameId},
 				})
 
 				if len(response.ErrorMessage) > 0 {
