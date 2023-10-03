@@ -66,7 +66,7 @@ func NewScraper(clientID string, userAccessToken string, streamers StreamerIndex
 	return &Scraper{
 		streamers:    streamers,
 		client:       client,
-		interval:     15,
+		interval:     60, // todo: decrease
 		shouldStop:   false,
 		helixStreams: make([]helix.Stream, 0),
 	}, nil
