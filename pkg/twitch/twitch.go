@@ -9,17 +9,18 @@ import (
 )
 
 type Stream struct {
-	Id            string    `json:"id"`
-	Channel       string    `json:"channel"`
-	Url           string    `json:"url"`
-	Title         string    `json:"title"`
-	ViewerCount   int       `json:"viewers"`
-	Language      string    `json:"language"`
-	ClientName    string    `json:"client_name"`
-	ServerAddress string    `json:"server_address"`
-	StartedAt     time.Time `json:"started_at"`
-	IsFeatured    bool      `json:"is_featured"`
-	GameName      string    `json:"game_name"`
+	Id              string    `json:"id"`
+	Channel         string    `json:"channel"`
+	Url             string    `json:"url"`
+	Title           string    `json:"title"`
+	ViewerCount     int       `json:"viewers"`
+	Language        string    `json:"language"`
+	ClientName      string    `json:"client_name"`
+	ServerAddress   string    `json:"server_address"`
+	StartedAt       time.Time `json:"started_at"`
+	DurationMinutes int       `json:"duration_minutes"`
+	IsFeatured      bool      `json:"is_featured"`
+	GameName        string    `json:"game_name"`
 }
 
 type StreamerIndex map[string]string
@@ -75,17 +76,18 @@ func (scraper *Scraper) Streams() []Stream {
 
 	for _, stream := range scraper.helixStreams {
 		elems := Stream{
-			ClientName:    scraper.streamers.GetClientName(stream),
-			Id:            stream.UserID,
-			Channel:       stream.UserName,
-			Language:      stream.Language,
-			Title:         stream.Title,
-			ViewerCount:   stream.ViewerCount,
-			Url:           fmt.Sprintf("https://twitch.tv/%s", stream.UserLogin),
-			ServerAddress: "",
-			StartedAt:     stream.StartedAt,
-			IsFeatured:    slices.Contains(featuredLogins, stream.UserLogin),
-			GameName:      stream.GameID,
+			ClientName:      scraper.streamers.GetClientName(stream),
+			Id:              stream.UserID,
+			Channel:         stream.UserName,
+			Language:        stream.Language,
+			Title:           stream.Title,
+			ViewerCount:     stream.ViewerCount,
+			Url:             fmt.Sprintf("https://twitch.tv/%s", stream.UserLogin),
+			ServerAddress:   "",
+			StartedAt:       stream.StartedAt,
+			DurationMinutes: int(time.Since(stream.StartedAt).Minutes()),
+			IsFeatured:      slices.Contains(featuredLogins, stream.UserLogin),
+			GameName:        stream.GameName,
 		}
 		result = append(result, elems)
 	}
@@ -141,14 +143,4 @@ func (scraper *Scraper) Start() {
 
 func (scraper *Scraper) Stop() {
 	scraper.shouldStop = true
-}
-
-func isValidStream(stream helix.Stream) bool {
-	duration := time.Since(stream.StartedAt)
-
-	if duration.Minutes() < 5 {
-		return false
-	}
-
-	return true
 }
