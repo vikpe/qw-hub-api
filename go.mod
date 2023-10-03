@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/PuerkitoBio/goquery v1.8.1
-	github.com/go-playground/validator/v10 v10.15.4
+	github.com/go-playground/validator/v10 v10.15.5
 	github.com/goccy/go-json v0.10.2
 	github.com/gofiber/fiber/v2 v2.49.2
 	github.com/jarcoal/httpmock v1.3.1
@@ -15,6 +15,7 @@ require (
 	github.com/stretchr/testify v1.8.4
 	github.com/vikpe/masterstat v0.2.0
 	github.com/vikpe/serverstat v1.2.5
+	golang.org/x/exp v0.0.0-20230905200255-921286631fa9
 )
 
 require (
@@ -28,6 +29,7 @@ require (
 	github.com/google/uuid v1.3.1 // indirect
 	github.com/jpillora/longestcommon v0.0.0-20161227235612-adb9d91ee629 // indirect
 	github.com/klauspost/compress v1.17.0 // indirect
+	github.com/kr/text v0.2.0 // indirect
 	github.com/leodido/go-urn v1.2.4 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.19 // indirect
@@ -43,7 +45,6 @@ require (
 	github.com/vikpe/udpclient v1.0.0 // indirect
 	github.com/vikpe/wildcard v0.1.0 // indirect
 	golang.org/x/crypto v0.13.0 // indirect
-	golang.org/x/exp v0.0.0-20230905200255-921286631fa9 // indirect
 	golang.org/x/net v0.15.0 // indirect
 	golang.org/x/sys v0.12.0 // indirect
 	golang.org/x/text v0.13.0 // indirect
