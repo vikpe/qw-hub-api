@@ -19,6 +19,7 @@ type Stream struct {
 	ServerAddress string    `json:"server_address"`
 	StartedAt     time.Time `json:"started_at"`
 	IsFeatured    bool      `json:"is_featured"`
+	GameName      string    `json:"game_name"`
 }
 
 type StreamerIndex map[string]string
@@ -31,6 +32,14 @@ func (s StreamerIndex) UserLogins() []string {
 	}
 
 	return result
+}
+
+func (s StreamerIndex) GetUsername(stream helix.Stream) string {
+	if _, ok := s[stream.UserLogin]; ok {
+		return s[stream.UserLogin]
+	}
+
+	return ""
 }
 
 type Scraper struct {
@@ -66,8 +75,8 @@ func (scraper *Scraper) Streams() []Stream {
 	featuredLogins := scraper.streamers.UserLogins()
 
 	for _, stream := range scraper.helixStreams {
-		result = append(result, Stream{
-			ClientName:    scraper.streamers[stream.UserLogin],
+		elems := Stream{
+			ClientName:    scraper.streamers.GetUsername(stream),
 			Id:            stream.UserID,
 			Channel:       stream.UserName,
 			Language:      stream.Language,
@@ -77,7 +86,9 @@ func (scraper *Scraper) Streams() []Stream {
 			ServerAddress: "",
 			StartedAt:     stream.StartedAt,
 			IsFeatured:    slices.Contains(featuredLogins, stream.UserLogin),
-		})
+			GameName:      stream.GameID,
+		}
+		result = append(result, elems)
 	}
 
 	return result
@@ -131,4 +142,14 @@ func (scraper *Scraper) Start() {
 
 func (scraper *Scraper) Stop() {
 	scraper.shouldStop = true
+}
+
+func isValidStream(stream helix.Stream) bool {
+	duration := time.Since(stream.StartedAt)
+
+	if duration.Minutes() < 5 {
+		return false
+	}
+
+	return true
 }
