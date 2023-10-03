@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"github.com/gofiber/fiber/v2"
 	"github.com/vikpe/qw-hub-api/pkg/twitch"
 	"github.com/vikpe/serverstat/qserver/mvdsv"
@@ -9,6 +10,7 @@ import (
 
 func Streams(getStreams func() []twitch.Stream, getMvdsvServers func() []mvdsv.Mvdsv) func(c *fiber.Ctx) error {
 	return func(c *fiber.Ctx) error {
+		c.Response().Header.Add("Cache-Time", fmt.Sprintf("%d", 0)) // no cache
 		streams := getStreams()
 
 		for streamIndex, stream := range streams {
