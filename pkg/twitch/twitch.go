@@ -55,7 +55,7 @@ func NewScraper(clientID string, userAccessToken string, streamers StreamerIndex
 	return &Scraper{
 		streamers:    streamers,
 		client:       client,
-		interval:     10,
+		interval:     15,
 		shouldStop:   false,
 		helixStreams: make([]helix.Stream, 0),
 	}, nil
@@ -104,7 +104,8 @@ func (scraper *Scraper) Start() {
 				const quakeGameId = "7348"
 
 				response, err := scraper.client.GetStreams(&helix.StreamsParams{
-					First:   60,
+					First:   20,
+					Type:    "live",
 					GameIDs: []string{quakeGameId},
 				})
 
