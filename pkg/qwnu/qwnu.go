@@ -73,16 +73,26 @@ func Events(limit int) ([]Event, error) {
 
 			cells := s.Children()
 
+			var title string
+			var wikiUrl string
+
 			linkElement := cells.Eq(indexLinkCell).Find("a").First()
-			linkRelHref := linkElement.AttrOr("href", "#")
+			if linkElement.Length() > 0 {
+				title = linkElement.AttrOr("title", "[parse fail]")
+				wikiUrl = fmt.Sprintf("%s%s", qwnuURL, linkElement.AttrOr("href", "#"))
+			} else {
+				title = strings.TrimSpace(cells.Eq(indexLinkCell).Text())
+				wikiUrl = ""
+			}
+
 			logoRelUrl := cells.Eq(indexLogoCell).Find("img").First().AttrOr("src", "")
 			logoRelUrl = strings.Replace(logoRelUrl, "21px", "32px", 1) // use 32px size
 
 			event := Event{
-				Title:   linkElement.AttrOr("title", "[parse fail]"),
+				Title:   title,
 				Status:  statuses[t],
 				Date:    strings.TrimSpace(cells.Eq(indexDateCell).Text()),
-				WikiUrl: fmt.Sprintf("%s%s", qwnuURL, linkRelHref),
+				WikiUrl: wikiUrl,
 				LogoUrl: fmt.Sprintf("%s%s", qwnuURL, logoRelUrl),
 			}
 			events = append(events, event)
