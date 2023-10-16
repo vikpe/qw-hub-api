@@ -113,17 +113,22 @@ func (f Filename) Time() string {
 	return strings.SplitN(dateTime, "-", 2)[1]
 }
 
-func (f Filename) ParseDateTime(dateFormat string) time.Time {
+func (f Filename) TimeInUtc(dateFormat, timezoneName string) time.Time {
+	location, err := time.LoadLocation(timezoneName)
+	if err != nil {
+		location = time.UTC
+	}
+
 	layoutDate := dateFormatToTimeLayout(dateFormat)
 	layoutTime := "1504" // hhmm
 	layout := fmt.Sprintf("%s-%s", layoutDate, layoutTime)
-	demoTime, err := time.Parse(layout, f.DateTime())
+	demoTime, err := time.ParseInLocation(layout, f.DateTime(), location)
 
 	if err != nil {
 		return time.Time{}
 	}
 
-	return demoTime
+	return demoTime.UTC()
 }
 
 func dateFormatToTimeLayout(dateFormat string) string {

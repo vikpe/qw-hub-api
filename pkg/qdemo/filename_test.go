@@ -67,14 +67,25 @@ func TestFilename_Time(t *testing.T) {
 	assert.Equal(t, "2255", qdemo.Filename("duel_holy_vs_si7h[bravado]261022-2255_01.mvd").Time())
 }
 
-func TestFilename_ParseDateTime(t *testing.T) {
-	timeByDateStr := func(dateStr string) time.Time {
+func TestFilename_TimeInUtc(t *testing.T) {
+	timeByStr := func(dateStr string) time.Time {
 		t, _ := time.Parse("20060102-1504", dateStr)
 		return t
 	}
 
-	assert.Equal(t, time.Time{}, qdemo.Filename("").ParseDateTime("ymd"))
-	assert.Equal(t, timeByDateStr("20010203-2255"), qdemo.Filename("duel_holy_vs_si7h[bravado]010203-2255.mvd").ParseDateTime("ymd"))
-	assert.Equal(t, timeByDateStr("20030201-2255"), qdemo.Filename("duel_holy_vs_si7h[bravado]010203-2255.mvd").ParseDateTime("dmy"))
-	assert.Equal(t, timeByDateStr("20010203-2255"), qdemo.Filename("duel_holy_vs_si7h[bravado]20010203-2255.mvd").ParseDateTime("Ymd"))
+	// UTC
+	assert.Equal(t, time.Time{}, qdemo.Filename("").TimeInUtc("ymd", "Europe/London"))
+	assert.Equal(t, timeByStr("20010203-2255"), qdemo.Filename("duel_holy_vs_si7h[bravado]010203-2255.mvd").TimeInUtc("ymd", "Europe/London"))
+	assert.Equal(t, timeByStr("20030201-2255"), qdemo.Filename("duel_holy_vs_si7h[bravado]010203-2255.mvd").TimeInUtc("dmy", "Europe/London"))
+	assert.Equal(t, timeByStr("20010203-2255"), qdemo.Filename("duel_holy_vs_si7h[bravado]20010203-2255.mvd").TimeInUtc("Ymd", "Europe/London"))
+
+	// summer time
+	assert.Equal(t, timeByStr("20230402-1500"), qdemo.Filename("duel_holy_vs_si7h[bravado]20230402-1800.mvd").TimeInUtc("Ymd", "Europe/Helsinki"))
+	assert.Equal(t, timeByStr("20230402-1600"), qdemo.Filename("duel_holy_vs_si7h[bravado]20230402-1800.mvd").TimeInUtc("Ymd", "Europe/Stockholm"))
+	assert.Equal(t, timeByStr("20230402-1700"), qdemo.Filename("duel_holy_vs_si7h[bravado]20230402-1800.mvd").TimeInUtc("Ymd", "Europe/London"))
+
+	// winter time
+	assert.Equal(t, timeByStr("20231102-1600"), qdemo.Filename("duel_holy_vs_si7h[bravado]20231102-1800.mvd").TimeInUtc("Ymd", "Europe/Helsinki"))
+	assert.Equal(t, timeByStr("20231102-1700"), qdemo.Filename("duel_holy_vs_si7h[bravado]20231102-1800.mvd").TimeInUtc("Ymd", "Europe/Stockholm"))
+	assert.Equal(t, timeByStr("20231102-1800"), qdemo.Filename("duel_holy_vs_si7h[bravado]20231102-1800.mvd").TimeInUtc("Ymd", "Europe/London"))
 }

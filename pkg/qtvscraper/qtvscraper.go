@@ -71,14 +71,14 @@ func (s *Scraper) scrapeDemos() []Demo {
 				}
 
 				// check age
-				demoTime := demoFilename.ParseDateTime(server.DemoDateFormat)
-				if s.DemoMaxAge.Seconds() > 0 && demoTime.Before(minDemoTime) {
+				demoDateTime := demoFilename.TimeInUtc(server.DemoDateFormat, server.Timezone)
+				if s.DemoMaxAge.Seconds() > 0 && demoDateTime.Before(minDemoTime) {
 					continue
 				}
 
 				demo := Demo{
 					QtvAddress:  server.Address,
-					Time:        demoTime,
+					Time:        demoDateTime,
 					Filename:    filename,
 					DownloadUrl: server.DemoDownloadUrl(filename),
 					QtvplayUrl:  server.DemoQtvplayUrl(filename),
@@ -158,6 +158,7 @@ func containsBotName(participants []string) bool {
 type Server struct {
 	Address        string `json:"address"`
 	DemoDateFormat string `json:"demo_date_format"`
+	Timezone       string `json:"timezone"`
 }
 
 func (s *Server) DemoDownloadUrl(filename string) string {
