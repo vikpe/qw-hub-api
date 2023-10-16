@@ -50,9 +50,17 @@ func TestEvents(t *testing.T) {
 		Title:   "QW LAN PL 2023",
 		Status:  "upcoming",
 		Date:    "08 Nov",
-		WikiUrl: "https://www.quakeworld.nu/wiki/QW_LAN_PL_2023",
+		WikiUrl: "",
 		LogoUrl: "https://www.quakeworld.nu/w/images/thumb/b/b8/Dqer-icon.png/32px-Dqer-icon.png",
 	}, events[0])
+
+	assert.Equal(t, qwnu.Event{
+		Title:   "TEC Elite Cup 2023",
+		Status:  "upcoming",
+		Date:    "29 Sep",
+		WikiUrl: "https://www.quakeworld.nu/wiki/TEC_Elite_Cup_2023",
+		LogoUrl: "https://www.quakeworld.nu/w/images/9/9f/Tbd-icon.png",
+	}, events[1])
 }
 
 func TestNewsPosts(t *testing.T) {
