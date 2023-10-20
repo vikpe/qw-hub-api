@@ -125,7 +125,7 @@ func IsRelevantDemo(demoFilename qdemo.Filename) bool {
 		return false
 	}
 
-	if !lo.Contains([]string{"duel", "1on1", "2on2", "wipeout"}, mode) {
+	if !lo.Contains([]string{"duel", "1on1", "2on2", "ctf", "wipeout"}, mode) {
 		return false
 	}
 

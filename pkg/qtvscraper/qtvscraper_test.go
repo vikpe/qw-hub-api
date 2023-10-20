@@ -216,6 +216,7 @@ func TestIsRelevantDemo(t *testing.T) {
 
 		"duel_foo_vs_bar[bravado]220101-2055.mvd": true,
 		"2on2_blue_vs_red[dm3]220101-2055.mvd":    true,
+		"ctf_blue_vs_red[ctf4]220101-2055.mvd":    true,
 		"wipeout_blue_vs_red[dm3]220101-2055.mvd": true,
 		"4on4_blue_vs_red[dm3]220101-2055.mvd":    true,
 		"4on4_foo_vs_bar[povdmm4]220101-2055.mvd": true,
