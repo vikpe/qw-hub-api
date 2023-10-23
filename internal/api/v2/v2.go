@@ -1,6 +1,7 @@
 package api
 
 import (
+	"github.com/vikpe/qw-hub-api/internal/api/v2/handlers/mvdsvh"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
@@ -18,7 +19,7 @@ func Init(
 	twitchProvider *twitch.Scraper,
 	demoProvider *qtvscraper.Scraper,
 ) {
-	router.Get("servers/mvdsv", handlers.Mvdsv(serverProvider.Mvdsv))
+	router.Get("servers/mvdsv", mvdsvh.Handler(serverProvider.Mvdsv))
 	router.Get("servers/qtv", handlers.Qtv(serverProvider.Qtv))
 	router.Get("servers/qwfwd", handlers.Qwfwd(serverProvider.Qwdfwd))
 	router.Get("servers/:address/lastscores", handlers.ServerLastScores())
