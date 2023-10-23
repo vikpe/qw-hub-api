@@ -29,10 +29,22 @@ See [config.sample.json](./config.sample.json)
       "qwmaster.fodquake.net:27000"
     ]
   },
-   "qtv_demo_sources": [
-    {"address": "qw.irc.ax:28000", "demo_date_format": "ymd"},
-    {"address": "troopers.fi:28000", "demo_date_format": "ymd"},
-    {"address": "quake.se:28000", "demo_date_format": "Ymd"}
+  "qtv_demo_sources": [
+    {
+      "address": "de.quake.world:28000",
+      "demo_date_format": "ymd",
+      "timezone": "UTC"
+    },
+    {
+      "address": "troopers.fi:28000",
+      "demo_date_format": "ymd",
+      "timezone": "Europe/Helsinki"
+    },
+    {
+      "address": "quake.se:28000",
+      "demo_date_format": "Ymd",
+      "timezone": "Europe/Stockholm"
+    }
   ],
   "streamers": {
     "annihilazor": "anni",
@@ -51,7 +63,7 @@ See [config.sample.json](./config.sample.json)
 | `/v2/servers/mvdsv`                | MVDSV servers                                                             |  
 | `/v2/servers/qwfwd`                | QWFWD servers (proxies)                                                   |  
 | `/v2/servers/qtv`                  | QTV servers                                                               |
- |                                    |                                                                           |
+|                                    |                                                                           |
 | `/v2/servers/<address>`            | Server details                                                            |
 | `/v2/servers/<address>/lastscores` | Server lastscores                                                         |
 | `/v2/servers/<address>/laststats`  | Server laststats                                                          |
@@ -70,10 +82,13 @@ See [config.sample.json](./config.sample.json)
 
 > `/v2/servers/mvdsv`
 
-| Param                | Type      | Example              | Description                                   |
-|----------------------|-----------|----------------------|-----------------------------------------------|
-| **has_player**       | `string`  | `has_player=xantom`  | Servers where `xantom` is connected as player |
-| **has_client**       | `string`  | `has_client=xantom`  | Servers where `xantom` is connected           |
+| Param          | Type                     | Example             | Description                                   |
+|----------------|--------------------------|---------------------|-----------------------------------------------|
+| **empty**      | `include\|exclude\|only` | `empty=include`     | Include empty servers (default `exclude`)     |
+| **hostname**   | `string`                 | `hostname=quake.se` | Servers matching hostname `quake.se`          |
+| **has_player** | `string`                 | `has_player=xantom` | Servers where `xantom` is connected as player |
+| **has_client** | `string`                 | `has_client=xantom` | Servers where `xantom` is connected           |
+| **limit**      | `int`                    | `limit=10`          | Limit to `10` servers                         |
 
 ### Demos
 
@@ -88,7 +103,7 @@ See [config.sample.json](./config.sample.json)
 
 ## Build
 
-```she
+```shell
 go build
 ```
 
