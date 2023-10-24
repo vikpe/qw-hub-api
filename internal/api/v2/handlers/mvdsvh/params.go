@@ -94,15 +94,15 @@ func FilterByEmpty(servers []mvdsv.Mvdsv, empty string) []mvdsv.Mvdsv {
 	return result
 }
 
-func FilterByParams(demos []mvdsv.Mvdsv, params *MvdsvParams) []mvdsv.Mvdsv {
-	result := FilterByHostname(demos, params.Hostname)
+func FilterByParams(servers []mvdsv.Mvdsv, params *MvdsvParams) []mvdsv.Mvdsv {
+	result := FilterByHostname(servers, params.Hostname)
 
-	if params.Empty != "" {
-		result = FilterByEmpty(result, params.Empty)
-	} else if params.HasPlayer != "" {
+	if params.HasPlayer != "" {
 		result = FilterByHasPlayer(result, params.HasPlayer)
 	} else if params.HasClient != "" {
 		result = FilterByHasClient(result, params.HasClient)
+	} else if params.Empty != "" {
+		result = FilterByEmpty(result, params.Empty)
 	}
 
 	if params.Limit > 0 && len(result) > params.Limit {
