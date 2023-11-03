@@ -146,7 +146,7 @@ func GamesInSpotlight() ([]GameInSpotlight, error) {
 
 	descriptions := make([]string, 0)
 	gamesDiv.ChildrenFiltered("div").Each(func(i int, s *goquery.Selection) {
-		descriptions = append(descriptions, cleanHtmlText(s.Text()))
+		descriptions = append(descriptions, CleanHtmlText(s.Text()))
 	})
 
 	games := make([]GameInSpotlight, 0)
@@ -168,13 +168,13 @@ func GamesInSpotlight() ([]GameInSpotlight, error) {
 		event := GameInSpotlightLink{}
 
 		if eventLink.Length() > 0 {
-			event.Title = eventLink.Text()
+			event.Title = CleanHtmlText(eventLink.Text())
 			event.Url = wikiLinkHref(eventLink.AttrOr("href", "#"))
 		}
 
 		// result
 		game := GameInSpotlight{
-			Participants: cleanHtmlText(rows.First().Text()),
+			Participants: ParseParticipants(rows.First()),
 			Stream:       stream,
 			Event:        event,
 			Date:         secondRow.Find(".datetime").Text(),
@@ -189,6 +189,19 @@ func GamesInSpotlight() ([]GameInSpotlight, error) {
 	})
 
 	return games, nil
+}
+
+func ParseParticipants(row *goquery.Selection) string {
+	breaks := row.Find("br")
+
+	if 2 != breaks.Size() {
+		return CleanHtmlText(row.Text())
+	}
+
+	breaks.ReplaceWithHtml(" (")
+	textValue := CleanHtmlText(row.Text())
+	result := strings.ReplaceAll(textValue, " vs. ", ") vs. ") + ")"
+	return result
 }
 
 func NewsPosts(limit int) ([]NewsPost, error) {
@@ -256,7 +269,7 @@ func WikiRecentChanges(limit int) ([]WikiArticle, error) {
 	return articles, nil
 }
 
-func cleanHtmlText(htmlText string) string {
+func CleanHtmlText(htmlText string) string {
 	result := regexp.MustCompile(`\s+`).ReplaceAllString(htmlText, " ")
 	result = strings.ReplaceAll(result, "\u00a0", "")
 	result = strings.TrimSpace(result)

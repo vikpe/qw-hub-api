@@ -9,6 +9,11 @@ import (
 	"github.com/vikpe/qw-hub-api/pkg/qwnu"
 )
 
+func TestCleanHtmlText(t *testing.T) {
+	text := "\t  Kombat   Duel\n                                                        5"
+	assert.Equal(t, "Kombat Duel 5", qwnu.CleanHtmlText(text))
+}
+
 func TestGamesInSpotlight(t *testing.T) {
 	httpmock.Activate()
 	defer httpmock.DeactivateAndReset()
@@ -17,7 +22,7 @@ func TestGamesInSpotlight(t *testing.T) {
 	httpmock.RegisterResponder("GET", "https://www.quakeworld.nu/wiki/Overview", response)
 
 	games, err := qwnu.GamesInSpotlight()
-	assert.Len(t, games, 2)
+	assert.Len(t, games, 3)
 	assert.Nil(t, err)
 
 	assert.Equal(t, qwnu.GameInSpotlight{
@@ -33,6 +38,20 @@ func TestGamesInSpotlight(t *testing.T) {
 		},
 		Date: "29 April 2023 20:00",
 	}, games[0])
+
+	assert.Equal(t, qwnu.GameInSpotlight{
+		Participants: "Commando (Milton, Diki, Xantom, Xterm, HENU, Martin) vs. Slackers (ParadokS, zero, niw, mazer, xunito)",
+		Description:  "Semifinal, 20:00 cet",
+		Stream: qwnu.GameInSpotlightLink{
+			Title: "badsebitv",
+			Url:   "http://twitch.tv/badsebitv",
+		},
+		Event: qwnu.GameInSpotlightLink{
+			Title: "Qlan War Tournament 5",
+			Url:   "https://www.quakeworld.nu/wiki/Qlan_War_Tournament_5",
+		},
+		Date: "5 Nov 2023 19:00",
+	}, games[2])
 }
 
 func TestEvents(t *testing.T) {
