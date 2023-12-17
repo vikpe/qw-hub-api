@@ -5,33 +5,62 @@
     "server_interval": 30,
     "master_interval": 14400,
     "master_servers": [
-      "master.quakeworld.nu:27000",
+      "masterserver:27000",
       "master.quakeservers.net:27000",
-      "qwmaster.ocrana.de:27000",
       "qwmaster.fodquake.net:27000"
     ]
   },
   "qtv_demo_sources": [
-    {
-      "address": "ny.quake.world:28000",
-      "demo_date_format": "ymd",
-      "timezone": "America/New_York"
-    },
-    {
-      "address": "troopers.fi:28000",
-      "demo_date_format": "ymd",
-      "timezone": "Europe/Helsinki"
-    },
-    {
-      "address": "quake.se:28000",
-      "demo_date_format": "Ymd",
-      "timezone": "Europe/Sweden"
-    }
+    {"address": "clanrot.org:28000", "demo_date_format": "ymd", "timezone": "UTC"},
+    {"address": "dal.spawnfrag.com:28000", "demo_date_format": "Ymd", "timezone": "UTC"},
+    {"address": "de.quake.world:28000", "demo_date_format": "Ymd", "timezone": "UTC"},
+    {"address": "nl.quake.world:28000", "demo_date_format": "Ymd", "timezone": "UTC"},
+    {"address": "dk.quake.world:28000", "demo_date_format": "Ymd", "timezone": "Europe/Copenhagen"},
+    {"address": "dm6.uk:28000", "demo_date_format": "Ymd", "timezone": "Europe/London"},
+    {"address": "la.quake.world:28000", "demo_date_format": "ymd", "timezone": "UTC"},
+    {"address": "ny.quake.world:28000", "demo_date_format": "ymd", "timezone": "UTC"},
+    {"address": "london.badplace.eu:28000", "demo_date_format": "ymd", "timezone": "Europe/London"},
+    {"address": "nl.badplace.eu:28000", "demo_date_format": "ymd", "timezone": "Europe/Amsterdam"},
+    {"address": "quake.se:28000", "demo_date_format": "Ymd", "timezone": "Europe/Stockholm"},
+    {"address": "qw.0f.se:28000", "demo_date_format": "Ymd", "timezone": "Europe/Stockholm"},
+    {"address": "se.imaginary.zone:28000", "demo_date_format": "ymd", "timezone": "Europe/Stockholm"},
+    {"address": "troopers.fi:28000", "demo_date_format": "ymd", "timezone": "Europe/Helsinki"},
+    {"address": "zasadzka.pl:28000", "demo_date_format": "Ymd", "timezone": "UTC"}
   ],
   "streamers": {
+    "4ksae": "sae",
+    "amd_glad": "glad",
+    "ake_vader": "ake_vader",
     "annihilazor": "anni",
+    "badsebitv": "badsebitv1",
+    "bogojoker": "bogojoker",
+    "bps__": "bps",
+    "chadmcdouche": "velocity",
+    "devqw": "dev",
+    "dracs_gaming": "dracs",
+    "hemostick": "hemostick",
+    "hangtime_of_qw": "HangTime",
+    "hiipe_qw": "hiipe",
+    "kliceo": "klice",
+    "locktar": "LocKtar",
+    "lordlame": "lordlame",
+    "lolekd2": "lolekd2",
+    "maalox1": "BLooD_DoG(D_P)",
+    "miltonizer": "Milton",
+    "niwsen": "niw",
+    "novate": "Flea",
+    "ocoini": "ocoini",
+    "proudsausage": "eb",
     "quakeworld": "[streambot]",
-    "suddendeathTV": "suddendeathTV",
-    "vikpe": "XantoM"
+    "quakeworlddemos": "[demobot]",
+    "qwhammer": "hmr",
+    "peppe_qw": "peppe",
+    "reppie": "reppie",
+    "ronm8": "kf",
+    "shining_ctf": "Shining",
+    "suddendeathtv": "suddendeathTV",
+    "vikpe": "XantoM",
+    "wimpeeh": "Wimp",
+    "zorakwar": "Zorak"
   }
 }
