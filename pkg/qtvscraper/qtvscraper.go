@@ -121,7 +121,7 @@ func IsRelevantDemo(demoFilename qdemo.Filename) bool {
 		return true
 	}
 
-	if "duel" == mode && containsBotName(demoFilename.Participants()) {
+	if containsBotName(demoFilename.Participants()) {
 		return false
 	}
 
@@ -136,8 +136,9 @@ func IsRelevantDemo(demoFilename qdemo.Filename) bool {
 	}
 
 	excludedMaps := []string{
-		"amphi", "amphi2", "dm3hill", "end", "outpost", "pov2022",
-		"endif", "midair", "nacmidair",
+		"amphi", "amphi2", "dm3hill", "dm3ra", "end", "outpost", "pov2022",
+		"endif", "midair", "nacmidair", "anarena", "anarena2",
+		"anarena3", "anarena4", "anarena5", "antemple", "anruin",
 	}
 
 	return !lo.Contains(excludedMaps, mapName)
