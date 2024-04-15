@@ -25,7 +25,6 @@ See [config.sample.json](./config.sample.json)
     "master_servers": [
       "master.quakeworld.nu:27000",
       "master.quakeservers.net:27000",
-      "qwmaster.ocrana.de:27000",
       "qwmaster.fodquake.net:27000"
     ]
   },
