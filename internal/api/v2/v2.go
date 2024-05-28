@@ -1,13 +1,10 @@
 package api
 
 import (
-	"github.com/vikpe/qw-hub-api/internal/api/v2/handlers/mvdsvh"
-	"time"
-
 	"github.com/gofiber/fiber/v2"
-	"github.com/patrickmn/go-cache"
 	"github.com/vikpe/qw-hub-api/internal/api/v2/handlers"
 	"github.com/vikpe/qw-hub-api/internal/api/v2/handlers/demoh"
+	"github.com/vikpe/qw-hub-api/internal/api/v2/handlers/mvdsvh"
 	"github.com/vikpe/qw-hub-api/pkg/qtvscraper"
 	"github.com/vikpe/qw-hub-api/pkg/serverscraper"
 	"github.com/vikpe/qw-hub-api/pkg/twitch"
@@ -31,12 +28,14 @@ func Init(
 
 	router.Get("streams", handlers.Streams(twitchProvider.Streams, serverProvider.Mvdsv))
 
-	scrapeCache := cache.New(15*time.Minute, 30*time.Minute)
-	router.Get("events", handlers.Events(scrapeCache))
-	router.Get("news", handlers.News(scrapeCache))
-	router.Get("forum_posts", handlers.ForumPosts(scrapeCache))
-	router.Get("games_in_spotlight", handlers.GamesInSpotlight(scrapeCache))
-	router.Get("wiki_recent_changes", handlers.WikiRecentChanges(scrapeCache))
+	/*
+		scrapeCache := cache.New(15*time.Minute, 30*time.Minute)
+		router.Get("events", handlers.Events(scrapeCache))
+		router.Get("news", handlers.News(scrapeCache))
+		router.Get("forum_posts", handlers.ForumPosts(scrapeCache))
+		router.Get("games_in_spotlight", handlers.GamesInSpotlight(scrapeCache))
+		router.Get("wiki_recent_changes", handlers.WikiRecentChanges(scrapeCache))
+	*/
 
 	router.Get("demos", demoh.Handler(demoProvider.Demos))
 }
