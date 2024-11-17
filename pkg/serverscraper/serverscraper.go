@@ -101,6 +101,7 @@ func (scraper *Scraper) ServersByHost(host string) []qserver.GenericServer {
 	for _, server := range scraper.Servers() {
 		if server.Host() == host {
 			result = append(result, server)
+			continue
 		}
 
 		parsedHostname := server.Settings.Get("hostname_parsed", "")
