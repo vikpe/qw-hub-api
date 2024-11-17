@@ -67,7 +67,10 @@ See [config.sample.json](./config.sample.json)
 | `/v2/servers/<address>/lastscores` | Server lastscores                                                         |
 | `/v2/servers/<address>/laststats`  | Server laststats                                                          |
 |                                    |                                                                           |
-| `/v2/masters/<address>`            | List of servers on master                                                 |
+| `/v2/server_groups`                | List server groups                                                        |
+| `/v2/server_groups/<host or ip>`   | Server group details                                                      |
+|                                    |                                                                           |
+| `/v2/masters/<address>`            | List servers on master                                                    |
 |                                    |                                                                           |
 | `/v2/demos`                        | Demos from popular servers                                                |  
 | `/v2/streams`                      | Twitch streams casting Quake                                              |  
