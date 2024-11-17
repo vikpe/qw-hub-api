@@ -2,6 +2,7 @@ package serverscraper
 
 import (
 	"log"
+	"strings"
 	"time"
 
 	"github.com/vikpe/masterstat"
@@ -92,6 +93,30 @@ func (scraper *Scraper) Servers() []qserver.GenericServer {
 
 func (scraper *Scraper) ServerByAddress(address string) (qserver.GenericServer, error) {
 	return scraper.ServerIndex.Get(address)
+}
+
+func (scraper *Scraper) ServersByHost(host string) []qserver.GenericServer {
+	result := make([]qserver.GenericServer, 0)
+
+	for _, server := range scraper.Servers() {
+		if server.Host() == host {
+			result = append(result, server)
+		}
+
+		parsedHostname := server.Settings.Get("hostname_parsed", "")
+
+		if !strings.ContainsRune(parsedHostname, ':') {
+			continue
+		}
+
+		parsedHost := strings.SplitN(parsedHostname, ":", 2)[0]
+
+		if parsedHost == host {
+			result = append(result, server)
+		}
+	}
+
+	return result
 }
 
 func (scraper *Scraper) Mvdsv() []mvdsv.Mvdsv {
