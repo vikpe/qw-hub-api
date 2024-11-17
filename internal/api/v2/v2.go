@@ -16,6 +16,9 @@ func Init(
 	twitchProvider *twitch.Scraper,
 	demoProvider *qtvscraper.Scraper,
 ) {
+	router.Get("server_groups/:host", handlers.ServerGroupDetails(serverProvider.ServersByHost))
+	router.Get("server_groups", handlers.ServerGroupList(serverProvider.Servers))
+
 	router.Get("servers/mvdsv", mvdsvh.Handler(serverProvider.Mvdsv))
 	router.Get("servers/qtv", handlers.Qtv(serverProvider.Qtv))
 	router.Get("servers/qwfwd", handlers.Qwfwd(serverProvider.Qwdfwd))
