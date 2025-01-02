@@ -2,10 +2,12 @@ package twitch
 
 import (
 	"fmt"
-	"golang.org/x/exp/slices"
+	"strings"
 	"time"
 
-	"github.com/nicklaw5/helix"
+	"golang.org/x/exp/slices"
+
+	"github.com/nicklaw5/helix/v2"
 )
 
 const quakeGameId = "7348"
@@ -23,6 +25,7 @@ type Stream struct {
 	DurationMinutes int       `json:"duration_minutes"`
 	IsFeatured      bool      `json:"is_featured"`
 	GameName        string    `json:"game_name"`
+	ProfileImageUrl string    `json:"profile_image_url"`
 }
 
 type StreamerIndex map[string]string
@@ -48,6 +51,7 @@ type Scraper struct {
 	client       *helix.Client
 	streamers    StreamerIndex
 	helixStreams []helix.Stream
+	helixUsers   []helix.User
 	shouldStop   bool
 	interval     int
 }
@@ -69,6 +73,7 @@ func NewScraper(clientID string, userAccessToken string, streamers StreamerIndex
 		interval:     60, // todo: decrease
 		shouldStop:   false,
 		helixStreams: make([]helix.Stream, 0),
+		helixUsers:   make([]helix.User, 0),
 	}, nil
 }
 
@@ -94,7 +99,16 @@ func (scraper *Scraper) Streams() []Stream {
 			DurationMinutes: int(time.Since(stream.StartedAt).Minutes()),
 			IsFeatured:      slices.Contains(featuredLogins, stream.UserLogin),
 			GameName:        stream.GameName,
+			ProfileImageUrl: "",
 		}
+
+		for _, user := range scraper.helixUsers {
+			if user.ID == stream.UserID {
+				elems.ProfileImageUrl = strings.Replace(user.ProfileImageURL, "300x300", "70x70", 1)
+				break
+			}
+		}
+
 		result = append(result, elems)
 	}
 
@@ -119,24 +133,46 @@ func (scraper *Scraper) Start() {
 			isTimeToUpdate := currentTick%scraper.interval == 0
 
 			if isTimeToUpdate {
-
-				response, err := scraper.client.GetStreams(&helix.StreamsParams{
+				// get streams
+				streamsRes, streamsErr := scraper.client.GetStreams(&helix.StreamsParams{
 					First:   20,
 					Type:    "live",
 					GameIDs: []string{quakeGameId},
 				})
 
-				if len(response.ErrorMessage) > 0 {
-					fmt.Println("error fetching twitch streams:", response.ErrorMessage)
+				if len(streamsRes.ErrorMessage) > 0 {
+					fmt.Println("error fetching twitch streams:", streamsRes.ErrorMessage)
 					return
 				}
 
-				if err != nil {
-					fmt.Println("error fetching twitch streams", err)
+				if streamsErr != nil {
+					fmt.Println("error fetching twitch streams", streamsErr)
 					return
 				}
 
-				scraper.helixStreams = response.Data.Streams
+				scraper.helixStreams = streamsRes.Data.Streams
+
+				// get user info
+				userIDs := make([]string, 0)
+				for _, stream := range scraper.helixStreams {
+					userIDs = append(userIDs, stream.UserID)
+				}
+
+				usersRes, usersErr := scraper.client.GetUsers(&helix.UsersParams{
+					IDs: userIDs,
+				})
+
+				if len(usersRes.ErrorMessage) > 0 {
+					fmt.Println("error fetching twitch users:", usersRes.ErrorMessage)
+					return
+				}
+
+				if usersErr != nil {
+					fmt.Println("error fetching twitch users", streamsErr)
+					return
+				}
+
+				scraper.helixUsers = usersRes.Data.Users
 			}
 		}()
 
