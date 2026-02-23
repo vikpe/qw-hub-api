@@ -24,14 +24,14 @@ type Config struct {
 
 type Scraper struct {
 	Config      Config
-	ServerIndex serverindex.ServerIndex
+	ServerIndex *serverindex.ServerIndex
 	shouldStop  bool
 }
 
 func New(cfg Config) *Scraper {
 	return &Scraper{
 		Config:      cfg,
-		ServerIndex: make(serverindex.ServerIndex, 0),
+		ServerIndex: serverindex.New([]qserver.GenericServer{}),
 		shouldStop:  false,
 	}
 }
@@ -73,7 +73,7 @@ func (scraper *Scraper) Start() {
 				scraper.ServerIndex = serverindex.New(statClient.GetInfoFromMany(serverAddresses))
 			} else if isTimeToUpdateActiveServers {
 				activeAddresses := scraper.ServerIndex.ActiveAddresses()
-				scraper.ServerIndex.Update(statClient.GetInfoFromMany(activeAddresses))
+				scraper.ServerIndex.Upsert(statClient.GetInfoFromMany(activeAddresses))
 			}
 		}()
 

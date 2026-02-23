@@ -85,9 +85,9 @@ func SubstringMatch(haystack string, query string) bool {
 		return false
 	}
 
-	needles := strings.Split(query, " ")
+	needles := strings.SplitSeq(query, " ")
 
-	for _, needle := range needles {
+	for needle := range needles {
 		if !strings.Contains(haystack, needle) {
 			return false
 		}
