@@ -74,8 +74,8 @@ github.com/valyala/fastjson v1.6.10 h1:/yjJg8jaVQdYR3arGxPE2X5z89xrlhS0eGXdv+ADT
 github.com/valyala/fastjson v1.6.10/go.mod h1:e6FubmQouUNP73jtMLmcbxS6ydWIpOfhz34TSfO3JaE=
 github.com/vikpe/masterstat v0.2.0 h1:xwLeK/eyWWlTwacGQr+B6Sw32g43oukjh/eidwkeHIE=
 github.com/vikpe/masterstat v0.2.0/go.mod h1:dWwVbHx/ilzsx5GLbXtX9x+S0pISmJzYPFdz6cgKrvo=
-github.com/vikpe/serverstat v1.6.0 h1:ywShvjOMJP4sdsiAxwUlATMcgvXVV+rnXZzZsXreFos=
-github.com/vikpe/serverstat v1.6.0/go.mod h1:KDFVLKaAgMN3UoXQFJxD9RS+jrh69y53JeW2RuGEau4=
+github.com/vikpe/serverstat v1.7.0 h1:l74JnrFgMeoNdirr5+S8if9/XhaP5H9sNCsZh8WWHTM=
+github.com/vikpe/serverstat v1.7.0/go.mod h1:KDFVLKaAgMN3UoXQFJxD9RS+jrh69y53JeW2RuGEau4=
 github.com/vikpe/udpclient v1.0.0 h1:xamjn2Vbwz9bEFTo9FJM2mAFdH4j3TXD7KHysyxK+lI=
 github.com/vikpe/udpclient v1.0.0/go.mod h1:zJgymSC/B3JTeyCncp0lrbbQnusOc7/CP/VDR29lpGY=
 github.com/vikpe/udphelper v1.0.1 h1:yx5/Pbbir5a3Ya0QLcHWNI95KlWPQE76Zclpc3MSDa4=

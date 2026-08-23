@@ -15,7 +15,7 @@ require (
 	github.com/samber/lo v1.52.0
 	github.com/stretchr/testify v1.11.1
 	github.com/vikpe/masterstat v0.2.0
-	github.com/vikpe/serverstat v1.6.0
+	github.com/vikpe/serverstat v1.7.0
 	golang.org/x/exp v0.0.0-20260218203240-3dfff04db8fa
 )
 
