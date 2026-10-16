@@ -25,15 +25,23 @@ func ServerLastStats() func(c *fiber.Ctx) error {
 			return c.Status(fiber.StatusBadRequest).JSON(err.Error())
 		}
 
-		// MVDSV instances sharing a demo directory return games from every port.
-		scores, err := mvdsv.GetLastStats(params.Address, 50)
+		scores, err := getServerLastStats(params)
 		if err != nil {
 			return c.JSON([]string{})
 		}
-		_, portText, _ := net.SplitHostPort(params.Address)
-		port, _ := strconv.Atoi(portText)
-		return c.JSON(statsForPort(scores, port, params.Limit))
+		return c.JSON(scores)
 	}
+}
+
+func getServerLastStats(params *ServerLastStatsParams) ([]laststats.Entry, error) {
+	// MVDSV instances sharing a demo directory return games from every port.
+	scores, err := mvdsv.GetLastStats(params.Address, 50)
+	if err != nil {
+		return nil, err
+	}
+	_, portText, _ := net.SplitHostPort(params.Address)
+	port, _ := strconv.Atoi(portText)
+	return statsForPort(scores, port, params.Limit), nil
 }
 
 func statsForPort(scores []laststats.Entry, port, limit int) []laststats.Entry {
