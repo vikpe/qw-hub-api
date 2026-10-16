@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/vikpe/serverstat/qserver/mvdsv"
+	"github.com/vikpe/serverstat/qserver/mvdsv/lastscores"
 )
 
 func ServerLastScores() func(c *fiber.Ctx) error {
@@ -16,9 +16,13 @@ func ServerLastScores() func(c *fiber.Ctx) error {
 			return c.Status(fiber.StatusBadRequest).JSON(err.Error())
 		}
 
-		scores, err := mvdsv.GetLastScores(params.Address, params.Limit)
+		stats, err := getServerLastStats(params)
 		if err != nil {
 			return c.JSON([]string{})
+		}
+		scores := make([]lastscores.Entry, 0, len(stats))
+		for _, entry := range stats {
+			scores = append(scores, lastscores.NewFromLastStatsEntry(entry))
 		}
 		return c.JSON(scores)
 	}
