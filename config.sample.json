@@ -11,6 +11,10 @@
     ]
   },
   "qtv_demo_sources": [
+    {"address": "lisbon.qlash.com.br:28000", "demo_date_format": "Ymd", "timezone": "America/Sao_Paulo"},
+    {"address": "miami.qlash.com.br:28000", "demo_date_format": "Ymd", "timezone": "America/Sao_Paulo"},
+    {"address": "nordeste.qlash.com.br:28000", "demo_date_format": "Ymd", "timezone": "UTC"},
+    {"address": "qw.qlash.com.br:28000", "demo_date_format": "Ymd", "timezone": "America/Sao_Paulo"},
     {"address": "clanrot.org:28000", "demo_date_format": "ymd", "timezone": "UTC"},
     {"address": "dal.spawnfrag.com:28000", "demo_date_format": "Ymd", "timezone": "UTC"},
     {"address": "de.quake.world:28000", "demo_date_format": "Ymd", "timezone": "UTC"},

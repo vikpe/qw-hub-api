@@ -187,6 +187,13 @@ func (s *Server) DemoFilenames() ([]string, error) {
 	if err != nil {
 		return make([]string, 0), err
 	}
+	// Current QTV serves a directory index at /demos/ and the demo table at /demolist/.
+	if demosDoc.Find("#demos").Length() == 0 {
+		demosDoc, err = htmlparse.GetDocument(fmt.Sprintf("http://%s/demolist/", s.Address))
+		if err != nil {
+			return make([]string, 0), err
+		}
+	}
 
 	demoFilenames := make([]string, 0)
 	demosDoc.Find("#demos").Find("td.name").Each(func(i int, s *goquery.Selection) {
